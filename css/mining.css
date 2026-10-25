@@ -3,9 +3,6 @@
    Общие стили (шапка, кнопки, форма, подвал) — в style.css
    ========================================================== */
 
-/* шапка над баннером: полупрозрачная, плотнее после прокрутки */
-.page-mining .header::before { background: rgba(26, 26, 26, .4); transition: background-color .3s; }
-.page-mining .header.is-scrolled::before { background: rgba(26, 26, 26, .92); }
 
 /* кнопки страницы: 252×56 и 252×49 (с рамкой) */
 .btn--md { min-height: 56px; min-width: 252px; padding: 0 20px; }
@@ -20,15 +17,7 @@
   background: url(../img/mining/hero.webp) center top / 100% 100% no-repeat;
 }
 .m-hero__inner { display: grid; grid-template-columns: minmax(0, 1fr) 213px; gap: 32px; }
-.crumbs { margin: 42px 0 0 8px; }
-.crumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0; }
-.crumbs li { display: flex; align-items: center; }
-.crumbs li + li::before {
-  content: ''; flex: none; width: 6px; height: 11px; margin: 0 11px 0 13px; background: currentColor;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 11' fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m.5.5 5 5-5 5'/%3E%3C/svg%3E") center / contain no-repeat;
-          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 11' fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m.5.5 5 5-5 5'/%3E%3C/svg%3E") center / contain no-repeat;
-}
-.crumbs a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.m-hero .crumbs { margin: 42px 0 0 8px; }
 .m-hero__title {
   margin-top: 15px; font-size: clamp(34px, 5vw, 72px); font-weight: 600; line-height: 1; text-transform: uppercase; color: var(--c-text-2);
 }
@@ -146,7 +135,7 @@
 
 @media (max-width: 1024px) {
   .m-hero__inner { grid-template-columns: minmax(0, 1fr); gap: 40px; }
-  .crumbs { margin-left: 0; }
+  .m-hero .crumbs { margin-left: 0; }
   .m-hero__features { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 0; }
   .m-build { grid-template-columns: minmax(0, 1fr); }
   .m-build__img { grid-row: auto; justify-self: center; }
@@ -183,8 +172,6 @@
 }
 
 @media (max-width: 600px) {
-  .crumbs { font-size: 14px; }
-  .crumbs li + li::before { margin: 0 8px 0 9px; }
   .m-adv { grid-template-columns: minmax(0, 1fr); }
   .m-adv__item p { margin-bottom: 20px; }
   .examples { gap: 8px; }

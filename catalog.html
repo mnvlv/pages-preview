@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Шкафы для раздевалок (локеры) — Диаском</title>
+  <meta name="description" content="Металлические шкафы для раздевалок (локеры) от Диаском: прочная сталь 0.6–1.2 мм, выбор окраски, поставка и монтаж по всей России и СНГ, гарантия до 7 лет.">
+  <meta name="theme-color" content="#1c1c1c">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=39">
+  <link rel="stylesheet" href="css/catalog.css?v=2">
+</head>
+<body class="page-catalog">
+
+<!-- ============ ИКОНКИ ИНТЕРФЕЙСА ============ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="i-arrow" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M.75 6.836h18M12 .836l6.75 6-6.75 6"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.75 6.836h-18M7.5 .836l-6.75 6 6.75 6"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5v7l5.5-3.5z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-crumb" viewBox="114.45 134.45 6.10 11.10"><path fill="currentColor" d="M114.65 144.65C114.45 144.84 114.45 145.16 114.65 145.35C114.84 145.55 115.16 145.55 115.35 145.35L115.00 145.00L114.65 144.65M120.00 140.00L120.35 140.35C120.55 140.16 120.55 139.84 120.35 139.65L120.00 140.00M115.35 134.65C115.16 134.45 114.84 134.45 114.65 134.65C114.45 134.84 114.45 135.16 114.65 135.35L115.00 135.00L115.35 134.65M115.00 145.00L115.35 145.35L120.35 140.35L120.00 140.00L119.65 139.65L114.65 144.65L115.00 145.00M120.00 140.00L120.35 139.65L115.35 134.65L115.00 135.00L114.65 135.35L119.65 140.35L120.00 140.00"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 29 21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1.3h3.4l2.9 12.2h15.6l3.4-8.9H5.6"/><circle cx="10" cy="18.2" r="1.8"/><circle cx="21.3" cy="18.2" r="1.8"/></symbol>
+  <symbol id="i-sort" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2.5v11M2 10.5l3 3 3-3M11 13.5v-11M8 5.5l3-3 3 3"/></symbol>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header class="header">
+  <div class="container header__inner">
+    <a href="/" class="logo" aria-label="Диаском — на главную">
+      <img src="img/icons/logo.svg" width="158" height="41" alt="">
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Основное меню">
+      <ul class="nav__list">
+        <li class="nav__item nav__item--drop">
+          <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-sub">
+            <span class="nav__text">Стеллажи</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </button>
+          <ul class="nav__sub" id="nav-sub">
+            <li><a href="/catalog/palletnye-frontalnye-stellazhi/">Паллетные стеллажи</a></li>
+            <li><a href="/catalog/mezoninnye-stellazhi/">Мезонинные стеллажи</a></li>
+            <li><a href="/catalog/glubinnye-stellazhi/">Глубинные стеллажи</a></li>
+            <li><a href="/catalog/konsolnye-stellazhi/">Консольные стеллажи</a></li>
+          </ul>
+        </li>
+        <li class="nav__item">
+          <a href="/services/" class="nav__link nav__desk-only"><span class="nav__text">Услуги</span></a>
+          <!-- в бургер-меню «Услуги» раскрываются, как в UI kit -->
+          <button class="nav__link nav__drop-btn nav__mob-only" type="button" aria-expanded="false" aria-controls="nav-sub-services">
+            <span class="nav__text">Услуги</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </button>
+          <ul class="nav__sub nav__mob-only" id="nav-sub-services">
+            <li><a href="/services/sborka-i-montazh/">Сборка и монтаж</a></li>
+            <li><a href="/services/razrabotka-tz-dlya-auktsionov/">Подготовка тех. задания</a></li>
+            <li><a href="/services/proektirovanie-sklada/">Проектирование склада</a></li>
+          </ul>
+        </li>
+        <li class="nav__item"><a href="/about/" class="nav__link"><span class="nav__text">О компании</span></a></li>
+        <li class="nav__item"><a href="/services/" class="nav__link"><span class="nav__text">Комплексные решения</span></a></li>
+      </ul>
+      <div class="nav__mobile">
+        <div class="icon-links">
+        <a href="tel:+73912592659" aria-label="Позвонить"><span class="socials__icon socials__icon--phone"></span></a>
+        <a href="https://t.me/+79138374659" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span class="socials__icon socials__icon--telegram"></span></a>
+        <a href="https://max.ru/id2464149300_bot" target="_blank" rel="noopener" aria-label="Написать в Max"><span class="socials__icon socials__icon--max"></span></a>
+        </div>
+        <a href="#request" class="btn btn--primary nav__btn">Заказать звонок</a>
+      </div>
+    </nav>
+
+    <a href="#request" class="btn btn--primary header__btn">Заказать звонок</a>
+    <div class="icon-links header__icons">
+        <a href="tel:+73912592659" aria-label="Позвонить"><span class="socials__icon socials__icon--phone"></span></a>
+        <a href="https://t.me/+79138374659" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span class="socials__icon socials__icon--telegram"></span></a>
+        <a href="https://max.ru/id2464149300_bot" target="_blank" rel="noopener" aria-label="Написать в Max"><span class="socials__icon socials__icon--max"></span></a>
+    </div>
+    <a href="#" class="cart" aria-label="Корзина: 99 товаров"><svg class="cart__icon" aria-hidden="true"><use href="#i-cart"/></svg><span class="cart__count">99</span></a>
+    <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ 1. HERO + КАТЕГОРИИ ============ -->
+  <section class="c-hero">
+    <div class="container">
+      <nav class="crumbs" aria-label="Навигационная цепочка">
+        <ol>
+          <li><a href="/">Главная</a></li>
+          <li><a href="/catalog/">Каталог</a></li>
+          <li><a href="#">Металлические шкафы</a></li>
+          <li aria-current="page">Шкафы для раздевалок</li>
+        </ol>
+      </nav>
+      <h1 class="c-hero__title">Шкафы для<br> раздевалок <span class="accent">(локеры)</span></h1>
+      <p class="c-hero__lead">Надежные металлические локеры для хранения одежды и личных<br> вещей на предприятиях, в спортзалах, учебных заведениях и офисах</p>
+      <ul class="c-hero__features">
+        <li><img src="img/catalog/c-material.svg" width="43" height="42" alt=""><span>Прочный материал<br> <span class="accent">0.6 - 1.2 мм</span></span></li>
+        <li><img src="img/catalog/c-paint.svg" width="45" height="41" alt=""><span>Выбор<br> <span class="accent">типа окраски</span></span></li>
+        <li><img src="img/catalog/c-delivery.svg" width="45" height="38" alt=""><span>Поставка и монтаж<br> <span class="accent">по всей России и СНГ</span></span></li>
+        <li><img src="img/catalog/c-warranty.svg" width="34" height="38" alt=""><span>Гарантия до 7 лет<br> <span class="accent">на все</span></span></li>
+      </ul>
+      <div class="cats-box">
+        <ul class="cats-box__list" id="catsList">
+        <li><a href="#" class="cat-card"><span class="cat-card__img"><img src="img/catalog/cat-1.webp" width="16" height="59" alt=""></span><span class="cat-card__title">Для раздевалок</span><span class="cat-card__count">120 товаров</span></a></li>
+        <li><a href="#" class="cat-card"><span class="cat-card__img"><img src="img/catalog/cat-2.webp" width="29" height="54" alt=""></span><span class="cat-card__title">Для офиса</span><span class="cat-card__count">220 товаров</span></a></li>
+        <li><a href="#" class="cat-card"><span class="cat-card__img"><img src="img/catalog/cat-3.webp" width="29" height="53" alt=""></span><span class="cat-card__title">Картотечные</span><span class="cat-card__count">100 товаров</span></a></li>
+        <li><a href="#" class="cat-card"><span class="cat-card__img"><img src="img/catalog/cat-4.webp" width="29" height="53" alt=""></span><span class="cat-card__title">Бухгалтерские</span><span class="cat-card__count">100 товаров</span></a></li>
+        <li><a href="#" class="cat-card"><span class="cat-card__img"><img src="img/catalog/cat-5.webp" width="29" height="54" alt=""></span><span class="cat-card__title">Абонентские почтовые</span><span class="cat-card__count">100 товаров</span></a></li>
+        <li><a href="#" class="cat-card"><span class="cat-card__img"><img src="img/catalog/cat-6.webp" width="49" height="39" alt=""></span><span class="cat-card__title">Аксессуары</span><span class="cat-card__count">100 товаров</span></a></li>
+        </ul>
+        <button class="cats-box__more" type="button" aria-expanded="false" aria-controls="catsList"><span>Развернуть все</span> <svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. ФИЛЬТР И ТОВАРЫ ============ -->
+  <section class="c-catalog">
+    <div class="container c-catalog__inner">
+      <button class="btn btn--primary btn--block filter-open" type="button" aria-controls="filter" aria-expanded="false">Открыть фильтры <svg class="filter-open__icon" aria-hidden="true"><use href="#i-sort"/></svg></button>
+      <form class="filter" id="filter" aria-label="Фильтр товаров">
+        <div class="filter__head">
+          <h2 class="filter__title">Фильтр</h2>
+          <button class="filter__close" type="button" aria-label="Закрыть фильтр"><span></span><span></span></button>
+        </div>
+        <div class="filter__group">
+          <p class="filter__label" id="priceLabel">Ползунок выбора:</p>
+          <div class="range" data-range data-min="0" data-max="1509000">
+            <div class="range__inputs">
+              <input type="text" inputmode="numeric" placeholder="0" aria-label="Цена от" data-range-from>
+              <input type="text" inputmode="numeric" placeholder="1 509 000" aria-label="Цена до" data-range-to>
+            </div>
+            <div class="range__track">
+              <span class="range__fill" aria-hidden="true"></span>
+              <input type="range" min="0" max="1509000" step="1000" value="0" aria-labelledby="priceLabel" data-range-a>
+              <input type="range" min="0" max="1509000" step="1000" value="700000" aria-labelledby="priceLabel" data-range-b>
+            </div>
+          </div>
+        </div>
+        <div class="filter__group">
+          <p class="filter__label">Чекбокс:</p>
+          <ul class="filter__checks">
+            <li><label class="c-check"><input type="checkbox" name="lock"><span class="c-check__box" aria-hidden="true"></span>Ключевой</label></li>
+            <li><label class="c-check"><input type="checkbox" name="lock"><span class="c-check__box" aria-hidden="true"></span>Кодовый механический</label></li>
+            <li><label class="c-check"><input type="checkbox" name="lock"><span class="c-check__box" aria-hidden="true"></span>Без защиты</label></li>
+            <li><label class="c-check"><input type="checkbox" name="lock" checked><span class="c-check__box" aria-hidden="true"></span>Под навесной замок</label></li>
+          </ul>
+        </div>
+        <div class="filter__group">
+          <p class="filter__label">Категории:</p>
+          <ul class="filter__cats">
+            <li><a href="#" class="is-active" aria-current="page">Односекционный</a></li>
+            <li><a href="#">Двухсекционный</a></li>
+            <li><a href="#">С лавкой</a></li>
+          </ul>
+        </div>
+        <div class="filter__buttons">
+          <button type="submit" class="btn btn--primary btn--block">Применить</button>
+          <button type="reset" class="btn btn--outline btn--block">Сбросить фильтр</button>
+        </div>
+      </form>
+
+      <div class="products">
+        <div class="products__head">
+          <h2 class="products__title">Найдено 16 товаров</h2>
+          <div class="sort sort--price" data-dropdown>
+            <button type="button" class="sort__btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="sortPrice"><span class="sort__value">По возрастанию цены</span><svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+            <ul class="sort__list" id="sortPrice" role="listbox" hidden><li role="option" aria-selected="true">По возрастанию цены</li><li role="option" aria-selected="false">По убыванию цены</li></ul>
+          </div>
+          <div class="sort" data-dropdown>
+            <button type="button" class="sort__btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="sortPop"><span class="sort__value">По популярности</span><svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+            <ul class="sort__list" id="sortPop" role="listbox" hidden><li role="option" aria-selected="true">По популярности</li><li role="option" aria-selected="false">По продажам</li><li role="option" aria-selected="false">Сначала со скидкой</li></ul>
+          </div>
+        </div>
+        <ul class="products__grid">
+          <li class="product">
+            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-1.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
+            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
+            <p class="product__sku">Артикул: 1202KV</p>
+            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <p class="product__status product__status--stock">В наличии</p>
+            <div class="product__buy">
+              <p class="product__price"><span>3200 ₽</span></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="#" class="product__img"><span class="badge badge--new">Новинка</span><img src="img/catalog/locker-2.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
+            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
+            <p class="product__sku">Артикул: 1202KV</p>
+            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <p class="product__status product__status--order">Под заказ</p>
+            <div class="product__buy">
+              <p class="product__price"><span>93200 ₽</span></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-4.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
+            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
+            <p class="product__sku">Артикул: 1202KV</p>
+            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <p class="product__status product__status--wait">В ожидании</p>
+            <div class="product__buy">
+              <p class="product__price"><span>3333200 ₽</span></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="#" class="product__img"><span class="badge badge--sale">Скидка</span><img src="img/catalog/locker-open.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
+            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
+            <p class="product__sku">Артикул: 1202KV</p>
+            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <p class="product__status product__status--none">Отсутствует</p>
+            <div class="product__buy">
+              <p class="product__price product__price--sale"><s class="product__old">3200 ₽</s><span>2200 ₽</span></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-1.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
+            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
+            <p class="product__sku">Артикул: 1202KV</p>
+            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <p class="product__status product__status--stock">В наличии</p>
+            <div class="product__buy">
+              <p class="product__price"><span>3200 ₽</span></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="#" class="product__img"><span class="badge badge--new">Новинка</span><img src="img/catalog/locker-2.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
+            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
+            <p class="product__sku">Артикул: 1202KV</p>
+            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <p class="product__status product__status--order">Под заказ</p>
+            <div class="product__buy">
+              <p class="product__price"><span>93200 ₽</span></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-4.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
+            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
+            <p class="product__sku">Артикул: 1202KV</p>
+            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <p class="product__status product__status--wait">В ожидании</p>
+            <div class="product__buy">
+              <p class="product__price"><span>3333200 ₽</span></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="#" class="product__img"><span class="badge badge--sale">Скидка</span><img src="img/catalog/locker-open.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
+            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
+            <p class="product__sku">Артикул: 1202KV</p>
+            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <p class="product__status product__status--none">Отсутствует</p>
+            <div class="product__buy">
+              <p class="product__price product__price--sale"><s class="product__old">3200 ₽</s><span>2200 ₽</span></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-bench.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
+            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
+            <p class="product__sku">Артикул: 1202KV</p>
+            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <p class="product__status product__status--stock">В наличии</p>
+            <div class="product__buy">
+              <p class="product__price"><span>3200 ₽</span></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-1.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
+            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
+            <p class="product__sku">Артикул: 1202KV</p>
+            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <p class="product__status product__status--stock">В наличии</p>
+            <div class="product__buy">
+              <p class="product__price"><span>3200 ₽</span></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-1.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
+            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
+            <p class="product__sku">Артикул: 1202KV</p>
+            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <p class="product__status product__status--stock">В наличии</p>
+            <div class="product__buy">
+              <p class="product__price"><span>3200 ₽</span></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-1.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
+            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
+            <p class="product__sku">Артикул: 1202KV</p>
+            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <p class="product__status product__status--stock">В наличии</p>
+            <div class="product__buy">
+              <p class="product__price"><span>3200 ₽</span></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-1.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
+            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
+            <p class="product__sku">Артикул: 1202KV</p>
+            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <p class="product__status product__status--stock">В наличии</p>
+            <div class="product__buy">
+              <p class="product__price"><span>3200 ₽</span></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-4.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
+            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
+            <p class="product__sku">Артикул: 1202KV</p>
+            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <p class="product__status product__status--stock">В наличии</p>
+            <div class="product__buy">
+              <p class="product__price"><span>3200 ₽</span></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-1.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
+            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
+            <p class="product__sku">Артикул: 1202KV</p>
+            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <p class="product__status product__status--stock">В наличии</p>
+            <div class="product__buy">
+              <p class="product__price"><span>3200 ₽</span></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-1.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
+            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
+            <p class="product__sku">Артикул: 1202KV</p>
+            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <p class="product__status product__status--stock">В наличии</p>
+            <div class="product__buy">
+              <p class="product__price"><span>3200 ₽</span></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+        </ul>
+        <nav class="pager" aria-label="Страницы каталога">
+          <a href="#" class="pager__item pager__item--arrow" aria-label="Предыдущая страница"><svg aria-hidden="true"><use href="#i-crumb"/></svg></a>
+          <a href="#" class="pager__item is-active" aria-current="page">1</a>
+          <a href="#" class="pager__item">2</a>
+          <span class="pager__item pager__item--gap">...</span>
+          <a href="#" class="pager__item">19</a>
+          <a href="#" class="pager__item pager__item--arrow pager__item--next" aria-label="Следующая страница"><svg aria-hidden="true"><use href="#i-crumb"/></svg></a>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. SEO-ТЕКСТ ============ -->
+  <section class="section">
+    <div class="container">
+      <h2 class="h2">Металлические шкафы для раздевалок</h2>
+      <div class="c-seo">
+        <div class="c-seo__text">
+          <p>Оформите заказ на металлические шкафы для раздевалок от компании Diaskom с быстрой доставкой по всей России. В нашем каталоге представлен широкий выбор надежной металлической мебели для оснащения спортивных клубов, производственных предприятий, офисов, медицинских и учебных учреждений.</p>
+          <p>Металлические гардеробные шкафы и локеры от Diaskom отличаются высокой прочностью, долговечностью и устойчивостью к взлому. Специальное порошково-полимерное покрытие надежно защищает сталь от коррозии и влаги, что позволяет использовать их в помещениях с повышенной влажностью, таких как бассейны или раздевалки при производственных цехах. Поверхности легко поддаются санитарной обработке и дезинфекции, а продуманная система вентиляционных отверстий обеспечивает постоянную циркуляцию воздуха внутри секций.</p>
+          <p>Мы гарантируем выгодные цены, официальную гарантию качества и индивидуальный подход к каждому клиенту. Специалисты Diaskom помогут подобрать оптимальную конфигурацию шкафов под ваши задачи и быстро оформят доставку в любой регион РФ.</p>
+        </div>
+        <ul class="c-seo__cards">
+          <li><img src="img/catalog/seo-1.webp" width="62" height="62" alt="">Более 1500 товаров<br> в наличии и под заказ</li>
+          <li><img src="img/catalog/seo-2.webp" width="77" height="54" alt="">Доставка по всей России<br> и странам СНГ</li>
+          <li><img src="img/catalog/seo-3.webp" width="46" height="62" alt="">Гарантия качества<br> и надежности</li>
+          <li><img src="img/catalog/seo-4.webp" width="60" height="60" alt="">Индивидуальный подбор<br> и проектирование</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. ВОПРОСЫ И ОТВЕТЫ ============ -->
+  <section class="section">
+    <div class="container">
+      <h2 class="h2">Вопросы и ответы</h2>
+      <div class="faq" data-faq>
+        <div class="faq__item is-open">
+          <h3 class="faq__q"><button type="button" aria-expanded="true" aria-controls="faq-0" id="faq-q-0">Какой стеллаж лучше подойдет для моего склада?<span class="faq__icon" aria-hidden="true"></span></button></h3>
+          <div class="faq__a" id="faq-0" role="region" aria-labelledby="faq-q-0"><p>Выбор зависит от типа груза, высоты потолков и оборачиваемости товаров.<br> Наши специалисты спроектируют оптимальную конфигурацию под ваши задачи.</p></div>
+        </div>
+        <div class="faq__item">
+          <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="faq-1" id="faq-q-1">Можно ли изготовить стеллажи под индивидуальные размеры?<span class="faq__icon" aria-hidden="true"></span></button></h3>
+          <div class="faq__a" id="faq-1" role="region" aria-labelledby="faq-q-1" hidden><p>Да. Изготавливаем стеллажи под любые задачи и размеры помещения — специалисты подберут оптимальную конфигурацию.</p></div>
+        </div>
+        <div class="faq__item">
+          <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="faq-2" id="faq-q-2">Какие нагрузки выдерживают стеллажи?<span class="faq__icon" aria-hidden="true"></span></button></h3>
+          <div class="faq__a" id="faq-2" role="region" aria-labelledby="faq-q-2" hidden><p>Нагрузка зависит от модели и конфигурации. Точные значения указаны в характеристиках каждого товара, а инженер поможет рассчитать систему под ваш груз.</p></div>
+        </div>
+        <div class="faq__item">
+          <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="faq-3" id="faq-q-3">Есть ли у вас монтаж и проектирование?<span class="faq__icon" aria-hidden="true"></span></button></h3>
+          <div class="faq__a" id="faq-3" role="region" aria-labelledby="faq-q-3" hidden><p>Да. Проектируем, поставляем и монтируем стеллажные системы для склада любой сложности по всей России и в странах СНГ.</p></div>
+        </div>
+        <div class="faq__item">
+          <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="faq-4" id="faq-q-4">Какие сроки поставки?<span class="faq__icon" aria-hidden="true"></span></button></h3>
+          <div class="faq__a" id="faq-4" role="region" aria-labelledby="faq-q-4" hidden><p>Сроки зависят от объема заказа и региона. Точный срок изготовления и доставки сообщим при расчете проекта.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. ГДЕ ИСПОЛЬЗУЮТ ============ -->
+  <section class="section">
+    <div class="container c-use">
+      <div class="c-use__text">
+        <h2 class="h2">Где используют<br> <span class="accent">локеры</span></h2>
+        <p>Локеры используются повсеместно на<br> предприятиях, в спортзалах, учебных заведениях и<br> офисах для хранения одежды и личных вещей</p>
+        <div class="c-use__nav">
+          <button class="slider-nav__btn" type="button" data-slider-prev="useSlider" aria-label="Предыдущий слайд"><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
+          <button class="slider-nav__btn" type="button" data-slider-next="useSlider" aria-label="Следующий слайд"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        </div>
+      </div>
+      <ul class="c-use__slider" id="useSlider">
+        <li><img src="img/catalog/use-1.webp" width="289" height="330" alt="" loading="lazy"><span>Промышленные<br> предприятия</span></li>
+        <li><img src="img/catalog/use-2.webp" width="289" height="330" alt="" loading="lazy"><span>Медицинские<br> организации</span></li>
+        <li><img src="img/catalog/use-3.webp" width="289" height="330" alt="" loading="lazy"><span>Образовательные<br> учреждения</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 6. ФОРМА ============ -->
+  <section class="section" id="request">
+    <div class="container">
+      <div class="request">
+        <div class="request__info">
+          <h2 class="h2">Нужна помощь<br> в выборе решения?</h2>
+          <span class="line" aria-hidden="true"></span>
+          <p class="lead">Получите бесплатную консультацию инженера и расчет<br> стоимости вашего проекта</p>
+          <ul class="request__perks">
+            <li><img src="img/icons/perk-1.svg" width="39" height="33" alt=""><span>Проект бесплатно<br><span class="accent">за 24 часа</span></span></li>
+            <li><img src="img/icons/perk-2.svg" width="38" height="42" alt=""><span>Бесплатная<br><span class="accent">консультация специалиста</span></span></li>
+            <li><img src="img/icons/perk-3.svg" width="34" height="38" alt=""><span>Гарантия до 7 лет<br><span class="accent">на все системы</span></span></li>
+          </ul>
+        </div>
+
+        <form class="form" id="requestForm" novalidate>
+          <label class="form__field">
+            <span class="visually-hidden">Ваше имя</span>
+            <input type="text" name="name" placeholder="Ваше имя" autocomplete="name">
+          </label>
+          <label class="form__field">
+            <span class="visually-hidden">Ваш телефон</span>
+            <input type="tel" name="phone" placeholder="Ваш телефон" autocomplete="tel" required data-phone>
+            <span class="form__error" role="alert">Введите номер полностью</span>
+          </label>
+          <div class="form__field form__select" data-select>
+            <span class="visually-hidden" id="whLabel">Тип организации</span>
+            <button type="button" class="form__select-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="whList" aria-labelledby="whLabel whValue">
+              <span class="form__select-value" id="whValue">Тип организации</span>
+              <svg class="form__chevron" viewBox="0 0 25.8 13.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M.9.9l12 12 12-12"/></svg>
+            </button>
+            <ul class="form__options" id="whList" role="listbox" aria-labelledby="whLabel" tabindex="-1" hidden>
+              <li role="option" id="org-industry" data-value="industry" aria-selected="false">Промышленное предприятие</li>
+              <li role="option" id="org-medical" data-value="medical" aria-selected="false">Медицинская организация</li>
+              <li role="option" id="org-education" data-value="education" aria-selected="false">Образовательное учреждение</li>
+              <li role="option" id="org-sport" data-value="sport" aria-selected="false">Спортивный клуб</li>
+              <li role="option" id="org-office" data-value="office" aria-selected="false">Офис</li>
+            </ul>
+            <input type="hidden" name="organization" value="">
+          </div>
+          <label class="form__check">
+            <input type="checkbox" name="agree" required>
+            <span class="form__box" aria-hidden="true"></span>
+            <span>Соглашаюсь с условиями <a href="/terms/">Политики конфиденциальности</a>.</span>
+          </label>
+          <button type="submit" class="btn btn--primary btn--lg btn--block">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <p class="form__success" role="status" hidden>Заявка отправлена. Мы перезвоним вам в ближайшее время.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<!-- ============ 10. ПОДВАЛ ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__card">
+      <div class="footer__brand">
+        <a href="/" class="logo logo--lg" aria-label="Диаском — на главную">
+          <img src="img/icons/logo-footer.svg" width="358" height="94" alt="">
+        </a>
+        <p class="footer__slogan">Металлическая мебель и складское оборудование<br> для вашего бизнеса</p>
+        <div class="footer__contact">
+          <img src="img/icons/phone.svg" width="26" height="26" alt="">
+          <div>
+            <a href="tel:+73912592659" class="footer__phone">+7 (391) 259-26-59</a>
+            <span class="footer__hours">Ежедневно с 9:00 до 18:00</span>
+          </div>
+        </div>
+        <div class="footer__contact footer__contact--address">
+          <img src="img/icons/pin.svg" width="26" height="32" alt="">
+          <address class="footer__address">проспект имени газеты Красноярский рабочий, 170а, офис 3-27</address>
+        </div>
+        <ul class="socials">
+          <li><a href="mailto:info@diaskom.ru" aria-label="Написать на почту"><span class="socials__icon socials__icon--mail"></span></a></li>
+          <li><a href="https://max.ru/id2464149300_bot" target="_blank" rel="noopener" aria-label="Написать в Max"><span class="socials__icon socials__icon--max"></span></a></li>
+          <li><a href="https://t.me/+79138374659" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span class="socials__icon socials__icon--telegram"></span></a></li>
+        </ul>
+      </div>
+      <nav class="footer__col" aria-label="Каталог">
+        <h3 class="footer__title">Каталог</h3>
+        <ul>
+          <li><a href="/catalog/palletnye-frontalnye-stellazhi/">Паллетные стеллажи</a></li>
+          <li><a href="/catalog/mezoninnye-stellazhi/">Мезонинные стеллажи</a></li>
+          <li><a href="/catalog/glubinnye-stellazhi/">Глубинные стеллажи</a></li>
+          <li><a href="/catalog/konsolnye-stellazhi/">Консольные стеллажи</a></li>
+          <li><a href="/catalog/metallicheskie-stellazhi/">Полочные стеллажи</a></li>
+          <li><a href="/catalog/stellazhi-dlya-sklada/">Передвижные стеллажи</a></li>
+          <li><a href="/catalog/stellazhi-dlya-sklada/" class="footer__all">Все стеллажи</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__col" aria-label="Компания">
+        <h3 class="footer__title">Компания</h3>
+        <ul>
+          <li><a href="/about/">О компании</a></li>
+          <li><a href="/rekvizity/">Документы и сертификаты</a></li>
+          <li><a href="https://yandex.ru/maps/org/diaskom/194174337631/reviews/" target="_blank" rel="noopener">Отзывы</a></li>
+          <li><a href="/contact/">Контакты</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__col" aria-label="Услуги">
+        <h3 class="footer__title">Услуги</h3>
+        <ul>
+          <li><a href="/services/sborka-i-montazh/">Сборка и монтаж</a></li>
+          <li><a href="/services/razrabotka-tz-dlya-auktsionov/">Подготовка тех. задания</a></li>
+          <li><a href="/services/proektirovanie-sklada/">Проектирование склада</a></li>
+        </ul>
+      </nav>
+      <div class="footer__bottom">
+        <span>2026 © Диаском</span>
+        <a href="/terms/">Политика конфиденциальности</a>
+        <a href="/terms/">Согласие на обработку персональных данных</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js?v=39"></script>
+<script src="js/catalog.js?v=1"></script>
+</body>
+</html>

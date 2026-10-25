@@ -62,6 +62,24 @@ button { cursor: pointer; }
 .line { display: block; width: 100px; height: 2px; margin-top: 24px; background: var(--c-accent); }
 .line + .lead { margin-top: 24px; }
 
+/* ---------- Шапка над баннером (внутренние страницы): полупрозрачная, плотнее после прокрутки ---------- */
+.page-mining .header::before, .page-catalog .header::before { background: rgba(26, 26, 26, .4); transition: background-color .3s; }
+.page-mining .header.is-scrolled::before, .page-catalog .header.is-scrolled::before { background: rgba(26, 26, 26, .92); }
+
+/* ---------- Хлебные крошки ---------- */
+.crumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0; }
+.crumbs li { display: flex; align-items: center; }
+.crumbs li + li::before {
+  content: ''; flex: none; width: 6px; height: 11px; margin: 0 11px 0 13px; background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 11' fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m.5.5 5 5-5 5'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 11' fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m.5.5 5 5-5 5'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.crumbs a:hover { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 600px) {
+  .crumbs { font-size: 14px; }
+  .crumbs li + li::before { margin: 0 8px 0 9px; }
+}
+
 /* ---------- Кнопки ---------- */
 /* размеры по макету — с рамкой 1px: большая 283×56, обычная 48, малая 174×34; текст 14/12px, вес 500 */
 .btn {
@@ -78,7 +96,7 @@ button { cursor: pointer; }
    «Смотреть все» — оранжевая → тёмная #232323 */
 .btn--primary { background: var(--c-accent); border-color: var(--c-accent); color: #fff; }
 .btn--primary:hover, .btn--primary:focus-visible { background: transparent; border-color: #585858; }
-.btn--outline { border-color: #585858; color: var(--c-text); }
+.btn--outline { background: transparent; border-color: #585858; color: var(--c-text); }
 .btn--outline:hover, .btn--outline:focus-visible { border-color: var(--c-accent); color: var(--c-accent); }
 .btn--primary.btn--xs:hover, .btn--primary.btn--xs:focus-visible { background: var(--c-surface); border-color: var(--c-surface); }
 .btn--lg { min-height: 56px; min-width: 283px; padding: 0 21px 0 23px; }
