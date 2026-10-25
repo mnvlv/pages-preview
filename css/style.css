@@ -63,8 +63,8 @@ button { cursor: pointer; }
 .line + .lead { margin-top: 24px; }
 
 /* ---------- Шапка над баннером (внутренние страницы): полупрозрачная, плотнее после прокрутки ---------- */
-.page-mining .header::before, .page-catalog .header::before { background: rgba(26, 26, 26, .4); transition: background-color .3s; }
-.page-mining .header.is-scrolled::before, .page-catalog .header.is-scrolled::before { background: rgba(26, 26, 26, .92); }
+.page-mining .header::before, .page-catalog .header::before, .page-warehouse .header::before { background: rgba(26, 26, 26, .4); transition: background-color .3s; }
+.page-mining .header.is-scrolled::before, .page-catalog .header.is-scrolled::before, .page-warehouse .header.is-scrolled::before { background: rgba(26, 26, 26, .92); }
 
 /* ---------- Хлебные крошки ---------- */
 .crumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0; }
@@ -189,6 +189,7 @@ button { cursor: pointer; }
 /* ---------- Секции ---------- */
 .section { padding-top: var(--section-y); }
 #request { padding-top: calc(var(--section-y) + 20px); }
+.page-mining #request, .page-catalog #request, .page-warehouse #request { padding-top: var(--section-y); }
 .section-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
 
 /* ---------- Каталог ---------- */

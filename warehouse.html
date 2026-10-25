@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Стеллажи для склада — Диаском</title>
+  <meta name="description" content="Стеллажи для склада от официального дилера: паллетные, глубинные, мезонинные, консольные и среднегрузовые. Бесплатный проект за 24 часа, поставка и монтаж по всей России и СНГ, гарантия до 7 лет.">
+  <meta name="theme-color" content="#1c1c1c">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=41">
+  <link rel="stylesheet" href="css/mining.css?v=2">
+  <link rel="stylesheet" href="css/catalog.css?v=3">
+  <link rel="stylesheet" href="css/warehouse.css?v=2">
+</head>
+<body class="page-warehouse">
+
+<!-- ============ ИКОНКИ ИНТЕРФЕЙСА ============ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="i-arrow" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M.75 6.836h18M12 .836l6.75 6-6.75 6"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.75 6.836h-18M7.5 .836l-6.75 6 6.75 6"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5v7l5.5-3.5z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-download" viewBox="489.50 518.50 15.00 15.00"><path fill="currentColor" d="M491.00 528.25C491.00 527.84 490.66 527.50 490.25 527.50C489.84 527.50 489.50 527.84 489.50 528.25L490.25 528.25L491.00 528.25M504.50 528.25C504.50 527.84 504.16 527.50 503.75 527.50C503.34 527.50 503.00 527.84 503.00 528.25L503.75 528.25L504.50 528.25M490.25 528.25L489.50 528.25C489.50 529.29 489.50 530.14 489.59 530.82C489.68 531.51 489.89 532.13 490.38 532.62L490.91 532.09L491.44 531.56C491.27 531.39 491.15 531.15 491.08 530.62C491.00 530.07 491.00 529.33 491.00 528.25L490.25 528.25M490.91 532.09L490.38 532.62C490.87 533.11 491.49 533.32 492.18 533.41C492.86 533.50 493.71 533.50 494.75 533.50L494.75 532.75L494.75 532.00C493.67 532.00 492.93 532.00 492.38 531.92C491.85 531.85 491.61 531.73 491.44 531.56L490.91 532.09M494.75 532.75L494.75 533.50L499.25 533.50L499.25 532.75L499.25 532.00L494.75 532.00L494.75 532.75M499.25 532.75L499.25 533.50C500.29 533.50 501.14 533.50 501.82 533.41C502.51 533.32 503.13 533.11 503.62 532.62L503.09 532.09L502.56 531.56C502.39 531.73 502.15 531.85 501.62 531.92C501.07 532.00 500.33 532.00 499.25 532.00L499.25 532.75M503.09 532.09L503.62 532.62C504.11 532.13 504.32 531.51 504.41 530.82C504.50 530.14 504.50 529.29 504.50 528.25L503.75 528.25L503.00 528.25C503.00 529.33 503.00 530.07 502.92 530.62C502.85 531.15 502.73 531.39 502.56 531.56L503.09 532.09"/><path fill="currentColor" d="M497.75 519.25C497.75 518.84 497.41 518.50 497.00 518.50C496.59 518.50 496.25 518.84 496.25 519.25L497.00 519.25L497.75 519.25M497.00 529.00L496.45 529.51C496.59 529.66 496.79 529.75 497.00 529.75C497.21 529.75 497.41 529.66 497.55 529.51L497.00 529.00M500.55 526.22C500.83 525.92 500.81 525.44 500.51 525.17C500.20 524.89 499.73 524.91 499.45 525.21L500.00 525.72L500.55 526.22M494.55 525.21C494.27 524.91 493.80 524.89 493.49 525.17C493.19 525.44 493.17 525.92 493.45 526.22L494.00 525.72L494.55 525.21M497.00 519.25L496.25 519.25L496.25 529.00L497.00 529.00L497.75 529.00L497.75 519.25L497.00 519.25M497.00 529.00L497.55 529.51L500.55 526.22L500.00 525.72L499.45 525.21L496.45 528.49L497.00 529.00L497.55 528.49L494.55 525.21L494.00 525.72L493.45 526.22L496.45 529.51L497.00 529.00"/></symbol>
+  <symbol id="i-phone" viewBox="267.00 3669.50 17.00 17.00"><path fill="currentColor" d="M276.87 3681.43L276.43 3682.32C276.44 3682.33 276.45 3682.33 276.46 3682.33L276.87 3681.43M277.78 3681.20L276.99 3680.59L276.99 3680.59L277.78 3681.20M278.05 3680.85L278.84 3681.46L278.85 3681.45L278.05 3680.85M281.50 3685.50L281.50 3686.50L281.50 3685.50M268.00 3672.00L269.00 3672.00L268.00 3672.00M269.50 3670.50L269.50 3669.50L269.50 3670.50M271.75 3670.50L271.75 3669.50L271.75 3670.50M272.65 3675.45L273.25 3676.25L272.65 3675.45M272.30 3675.71L271.70 3674.91L271.69 3674.92L272.30 3675.71M272.08 3676.64L271.18 3677.08L271.18 3677.08L272.08 3676.64M276.87 3681.43L276.46 3682.33C276.82 3682.50 277.23 3682.54 277.61 3682.44L277.37 3681.47L277.13 3680.50C277.18 3680.49 277.24 3680.49 277.29 3680.52L276.87 3681.43M277.37 3681.47L277.61 3682.44C278.00 3682.35 278.34 3682.12 278.58 3681.80L277.78 3681.20L276.99 3680.59C277.02 3680.55 277.07 3680.52 277.13 3680.50L277.37 3681.47M277.78 3681.20L278.58 3681.81L278.84 3681.46L278.05 3680.85L277.26 3680.24L276.99 3680.59L277.78 3681.20M278.05 3680.85L278.85 3681.45C278.90 3681.39 278.96 3681.34 279.03 3681.30L278.58 3680.41L278.13 3679.51C277.78 3679.69 277.48 3679.94 277.25 3680.25L278.05 3680.85M278.58 3680.41L279.03 3681.30C279.10 3681.27 279.17 3681.25 279.25 3681.25L279.25 3680.25L279.25 3679.25C278.86 3679.25 278.48 3679.34 278.13 3679.51L278.58 3680.41M279.25 3680.25L279.25 3681.25L281.50 3681.25L281.50 3680.25L281.50 3679.25L279.25 3679.25L279.25 3680.25M281.50 3680.25L281.50 3681.25C281.63 3681.25 281.76 3681.30 281.85 3681.40L282.56 3680.69L283.27 3679.98C282.80 3679.51 282.16 3679.25 281.50 3679.25L281.50 3680.25M282.56 3680.69L281.85 3681.40C281.95 3681.49 282.00 3681.62 282.00 3681.75L283.00 3681.75L284.00 3681.75C284.00 3681.09 283.74 3680.45 283.27 3679.98L282.56 3680.69M283.00 3681.75L282.00 3681.75L282.00 3684.00L283.00 3684.00L284.00 3684.00L284.00 3681.75L283.00 3681.75M283.00 3684.00L282.00 3684.00C282.00 3684.13 281.95 3684.26 281.85 3684.35L282.56 3685.06L283.27 3685.77C283.74 3685.30 284.00 3684.66 284.00 3684.00L283.00 3684.00M282.56 3685.06L281.85 3684.35C281.76 3684.45 281.63 3684.50 281.50 3684.50L281.50 3685.50L281.50 3686.50C282.16 3686.50 282.80 3686.24 283.27 3685.77L282.56 3685.06M281.50 3685.50L281.50 3684.50C278.18 3684.50 275.01 3683.18 272.66 3680.84L271.95 3681.55L271.25 3682.25C273.97 3684.97 277.65 3686.50 281.50 3686.50L281.50 3685.50M271.95 3681.55L272.66 3680.84C270.32 3678.49 269.00 3675.32 269.00 3672.00L268.00 3672.00L267.00 3672.00C267.00 3675.85 268.53 3679.53 271.25 3682.25L271.95 3681.55M268.00 3672.00L269.00 3672.00C269.00 3671.87 269.05 3671.74 269.15 3671.65L268.44 3670.94L267.73 3670.23C267.26 3670.70 267.00 3671.34 267.00 3672.00L268.00 3672.00M268.44 3670.94L269.15 3671.65C269.24 3671.55 269.37 3671.50 269.50 3671.50L269.50 3670.50L269.50 3669.50C268.84 3669.50 268.20 3669.76 267.73 3670.23L268.44 3670.94M269.50 3670.50L269.50 3671.50L271.75 3671.50L271.75 3670.50L271.75 3669.50L269.50 3669.50L269.50 3670.50M271.75 3670.50L271.75 3671.50C271.88 3671.50 272.01 3671.55 272.10 3671.65L272.81 3670.94L273.52 3670.23C273.05 3669.76 272.41 3669.50 271.75 3669.50L271.75 3670.50M272.81 3670.94L272.10 3671.65C272.20 3671.74 272.25 3671.87 272.25 3672.00L273.25 3672.00L274.25 3672.00C274.25 3671.34 273.99 3670.70 273.52 3670.23L272.81 3670.94M273.25 3672.00L272.25 3672.00L272.25 3674.25L273.25 3674.25L274.25 3674.25L274.25 3672.00L273.25 3672.00M273.25 3674.25L272.25 3674.25C272.25 3674.33 272.23 3674.40 272.20 3674.47L273.09 3674.92L273.99 3675.37C274.16 3675.02 274.25 3674.64 274.25 3674.25L273.25 3674.25M273.09 3674.92L272.20 3674.47C272.16 3674.54 272.11 3674.60 272.05 3674.65L272.65 3675.45L273.25 3676.25C273.56 3676.02 273.81 3675.72 273.99 3675.37L273.09 3674.92M272.65 3675.45L272.05 3674.65L271.70 3674.91L272.30 3675.71L272.90 3676.51L273.25 3676.25L272.65 3675.45M272.30 3675.71L271.69 3674.92C271.37 3675.16 271.14 3675.51 271.05 3675.91L272.02 3676.14L273.00 3676.37C272.98 3676.42 272.95 3676.47 272.91 3676.51L272.30 3675.71M272.02 3676.14L271.05 3675.91C270.96 3676.30 271.00 3676.71 271.18 3677.08L272.08 3676.64L272.98 3676.20C273.00 3676.25 273.01 3676.31 273.00 3676.37L272.02 3676.14M272.08 3676.64L271.18 3677.08C272.31 3679.36 274.15 3681.20 276.43 3682.32L276.87 3681.43L277.31 3680.53C275.43 3679.60 273.90 3678.08 272.98 3676.20L272.08 3676.64"/></symbol>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header class="header">
+  <div class="container header__inner">
+    <a href="/" class="logo" aria-label="Диаском — на главную">
+      <img src="img/icons/logo.svg" width="158" height="41" alt="">
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Основное меню">
+      <ul class="nav__list">
+        <li class="nav__item nav__item--drop">
+          <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-sub">
+            <span class="nav__text">Стеллажи</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </button>
+          <ul class="nav__sub" id="nav-sub">
+            <li><a href="/catalog/palletnye-frontalnye-stellazhi/">Паллетные стеллажи</a></li>
+            <li><a href="/catalog/mezoninnye-stellazhi/">Мезонинные стеллажи</a></li>
+            <li><a href="/catalog/glubinnye-stellazhi/">Глубинные стеллажи</a></li>
+            <li><a href="/catalog/konsolnye-stellazhi/">Консольные стеллажи</a></li>
+          </ul>
+        </li>
+        <li class="nav__item">
+          <a href="/services/" class="nav__link nav__desk-only"><span class="nav__text">Услуги</span></a>
+          <!-- в бургер-меню «Услуги» раскрываются, как в UI kit -->
+          <button class="nav__link nav__drop-btn nav__mob-only" type="button" aria-expanded="false" aria-controls="nav-sub-services">
+            <span class="nav__text">Услуги</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </button>
+          <ul class="nav__sub nav__mob-only" id="nav-sub-services">
+            <li><a href="/services/sborka-i-montazh/">Сборка и монтаж</a></li>
+            <li><a href="/services/razrabotka-tz-dlya-auktsionov/">Подготовка тех. задания</a></li>
+            <li><a href="/services/proektirovanie-sklada/">Проектирование склада</a></li>
+          </ul>
+        </li>
+        <li class="nav__item"><a href="/about/" class="nav__link"><span class="nav__text">О компании</span></a></li>
+        <li class="nav__item"><a href="/services/" class="nav__link"><span class="nav__text">Комплексные решения</span></a></li>
+      </ul>
+      <div class="nav__mobile">
+        <div class="icon-links">
+        <a href="tel:+73912592659" aria-label="Позвонить"><span class="socials__icon socials__icon--phone"></span></a>
+        <a href="https://t.me/+79138374659" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span class="socials__icon socials__icon--telegram"></span></a>
+        <a href="https://max.ru/id2464149300_bot" target="_blank" rel="noopener" aria-label="Написать в Max"><span class="socials__icon socials__icon--max"></span></a>
+        </div>
+        <a href="#request" class="btn btn--primary nav__btn">Заказать звонок</a>
+      </div>
+    </nav>
+
+    <a href="#request" class="btn btn--primary header__btn">Заказать звонок</a>
+    <div class="icon-links header__icons">
+        <a href="tel:+73912592659" aria-label="Позвонить"><span class="socials__icon socials__icon--phone"></span></a>
+        <a href="https://t.me/+79138374659" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span class="socials__icon socials__icon--telegram"></span></a>
+        <a href="https://max.ru/id2464149300_bot" target="_blank" rel="noopener" aria-label="Написать в Max"><span class="socials__icon socials__icon--max"></span></a>
+    </div>
+    <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ 1. HERO ============ -->
+  <section class="w-hero">
+    <div class="container w-hero__inner">
+      <div class="w-hero__main">
+        <p class="pill"><img class="pill__icon" src="img/icons/logo-mark.svg" width="16" height="18" alt="">Официальный дилер стеллажных систем</p>
+        <h1 class="m-hero__title w-hero__title">Стеллажи <span class="accent">для склада</span></h1>
+        <p class="w-hero__lead">Подберем оптимальное решение, спроектируем<br> и оснастим ваш склад под ключ</p>
+        <ul class="w-hero__perks">
+          <li><img src="img/icons/perk-1.svg" width="39" height="33" alt=""><span>Проект бесплатно<br> <span class="accent">за 24 часа</span></span></li>
+          <li><img src="img/catalog/c-delivery.svg" width="45" height="38" alt=""><span>Поставка и монтаж<br> <span class="accent">по всей России и СНГ</span></span></li>
+          <li><img src="img/icons/perk-3.svg" width="34" height="38" alt=""><span>Гарантия до 7 лет<br> <span class="accent">на все системы</span></span></li>
+        </ul>
+        <div class="m-hero__buttons w-hero__buttons">
+          <a href="#request" class="btn btn--primary btn--md">Подобрать решение <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a href="#" class="btn btn--outline btn--md">Скачать каталог <svg class="btn__icon btn__icon--dl" aria-hidden="true"><use href="#i-download"/></svg></a>
+        </div>
+      </div>
+      <aside class="w-tasks" aria-label="Решаем задачи">
+        <p class="w-tasks__title">Решаем любые задачи<br> под ключ</p>
+        <ul class="w-tasks__list">
+          <li><img src="img/warehouse/task-1.svg" width="24" height="24" alt="">Паллеты и коробки</li>
+          <li><img src="img/warehouse/task-2.svg" width="24" height="24" alt="">Длинномерные грузы</li>
+          <li><img src="img/warehouse/task-3.svg" width="24" height="24" alt="">Архивы и документация</li>
+          <li><img src="img/warehouse/task-4.svg" width="24" height="24" alt="">Мелкоштучные товары</li>
+          <li><img src="img/warehouse/task-5.svg" width="24" height="24" alt="">Холодильные склады</li>
+          <li><img src="img/warehouse/task-6.svg" width="24" height="24" alt="">Производственные<br> помещения</li>
+        </ul>
+      </aside>
+    </div>
+
+    <div class="container">
+      <div class="w-pick">
+        <div class="w-pick__intro">
+          <h2 class="w-pick__title">Подберем стеллаж <span class="accent">именно под ваш склад</span></h2>
+          <p>Подберем оптимальное решение под ваш склад,<br> тип груза и необходимую нагрузку</p>
+        </div>
+        <ul class="w-pick__items">
+          <li><img src="img/warehouse/pick-1.webp" width="55" height="41" alt=""><strong>Тип груза</strong><span>учитываем особенности<br> и габариты</span></li>
+          <li><img src="img/warehouse/pick-2.webp" width="44" height="39" alt=""><strong>Нагрузка</strong><span>подберем стеллаж<br> под нужный вес</span></li>
+          <li><img src="img/warehouse/pick-3.webp" width="47" height="38" alt=""><strong>Размеры склада</strong><span>эффективно используем<br> площадь и высоту</span></li>
+        </ul>
+        <ul class="w-pick__checks">
+          <li>Бесплатная консультация</li>
+          <li>Работы «под ключ»</li>
+          <li>Подготовка плана</li>
+          <li>Прозрачная стоимость</li>
+        </ul>
+        <a href="#request" class="btn btn--primary w-pick__btn">Получить рекомендацию</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. ВИДЫ СТЕЛЛАЖЕЙ ============ -->
+  <section class="section w-types">
+    <div class="container">
+      <h2 class="h2">Виды стеллажей</h2>
+      <ul class="w-types__grid">
+        <li class="w-type">
+          <div class="w-type__img"><img src="img/warehouse/type-1.webp" width="436" height="190" alt="Паллетные стеллажи" loading="lazy"><span class="w-badge w-badge--hit">Хит</span></div>
+          <h3 class="w-type__title">Паллетные стеллажи</h3>
+          <ul class="w-type__list"><li>Нагрузка до 4500 кг/ярус</li><li>Высота до 14 м</li><li>Срок поставки от 3 дней</li></ul>
+          <a href="/catalog/palletnye-frontalnye-stellazhi/" class="w-more">Подробнее <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </li>
+        <li class="w-type">
+          <div class="w-type__img"><img src="img/warehouse/type-2.webp" width="436" height="190" alt="Глубинные стеллажи" loading="lazy"><span class="w-badge w-badge--long">Для длинномеров</span></div>
+          <h3 class="w-type__title">Глубинные стеллажи</h3>
+          <ul class="w-type__list"><li>Нагрузка до 4500 кг/ярус</li><li>Высота до 14 м</li><li>Срок поставки от 3 дней</li></ul>
+          <a href="/catalog/glubinnye-stellazhi/" class="w-more">Подробнее <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </li>
+        <li class="w-type">
+          <div class="w-type__img"><img src="img/warehouse/type-3.webp" width="436" height="190" alt="Мезонинные стеллажи" loading="lazy"><span class="w-badge w-badge--height">Экономия высоты</span></div>
+          <h3 class="w-type__title">Мезонинные стеллажи</h3>
+          <ul class="w-type__list"><li>Нагрузка до 4500 кг/ярус</li><li>Высота до 14 м</li><li>Срок поставки от 3 дней</li></ul>
+          <a href="/catalog/mezoninnye-stellazhi/" class="w-more">Подробнее <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </li>
+        <li class="w-type">
+          <div class="w-type__img"><img src="img/warehouse/type-4.webp" width="436" height="190" alt="Консольные стеллажи" loading="lazy"><span class="w-badge w-badge--dense">Макс. плотность</span></div>
+          <h3 class="w-type__title">Консольные стеллажи</h3>
+          <ul class="w-type__list"><li>Нагрузка до 4500 кг/ярус</li><li>Высота до 14 м</li><li>Срок поставки от 3 дней</li></ul>
+          <a href="/catalog/konsolnye-stellazhi/" class="w-more">Подробнее <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </li>
+        <li class="w-type">
+          <div class="w-type__img"><img src="img/warehouse/type-5.webp" width="436" height="190" alt="Среднегрузовые стеллажи" loading="lazy"><span class="w-badge w-badge--dense">Макс. плотность</span></div>
+          <h3 class="w-type__title">Среднегрузовые стеллажи</h3>
+          <ul class="w-type__list"><li>Нагрузка до 4500 кг/ярус</li><li>Высота до 14 м</li><li>Срок поставки от 3 дней</li></ul>
+          <a href="/catalog/" class="w-more">Подробнее <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </li>
+        <li class="w-type">
+          <div class="w-type__img"><img src="img/warehouse/type-6.webp" width="436" height="190" alt="Майнинг стеллажи" loading="lazy"><span class="w-badge w-badge--dense">Макс. плотность</span></div>
+          <h3 class="w-type__title">Майнинг стеллажи</h3>
+          <ul class="w-type__list"><li>Нагрузка до 4500 кг/ярус</li><li>Высота до 14 м</li><li>Срок поставки от 3 дней</li></ul>
+          <a href="mining.html" class="w-more">Подробнее <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 3. КАК МЫ РАБОТАЕМ ============ -->
+  <section class="section">
+    <div class="container">
+      <h2 class="h2">Как мы работаем</h2>
+      <p class="lead lead--lg">Каждый проект разрабатывается индивидуально с учетом всех технических особенностей и задач вашего бизнеса.</p>
+      <ol class="steps" id="stepsSlider">
+        <li class="step"><img class="step__icon" src="img/icons/step-1.svg" width="23" height="29" alt=""><span class="step__num">01</span><h3 class="step__title">Получаем<br> задачу</h3></li>
+        <li class="step"><img class="step__icon" src="img/icons/step-2.svg" width="26" height="29" alt=""><span class="step__num">02</span><h3 class="step__title">Проектируем<br> систему хранения</h3></li>
+        <li class="step"><img class="step__icon" src="img/icons/step-3.svg" width="29" height="26" alt=""><span class="step__num">03</span><h3 class="step__title">Согласовываем<br> решение</h3></li>
+        <li class="step"><img class="step__icon" src="img/icons/step-4.svg" width="29" height="23" alt=""><span class="step__num">04</span><h3 class="step__title">Поставляем<br> оборудование</h3></li>
+        <li class="step"><img class="step__icon" src="img/icons/step-5.svg" width="21" height="26" alt=""><span class="step__num">05</span><h3 class="step__title">Готовим смету</h3></li>
+        <li class="step"><img class="step__icon" src="img/icons/step-6.svg" width="26" height="29" alt=""><span class="step__num">06</span><h3 class="step__title">Проводим<br> монтаж</h3></li>
+        <li class="step"><img class="step__icon" src="img/icons/step-7.svg" width="28" height="27" alt=""><span class="step__num">07</span><h3 class="step__title">Сдаем проект и<br> обучаем</h3></li>
+        <li class="step"><img class="step__icon" src="img/icons/step-8.svg" width="23" height="29" alt=""><span class="step__num">08</span><h3 class="step__title">Гарантийное<br> обслуживание</h3></li>
+      </ol>
+      <div class="steps-nav">
+        <button class="slider-nav__btn" type="button" data-slider-prev="stepsSlider" aria-label="Предыдущий этап"><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
+        <span class="steps-nav__bar" aria-hidden="true"><span></span></span>
+        <button class="slider-nav__btn" type="button" data-slider-next="stepsSlider" aria-label="Следующий этап"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. ЦИФРЫ И ГЕОГРАФИЯ ============ -->
+  <section class="section">
+    <div class="container m-cards">
+      <div class="m-card m-card--photo">
+        <h2 class="m-card__title">Диаском в цифрах</h2>
+        <span class="m-card__line" aria-hidden="true"></span>
+        <ul class="m-stats">
+          <li><strong>12+</strong><span>лет на рынке<br> стеллажных систем</span></li>
+          <li><strong>1500+</strong><span>реализованных<br> проектов</span></li>
+          <li><strong>85</strong><span>регионов<br> поставок</span></li>
+          <li><strong>98%</strong><span>клиентов<br> рекомендуют нас</span></li>
+        </ul>
+      </div>
+<div class="m-card">
+        <h2 class="m-card__title">География поставок</h2>
+        <span class="m-card__line" aria-hidden="true"></span>
+        <p class="m-card__text">Доставляем и монтируем стеллажи по всей России и СНГ</p>
+        <img class="m-card__map" src="img/mining/map.webp" width="617" height="337" alt="Карта поставок по России и СНГ" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. ПРОЕКТЫ ============ -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="h2">Реализованные проекты</h2>
+        <div class="slider-nav">
+          <button class="slider-nav__btn" type="button" data-slider-prev="projectsSlider" aria-label="Предыдущие проекты"><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
+          <button class="slider-nav__btn" type="button" data-slider-next="projectsSlider" aria-label="Следующие проекты"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <a href="/services/sborka-i-montazh/" class="btn btn--primary btn--xs slider-nav__all">Смотреть все <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+      <div class="slider-wrap">
+      <button class="slider-nav__btn slider-wrap__btn slider-wrap__btn--prev" type="button" data-slider-prev="projectsSlider" aria-label="Предыдущий проект"><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
+      <button class="slider-nav__btn slider-wrap__btn slider-wrap__btn--next" type="button" data-slider-next="projectsSlider" aria-label="Следующий проект"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      <ul class="slider" id="projectsSlider">
+        <li class="project"><div class="project__img" style="--img:url('../img/project-1.webp')"></div><h3 class="project__title">Распределительный центр Wildberries, Подольск</h3></li>
+        <li class="project"><div class="project__img" style="--img:url('../img/project-2.webp')"></div><h3 class="project__title">Логистический центр Ozon, Тверь</h3></li>
+        <li class="project"><div class="project__img" style="--img:url('../img/project-3.webp')"></div><h3 class="project__title">Складской комплекс X5 Group, Казань</h3></li>
+        <li class="project"><div class="project__img" style="--img:url('../img/project-4.webp')"></div><h3 class="project__title">Производственный склад «МеталлПроф», Екатеринбург</h3></li>
+        <li class="project"><div class="project__img" style="--img:url('../img/project-5.webp')"></div><h3 class="project__title">Склад архивного хранения РЖД, Москва</h3></li>
+      </ul>
+      </div>
+      <a href="/services/sborka-i-montazh/" class="btn btn--primary btn--lg slider-all-mob">Смотреть все проекты <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+  </section>
+
+  <!-- ============ 6. ДОВЕРИЕ, ПРОИЗВОДИТЕЛИ, ДОКУМЕНТЫ ============ -->
+  <section class="section">
+    <div class="container w-trust">
+      <div class="w-trust__card">
+        <h2 class="w-trust__title">Почему нам<br> доверяют</h2>
+        <span class="m-card__line" aria-hidden="true"></span>
+        <ul class="w-dots">
+          <li>Официальный дилер известных брендов</li>
+          <li>Бесплатное проектирование</li>
+          <li>Оптимальные цены без переплат</li>
+          <li>Соблюдение сроков поставки</li>
+          <li>Гарантия до 7 лет на оборудование</li>
+          <li>Полный цикл работ «под ключ»</li>
+        </ul>
+      </div>
+      <div class="w-trust__card">
+        <h2 class="w-trust__title">Наши<br> производители</h2>
+        <span class="m-card__line" aria-hidden="true"></span>
+        <ul class="w-brands">
+          <li><img src="img/partners/rosneft-color.webp" width="174" height="53" alt="Роснефть"></li>
+          <li><img src="img/partners/rushydro-color.webp" width="155" height="44" alt="РусГидро"></li>
+          <li><img src="img/partners/paks-color.webp" width="169" height="40" alt="ПАКС Металл"></li>
+          <li><img src="img/partners/rosseti-color.webp" width="177" height="52" alt="Россети Сибирь"></li>
+        </ul>
+        <a href="#" class="btn btn--primary btn--md w-trust__btn">Все производители <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="w-trust__card">
+        <h2 class="w-trust__title">Сертификаты<br> и документы</h2>
+        <span class="m-card__line" aria-hidden="true"></span>
+        <img class="w-docs" src="img/warehouse/certificates.webp" width="337" height="224" alt="Сертификаты соответствия и благодарственное письмо Диаском" loading="lazy">
+        <a href="#" class="btn btn--primary btn--md w-trust__btn">Смотреть все документы <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. ВОПРОСЫ И ОТВЕТЫ ============ -->
+  <section class="section">
+    <div class="container">
+      <h2 class="h2">Вопросы и ответы</h2>
+      <div class="faq" data-faq>
+        <div class="faq__item is-open">
+          <h3 class="faq__q"><button type="button" aria-expanded="true" aria-controls="faq-0" id="faq-q-0">Какой стеллаж лучше подойдет для моего склада?<span class="faq__icon" aria-hidden="true"></span></button></h3>
+          <div class="faq__a" id="faq-0" role="region" aria-labelledby="faq-q-0"><p>Выбор зависит от типа груза, высоты потолков и оборачиваемости товаров.<br> Наши специалисты спроектируют оптимальную конфигурацию под ваши задачи.</p></div>
+        </div>
+        <div class="faq__item">
+          <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="faq-1" id="faq-q-1">Можно ли изготовить стеллажи под индивидуальные размеры?<span class="faq__icon" aria-hidden="true"></span></button></h3>
+          <div class="faq__a" id="faq-1" role="region" aria-labelledby="faq-q-1" hidden><p>Да. Изготавливаем стеллажи под любые задачи и размеры помещения — специалисты подберут оптимальную конфигурацию.</p></div>
+        </div>
+        <div class="faq__item">
+          <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="faq-2" id="faq-q-2">Какие нагрузки выдерживают стеллажи?<span class="faq__icon" aria-hidden="true"></span></button></h3>
+          <div class="faq__a" id="faq-2" role="region" aria-labelledby="faq-q-2" hidden><p>Нагрузка зависит от модели и конфигурации. Точные значения указаны в характеристиках каждого товара, а инженер поможет рассчитать систему под ваш груз.</p></div>
+        </div>
+        <div class="faq__item">
+          <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="faq-3" id="faq-q-3">Есть ли у вас монтаж и проектирование?<span class="faq__icon" aria-hidden="true"></span></button></h3>
+          <div class="faq__a" id="faq-3" role="region" aria-labelledby="faq-q-3" hidden><p>Да. Проектируем, поставляем и монтируем стеллажные системы для склада любой сложности по всей России и в странах СНГ.</p></div>
+        </div>
+        <div class="faq__item">
+          <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="faq-4" id="faq-q-4">Какие сроки поставки?<span class="faq__icon" aria-hidden="true"></span></button></h3>
+          <div class="faq__a" id="faq-4" role="region" aria-labelledby="faq-q-4" hidden><p>Сроки зависят от объема заказа и региона. Точный срок изготовления и доставки сообщим при расчете проекта.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 8. ФОРМА ============ -->
+  <section class="section" id="request">
+    <div class="container">
+      <div class="request m-request">
+        <div class="request__info">
+          <h2 class="h2">Получите проект<br> вашего склада<br> <span class="accent">бесплатно за 24 часа</span></h2>
+          <span class="line" aria-hidden="true"></span>
+          <ul class="checks checks--lg">
+            <li>Проектирование под ваш склад</li>
+            <li>Подбор оборудования</li>
+            <li>Расчет стоимости и сроков</li>
+            <li>Коммерческое предложение</li>
+          </ul>
+          <a href="tel:+73912592659" class="btn btn--outline btn--lg m-request__call">Позвонить сейчас <svg class="btn__icon btn__icon--phone" aria-hidden="true"><use href="#i-phone"/></svg></a>
+        </div>
+
+        <form class="form" id="requestForm" novalidate>
+          <label class="form__field">
+            <span class="visually-hidden">Ваше имя</span>
+            <input type="text" name="name" placeholder="Ваше имя" autocomplete="name">
+          </label>
+          <label class="form__field">
+            <span class="visually-hidden">Ваш телефон</span>
+            <input type="tel" name="phone" placeholder="Ваш телефон" autocomplete="tel" required data-phone>
+            <span class="form__error" role="alert">Введите номер полностью</span>
+          </label>
+          <label class="form__field">
+            <span class="visually-hidden">Ваша почта</span>
+            <input type="email" name="email" placeholder="Ваша почта" autocomplete="email">
+          </label>
+          <div class="form__field form__select" data-select>
+            <span class="visually-hidden" id="whLabel">Тип склада</span>
+            <button type="button" class="form__select-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="whList" aria-labelledby="whLabel whValue">
+              <span class="form__select-value" id="whValue">Тип склада</span>
+              <svg class="form__chevron" viewBox="0 0 25.8 13.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M.9.9l12 12 12-12"/></svg>
+            </button>
+            <ul class="form__options" id="whList" role="listbox" aria-labelledby="whLabel" tabindex="-1" hidden>
+              <li role="option" id="wh-logistics" data-value="logistics" aria-selected="false">Логистический склад</li>
+              <li role="option" id="wh-production" data-value="production" aria-selected="false">Производственный склад</li>
+              <li role="option" id="wh-trade" data-value="trade" aria-selected="false">Торговый склад</li>
+              <li role="option" id="wh-console" data-value="console" aria-selected="false">Консольный склад</li>
+              <li role="option" id="wh-cold" data-value="cold" aria-selected="false">Холодильный склад</li>
+              <li role="option" id="wh-archive" data-value="archive" aria-selected="false">Архив и офис</li>
+            </ul>
+            <input type="hidden" name="warehouse" value="">
+          </div>
+          <label class="form__check">
+            <input type="checkbox" name="agree" required>
+            <span class="form__box" aria-hidden="true"></span>
+            <span>Соглашаюсь с условиями <a href="/terms/">Политики конфиденциальности</a>.</span>
+          </label>
+          <button type="submit" class="btn btn--primary btn--lg btn--block">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <p class="form__success" role="status" hidden>Заявка отправлена. Мы перезвоним вам в ближайшее время.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<!-- ============ 10. ПОДВАЛ ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__card">
+      <div class="footer__brand">
+        <a href="/" class="logo logo--lg" aria-label="Диаском — на главную">
+          <img src="img/icons/logo-footer.svg" width="358" height="94" alt="">
+        </a>
+        <p class="footer__slogan">Металлическая мебель и складское оборудование<br> для вашего бизнеса</p>
+        <div class="footer__contact">
+          <img src="img/icons/phone.svg" width="26" height="26" alt="">
+          <div>
+            <a href="tel:+73912592659" class="footer__phone">+7 (391) 259-26-59</a>
+            <span class="footer__hours">Ежедневно с 9:00 до 18:00</span>
+          </div>
+        </div>
+        <div class="footer__contact footer__contact--address">
+          <img src="img/icons/pin.svg" width="26" height="32" alt="">
+          <address class="footer__address">проспект имени газеты Красноярский рабочий, 170а, офис 3-27</address>
+        </div>
+        <ul class="socials">
+          <li><a href="mailto:info@diaskom.ru" aria-label="Написать на почту"><span class="socials__icon socials__icon--mail"></span></a></li>
+          <li><a href="https://max.ru/id2464149300_bot" target="_blank" rel="noopener" aria-label="Написать в Max"><span class="socials__icon socials__icon--max"></span></a></li>
+          <li><a href="https://t.me/+79138374659" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span class="socials__icon socials__icon--telegram"></span></a></li>
+        </ul>
+      </div>
+      <nav class="footer__col" aria-label="Каталог">
+        <h3 class="footer__title">Каталог</h3>
+        <ul>
+          <li><a href="/catalog/palletnye-frontalnye-stellazhi/">Паллетные стеллажи</a></li>
+          <li><a href="/catalog/mezoninnye-stellazhi/">Мезонинные стеллажи</a></li>
+          <li><a href="/catalog/glubinnye-stellazhi/">Глубинные стеллажи</a></li>
+          <li><a href="/catalog/konsolnye-stellazhi/">Консольные стеллажи</a></li>
+          <li><a href="/catalog/metallicheskie-stellazhi/">Полочные стеллажи</a></li>
+          <li><a href="/catalog/stellazhi-dlya-sklada/">Передвижные стеллажи</a></li>
+          <li><a href="/catalog/stellazhi-dlya-sklada/" class="footer__all">Все стеллажи</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__col" aria-label="Компания">
+        <h3 class="footer__title">Компания</h3>
+        <ul>
+          <li><a href="/about/">О компании</a></li>
+          <li><a href="/rekvizity/">Документы и сертификаты</a></li>
+          <li><a href="https://yandex.ru/maps/org/diaskom/194174337631/reviews/" target="_blank" rel="noopener">Отзывы</a></li>
+          <li><a href="/contact/">Контакты</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__col" aria-label="Услуги">
+        <h3 class="footer__title">Услуги</h3>
+        <ul>
+          <li><a href="/services/sborka-i-montazh/">Сборка и монтаж</a></li>
+          <li><a href="/services/razrabotka-tz-dlya-auktsionov/">Подготовка тех. задания</a></li>
+          <li><a href="/services/proektirovanie-sklada/">Проектирование склада</a></li>
+        </ul>
+      </nav>
+      <div class="footer__bottom">
+        <span>2026 © Диаском</span>
+        <a href="/terms/">Политика конфиденциальности</a>
+        <a href="/terms/">Согласие на обработку персональных данных</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js?v=41"></script>
+<script src="js/catalog.js?v=1"></script>
+</body>
+</html>

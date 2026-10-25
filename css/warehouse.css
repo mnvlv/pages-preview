@@ -1,0 +1,139 @@
+/* ==========================================================
+   Диаском — «Стеллажи для склада»
+   Общие блоки: style.css (шаги, проекты, форма), mining.css (цифры, география, заголовок hero),
+   catalog.css (FAQ)
+   ========================================================== */
+
+/* ---------- Hero ---------- */
+.w-hero { position: relative; margin-top: calc(-1 * var(--header-h)); padding-top: var(--header-h); isolation: isolate; overflow-x: clip; }
+.w-hero::before {
+  content: ''; position: absolute; z-index: -1; top: 0; left: 50%; width: 1440px; height: 646px; transform: translateX(-50%);
+  background: url(../img/warehouse/hero.webp) center top / 100% 100% no-repeat;
+}
+.w-hero__inner { display: grid; grid-template-columns: minmax(0, 1fr) 270px; gap: 32px; }
+.w-hero__main .pill { margin: 29px 0 0; height: 37px; padding: 0 12px 0 11px; gap: 10px; border-color: #585858; }
+.w-hero__title { margin-top: 10px; }
+.w-hero__lead { margin-top: 33px; line-height: 19px; }
+.w-hero__perks { display: flex; flex-wrap: wrap; gap: 20px 28px; margin: 37px 0 0 4px; }
+.w-hero__perks li { display: flex; align-items: center; gap: 20px; line-height: 19px; }
+.w-hero__perks img { flex: none; }
+.w-hero__buttons { margin-top: 52px; }
+.w-tasks {
+  align-self: start; margin-top: 30px; padding: 19px 20px 18px; background: var(--c-bg);
+  border-radius: 8px; box-shadow: 0 0 0 1px #585858;
+}
+.w-tasks__title { font-weight: 600; line-height: 19px; }
+.w-tasks__list { display: grid; gap: 12px; margin-top: 14px; }
+.w-tasks__list li { display: flex; align-items: center; gap: 12px; line-height: 19px; }
+.w-tasks__list li:last-child { line-height: 16px; }
+.w-tasks__list img { flex: none; width: 24px; height: 24px; object-fit: contain; }
+
+/* подбор стеллажа */
+.w-pick {
+  display: grid; grid-template-columns: minmax(0, 1fr) 690px; align-items: end; gap: 15px 24px;
+  margin-top: 62px; padding: 22px 24px 23px 20px; border-radius: 8px; box-shadow: 0 0 0 1px #585858;
+}
+.w-pick__intro { align-self: start; }
+.w-pick__title { font-size: clamp(26px, 2.78vw, 40px); font-weight: 600; line-height: 1.15; text-transform: uppercase; }
+.w-pick__title .accent { display: block; }
+.w-pick__intro p { margin-top: 18px; line-height: 19px; }
+.w-pick__items { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-self: start; padding-top: 6px; text-align: center; }
+.w-pick__items li { display: flex; flex-direction: column; align-items: center; }
+.w-pick__items img { height: 42px; width: auto; object-fit: contain; }
+.w-pick__items strong { margin-top: 12px; font-size: 20px; font-weight: 600; line-height: 24px; }
+.w-pick__items span { margin-top: 9px; line-height: 19px; }
+.w-pick__checks { display: flex; flex-wrap: wrap; gap: 12px 17px; align-self: center; grid-column: 1 / -1; grid-row: 2; }
+.w-pick__checks li { display: flex; align-items: center; gap: 8px; line-height: 19px; }
+.w-pick__checks li::before { content: ''; flex: none; width: 19px; height: 19px; background: url(../img/warehouse/check-circle.svg) center / contain no-repeat; }
+.w-pick__btn { grid-column: 2; grid-row: 2; justify-self: end; min-height: 48px; min-width: 248px; padding: 0 20px; }
+
+/* ---------- Виды стеллажей ---------- */
+.w-types { padding-top: calc(var(--section-y) - 3px); }
+.w-types__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 31px; margin-top: 42px; }
+.w-type {
+  display: flex; flex-direction: column; overflow: hidden; padding-bottom: 16px;
+  background: var(--c-surface); border-radius: 8px; box-shadow: inset 0 0 0 1px #585858;
+}
+.w-type__img { position: relative; aspect-ratio: 438 / 191; overflow: hidden; }
+.w-type__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.w-type:hover .w-type__img img { transform: scale(1.04); }
+.w-badge {
+  position: absolute; top: 11px; left: 17px; padding: 0 9px; font-size: 12px; line-height: 24px;
+  text-transform: uppercase; color: #fff; background: var(--c-accent); border-radius: 2px;
+}
+.w-badge--long { background: #ff9554; }
+.w-badge--height { background: #016aea; }
+.w-badge--dense { background: #4701ea; }
+.w-type__title { margin: 17px 17px 0; font-size: 20px; font-weight: 600; line-height: 24px; }
+.w-type__list { display: grid; gap: 8px; margin: 17px 17px 0; }
+.w-type__list li { position: relative; padding-left: 13px; line-height: 19px; color: var(--c-text-2); }
+.w-type__list li::before { content: ''; position: absolute; top: 7px; left: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--c-accent); }
+/* кнопка карточек по UI kit: оранжевый текст со стрелкой → белый при наведении */
+.w-more { display: inline-flex; align-self: flex-start; align-items: center; gap: 10px; margin: 16px 17px 0; line-height: 19px; color: var(--c-accent); transition: color .2s; }
+.w-more .btn__icon { width: 17px; height: 12px; }
+.w-more:hover, .w-more:focus-visible { color: var(--c-text); }
+
+/* ---------- Доверие, производители, документы ---------- */
+.w-trust { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.w-trust__card {
+  display: flex; flex-direction: column; align-items: flex-start; min-height: 444px; padding: 28px;
+  background: var(--c-surface); border-radius: 8px; box-shadow: 0 0 0 1px #585858;
+}
+.w-trust__title { font-size: clamp(24px, 2.23vw, 32px); font-weight: 600; line-height: 1.31; text-transform: uppercase; }
+.w-trust .m-card__line { margin-top: 14px; }
+.w-dots { display: grid; gap: 21px; margin-top: 30px; }
+.w-dots li { position: relative; padding-left: 20px; font-weight: 600; line-height: 19px; color: var(--c-text-2); }
+.w-dots li::before { content: ''; position: absolute; top: 3.5px; left: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--c-accent); }
+.w-brands { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center; gap: 39px 24px; margin-top: 45px; width: 100%; max-width: 400px; }
+.w-brands img { max-width: 100%; height: auto; }
+.w-docs { width: 337px; max-width: 100%; height: auto; margin: 6px 0 0 -21px; }
+.w-trust__btn { margin-top: auto; }
+.w-trust__card:last-child .w-trust__btn { min-width: 295px; }
+/* форма: «Позвонить сейчас» внизу, на одной линии с «Оставить заявку» */
+.page-warehouse .m-request .request__info { display: flex; flex-direction: column; align-items: flex-start; align-self: stretch; }
+.page-warehouse .m-request__call { margin-top: auto; }
+
+/* ==========================================================
+   Адаптив
+   ========================================================== */
+@media (max-width: 1360px) {
+  .w-pick { grid-template-columns: minmax(0, 1fr) minmax(0, 600px); }
+  .w-pick__checks { grid-column: 1; }
+}
+
+@media (max-width: 1200px) {
+  .w-pick { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  .w-pick__checks, .w-pick__btn { grid-column: 1; grid-row: auto; }
+  .w-pick__btn { justify-self: start; }
+  .w-types__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .w-trust { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .w-trust__card { min-height: 0; gap: 0; }
+  .w-trust__btn { margin-top: 32px; }
+}
+
+@media (max-width: 1024px) {
+  .w-hero__inner { grid-template-columns: minmax(0, 1fr); }
+  .w-tasks { margin-top: 0; }
+  .w-tasks__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .w-pick { margin-top: 48px; }
+}
+
+@media (max-width: 768px) {
+  .w-hero__lead br, .w-pick br, .w-tasks br { display: none; }
+  .w-hero__perks { flex-direction: column; gap: 16px; margin-left: 0; }
+  .w-hero__perks img { width: 46px; height: 38px; object-fit: contain; object-position: left center; }
+  .w-hero__buttons .btn { flex: 1 1 100%; }
+  .w-tasks__list { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .w-pick { padding: 20px 16px; gap: 24px; }
+  .w-pick__items { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .w-pick__checks { flex-direction: column; align-items: flex-start; }
+  .w-pick__btn { width: 100%; }
+  .w-types__grid { grid-template-columns: minmax(0, 1fr); gap: 16px; margin-top: 24px; }
+  .w-trust { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .w-trust__card { padding: 24px 20px; }
+  .w-trust__btn, .w-trust__card:last-child .w-trust__btn { width: 100%; min-width: 0; }
+  .page-warehouse .m-request__call { margin-top: 14px; }
+  .w-brands { gap: 24px 20px; margin-top: 28px; }
+  .w-docs { margin-left: 0; }
+}
+
