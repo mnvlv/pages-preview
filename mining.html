@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Стеллажи для майнинговых ферм — Диаском</title>
+  <meta name="description" content="Стеллажи для майнинг-ферм от производителя: открытая конструкция для охлаждения, нагрузка до 1000 кг на ярус, модульная структура. Доставка и монтаж по всей России и СНГ.">
+  <meta name="theme-color" content="#1c1c1c">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=37">
+  <link rel="stylesheet" href="css/mining.css?v=1">
+</head>
+<body class="page-mining">
+
+<!-- ============ ИКОНКИ ИНТЕРФЕЙСА ============ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="i-arrow" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M.75 6.836h18M12 .836l6.75 6-6.75 6"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.75 6.836h-18M7.5 .836l-6.75 6 6.75 6"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5v7l5.5-3.5z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-download" viewBox="489.50 518.50 15.00 15.00"><path fill="currentColor" d="M491.00 528.25C491.00 527.84 490.66 527.50 490.25 527.50C489.84 527.50 489.50 527.84 489.50 528.25L490.25 528.25L491.00 528.25M504.50 528.25C504.50 527.84 504.16 527.50 503.75 527.50C503.34 527.50 503.00 527.84 503.00 528.25L503.75 528.25L504.50 528.25M490.25 528.25L489.50 528.25C489.50 529.29 489.50 530.14 489.59 530.82C489.68 531.51 489.89 532.13 490.38 532.62L490.91 532.09L491.44 531.56C491.27 531.39 491.15 531.15 491.08 530.62C491.00 530.07 491.00 529.33 491.00 528.25L490.25 528.25M490.91 532.09L490.38 532.62C490.87 533.11 491.49 533.32 492.18 533.41C492.86 533.50 493.71 533.50 494.75 533.50L494.75 532.75L494.75 532.00C493.67 532.00 492.93 532.00 492.38 531.92C491.85 531.85 491.61 531.73 491.44 531.56L490.91 532.09M494.75 532.75L494.75 533.50L499.25 533.50L499.25 532.75L499.25 532.00L494.75 532.00L494.75 532.75M499.25 532.75L499.25 533.50C500.29 533.50 501.14 533.50 501.82 533.41C502.51 533.32 503.13 533.11 503.62 532.62L503.09 532.09L502.56 531.56C502.39 531.73 502.15 531.85 501.62 531.92C501.07 532.00 500.33 532.00 499.25 532.00L499.25 532.75M503.09 532.09L503.62 532.62C504.11 532.13 504.32 531.51 504.41 530.82C504.50 530.14 504.50 529.29 504.50 528.25L503.75 528.25L503.00 528.25C503.00 529.33 503.00 530.07 502.92 530.62C502.85 531.15 502.73 531.39 502.56 531.56L503.09 532.09"/><path fill="currentColor" d="M497.75 519.25C497.75 518.84 497.41 518.50 497.00 518.50C496.59 518.50 496.25 518.84 496.25 519.25L497.00 519.25L497.75 519.25M497.00 529.00L496.45 529.51C496.59 529.66 496.79 529.75 497.00 529.75C497.21 529.75 497.41 529.66 497.55 529.51L497.00 529.00M500.55 526.22C500.83 525.92 500.81 525.44 500.51 525.17C500.20 524.89 499.73 524.91 499.45 525.21L500.00 525.72L500.55 526.22M494.55 525.21C494.27 524.91 493.80 524.89 493.49 525.17C493.19 525.44 493.17 525.92 493.45 526.22L494.00 525.72L494.55 525.21M497.00 519.25L496.25 519.25L496.25 529.00L497.00 529.00L497.75 529.00L497.75 519.25L497.00 519.25M497.00 529.00L497.55 529.51L500.55 526.22L500.00 525.72L499.45 525.21L496.45 528.49L497.00 529.00L497.55 528.49L494.55 525.21L494.00 525.72L493.45 526.22L496.45 529.51L497.00 529.00"/></symbol>
+  <symbol id="i-phone" viewBox="267.00 3669.50 17.00 17.00"><path fill="currentColor" d="M276.87 3681.43L276.43 3682.32C276.44 3682.33 276.45 3682.33 276.46 3682.33L276.87 3681.43M277.78 3681.20L276.99 3680.59L276.99 3680.59L277.78 3681.20M278.05 3680.85L278.84 3681.46L278.85 3681.45L278.05 3680.85M281.50 3685.50L281.50 3686.50L281.50 3685.50M268.00 3672.00L269.00 3672.00L268.00 3672.00M269.50 3670.50L269.50 3669.50L269.50 3670.50M271.75 3670.50L271.75 3669.50L271.75 3670.50M272.65 3675.45L273.25 3676.25L272.65 3675.45M272.30 3675.71L271.70 3674.91L271.69 3674.92L272.30 3675.71M272.08 3676.64L271.18 3677.08L271.18 3677.08L272.08 3676.64M276.87 3681.43L276.46 3682.33C276.82 3682.50 277.23 3682.54 277.61 3682.44L277.37 3681.47L277.13 3680.50C277.18 3680.49 277.24 3680.49 277.29 3680.52L276.87 3681.43M277.37 3681.47L277.61 3682.44C278.00 3682.35 278.34 3682.12 278.58 3681.80L277.78 3681.20L276.99 3680.59C277.02 3680.55 277.07 3680.52 277.13 3680.50L277.37 3681.47M277.78 3681.20L278.58 3681.81L278.84 3681.46L278.05 3680.85L277.26 3680.24L276.99 3680.59L277.78 3681.20M278.05 3680.85L278.85 3681.45C278.90 3681.39 278.96 3681.34 279.03 3681.30L278.58 3680.41L278.13 3679.51C277.78 3679.69 277.48 3679.94 277.25 3680.25L278.05 3680.85M278.58 3680.41L279.03 3681.30C279.10 3681.27 279.17 3681.25 279.25 3681.25L279.25 3680.25L279.25 3679.25C278.86 3679.25 278.48 3679.34 278.13 3679.51L278.58 3680.41M279.25 3680.25L279.25 3681.25L281.50 3681.25L281.50 3680.25L281.50 3679.25L279.25 3679.25L279.25 3680.25M281.50 3680.25L281.50 3681.25C281.63 3681.25 281.76 3681.30 281.85 3681.40L282.56 3680.69L283.27 3679.98C282.80 3679.51 282.16 3679.25 281.50 3679.25L281.50 3680.25M282.56 3680.69L281.85 3681.40C281.95 3681.49 282.00 3681.62 282.00 3681.75L283.00 3681.75L284.00 3681.75C284.00 3681.09 283.74 3680.45 283.27 3679.98L282.56 3680.69M283.00 3681.75L282.00 3681.75L282.00 3684.00L283.00 3684.00L284.00 3684.00L284.00 3681.75L283.00 3681.75M283.00 3684.00L282.00 3684.00C282.00 3684.13 281.95 3684.26 281.85 3684.35L282.56 3685.06L283.27 3685.77C283.74 3685.30 284.00 3684.66 284.00 3684.00L283.00 3684.00M282.56 3685.06L281.85 3684.35C281.76 3684.45 281.63 3684.50 281.50 3684.50L281.50 3685.50L281.50 3686.50C282.16 3686.50 282.80 3686.24 283.27 3685.77L282.56 3685.06M281.50 3685.50L281.50 3684.50C278.18 3684.50 275.01 3683.18 272.66 3680.84L271.95 3681.55L271.25 3682.25C273.97 3684.97 277.65 3686.50 281.50 3686.50L281.50 3685.50M271.95 3681.55L272.66 3680.84C270.32 3678.49 269.00 3675.32 269.00 3672.00L268.00 3672.00L267.00 3672.00C267.00 3675.85 268.53 3679.53 271.25 3682.25L271.95 3681.55M268.00 3672.00L269.00 3672.00C269.00 3671.87 269.05 3671.74 269.15 3671.65L268.44 3670.94L267.73 3670.23C267.26 3670.70 267.00 3671.34 267.00 3672.00L268.00 3672.00M268.44 3670.94L269.15 3671.65C269.24 3671.55 269.37 3671.50 269.50 3671.50L269.50 3670.50L269.50 3669.50C268.84 3669.50 268.20 3669.76 267.73 3670.23L268.44 3670.94M269.50 3670.50L269.50 3671.50L271.75 3671.50L271.75 3670.50L271.75 3669.50L269.50 3669.50L269.50 3670.50M271.75 3670.50L271.75 3671.50C271.88 3671.50 272.01 3671.55 272.10 3671.65L272.81 3670.94L273.52 3670.23C273.05 3669.76 272.41 3669.50 271.75 3669.50L271.75 3670.50M272.81 3670.94L272.10 3671.65C272.20 3671.74 272.25 3671.87 272.25 3672.00L273.25 3672.00L274.25 3672.00C274.25 3671.34 273.99 3670.70 273.52 3670.23L272.81 3670.94M273.25 3672.00L272.25 3672.00L272.25 3674.25L273.25 3674.25L274.25 3674.25L274.25 3672.00L273.25 3672.00M273.25 3674.25L272.25 3674.25C272.25 3674.33 272.23 3674.40 272.20 3674.47L273.09 3674.92L273.99 3675.37C274.16 3675.02 274.25 3674.64 274.25 3674.25L273.25 3674.25M273.09 3674.92L272.20 3674.47C272.16 3674.54 272.11 3674.60 272.05 3674.65L272.65 3675.45L273.25 3676.25C273.56 3676.02 273.81 3675.72 273.99 3675.37L273.09 3674.92M272.65 3675.45L272.05 3674.65L271.70 3674.91L272.30 3675.71L272.90 3676.51L273.25 3676.25L272.65 3675.45M272.30 3675.71L271.69 3674.92C271.37 3675.16 271.14 3675.51 271.05 3675.91L272.02 3676.14L273.00 3676.37C272.98 3676.42 272.95 3676.47 272.91 3676.51L272.30 3675.71M272.02 3676.14L271.05 3675.91C270.96 3676.30 271.00 3676.71 271.18 3677.08L272.08 3676.64L272.98 3676.20C273.00 3676.25 273.01 3676.31 273.00 3676.37L272.02 3676.14M272.08 3676.64L271.18 3677.08C272.31 3679.36 274.15 3681.20 276.43 3682.32L276.87 3681.43L277.31 3680.53C275.43 3679.60 273.90 3678.08 272.98 3676.20L272.08 3676.64"/></symbol>
+  <symbol id="i-check" viewBox="1133.89 793.89 15.23 12.11"><path fill="currentColor" d="M1148.75 795.67C1149.11 795.25 1149.08 794.62 1148.67 794.25C1148.25 793.89 1147.62 793.92 1147.25 794.33L1148.00 795.00L1148.75 795.67M1139.06 805.00L1138.32 805.67C1138.51 805.88 1138.78 806.00 1139.06 806.00C1139.35 806.00 1139.62 805.88 1139.81 805.67L1139.06 805.00M1135.75 799.79C1135.38 799.38 1134.75 799.34 1134.33 799.71C1133.92 800.08 1133.89 800.71 1134.25 801.12L1135.00 800.45L1135.75 799.79M1148.00 795.00L1147.25 794.33L1138.32 804.33L1139.06 805.00L1139.81 805.67L1148.75 795.67L1148.00 795.00M1139.06 805.00L1139.81 804.33L1135.75 799.79L1135.00 800.45L1134.25 801.12L1138.32 805.67L1139.06 805.00"/></symbol>
+  <symbol id="i-crumb" viewBox="114.45 134.45 6.10 11.10"><path fill="currentColor" d="M114.65 144.65C114.45 144.84 114.45 145.16 114.65 145.35C114.84 145.55 115.16 145.55 115.35 145.35L115.00 145.00L114.65 144.65M120.00 140.00L120.35 140.35C120.55 140.16 120.55 139.84 120.35 139.65L120.00 140.00M115.35 134.65C115.16 134.45 114.84 134.45 114.65 134.65C114.45 134.84 114.45 135.16 114.65 135.35L115.00 135.00L115.35 134.65M115.00 145.00L115.35 145.35L120.35 140.35L120.00 140.00L119.65 139.65L114.65 144.65L115.00 145.00M120.00 140.00L120.35 139.65L115.35 134.65L115.00 135.00L114.65 135.35L119.65 140.35L120.00 140.00"/></symbol>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header class="header">
+  <div class="container header__inner">
+    <a href="/" class="logo" aria-label="Диаском — на главную">
+      <img src="img/icons/logo.svg" width="158" height="41" alt="">
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Основное меню">
+      <ul class="nav__list">
+        <li class="nav__item nav__item--drop">
+          <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-sub">
+            <span class="nav__text">Стеллажи</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </button>
+          <ul class="nav__sub" id="nav-sub">
+            <li><a href="/catalog/palletnye-frontalnye-stellazhi/">Паллетные стеллажи</a></li>
+            <li><a href="/catalog/mezoninnye-stellazhi/">Мезонинные стеллажи</a></li>
+            <li><a href="/catalog/glubinnye-stellazhi/">Глубинные стеллажи</a></li>
+            <li><a href="/catalog/konsolnye-stellazhi/">Консольные стеллажи</a></li>
+          </ul>
+        </li>
+        <li class="nav__item">
+          <a href="/services/" class="nav__link nav__desk-only"><span class="nav__text">Услуги</span></a>
+          <!-- в бургер-меню «Услуги» раскрываются, как в UI kit -->
+          <button class="nav__link nav__drop-btn nav__mob-only" type="button" aria-expanded="false" aria-controls="nav-sub-services">
+            <span class="nav__text">Услуги</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </button>
+          <ul class="nav__sub nav__mob-only" id="nav-sub-services">
+            <li><a href="/services/sborka-i-montazh/">Сборка и монтаж</a></li>
+            <li><a href="/services/razrabotka-tz-dlya-auktsionov/">Подготовка тех. задания</a></li>
+            <li><a href="/services/proektirovanie-sklada/">Проектирование склада</a></li>
+          </ul>
+        </li>
+        <li class="nav__item"><a href="/about/" class="nav__link"><span class="nav__text">О компании</span></a></li>
+        <li class="nav__item"><a href="/services/" class="nav__link"><span class="nav__text">Комплексные решения</span></a></li>
+      </ul>
+      <div class="nav__mobile">
+        <div class="icon-links">
+        <a href="tel:+73912592659" aria-label="Позвонить"><span class="socials__icon socials__icon--phone"></span></a>
+        <a href="https://t.me/+79138374659" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span class="socials__icon socials__icon--telegram"></span></a>
+        <a href="https://max.ru/id2464149300_bot" target="_blank" rel="noopener" aria-label="Написать в Max"><span class="socials__icon socials__icon--max"></span></a>
+        </div>
+        <a href="#request" class="btn btn--primary nav__btn">Заказать звонок</a>
+      </div>
+    </nav>
+
+    <a href="#request" class="btn btn--primary header__btn">Заказать звонок</a>
+    <div class="icon-links header__icons">
+        <a href="tel:+73912592659" aria-label="Позвонить"><span class="socials__icon socials__icon--phone"></span></a>
+        <a href="https://t.me/+79138374659" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span class="socials__icon socials__icon--telegram"></span></a>
+        <a href="https://max.ru/id2464149300_bot" target="_blank" rel="noopener" aria-label="Написать в Max"><span class="socials__icon socials__icon--max"></span></a>
+    </div>
+    <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ 1. HERO ============ -->
+  <section class="m-hero">
+    <div class="container m-hero__inner">
+      <div class="m-hero__main">
+        <nav class="crumbs" aria-label="Навигационная цепочка">
+          <ol>
+            <li><a href="/">Главная</a></li>
+            <li><a href="/catalog/">Каталог</a></li>
+            <li aria-current="page">Стеллажи для майнинговых ферм</li>
+          </ol>
+        </nav>
+        <h1 class="m-hero__title">Стеллажи для <span class="accent">майнинговых<br> ферм</span></h1>
+        <p class="m-hero__lead">Эффективные решения для размещения майнинг-<br>оборудования и управления охлаждением</p>
+        <div class="m-hero__buttons">
+          <a href="#request" class="btn btn--primary btn--md">Рассчитать проект <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a href="#" class="btn btn--outline btn--md">Скачать каталог <svg class="btn__icon btn__icon--dl" aria-hidden="true"><use href="#i-download"/></svg></a>
+        </div>
+      </div>
+      <ul class="m-hero__features">
+        <li><img src="img/mining/m-air.svg" width="30" height="30" alt="">оптимальный<br> воздушный поток</li>
+        <li><img src="img/mining/m-weight.svg" width="32" height="32" alt="">нагрузка до 1000кг<br> на один ярус</li>
+        <li><img src="img/mining/m-modules.svg" width="36" height="30" alt="">модульная<br> структура</li>
+        <li><img src="img/mining/m-access.svg" width="34" height="34" alt="">быстрый доступ<br> к оборудованию</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 2. КОНСТРУКЦИЯ ============ -->
+  <section class="section">
+    <div class="container m-build">
+      <div class="m-build__text">
+        <h2 class="h2">Конструкция<br> стеллажей</h2>
+        <p class="m-build__lead">Стеллажи разработаны с учетом особенностей майнинг-оборудования высокой тепловой нагрузки, веса и необходимости постоянного доступа для обслуживания</p>
+        <ul class="dots">
+          <li>Открытая конструкция для максимального воздушного потока</li>
+          <li>Перфорированные полки для эффективного отвода тепла</li>
+          <li>Регулируемая высота ярусов</li>
+          <li>Прочная сталь с антикоррозийным покрытием</li>
+        </ul>
+      </div>
+      <img class="m-build__img" src="img/mining/construction.webp" width="523" height="368" alt="Стеллаж для майнинговой фермы с ASIC-майнерами" loading="lazy">
+      <div class="m-why">
+        <h3 class="m-why__title">Почему это важно</h3>
+        <ul class="checks">
+          <li>Снижение температуры<br> оборудования на 30%</li>
+          <li>Увеличение срока<br> службы ASIC</li>
+          <li>Стабильная работа без<br> перегрева</li>
+          <li>Быстрое<br> масштабирование фермы</li>
+        </ul>
+        <a href="#request" class="btn btn--primary btn--block m-why__btn">Рассчитать проект <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. ПРЕИМУЩЕСТВА ============ -->
+  <section class="section">
+    <div class="container">
+      <h2 class="h2">Преимущества наших<br> стеллажей</h2>
+      <ul class="m-adv">
+        <li class="m-adv__item">
+          <h3 class="m-adv__title">Оптимальное<br> охлаждение</h3>
+          <p>Открытая конструкция обеспечивает свободный воздушный поток и предотвращает перегрев оборудования</p>
+          <img class="m-adv__img" src="img/mining/adv-1.webp" width="186" height="136" alt="" loading="lazy">
+        </li>
+        <li class="m-adv__item">
+          <h3 class="m-adv__title">Высокая<br> нагрузка</h3>
+          <p>Усиленные полки выдерживают нагрузку до 1000кг на ярус, подходят для тяжелых ASIC-майнеров</p>
+          <img class="m-adv__img" src="img/mining/adv-2.webp" width="173" height="136" alt="" loading="lazy">
+        </li>
+        <li class="m-adv__item">
+          <h3 class="m-adv__title">Удобство<br> обслуживания</h3>
+          <p>Открытый доступ к оборудованию для быстрой замены и обслуживания</p>
+          <img class="m-adv__img" src="img/mining/adv-3.webp" width="172" height="136" alt="" loading="lazy">
+        </li>
+        <li class="m-adv__item">
+          <h3 class="m-adv__title">Кабель<br> менеджмент</h3>
+          <p>Продуманная система укладки кабелей для безопасной и аккуратной организации</p>
+          <img class="m-adv__img" src="img/mining/adv-4.webp" width="175" height="136" alt="" loading="lazy">
+        </li>
+        <li class="m-adv__item">
+          <h3 class="m-adv__title">Удобное<br> масштабирование</h3>
+          <p>Модульная система позволяет легко расширять ферму по мере роста мощностей</p>
+          <img class="m-adv__img" src="img/mining/adv-5.webp" width="173" height="136" alt="" loading="lazy">
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 4. ХАРАКТЕРИСТИКИ, ПРИМЕРЫ, ЦИФРЫ, ГЕОГРАФИЯ ============ -->
+  <section class="section">
+    <div class="container m-cards">
+      <div class="m-card m-card--photo">
+        <h2 class="m-card__title">Технические характеристики</h2>
+        <span class="m-card__line" aria-hidden="true"></span>
+        <table class="specs">
+          <tbody>
+            <tr><th scope="row">Нагрузка на ярус</th><td>до 1000 кг</td></tr>
+            <tr><th scope="row">Высота стеллажа</th><td>от 1500 до 3000 мм</td></tr>
+            <tr><th scope="row">Ширина стеллажа</th><td>от 900 до 1500 мм</td></tr>
+            <tr><th scope="row">Глубина стеллажа</th><td>от 400 до 800 мм</td></tr>
+            <tr><th scope="row">Материал</th><td>сталь</td></tr>
+            <tr><th scope="row">Покрытие</th><td>порошковая окраска</td></tr>
+            <tr><th scope="row">Цвет</th><td>серый RAL 7016 / оранжевый RAL 2004</td></tr>
+            <tr><th scope="row">Монтаж</th><td>болтовое соединение</td></tr>
+            <tr><th scope="row">Возможность расширения</th><td>да</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="m-card">
+        <h2 class="m-card__title">Примеры реализации</h2>
+        <span class="m-card__line" aria-hidden="true"></span>
+        <ul class="examples">
+          <li><img src="img/mining/example-1.webp" width="292" height="150" alt="Стеллажи с майнинговым оборудованием в серверной" loading="lazy"></li>
+          <li><img src="img/mining/example-2.webp" width="292" height="150" alt="Майнинговая ферма на стеллажах в офисном помещении" loading="lazy"></li>
+          <li><img src="img/mining/example-3.webp" width="292" height="150" alt="Стеллаж с ASIC-майнерами у панорамного окна" loading="lazy"></li>
+          <li><img src="img/mining/example-1.webp" width="292" height="150" alt="Стеллажи для майнинга в техническом помещении" loading="lazy"></li>
+        </ul>
+      </div>
+
+      <div class="m-card m-card--photo">
+        <h2 class="m-card__title">Диаском в цифрах</h2>
+        <span class="m-card__line" aria-hidden="true"></span>
+        <ul class="m-stats">
+          <li><strong>12+</strong><span>лет на рынке<br> стеллажных систем</span></li>
+          <li><strong>1500+</strong><span>реализованных<br> проектов</span></li>
+          <li><strong>85</strong><span>регионов<br> поставок</span></li>
+          <li><strong>98%</strong><span>клиентов<br> рекомендуют нас</span></li>
+        </ul>
+      </div>
+
+      <div class="m-card">
+        <h2 class="m-card__title">География поставок</h2>
+        <span class="m-card__line" aria-hidden="true"></span>
+        <p class="m-card__text">Доставляем и монтируем стеллажи по всей России и СНГ</p>
+        <img class="m-card__map" src="img/mining/map.webp" width="617" height="337" alt="Карта поставок по России и СНГ" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. КОГДА ВЫБИРАЮТ ============ -->
+  <section class="section">
+    <div class="container m-when">
+      <div class="m-when__text">
+        <h2 class="h2">Когда выбирают наши<br> стеллажи</h2>
+        <p>Мы специализируемся на производстве стеллажей для майнинга и поставляем оборудование по всей России и странам СНГ. Используем прочный металл, надежную порошковую окраску и продуманную конструкцию для эффективного охлаждения оборудования. Изготавливаем стеллажи под любые задачи — от домашних майнинг-ферм до крупных промышленных объектов. Предлагаем доступные цены от производителя, быстрые сроки изготовления, доставку в любой регион и гарантию качества на всю продукцию.</p>
+        <a href="/catalog/" class="btn btn--primary btn--md">Перейти в каталог <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+      <ul class="m-when__cards">
+        <li><img src="img/mining/why-1.webp" width="64" height="64" alt="">Строительство<br> новой фермы</li>
+        <li><img src="img/mining/why-2.webp" width="64" height="64" alt="">Расширение<br> мощностей</li>
+        <li><img src="img/mining/why-3.webp" width="64" height="64" alt="">Замена<br> охлаждения</li>
+        <li><img src="img/mining/why-4.webp" width="64" height="64" alt="">Модернизация<br> системы</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 6. ФОРМА ============ -->
+  <section class="section" id="request">
+    <div class="container">
+      <div class="request m-request">
+        <div class="request__info">
+          <h2 class="h2">Получите проект<br> вашей фермы<br> <span class="accent">бесплатно за 24 часа</span></h2>
+          <span class="line" aria-hidden="true"></span>
+          <ul class="checks checks--lg">
+            <li>Проектирование под ваше помещение</li>
+            <li>Расчет стоимости и сроков</li>
+            <li>Коммерческое предложение</li>
+          </ul>
+          <a href="tel:+73912592659" class="btn btn--outline btn--lg m-request__call">Позвонить сейчас <svg class="btn__icon btn__icon--phone" aria-hidden="true"><use href="#i-phone"/></svg></a>
+        </div>
+
+        <form class="form" id="requestForm" novalidate>
+          <label class="form__field">
+            <span class="visually-hidden">Ваше имя</span>
+            <input type="text" name="name" placeholder="Ваше имя" autocomplete="name">
+          </label>
+          <label class="form__field">
+            <span class="visually-hidden">Ваш телефон</span>
+            <input type="tel" name="phone" placeholder="Ваш телефон" autocomplete="tel" required data-phone>
+            <span class="form__error" role="alert">Введите номер полностью</span>
+          </label>
+          <label class="form__field">
+            <span class="visually-hidden">Ваша почта</span>
+            <input type="email" name="email" placeholder="Ваша почта" autocomplete="email">
+          </label>
+          <label class="form__check">
+            <input type="checkbox" name="agree" required>
+            <span class="form__box" aria-hidden="true"></span>
+            <span>Соглашаюсь с условиями <a href="/terms/">Политики конфиденциальности</a>.</span>
+          </label>
+          <button type="submit" class="btn btn--primary btn--lg btn--block">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <p class="form__success" role="status" hidden>Заявка отправлена. Мы перезвоним вам в ближайшее время.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<!-- ============ 10. ПОДВАЛ ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__card">
+      <div class="footer__brand">
+        <a href="/" class="logo logo--lg" aria-label="Диаском — на главную">
+          <img src="img/icons/logo-footer.svg" width="358" height="94" alt="">
+        </a>
+        <p class="footer__slogan">Металлическая мебель и складское оборудование<br> для вашего бизнеса</p>
+        <div class="footer__contact">
+          <img src="img/icons/phone.svg" width="26" height="26" alt="">
+          <div>
+            <a href="tel:+73912592659" class="footer__phone">+7 (391) 259-26-59</a>
+            <span class="footer__hours">Ежедневно с 9:00 до 18:00</span>
+          </div>
+        </div>
+        <div class="footer__contact footer__contact--address">
+          <img src="img/icons/pin.svg" width="26" height="32" alt="">
+          <address class="footer__address">проспект имени газеты Красноярский рабочий, 170а, офис 3-27</address>
+        </div>
+        <ul class="socials">
+          <li><a href="mailto:info@diaskom.ru" aria-label="Написать на почту"><span class="socials__icon socials__icon--mail"></span></a></li>
+          <li><a href="https://max.ru/id2464149300_bot" target="_blank" rel="noopener" aria-label="Написать в Max"><span class="socials__icon socials__icon--max"></span></a></li>
+          <li><a href="https://t.me/+79138374659" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span class="socials__icon socials__icon--telegram"></span></a></li>
+        </ul>
+      </div>
+      <nav class="footer__col" aria-label="Каталог">
+        <h3 class="footer__title">Каталог</h3>
+        <ul>
+          <li><a href="/catalog/palletnye-frontalnye-stellazhi/">Паллетные стеллажи</a></li>
+          <li><a href="/catalog/mezoninnye-stellazhi/">Мезонинные стеллажи</a></li>
+          <li><a href="/catalog/glubinnye-stellazhi/">Глубинные стеллажи</a></li>
+          <li><a href="/catalog/konsolnye-stellazhi/">Консольные стеллажи</a></li>
+          <li><a href="/catalog/metallicheskie-stellazhi/">Полочные стеллажи</a></li>
+          <li><a href="/catalog/stellazhi-dlya-sklada/">Передвижные стеллажи</a></li>
+          <li><a href="/catalog/stellazhi-dlya-sklada/" class="footer__all">Все стеллажи</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__col" aria-label="Компания">
+        <h3 class="footer__title">Компания</h3>
+        <ul>
+          <li><a href="/about/">О компании</a></li>
+          <li><a href="/rekvizity/">Документы и сертификаты</a></li>
+          <li><a href="https://yandex.ru/maps/org/diaskom/194174337631/reviews/" target="_blank" rel="noopener">Отзывы</a></li>
+          <li><a href="/contact/">Контакты</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__col" aria-label="Услуги">
+        <h3 class="footer__title">Услуги</h3>
+        <ul>
+          <li><a href="/services/sborka-i-montazh/">Сборка и монтаж</a></li>
+          <li><a href="/services/razrabotka-tz-dlya-auktsionov/">Подготовка тех. задания</a></li>
+          <li><a href="/services/proektirovanie-sklada/">Проектирование склада</a></li>
+        </ul>
+      </nav>
+      <div class="footer__bottom">
+        <span>2026 © Диаском</span>
+        <a href="/terms/">Политика конфиденциальности</a>
+        <a href="/terms/">Согласие на обработку персональных данных</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js?v=37"></script>
+</body>
+</html>
