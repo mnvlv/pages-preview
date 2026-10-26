@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=46">
-  <link rel="stylesheet" href="css/catalog.css?v=3">
+  <link rel="stylesheet" href="css/catalog.css?v=4">
 </head>
 <body class="page-catalog">
 
@@ -133,8 +133,8 @@
         <ol>
           <li><a href="/">Главная</a></li>
           <li><a href="/catalog/">Каталог</a></li>
-          <li><a href="#">Металлические шкафы</a></li>
-          <li aria-current="page">Шкафы для раздевалок</li>
+          <li><a href="/catalog/metallicheskie-shkafy/">Шкафы металлические</a></li>
+          <li aria-current="page">Для раздевалок (локеры)</li>
         </ol>
       </nav>
       <h1 class="c-hero__title">Шкафы для<br> раздевалок <span class="accent">(локеры)</span></h1>
@@ -147,12 +147,28 @@
       </ul>
       <div class="cats-box">
         <ul class="cats-box__list" id="catsList">
-        <li><a href="#" class="cat-card"><span class="cat-card__img"><img src="img/catalog/cat-1.webp" width="16" height="59" alt=""></span><span class="cat-card__title">Для раздевалок</span><span class="cat-card__count">120 товаров</span></a></li>
-        <li><a href="#" class="cat-card"><span class="cat-card__img"><img src="img/catalog/cat-2.webp" width="29" height="54" alt=""></span><span class="cat-card__title">Для офиса</span><span class="cat-card__count">220 товаров</span></a></li>
-        <li><a href="#" class="cat-card"><span class="cat-card__img"><img src="img/catalog/cat-3.webp" width="29" height="53" alt=""></span><span class="cat-card__title">Картотечные</span><span class="cat-card__count">100 товаров</span></a></li>
-        <li><a href="#" class="cat-card"><span class="cat-card__img"><img src="img/catalog/cat-4.webp" width="29" height="53" alt=""></span><span class="cat-card__title">Бухгалтерские</span><span class="cat-card__count">100 товаров</span></a></li>
-        <li><a href="#" class="cat-card"><span class="cat-card__img"><img src="img/catalog/cat-5.webp" width="29" height="54" alt=""></span><span class="cat-card__title">Абонентские почтовые</span><span class="cat-card__count">100 товаров</span></a></li>
-        <li><a href="#" class="cat-card"><span class="cat-card__img"><img src="img/catalog/cat-6.webp" width="49" height="39" alt=""></span><span class="cat-card__title">Аксессуары</span><span class="cat-card__count">100 товаров</span></a></li>
+        <li><div class="cat-card cat-card--drop" data-cat-drop><a href="/catalog/shkafy-dlya-razdevalok-lokery/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-1.webp" width="16" height="59" alt=""></span><span class="cat-card__title">Для раздевалок</span><span class="cat-card__count">46 товаров</span></a>
+          <button class="cat-card__toggle" type="button" aria-expanded="false" aria-controls="catSub0" aria-label="Подкатегории: Для раздевалок"><svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <ul class="cat-card__sub" id="catSub0"><li><a href="/catalog/shkafy-serii-ml-usilennye/">Шкафы ML (усиленные) <span>12</span></a></li><li><a href="/catalog/shkafy-serii-ls/">Шкафы LS <span>11</span></a></li><li><a href="/catalog/shkafy-serii-shrm/">Шкафы ШРМ <span>12</span></a></li><li><a href="/catalog/shkafy-serii-shrk/">Шкафы ШРК <span>7</span></a></li><li><a href="/catalog/shkafy-serii-shrek/">Шкафы ШРЭК <span>4</span></a></li><li><a href="/catalog/shkafy-dlya-razdevalok-lokery/" class="cat-card__all">Все товары <span aria-hidden="true">→</span></a></li></ul></div></li>
+        <li><div class="cat-card cat-card--drop" data-cat-drop><a href="/catalog/shkafy-dlya-ofisa/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-2.webp" width="29" height="54" alt=""></span><span class="cat-card__title">Для офиса</span><span class="cat-card__count">39 товаров</span></a>
+          <button class="cat-card__toggle" type="button" aria-expanded="false" aria-controls="catSub1" aria-label="Подкатегории: Для офиса"><svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <ul class="cat-card__sub" id="catSub1"><li><a href="/catalog/shkafy-arkhivnye-praktik/">Практик</a></li><li><a href="/catalog/shkafy-arkhivnye-sham/">ШАМ</a></li><li><a href="/catalog/shkafy-arkhivnye-al/">Архивные AL</a></li><li><a href="/catalog/shkafy-dlya-ofisa/" class="cat-card__all">Все товары <span aria-hidden="true">→</span></a></li></ul></div></li>
+        <li><div class="cat-card cat-card--drop" data-cat-drop><a href="/catalog/kartotechnye-shkafy/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-3.webp" width="29" height="53" alt=""></span><span class="cat-card__title">Картотечные</span><span class="cat-card__count">28 товаров</span></a>
+          <button class="cat-card__toggle" type="button" aria-expanded="false" aria-controls="catSub2" aria-label="Подкатегории: Картотечные"><svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <ul class="cat-card__sub" id="catSub2"><li><a href="/catalog/kartoteki-serii-praktik/">Картотеки ПРАКТИК</a></li><li><a href="/catalog/kartoteki-serii-kr/">Картотеки КР</a></li><li><a href="/catalog/kartoteki-bolshikh-formatov/">Картотеки больших форматов</a></li><li><a href="/catalog/papki-podvesnye/">Папки подвесные</a></li><li><a href="/catalog/kartotechnye-shkafy/" class="cat-card__all">Все товары <span aria-hidden="true">→</span></a></li></ul></div></li>
+        <li><div class="cat-card cat-card--drop" data-cat-drop><a href="/catalog/bukhgalterskie-shkafy/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-4.webp" width="29" height="53" alt=""></span><span class="cat-card__title">Бухгалтерские</span><span class="cat-card__count">36 товаров</span></a>
+          <button class="cat-card__toggle" type="button" aria-expanded="false" aria-controls="catSub3" aria-label="Подкатегории: Бухгалтерские"><svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <ul class="cat-card__sub" id="catSub3"><li><a href="/catalog/shkafy-serii-sl/">Шкафы SL</a></li><li><a href="/catalog/shkafy-serii-kb/">Шкафы КБ</a></li><li><a href="/catalog/bukhgalterskie-shkafy/" class="cat-card__all">Все товары <span aria-hidden="true">→</span></a></li></ul></div></li>
+        <li><div class="cat-card"><a href="/catalog/abonenskie-pochtovye-shkafy/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-5.webp" width="29" height="54" alt=""></span><span class="cat-card__title">Абонентские почтовые</span><span class="cat-card__count">2 товара</span></a></div></li>
+        <li><div class="cat-card"><a href="/catalog/zamki-skameyki-podstavki-aksessuary-i-optsii/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-6.webp" width="49" height="39" alt=""></span><span class="cat-card__title">Аксессуары и опции</span><span class="cat-card__count">20 товаров</span></a></div></li>
+        <li class="cats-box__extra"><div class="cat-card cat-card--drop" data-cat-drop><a href="/catalog/shkafy-dlya-sumok-sumochnitsy/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-7.webp" width="22" height="60" alt=""></span><span class="cat-card__title">Сумочницы для сумок</span><span class="cat-card__count">5 товаров</span></a>
+          <button class="cat-card__toggle" type="button" aria-expanded="false" aria-controls="catSub6" aria-label="Подкатегории: Сумочницы для сумок"><svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <ul class="cat-card__sub" id="catSub6"><li><a href="/catalog/shkafy-dlya-sumok-sumochnitsy-shkafy-serii-ls/">LS</a></li><li><a href="/catalog/shkafy-dlya-sumok-sumochnitsy-shkafy-serii-shrm/">ШРМ</a></li><li><a href="/catalog/shkafy-dlya-sumok-sumochnitsy/" class="cat-card__all">Все товары <span aria-hidden="true">→</span></a></li></ul></div></li>
+        <li class="cats-box__extra"><div class="cat-card"><a href="/catalog/ognestoykie-shkafy/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-8.webp" width="33" height="60" alt=""></span><span class="cat-card__title">Огнестойкие</span><span class="cat-card__count">4 товара</span></a></div></li>
+        <li class="cats-box__extra"><div class="cat-card cat-card--drop" data-cat-drop><a href="/catalog/shkafy-sushilnye-dlya-odezhdy/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-9.webp" width="32" height="60" alt=""></span><span class="cat-card__title">Сушильные</span><span class="cat-card__count">20 товаров</span></a>
+          <button class="cat-card__toggle" type="button" aria-expanded="false" aria-controls="catSub8" aria-label="Подкатегории: Сушильные"><svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <ul class="cat-card__sub" id="catSub8"><li><a href="/catalog/ranger/">Ranger</a></li><li><a href="/catalog/veterok/">ВЕТЕРОК</a></li><li><a href="/catalog/nord-stoyka-sushilnaya/">Норд (стойка сушильная)</a></li><li><a href="/catalog/sakhara/">САХАРА</a></li><li><a href="/catalog/tsiklon/">ЦИКЛОН</a></li><li><a href="/catalog/shso/">ШСО</a></li><li><a href="/catalog/shkafy-sushilnye-dlya-odezhdy/" class="cat-card__all">Все товары <span aria-hidden="true">→</span></a></li></ul></div></li>
+        <li class="cats-box__extra"><div class="cat-card"><a href="/catalog/tumby-mobilnye/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-10.webp" width="48" height="48" alt=""></span><span class="cat-card__title">Тумбы мобильные</span><span class="cat-card__count">2 товара</span></a></div></li>
         </ul>
         <button class="cats-box__more" type="button" aria-expanded="false" aria-controls="catsList"><span>Развернуть все</span> <svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
       </div>
@@ -169,36 +185,39 @@
           <button class="filter__close" type="button" aria-label="Закрыть фильтр"><span></span><span></span></button>
         </div>
         <div class="filter__group">
-          <p class="filter__label" id="priceLabel">Ползунок выбора:</p>
-          <div class="range" data-range data-min="0" data-max="1509000">
+          <p class="filter__label" id="priceLabel">Цена, ₽</p>
+          <div class="range" data-range data-min="5000" data-max="17000">
             <div class="range__inputs">
-              <input type="text" inputmode="numeric" placeholder="0" aria-label="Цена от" data-range-from>
-              <input type="text" inputmode="numeric" placeholder="1 509 000" aria-label="Цена до" data-range-to>
+              <input type="text" inputmode="numeric" placeholder="5 000" aria-label="Цена от" data-range-from>
+              <input type="text" inputmode="numeric" placeholder="17 000" aria-label="Цена до" data-range-to>
             </div>
             <div class="range__track">
               <span class="range__fill" aria-hidden="true"></span>
-              <input type="range" min="0" max="1509000" step="1000" value="0" aria-labelledby="priceLabel" data-range-a>
-              <input type="range" min="0" max="1509000" step="1000" value="700000" aria-labelledby="priceLabel" data-range-b>
+              <input type="range" min="5000" max="17000" step="100" value="5000" aria-labelledby="priceLabel" data-range-a>
+              <input type="range" min="5000" max="17000" step="100" value="17000" aria-labelledby="priceLabel" data-range-b>
             </div>
           </div>
         </div>
-        <div class="filter__group">
-          <p class="filter__label">Чекбокс:</p>
-          <ul class="filter__checks">
-            <li><label class="c-check"><input type="checkbox" name="lock"><span class="c-check__box" aria-hidden="true"></span>Ключевой</label></li>
-            <li><label class="c-check"><input type="checkbox" name="lock"><span class="c-check__box" aria-hidden="true"></span>Кодовый механический</label></li>
-            <li><label class="c-check"><input type="checkbox" name="lock"><span class="c-check__box" aria-hidden="true"></span>Без защиты</label></li>
-            <li><label class="c-check"><input type="checkbox" name="lock" checked><span class="c-check__box" aria-hidden="true"></span>Под навесной замок</label></li>
-          </ul>
-        </div>
-        <div class="filter__group">
-          <p class="filter__label">Категории:</p>
-          <ul class="filter__cats">
-            <li><a href="#" class="is-active" aria-current="page">Односекционный</a></li>
-            <li><a href="#">Двухсекционный</a></li>
-            <li><a href="#">С лавкой</a></li>
-          </ul>
-        </div>
+        <fieldset class="filter__group">
+          <legend class="filter__label">Серия</legend>
+          <ul class="filter__chips"><li><label class="c-chip"><input type="checkbox" name="series" value="LS/ML"><span>LS/ML</span></label></li><li><label class="c-chip"><input type="checkbox" name="series" value="ML (усиленные)"><span>ML (усиленные)</span></label></li><li><label class="c-chip"><input type="checkbox" name="series" value="ШРК"><span>ШРК</span></label></li><li><label class="c-chip"><input type="checkbox" name="series" value="ШРМ"><span>ШРМ</span></label></li><li><label class="c-chip"><input type="checkbox" name="series" value="ШРЭК"><span>ШРЭК</span></label></li></ul>
+        </fieldset>
+        <fieldset class="filter__group">
+          <legend class="filter__label">Высота, мм</legend>
+          <ul class="filter__chips"><li><label class="c-chip"><input type="checkbox" name="height" value="1500"><span>1500</span></label></li><li><label class="c-chip"><input type="checkbox" name="height" value="1830"><span>1830</span></label></li><li><label class="c-chip"><input type="checkbox" name="height" value="1850"><span>1850</span></label></li><li><label class="c-chip"><input type="checkbox" name="height" value="1860"><span>1860</span></label></li></ul>
+        </fieldset>
+        <fieldset class="filter__group">
+          <legend class="filter__label">Ширина, мм</legend>
+          <ul class="filter__chips"><li><label class="c-chip"><input type="checkbox" name="width" value="300"><span>300</span></label></li><li><label class="c-chip"><input type="checkbox" name="width" value="400"><span>400</span></label></li><li><label class="c-chip"><input type="checkbox" name="width" value="500"><span>500</span></label></li><li><label class="c-chip"><input type="checkbox" name="width" value="530"><span>530</span></label></li><li><label class="c-chip"><input type="checkbox" name="width" value="600"><span>600</span></label></li><li><label class="c-chip"><input type="checkbox" name="width" value="800"><span>800</span></label></li><li><label class="c-chip"><input type="checkbox" name="width" value="850"><span>850</span></label></li><li><label class="c-chip"><input type="checkbox" name="width" value="885"><span>885</span></label></li><li><label class="c-chip"><input type="checkbox" name="width" value="1170"><span>1170</span></label></li></ul>
+        </fieldset>
+        <fieldset class="filter__group">
+          <legend class="filter__label">Количество дверей</legend>
+          <ul class="filter__chips"><li><label class="c-chip"><input type="checkbox" name="doors" value="1"><span>1</span></label></li><li><label class="c-chip"><input type="checkbox" name="doors" value="2"><span>2</span></label></li><li><label class="c-chip"><input type="checkbox" name="doors" value="4"><span>4</span></label></li></ul>
+        </fieldset>
+        <fieldset class="filter__group">
+          <legend class="filter__label">Количество секций</legend>
+          <ul class="filter__chips"><li><label class="c-chip"><input type="checkbox" name="sections" value="1"><span>1</span></label></li><li><label class="c-chip"><input type="checkbox" name="sections" value="2"><span>2</span></label></li><li><label class="c-chip"><input type="checkbox" name="sections" value="4"><span>4</span></label></li></ul>
+        </fieldset>
         <div class="filter__buttons">
           <button type="submit" class="btn btn--primary btn--block">Применить</button>
           <button type="reset" class="btn btn--outline btn--block">Сбросить фильтр</button>
@@ -207,190 +226,187 @@
 
       <div class="products">
         <div class="products__head">
-          <h2 class="products__title">Найдено 16 товаров</h2>
-          <div class="sort sort--price" data-dropdown>
-            <button type="button" class="sort__btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="sortPrice"><span class="sort__value">По возрастанию цены</span><svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
-            <ul class="sort__list" id="sortPrice" role="listbox" hidden><li role="option" aria-selected="true">По возрастанию цены</li><li role="option" aria-selected="false">По убыванию цены</li></ul>
-          </div>
+          <h2 class="products__title">Найдено 46 товаров</h2>
+          <span class="products__sort-label">Сортировка:</span>
           <div class="sort" data-dropdown>
-            <button type="button" class="sort__btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="sortPop"><span class="sort__value">По популярности</span><svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
-            <ul class="sort__list" id="sortPop" role="listbox" hidden><li role="option" aria-selected="true">По популярности</li><li role="option" aria-selected="false">По продажам</li><li role="option" aria-selected="false">Сначала со скидкой</li></ul>
+            <button type="button" class="sort__btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="sortMain"><span class="sort__value">По умолчанию</span><svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+            <ul class="sort__list" id="sortMain" role="listbox" hidden><li role="option" aria-selected="true">По умолчанию</li><li role="option" aria-selected="false">Сначала дешевле</li><li role="option" aria-selected="false">Сначала дороже</li><li role="option" aria-selected="false">По названию</li><li role="option" aria-selected="false">Сначала со скидкой</li></ul>
           </div>
         </div>
         <ul class="products__grid">
           <li class="product">
-            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-1.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
-            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
-            <p class="product__sku">Артикул: 1202KV</p>
-            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <a href="/product/shkaf-dlya-razdevalok-ls-21-60-1500-1500x600x500" class="product__img"><span class="badge badge--sale">−20%</span><img src="img/catalog/products/locker-2570.webp" width="208" height="208" alt="Шкаф для раздевалок LS-21-60/1500" loading="lazy"></a>
+            <h3 class="product__title"><a href="/product/shkaf-dlya-razdevalok-ls-21-60-1500-1500x600x500">Шкаф для раздевалок LS-21-60/1500</a></h3>
+            <p class="product__sku">Арт: 2570</p>
+            <p class="product__size">1500 × 600 × 500 мм</p>
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
-              <p class="product__price"><span>3200 ₽</span></p>
+              <p class="product__price"><span class="product__current">9 087 ₽</span><s class="product__old">11 430 ₽</s></p>
               <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
-            <a href="#" class="product__img"><span class="badge badge--new">Новинка</span><img src="img/catalog/locker-2.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
-            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
-            <p class="product__sku">Артикул: 1202KV</p>
-            <p class="product__size">1800 × 2000 × 1200 мм</p>
-            <p class="product__status product__status--order">Под заказ</p>
-            <div class="product__buy">
-              <p class="product__price"><span>93200 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
-            </div>
-          </li>
-          <li class="product">
-            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-4.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
-            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
-            <p class="product__sku">Артикул: 1202KV</p>
-            <p class="product__size">1800 × 2000 × 1200 мм</p>
-            <p class="product__status product__status--wait">В ожидании</p>
-            <div class="product__buy">
-              <p class="product__price"><span>3333200 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
-            </div>
-          </li>
-          <li class="product">
-            <a href="#" class="product__img"><span class="badge badge--sale">Скидка</span><img src="img/catalog/locker-open.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
-            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
-            <p class="product__sku">Артикул: 1202KV</p>
-            <p class="product__size">1800 × 2000 × 1200 мм</p>
-            <p class="product__status product__status--none">Отсутствует</p>
-            <div class="product__buy">
-              <p class="product__price product__price--sale"><s class="product__old">3200 ₽</s><span>2200 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
-            </div>
-          </li>
-          <li class="product">
-            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-1.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
-            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
-            <p class="product__sku">Артикул: 1202KV</p>
-            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <a href="/product/shkaf-dlya-razdevalok-ls-21-80-1500-1500x800x500" class="product__img"><span class="badge badge--sale">−21%</span><img src="img/catalog/products/locker-2571.webp" width="208" height="208" alt="Шкаф для раздевалок LS-21-80/1500" loading="lazy"></a>
+            <h3 class="product__title"><a href="/product/shkaf-dlya-razdevalok-ls-21-80-1500-1500x800x500">Шкаф для раздевалок LS-21-80/1500</a></h3>
+            <p class="product__sku">Арт: 2571</p>
+            <p class="product__size">1500 × 800 × 500 мм</p>
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
-              <p class="product__price"><span>3200 ₽</span></p>
+              <p class="product__price"><span class="product__current">12 013 ₽</span><s class="product__old">15 111 ₽</s></p>
               <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
-            <a href="#" class="product__img"><span class="badge badge--new">Новинка</span><img src="img/catalog/locker-2.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
-            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
-            <p class="product__sku">Артикул: 1202KV</p>
-            <p class="product__size">1800 × 2000 × 1200 мм</p>
-            <p class="product__status product__status--order">Под заказ</p>
-            <div class="product__buy">
-              <p class="product__price"><span>93200 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
-            </div>
-          </li>
-          <li class="product">
-            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-4.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
-            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
-            <p class="product__sku">Артикул: 1202KV</p>
-            <p class="product__size">1800 × 2000 × 1200 мм</p>
-            <p class="product__status product__status--wait">В ожидании</p>
-            <div class="product__buy">
-              <p class="product__price"><span>3333200 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
-            </div>
-          </li>
-          <li class="product">
-            <a href="#" class="product__img"><span class="badge badge--sale">Скидка</span><img src="img/catalog/locker-open.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
-            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
-            <p class="product__sku">Артикул: 1202KV</p>
-            <p class="product__size">1800 × 2000 × 1200 мм</p>
-            <p class="product__status product__status--none">Отсутствует</p>
-            <div class="product__buy">
-              <p class="product__price product__price--sale"><s class="product__old">3200 ₽</s><span>2200 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
-            </div>
-          </li>
-          <li class="product">
-            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-bench.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
-            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
-            <p class="product__sku">Артикул: 1202KV</p>
-            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <a href="/product/shkaf-dlya-razdevalok-shrm-11-300-1860x300x500" class="product__img"><span class="badge badge--sale">−14%</span><img src="img/catalog/products/locker-2485.webp" width="208" height="208" alt="Шкаф для раздевалок ШРМ-11/300" loading="lazy"></a>
+            <h3 class="product__title"><a href="/product/shkaf-dlya-razdevalok-shrm-11-300-1860x300x500">Шкаф для раздевалок ШРМ-11/300</a></h3>
+            <p class="product__sku">Арт: 2485</p>
+            <p class="product__size">1860 × 300 × 500 мм</p>
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
-              <p class="product__price"><span>3200 ₽</span></p>
+              <p class="product__price"><span class="product__current">6 660 ₽</span><s class="product__old">7 744 ₽</s></p>
               <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
-            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-1.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
-            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
-            <p class="product__sku">Артикул: 1202KV</p>
-            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <a href="/product/shkaf-dlya-razdevalok-shrm-11-400-1860x400x500" class="product__img"><span class="badge badge--sale">−14%</span><img src="img/catalog/products/locker-2486.webp" width="208" height="208" alt="Шкаф для раздевалок ШРМ-11/400" loading="lazy"></a>
+            <h3 class="product__title"><a href="/product/shkaf-dlya-razdevalok-shrm-11-400-1860x400x500">Шкаф для раздевалок ШРМ-11/400</a></h3>
+            <p class="product__sku">Арт: 2486</p>
+            <p class="product__size">1860 × 400 × 500 мм</p>
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
-              <p class="product__price"><span>3200 ₽</span></p>
+              <p class="product__price"><span class="product__current">7 778 ₽</span><s class="product__old">9 044 ₽</s></p>
               <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
-            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-1.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
-            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
-            <p class="product__sku">Артикул: 1202KV</p>
-            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <a href="/product/shkaf-dlya-razdevalok-shrm-12-1860x300x500" class="product__img"><span class="badge badge--sale">−14%</span><img src="img/catalog/products/locker-2487.webp" width="208" height="208" alt="Шкаф для раздевалок ШРМ-12" loading="lazy"></a>
+            <h3 class="product__title"><a href="/product/shkaf-dlya-razdevalok-shrm-12-1860x300x500">Шкаф для раздевалок ШРМ-12</a></h3>
+            <p class="product__sku">Арт: 2487</p>
+            <p class="product__size">1860 × 300 × 500 мм</p>
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
-              <p class="product__price"><span>3200 ₽</span></p>
+              <p class="product__price"><span class="product__current">8 054 ₽</span><s class="product__old">9 365 ₽</s></p>
               <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
-            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-1.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
-            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
-            <p class="product__sku">Артикул: 1202KV</p>
-            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <a href="/product/shkaf-dlya-razdevalok-shrm-21-1860x400x500" class="product__img"><span class="badge badge--sale">−14%</span><img src="img/catalog/products/locker-2488.webp" width="208" height="208" alt="Шкаф для раздевалок ШРМ-21" loading="lazy"></a>
+            <h3 class="product__title"><a href="/product/shkaf-dlya-razdevalok-shrm-21-1860x400x500">Шкаф для раздевалок ШРМ-21</a></h3>
+            <p class="product__sku">Арт: 2488</p>
+            <p class="product__size">1860 × 400 × 500 мм</p>
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
-              <p class="product__price"><span>3200 ₽</span></p>
+              <p class="product__price"><span class="product__current">8 820 ₽</span><s class="product__old">10 256 ₽</s></p>
               <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
-            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-1.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
-            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
-            <p class="product__sku">Артикул: 1202KV</p>
-            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <a href="/product/shkaf-dlya-razdevalok-shrek-21-530-1850x530x500" class="product__img"><img src="img/catalog/products/locker-2640.webp" width="208" height="208" alt="Шкаф для раздевалок ШРЭК 21-530" loading="lazy"></a>
+            <h3 class="product__title"><a href="/product/shkaf-dlya-razdevalok-shrek-21-530-1850x530x500">Шкаф для раздевалок ШРЭК 21-530</a></h3>
+            <p class="product__sku">Арт: 2640</p>
+            <p class="product__size">1850 × 530 × 500 мм</p>
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
-              <p class="product__price"><span>3200 ₽</span></p>
+              <p class="product__price"><span class="product__current">9 900 ₽</span></p>
               <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
-            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-4.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
-            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
-            <p class="product__sku">Артикул: 1202KV</p>
-            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <a href="/product/shkaf-dlya-razdevalok-shrk-21-400-1850x400x500" class="product__img"><img src="img/catalog/products/locker-2633.webp" width="208" height="208" alt="Шкаф для раздевалок ШРК 21-400" loading="lazy"></a>
+            <h3 class="product__title"><a href="/product/shkaf-dlya-razdevalok-shrk-21-400-1850x400x500">Шкаф для раздевалок ШРК 21-400</a></h3>
+            <p class="product__sku">Арт: 2633</p>
+            <p class="product__size">1850 × 400 × 500 мм</p>
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
-              <p class="product__price"><span>3200 ₽</span></p>
+              <p class="product__price"><span class="product__current">10 000 ₽</span></p>
               <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
-            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-1.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
-            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
-            <p class="product__sku">Артикул: 1202KV</p>
-            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <a href="/product/shkaf-dlya-razdevalok-usilennyy-ml-11-30-ls-01-bazovyy-modul-1830x300x500" class="product__img"><span class="badge badge--sale">−20%</span><img src="img/catalog/products/locker-2582.webp" width="208" height="208" alt="Шкаф для раздевалок усиленный ML 11-30 (LS-01) базовый модуль" loading="lazy"></a>
+            <h3 class="product__title"><a href="/product/shkaf-dlya-razdevalok-usilennyy-ml-11-30-ls-01-bazovyy-modul-1830x300x500">Шкаф для раздевалок усиленный ML 11-30 (LS-01) базовый модуль</a></h3>
+            <p class="product__sku">Арт: 2582</p>
+            <p class="product__size">1830 × 300 × 500 мм</p>
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
-              <p class="product__price"><span>3200 ₽</span></p>
+              <p class="product__price"><span class="product__current">6 333 ₽</span><s class="product__old">7 966 ₽</s></p>
               <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
-            <a href="#" class="product__img"><span class="badge badge--hit">Хит</span><img src="img/catalog/locker-1.webp" width="208" height="208" alt="Шкаф офисный АМ-1891" loading="lazy"></a>
-            <h3 class="product__title"><a href="#">Шкаф офисный АМ-1891</a></h3>
-            <p class="product__sku">Артикул: 1202KV</p>
-            <p class="product__size">1800 × 2000 × 1200 мм</p>
+            <a href="/product/shkaf-dlya-razdevalok-ls-21-50-1830x500x500" class="product__img"><span class="badge badge--sale">−21%</span><img src="img/catalog/products/locker-2578.webp" width="208" height="208" alt="Шкаф для раздевалок LS 21-50" loading="lazy"></a>
+            <h3 class="product__title"><a href="/product/shkaf-dlya-razdevalok-ls-21-50-1830x500x500">Шкаф для раздевалок LS 21-50</a></h3>
+            <p class="product__sku">Арт: 2578</p>
+            <p class="product__size">1830 × 500 × 500 мм</p>
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
-              <p class="product__price"><span>3200 ₽</span></p>
+              <p class="product__price"><span class="product__current">9 698 ₽</span><s class="product__old">12 199 ₽</s></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="/product/shkaf-dlya-razdevalok-sham-11-r-1860x850x500" class="product__img"><span class="badge badge--sale">−14%</span><img src="img/catalog/products/locker-2483.webp" width="208" height="208" alt="Шкаф для раздевалок ШАМ-11.Р" loading="lazy"></a>
+            <h3 class="product__title"><a href="/product/shkaf-dlya-razdevalok-sham-11-r-1860x850x500">Шкаф для раздевалок ШАМ-11.Р</a></h3>
+            <p class="product__sku">Арт: 2483</p>
+            <p class="product__size">1860 × 850 × 500 мм</p>
+            <p class="product__status product__status--stock">В наличии</p>
+            <div class="product__buy">
+              <p class="product__price"><span class="product__current">14 418 ₽</span><s class="product__old">16 765 ₽</s></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="/product/shkaf-dlya-razdevalok-shrek-21-530-vsk-1850x530x500" class="product__img"><img src="img/catalog/products/locker-2641.webp" width="208" height="208" alt="Шкаф для раздевалок ШРЭК 21-530 ВСК" loading="lazy"></a>
+            <h3 class="product__title"><a href="/product/shkaf-dlya-razdevalok-shrek-21-530-vsk-1850x530x500">Шкаф для раздевалок ШРЭК 21-530 ВСК</a></h3>
+            <p class="product__sku">Арт: 2641</p>
+            <p class="product__size">1850 × 530 × 500 мм</p>
+            <p class="product__status product__status--stock">В наличии</p>
+            <div class="product__buy">
+              <p class="product__price"><span class="product__current">10 800 ₽</span></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="/product/shkaf-dlya-razdevalok-shrk-22-600-1850x600x500" class="product__img"><img src="img/catalog/products/locker-2634.webp" width="208" height="208" alt="Шкаф для раздевалок ШРК 22-600" loading="lazy"></a>
+            <h3 class="product__title"><a href="/product/shkaf-dlya-razdevalok-shrk-22-600-1850x600x500">Шкаф для раздевалок ШРК 22-600</a></h3>
+            <p class="product__sku">Арт: 2634</p>
+            <p class="product__size">1850 × 600 × 500 мм</p>
+            <p class="product__status product__status--stock">В наличии</p>
+            <div class="product__buy">
+              <p class="product__price"><span class="product__current">11 750 ₽</span></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="/product/shkaf-dlya-razdevalok-usilennyy-ml-01-30-dop-modul-ls-001-1830x300x500" class="product__img"><span class="badge badge--sale">−21%</span><img src="img/catalog/products/locker-2583.webp" width="208" height="208" alt="Шкаф для раздевалок усиленный ML 01-30 доп. модуль (LS-001)" loading="lazy"></a>
+            <h3 class="product__title"><a href="/product/shkaf-dlya-razdevalok-usilennyy-ml-01-30-dop-modul-ls-001-1830x300x500">Шкаф для раздевалок усиленный ML 01-30 доп. модуль (LS-001)</a></h3>
+            <p class="product__sku">Арт: 2583</p>
+            <p class="product__size">1830 × 300 × 500 мм</p>
+            <p class="product__status product__status--stock">В наличии</p>
+            <div class="product__buy">
+              <p class="product__price"><span class="product__current">5 010 ₽</span><s class="product__old">6 302 ₽</s></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="/product/shkaf-dlya-razdevalok-ls-21-60-1860x600x500" class="product__img"><span class="badge badge--sale">−21%</span><img src="img/catalog/products/locker-2577.webp" width="208" height="208" alt="Шкаф для раздевалок LS-21-60" loading="lazy"></a>
+            <h3 class="product__title"><a href="/product/shkaf-dlya-razdevalok-ls-21-60-1860x600x500">Шкаф для раздевалок LS-21-60</a></h3>
+            <p class="product__sku">Арт: 2577</p>
+            <p class="product__size">1860 × 600 × 500 мм</p>
+            <p class="product__status product__status--stock">В наличии</p>
+            <div class="product__buy">
+              <p class="product__price"><span class="product__current">10 368 ₽</span><s class="product__old">13 042 ₽</s></p>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+            </div>
+          </li>
+          <li class="product">
+            <a href="/product/shkaf-dlya-razdevalok-shrm-ak-500-1860x500x500" class="product__img"><span class="badge badge--sale">−14%</span><img src="img/catalog/products/locker-2492.webp" width="208" height="208" alt="Шкаф для раздевалок ШРМ-АК/500" loading="lazy"></a>
+            <h3 class="product__title"><a href="/product/shkaf-dlya-razdevalok-shrm-ak-500-1860x500x500">Шкаф для раздевалок ШРМ-АК/500</a></h3>
+            <p class="product__sku">Арт: 2492</p>
+            <p class="product__size">1860 × 500 × 500 мм</p>
+            <p class="product__status product__status--stock">В наличии</p>
+            <div class="product__buy">
+              <p class="product__price"><span class="product__current">9 890 ₽</span><s class="product__old">11 500 ₽</s></p>
               <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
             </div>
           </li>
@@ -399,8 +415,7 @@
           <a href="#" class="pager__item pager__item--arrow" aria-label="Предыдущая страница"><svg aria-hidden="true"><use href="#i-crumb"/></svg></a>
           <a href="#" class="pager__item is-active" aria-current="page">1</a>
           <a href="#" class="pager__item">2</a>
-          <span class="pager__item pager__item--gap">...</span>
-          <a href="#" class="pager__item">19</a>
+          <a href="#" class="pager__item">3</a>
           <a href="#" class="pager__item pager__item--arrow pager__item--next" aria-label="Следующая страница"><svg aria-hidden="true"><use href="#i-crumb"/></svg></a>
         </nav>
       </div>
@@ -597,6 +612,6 @@
 </footer>
 
 <script src="js/main.js?v=46"></script>
-<script src="js/catalog.js?v=1"></script>
+<script src="js/catalog.js?v=2"></script>
 </body>
 </html>

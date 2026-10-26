@@ -70,6 +70,24 @@ document.addEventListener('DOMContentLoaded', () => {
     root.addEventListener('keydown', (e) => { if (e.key === 'Escape') { close(); btn.focus(); } });
   });
 
+  /* ---------- Подкатегории в карточках категорий (как на текущем сайте): наведение на десктопе, клик по стрелке ---------- */
+  const hoverable = window.matchMedia('(hover: hover) and (min-width: 1025px)');
+  const drops = [...document.querySelectorAll('[data-cat-drop]')];
+  const setDrop = (card, open) => card.querySelector('.cat-card__toggle').setAttribute('aria-expanded', String(open));
+  drops.forEach((card) => {
+    const btn = card.querySelector('.cat-card__toggle');
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') !== 'true';
+      drops.forEach((c) => setDrop(c, false));
+      setDrop(card, open);
+    });
+    card.addEventListener('mouseenter', () => { if (hoverable.matches) setDrop(card, true); });
+    card.addEventListener('mouseleave', () => { if (hoverable.matches) setDrop(card, false); });
+    card.addEventListener('focusout', (e) => { if (!card.contains(e.relatedTarget)) setDrop(card, false); });
+  });
+  document.addEventListener('click', (e) => { drops.forEach((c) => { if (!c.contains(e.target)) setDrop(c, false); }); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') drops.forEach((c) => setDrop(c, false)); });
+
   /* ---------- «Развернуть все» в категориях ---------- */
   const more = document.querySelector('.cats-box__more');
   if (more) {
