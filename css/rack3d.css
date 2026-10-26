@@ -1,0 +1,61 @@
+/* ==========================================================
+   Диаском — блок «3D-модель стеллажа» (переиспользуемый)
+   Вставка: разметка <section class="rack3d"> + этот css + js/rack3d.js
+   ========================================================== */
+.rack3d__inner { display: grid; grid-template-columns: minmax(0, 392px) minmax(0, 1fr); gap: 32px; align-items: stretch; }
+.rack3d__text { display: flex; flex-direction: column; }
+.rack3d__text .lead { margin-top: 18px; }
+.rack3d__list { display: grid; gap: 14px; margin-top: 24px; }
+.rack3d__list li { display: flex; align-items: center; gap: 12px; line-height: 19px; color: var(--c-text-2); }
+.rack3d__list li::before { content: ''; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--c-accent); }
+.rack3d__text .btn { align-self: flex-start; margin-top: auto; }
+
+.rack3d__stage {
+  position: relative; min-height: 520px; overflow: hidden; border-radius: 8px;
+  background: radial-gradient(circle at 50% 38%, #34312f 0%, #232323 55%, #1c1c1c 100%);
+  box-shadow: 0 0 0 1px #585858;
+}
+.rack3d__stage model-viewer {
+  position: absolute; inset: 0; width: 100%; height: 100%; --poster-color: transparent;
+  --progress-bar-color: var(--c-accent); --progress-bar-height: 2px;
+}
+.rack3d__stage model-viewer:focus-visible { outline: 2px solid var(--c-accent); outline-offset: -2px; }
+/* заглушка до загрузки модели */
+.rack3d__placeholder {
+  position: absolute; inset: 0; display: grid; place-items: center; gap: 12px; align-content: center;
+  font-size: 14px; color: #a0a0a0; text-align: center; pointer-events: none; transition: opacity .3s;
+}
+.rack3d__placeholder::before {
+  content: ''; width: 36px; height: 36px; border: 2px solid #585858; border-top-color: var(--c-accent); border-radius: 50%;
+  animation: rack3d-spin 1s linear infinite;
+}
+.rack3d.is-loaded .rack3d__placeholder { opacity: 0; }
+@keyframes rack3d-spin { to { transform: rotate(360deg); } }
+
+/* панель управления */
+.rack3d__controls { position: absolute; z-index: 2; right: 16px; bottom: 16px; display: flex; gap: 8px; }
+.rack3d__btn {
+  display: grid; place-items: center; width: 40px; height: 40px; padding: 0; color: var(--c-text-2);
+  background: rgba(26, 26, 26, .75); border: 1px solid #585858; border-radius: 3px; cursor: pointer;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); transition: border-color .2s, color .2s;
+}
+.rack3d__btn svg { width: 18px; height: 18px; }
+.rack3d__btn:hover, .rack3d__btn:focus-visible { border-color: var(--c-accent); color: var(--c-accent); outline: none; }
+.rack3d__btn:active, .rack3d__btn[aria-pressed="true"] { color: var(--c-accent); }
+.rack3d__hint {
+  position: absolute; z-index: 2; left: 16px; bottom: 16px; max-width: calc(100% - 260px);
+  font-size: 13px; line-height: 1.3; color: #a0a0a0; pointer-events: none;
+}
+/* полноэкранный режим */
+.rack3d__stage:fullscreen { border-radius: 0; }
+
+@media (max-width: 1024px) {
+  .rack3d__inner { grid-template-columns: minmax(0, 1fr); }
+  .rack3d__text .btn { margin-top: 28px; }
+  .rack3d__stage { min-height: 0; aspect-ratio: 4 / 3; }
+}
+@media (max-width: 600px) {
+  .rack3d__stage { aspect-ratio: 1 / 1.1; }
+  .rack3d__hint { top: 14px; right: 16px; bottom: auto; max-width: none; }
+  .rack3d__text .btn { width: 100%; }
+}
