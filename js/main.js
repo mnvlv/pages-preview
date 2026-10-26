@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') toggleMenu(false); });
   window.matchMedia('(min-width: 1025px)').addEventListener('change', (e) => { if (e.matches) toggleMenu(false); });
 
-  /* ---------- Выпадающие пункты меню: «Стеллажи» (наведение на десктопе), «Услуги» в бургере ---------- */
+  /* ---------- Выпадающие пункты меню: мегаменю «Каталог» и «Услуги» (на десктопе — по наведению) ---------- */
   const desktop = window.matchMedia('(min-width: 1025px)');
   document.querySelectorAll('.nav__drop-btn').forEach((btn) => {
     const item = btn.closest('.nav__item');

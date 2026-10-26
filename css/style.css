@@ -134,6 +134,10 @@ button { cursor: pointer; }
 .nav__chevron { width: 22px; height: 22px; transition: transform .2s; }
 .nav__drop-btn[aria-expanded="true"] .nav__chevron { transform: rotate(180deg); }
 .nav__mob-only { display: none; }
+/* «Услуги»: выпадающий список под пунктом; на десктопе без стрелки, как в макете */
+.nav__item--sub { position: relative; }
+.nav__item--sub .nav__chevron { display: none; }
+.nav__item--sub .nav__sub { width: 260px; }
 /* выпадающее меню «Стеллажи» по UI kit: 272px, фон #232323, рамка #585858, радиус 8px */
 .nav__sub {
   position: absolute; top: calc(100% + 18px); left: 0; z-index: 10; width: 272px; padding: 20px 16px;
@@ -142,7 +146,28 @@ button { cursor: pointer; }
   opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .2s, transform .2s, visibility .2s;
 }
 .nav__sub::before { content: ''; position: absolute; left: 0; right: 0; bottom: 100%; height: 20px; } /* мостик для наведения */
-.nav__drop-btn[aria-expanded="true"] + .nav__sub { opacity: 1; visibility: visible; transform: none; }
+.nav__drop-btn[aria-expanded="true"] + .nav__sub, .nav__drop-btn[aria-expanded="true"] + .mega { opacity: 1; visibility: visible; transform: none; }
+/* мегаменю «Каталог» (как на текущем сайте): 9 категорий в 3 колонки, стиль выпадающих меню из UI kit */
+.nav__item--mega { position: static; }
+.mega {
+  position: absolute; top: calc(100% + 2px); left: 50%; z-index: 10; width: min(980px, calc(100% - 2 * var(--gutter))); margin-left: calc(min(980px, calc(100% - 2 * var(--gutter))) / -2);
+  padding: 28px 32px 30px; background: var(--c-surface); border: 1px solid #585858; border-radius: 8px; box-shadow: 0 24px 60px rgba(0, 0, 0, .55);
+  opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .2s, transform .2s, visibility .2s;
+}
+.mega::before { content: ''; position: absolute; left: 0; right: 0; bottom: 100%; height: 32px; } /* мостик для наведения */
+.mega__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 40px; }
+.mega__col { display: flex; flex-direction: column; }
+.mega__head {
+  display: flex; align-items: center; gap: 12px; padding-bottom: 12px; font-size: 16px; font-weight: 600; line-height: 1.2;
+  border-bottom: 1px solid #585858; transition: border-color .2s;
+}
+.mega__head img { flex: none; width: 32px; height: 32px; object-fit: cover; border-radius: 4px; }
+.mega__head:hover { border-color: var(--c-accent); }
+.mega__links { display: grid; gap: 8px; margin-top: 12px; font-size: 14px; line-height: 1.25; color: var(--c-text-2); }
+.mega__links a:hover, .mega__head:hover { text-decoration: underline; text-underline-offset: 3px; }
+.mega__links a:active, .mega__all:active { color: var(--c-accent); }
+.mega__all { align-self: flex-start; margin-top: 12px; font-size: 14px; color: var(--c-accent); }
+.mega__all:hover { text-decoration: underline; text-underline-offset: 3px; }
 .nav__sub a { display: block; font-size: 16px; line-height: 1.2; color: var(--c-text-2); transition: color .15s; }
 .nav__sub a:hover { text-decoration: underline; text-underline-offset: 3px; }
 /* нажатие на пункт выпадающего меню — акцентный цвет (по макету) */
@@ -183,7 +208,23 @@ button { cursor: pointer; }
 .hero__features li { display: flex; align-items: center; gap: 8px; }
 .hero__features img { flex: none; }
 .hero__buttons { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 52px; padding-left: 4px; }
-.hero__media { position: relative; overflow: hidden; border-radius: var(--radius-lg); background: var(--c-surface); }
+.hero__media {
+  position: relative; overflow: hidden; border-radius: var(--radius-lg); background: var(--c-surface);
+  box-shadow: 0 0 0 1px #585858, 0 32px 64px -28px rgba(0, 0, 0, .9), 0 0 120px -48px rgba(234, 89, 1, .55);
+}
+.hero__media::before {
+  content: ''; position: absolute; inset: 0; z-index: 1; border-radius: inherit; pointer-events: none;
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, .55); background: linear-gradient(180deg, rgba(26, 26, 26, 0) 65%, rgba(26, 26, 26, .4));
+}
+.hero__media::after {
+  content: ''; position: absolute; inset: 14px; z-index: 2; pointer-events: none;
+  background:
+    linear-gradient(var(--c-accent), var(--c-accent)) left top / 28px 2px,
+    linear-gradient(var(--c-accent), var(--c-accent)) left top / 2px 28px,
+    linear-gradient(var(--c-accent), var(--c-accent)) right bottom / 28px 2px,
+    linear-gradient(var(--c-accent), var(--c-accent)) right bottom / 2px 28px;
+  background-repeat: no-repeat;
+}
 .hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
 /* ---------- Секции ---------- */
@@ -505,6 +546,16 @@ button { cursor: pointer; }
   .nav__list { flex-direction: column; align-items: stretch; gap: 0; }
   .nav__desk-only { display: none; }
   .nav__mob-only { display: inline-flex; }
+  .nav__item--sub .nav__chevron { display: block; }
+  .nav__item--sub .nav__sub { width: auto; }
+  .mega {
+    position: static; display: none; width: auto; margin: 0; padding: 4px 0 4px 12px;
+    background: none; border: 0; box-shadow: none; opacity: 1; visibility: visible; transform: none;
+  }
+  .mega::before, .mega__links, .mega__all, .mega__head img { display: none; }
+  .nav__drop-btn[aria-expanded="true"] + .mega { display: block; }
+  .mega__grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .mega__head { padding: 8px 0; font-weight: 400; text-transform: uppercase; border: 0; }
   .nav__link { width: 100%; justify-content: space-between; padding: 8px 0; font-size: 16px; line-height: 1.2; }
   .nav__chevron { width: 24px; height: 24px; }
   .nav__sub {
