@@ -235,6 +235,7 @@ a.pager__item:hover, .pager__item.is-active { color: var(--c-accent); box-shadow
 .c-use__text p { margin-top: 34px; line-height: 19px; }
 .c-use__nav { display: flex; gap: 12px; margin-top: auto; }
 .c-use__nav .slider-nav__btn { width: 48px; height: 48px; }
+.c-use__nav .slider-nav__btn svg { width: 18.4px; height: 13px; }
 .c-use__slider {
   display: grid; grid-auto-flow: column; grid-auto-columns: 289px; gap: 32px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
   /* выходит за правый край контейнера на ширину поля, как в макете: третья карточка обрезана и слайдер всегда листается */
