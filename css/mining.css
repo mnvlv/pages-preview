@@ -71,6 +71,8 @@
   content: ''; position: absolute; inset: 0; z-index: -1; opacity: .05;
   background: url(../img/form-bg.webp) center / cover no-repeat;
 }
+/* в «Диаском в цифрах» фото по макету заметнее */
+.m-card--photo:has(.m-stats)::before { opacity: .1; }
 .m-card__title { font-size: clamp(22px, 2.23vw, 32px); font-weight: 600; line-height: 1.2; text-transform: uppercase; }
 .m-card__line { display: block; width: 50px; height: 2px; margin-top: 16px; background: var(--c-accent); }
 .specs { width: 100%; margin-top: 16px; border-collapse: collapse; }
@@ -79,10 +81,11 @@
 .specs td { font-weight: 400; }
 .examples { display: grid; grid-template-columns: repeat(2, minmax(0, 292px)); gap: 16px; margin-top: 17px; }
 .examples img { width: 100%; height: auto; aspect-ratio: 292 / 150; object-fit: cover; border-radius: 4px; }
-.m-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 30px; margin-top: 20px; }
-.m-stats li { display: flex; flex-direction: column; gap: 10px; min-height: 181px; padding: 17px 16px 20px; border: 1px solid #585858; border-radius: 8px; }
+.m-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 32px; margin-top: 20px; }
+.m-stats li { display: flex; flex-direction: column; gap: 10px; min-height: 181px; padding: 20px 14px 20px 15px; border: 1px solid #585858; border-radius: 8px; }
 .m-stats strong { font-size: 52px; font-weight: 600; line-height: 1; color: var(--c-accent); }
-.m-stats span { font-size: 26px; font-weight: 600; line-height: 30px; color: var(--c-text-2); }
+/* «стеллажных систем» по макету в одну строку */
+.m-stats span { font-size: 25px; font-weight: 600; line-height: 30px; letter-spacing: -0.005em; color: var(--c-text-2); }
 .m-card__text { margin-top: 18px; font-size: 20px; line-height: 1.2; color: var(--c-text-2); }
 .m-card__map { width: 100%; height: auto; margin-top: 19px; }
 
