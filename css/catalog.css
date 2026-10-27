@@ -364,3 +364,6 @@ a.pager__item:hover, .pager__item.is-active { color: var(--c-accent); box-shadow
   .header .logo img { width: 112px; }
   .cart { margin-left: 4px; }
 }
+
+/* ---------- Форма: иконки преимуществ в натуральном размере, как в макете каталога (38×33, 38×42, 34×38) ---------- */
+.page-catalog .request__perks img { object-fit: none; object-position: center; }
