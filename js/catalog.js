@@ -115,14 +115,20 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && filter.classList.contains('is-open')) setOpen(false); });
   }
 
-  /* ---------- FAQ: аккордеон ---------- */
-  document.querySelectorAll('[data-faq] .faq__q button').forEach((btn) => {
-    btn.addEventListener('click', () => {
+  /* ---------- FAQ: аккордеон с плавным раскрытием ---------- */
+  document.querySelectorAll('[data-faq]').forEach((faq) => {
+    faq.classList.add('is-anim');  // без JS ответы просто открываются атрибутом hidden
+    faq.querySelectorAll('.faq__q button').forEach((btn) => {
       const item = btn.closest('.faq__item');
-      const open = btn.getAttribute('aria-expanded') !== 'true';
-      btn.setAttribute('aria-expanded', String(open));
-      item.classList.toggle('is-open', open);
-      document.getElementById(btn.getAttribute('aria-controls')).hidden = !open;
+      const panel = document.getElementById(btn.getAttribute('aria-controls'));
+      const set = (open) => {
+        btn.setAttribute('aria-expanded', String(open));
+        item.classList.toggle('is-open', open);
+        panel.inert = !open;  // свёрнутый ответ скрыт от фокуса и экранного диктора
+      };
+      panel.hidden = false;
+      set(btn.getAttribute('aria-expanded') === 'true');
+      btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
     });
   });
 

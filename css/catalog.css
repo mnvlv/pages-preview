@@ -215,17 +215,34 @@ a.pager__item:hover, .pager__item.is-active { color: var(--c-accent); box-shadow
 
 /* ---------- FAQ ---------- */
 .faq { display: grid; gap: 24px; margin-top: 38px; }
-.faq__item { background: var(--c-surface); border-radius: 8px; box-shadow: 0 0 0 1px #585858; }
+/* аккордеон: мягкая подсветка карточки при наведении, плавное раскрытие ответа */
+.faq__item {
+  position: relative; background: var(--c-surface); border-radius: 8px; box-shadow: 0 0 0 1px #585858;
+  transition: box-shadow .35s ease, background-color .35s ease, transform .2s ease;
+}
+.faq__item:hover { background: #262626; box-shadow: 0 0 0 1px rgba(234, 89, 1, .55), 0 10px 30px -18px rgba(234, 89, 1, .45); }
+.faq__item.is-open { box-shadow: 0 0 0 1px var(--c-accent), 0 14px 40px -22px rgba(234, 89, 1, .55); }
+.faq__item:has(.faq__q button:active) { transform: scale(.995); }
 .faq__q button {
   position: relative; display: flex; align-items: center; width: 100%; min-height: 80px; padding: 20px 80px 20px 28px; text-align: left;
   font-size: 20px; font-weight: 600; line-height: 24px; color: var(--c-text-2); background: none; border: 0;
 }
-.faq__q button:hover { color: var(--c-accent); }
-.faq__icon { position: absolute; top: 50%; right: 28px; width: 24px; height: 24px; margin-top: -12px; color: #3d3d3d; transition: color .2s; }
+.faq__q button:hover, .faq__item.is-open .faq__q button { color: var(--c-accent); }
+.faq__icon { position: absolute; top: 50%; right: 28px; width: 24px; height: 24px; margin-top: -12px; color: #3d3d3d; transition: color .35s ease, transform .45s cubic-bezier(.2, .8, .2, 1); }
 .faq__icon::before, .faq__icon::after { content: ''; position: absolute; top: 50%; left: 0; width: 24px; height: 2.4px; margin-top: -1.2px; background: currentColor; }
 .faq__icon::after { transform: rotate(90deg); }
+/* открытый пункт: плюс по макету остаётся плюсом, но плавно проворачивается и становится оранжевым */
+.faq__item.is-open .faq__icon { transform: rotate(180deg); }
 .faq__q button:hover .faq__icon, .faq__item.is-open .faq__icon { color: var(--c-accent); }
 .faq__a { margin-top: -9px; padding: 0 80px 43px 28px; line-height: 21px; color: var(--c-text-2); }
+/* с JS ответ раскрывается плавно: высота через grid-template-rows 0fr → 1fr, текст проявляется и опускается на место */
+.faq.is-anim .faq__a {
+  display: grid; grid-template-rows: 0fr; padding-bottom: 0;
+  transition: grid-template-rows .45s cubic-bezier(.2, .8, .2, 1), padding-bottom .45s cubic-bezier(.2, .8, .2, 1);
+}
+.faq.is-anim .faq__a > p { min-height: 0; overflow: hidden; opacity: 0; transform: translateY(-8px); transition: opacity .3s ease, transform .45s cubic-bezier(.2, .8, .2, 1); }
+.faq.is-anim .faq__item.is-open .faq__a { grid-template-rows: 1fr; padding-bottom: 43px; }
+.faq.is-anim .faq__item.is-open .faq__a > p { opacity: 1; transform: none; transition-delay: .08s; }
 
 /* ---------- Где используют ---------- */
 .section:has(> .c-use) { overflow-x: clip; }
@@ -315,6 +332,7 @@ a.pager__item:hover, .pager__item.is-active { color: var(--c-accent); box-shadow
   .faq__icon { right: 16px; width: 18px; height: 18px; margin-top: -9px; }
   .faq__icon::before, .faq__icon::after { width: 18px; height: 2px; margin-top: -1px; }
   .faq__a { margin-top: -4px; padding: 0 16px 20px; }
+  .faq.is-anim .faq__item.is-open .faq__a { padding-bottom: 20px; }
   .faq__a br, .c-use__text br { display: none; }
   .c-use__slider { grid-auto-columns: 240px; gap: 16px; }
   .c-use__slider li { height: 280px; }
