@@ -19,7 +19,7 @@
 .c-hero { position: relative; margin-top: calc(-1 * var(--header-h)); padding-top: var(--header-h); isolation: isolate; overflow-x: clip; }
 .c-hero::before {
   content: ''; position: absolute; z-index: -1; top: 0; left: 50%; width: 1440px; height: 552px; transform: translateX(-50%);
-  background: url(../img/catalog/hero.webp) center top / 100% 100% no-repeat;
+  background: url(../img/catalog/hero.webp?v=2) center top / 100% 100% no-repeat;
 }
 .c-hero .crumbs { margin-top: 42px; }
 .c-hero__title { margin-top: 18px; font-size: var(--fs-h1); font-weight: 600; line-height: 1; text-transform: uppercase; color: var(--c-text-2); }
