@@ -237,7 +237,8 @@ a.pager__item:hover, .pager__item.is-active { color: var(--c-accent); box-shadow
 .c-use__nav .slider-nav__btn { width: 48px; height: 48px; }
 .c-use__slider {
   display: grid; grid-auto-flow: column; grid-auto-columns: 289px; gap: 32px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
-  margin-right: calc(-1 * max(var(--gutter), (100vw - var(--container)) / 2));
+  /* выходит за правый край контейнера на ширину поля, как в макете: третья карточка обрезана и слайдер всегда листается */
+  margin-right: calc(-1 * var(--gutter));
 }
 .c-use__slider::-webkit-scrollbar { display: none; }
 .c-use__slider li { position: relative; height: 330px; overflow: hidden; border-radius: 4px; scroll-snap-align: start; }
