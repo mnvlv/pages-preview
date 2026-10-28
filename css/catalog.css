@@ -181,9 +181,9 @@ fieldset.filter__group { margin: 16px 0 0; padding: 0; border: 0; min-width: 0; 
 .product__status--wait { color: #60a5fa; }
 .product__status--none { color: #af9c9c; }
 .product__buy { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 12px; }
-/* цена по макету: крупная белая; старая — мелкая серая зачёркнутая над ней */
+/* цена: крупная оранжевая, как на текущем сайте; старая — мелкая серая зачёркнутая над ней */
 .product__price { display: grid; justify-items: start; gap: 2px; line-height: 1; white-space: nowrap; }
-.product__current { font-size: 28px; font-weight: 600; color: var(--c-text-2); }
+.product__current { font-size: 28px; font-weight: 600; color: var(--c-accent); }
 .product__old { font-size: 12px; font-weight: 400; color: #888; }
 .product__old + .product__current { font-size: 22px; }
 .product__cart {
