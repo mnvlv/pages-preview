@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Демо: картинки полочных стеллажей — Диаском</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=60">
+  <style>
+    .sd { padding: 40px 0 80px; }
+    .sd__top { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--c-border-soft); }
+    .sd__top a { color: var(--c-text); text-decoration: none; transition: color .3s; }
+    .sd__top a:hover { color: var(--c-accent); }
+    .sd__logo { font-weight: 700; font-size: 20px; }
+    .sd h1 { margin: 40px 0 8px; font-size: clamp(28px, 4vw, 44px); font-weight: 700; line-height: 1.1; }
+    .sd__lead { max-width: 720px; color: #bdbdbd; line-height: 1.4; }
+    .sd__card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; margin-top: 32px; padding: 24px; background: var(--c-surface); border: 1px solid var(--c-border-soft); border-radius: 8px; }
+    .sd__view { position: relative; display: grid; place-items: center; min-height: 480px; background: #fff; border-radius: 8px; }
+    .sd__view svg { width: 100%; max-width: 520px; height: auto; }
+    .sd__file { position: absolute; left: 12px; bottom: 10px; font-size: 12px; color: #777; }
+    .sd__badge { position: absolute; left: 12px; top: 12px; padding: 6px 10px; font-size: 13px; font-weight: 600; color: #fff; background: var(--c-accent); border-radius: 6px; }
+    .sd__title { font-size: 24px; font-weight: 600; line-height: 1.2; }
+    .sd__sku { margin-top: 8px; color: #8a8a8a; font-size: 14px; }
+    .sd__group { margin-top: 22px; }
+    .sd__label { margin-bottom: 10px; font-size: 14px; color: #bdbdbd; }
+    .sd__chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .sd__chip { padding: 9px 14px; font: inherit; font-size: 15px; color: var(--c-text); background: transparent; border: 1px solid #585858; border-radius: 6px; cursor: pointer; transition: color .3s, border-color .3s, background-color .3s; }
+    .sd__chip:hover { color: var(--c-accent); border-color: var(--c-accent); }
+    .sd__chip.is-active { color: #fff; background: var(--c-accent); border-color: var(--c-accent); }
+    .sd__chip.is-mate { border-style: dashed; border-color: var(--c-accent); color: var(--c-accent); }
+    .sd__hint { margin-top: 6px; font-size: 12px; color: #8a8a8a; min-height: 14px; }
+    .sd__note { margin-top: 24px; padding: 14px 16px; font-size: 14px; line-height: 1.4; color: #d8d8d8; background: rgba(234,89,1,.10); border-left: 3px solid var(--c-accent); border-radius: 0 6px 6px 0; }
+    .sd h2 { margin: 56px 0 16px; font-size: 28px; font-weight: 600; }
+    .sd__steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding: 0; margin: 0; list-style: none; counter-reset: s; }
+    .sd__steps li { counter-increment: s; padding: 20px; line-height: 1.4; background: var(--c-surface); border: 1px solid var(--c-border-soft); border-radius: 8px; }
+    .sd__steps li::before { content: counter(s); display: grid; place-items: center; width: 32px; height: 32px; margin-bottom: 12px; font-weight: 600; color: #fff; background: var(--c-accent); border-radius: 50%; }
+    .sd__steps b { display: block; margin-bottom: 6px; font-size: 17px; }
+    .sd__steps span { color: #bdbdbd; font-size: 15px; }
+    .sd table { width: 100%; border-collapse: collapse; font-size: 15px; }
+    .sd th, .sd td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--c-border-soft); }
+    .sd th { color: #bdbdbd; font-weight: 500; }
+    .sd__tw { overflow-x: auto; background: var(--c-surface); border: 1px solid var(--c-border-soft); border-radius: 8px; }
+    @media (max-width: 900px) {
+      .sd__card { grid-template-columns: minmax(0, 1fr); padding: 16px; }
+      .sd__view { min-height: 340px; }
+      .sd__steps { grid-template-columns: minmax(0, 1fr); }
+    }
+  </style>
+</head>
+<body>
+<div class="container sd">
+  <div class="sd__top"><a class="sd__logo" href="index.html">Диаском</a><a href="catalog.html">← В каталог</a></div>
+
+  <h1>Картинка стеллажа под каждый типоразмер</h1>
+  <p class="sd__lead">Демонстрация карточки товара. Меняйте высоту, ширину, глубину и число полок — картинка подставляется сама. Близкие размеры, которые на глаз не отличить, используют одну картинку.</p>
+
+  <div class="sd__card">
+    <div class="sd__view" id="view">
+      <span class="sd__badge" id="badge" hidden></span>
+      <svg id="rack" viewBox="0 0 520 520" role="img" aria-label="Полочный стеллаж"></svg>
+      <span class="sd__file" id="file"></span>
+    </div>
+    <div>
+      <h3 class="sd__title" id="title"></h3>
+      <p class="sd__sku" id="sku"></p>
+
+      <div class="sd__group"><p class="sd__label">Высота, мм</p><div class="sd__chips" id="c-h"></div><p class="sd__hint" id="h-h"></p></div>
+      <div class="sd__group"><p class="sd__label">Ширина, мм</p><div class="sd__chips" id="c-w"></div><p class="sd__hint" id="h-w"></p></div>
+      <div class="sd__group"><p class="sd__label">Глубина, мм</p><div class="sd__chips" id="c-d"></div><p class="sd__hint" id="h-d"></p></div>
+      <div class="sd__group"><p class="sd__label">Количество полок</p><div class="sd__chips" id="c-s"></div><p class="sd__hint" id="h-s"></p></div>
+
+      <p class="sd__note" id="note"></p>
+    </div>
+  </div>
+
+  <h2>Что делает посетитель сайта</h2>
+  <ol class="sd__steps">
+    <li><b>Открывает карточку стеллажа</b><span>Видит картинку для размера, который открыт по умолчанию.</span></li>
+    <li><b>Выбирает высоту, ширину, глубину, число полок</b><span>Нажимает на нужные значения — как в фильтре каталога. Картинка меняется сразу, без перезагрузки страницы.</span></li>
+    <li><b>Добавляет в корзину или оставляет заявку</b><span>В заказ попадает именно тот типоразмер, который виден на картинке.</span></li>
+  </ol>
+
+  <h2>Что делает заказчик</h2>
+  <ol class="sd__steps">
+    <li><b>Ничего вручную не загружает</b><span>Картинки делаем мы по трёхмерной модели и сами загружаем в товары.</span></li>
+    <li><b>Заводит новый типоразмер как обычно</b><span>Указывает высоту, ширину, глубину, число полок — картинка подбирается по этим свойствам.</span></li>
+    <li><b>Если картинку нужно заменить</b><span>Пишет нам: правим модель, перерисовываем группу и обновляем все товары группы разом.</span></li>
+  </ol>
+
+  <h2>Как объединены размеры</h2>
+  <div class="sd__tw"><table>
+    <thead><tr><th>Параметр</th><th>Значения</th><th>Картинок</th></tr></thead>
+    <tbody>
+      <tr><td>Высота</td><td>1600 и 1800 · 2000 · 2200, 2300 и 2500 · 3100</td><td>4</td></tr>
+      <tr><td>Ширина</td><td>700 · 1000 · 1200 · 1500</td><td>4</td></tr>
+      <tr><td>Глубина</td><td>300 и 400 · 500 и 600 · 800</td><td>3</td></tr>
+      <tr><td>Полки</td><td>3 · 4 · 5 · 6</td><td>4</td></tr>
+      <tr><td><b>Итого</b></td><td>вместо 560 вариантов (7 × 4 × 5 × 4)</td><td><b>192 картинки</b></td></tr>
+    </tbody>
+  </table></div>
+  <p class="sd__lead" style="margin-top:16px">Группы можно менять: чем больше объединяем, тем меньше картинок, но тем менее точно они показывают размер. Состав групп согласуем с заказчиком до отрисовки.</p>
+</div>
+
+<script>
+(function () {
+  var P = {
+    h: [{v:[1600,1800],r:1700},{v:[2000],r:2000},{v:[2200,2300,2500],r:2350},{v:[3100],r:3100}],
+    w: [{v:[700],r:700},{v:[1000],r:1000},{v:[1200],r:1200},{v:[1500],r:1500}],
+    d: [{v:[300,400],r:350},{v:[500,600],r:550},{v:[800],r:800}],
+    s: [{v:[3],r:3},{v:[4],r:4},{v:[5],r:5},{v:[6],r:6}]
+  };
+  var st = {h:2300, w:1000, d:500, s:4};
+  var $ = function (id) { return document.getElementById(id); };
+  var grp = function (k, val) { return P[k].filter(function (g) { return g.v.indexOf(val) > -1; })[0]; };
+  var idx = function (k, val) { return P[k].indexOf(grp(k, val)) + 1; };
+
+  function chips(k) {
+    var box = $('c-' + k), cur = grp(k, st[k]);
+    box.innerHTML = '';
+    P[k].forEach(function (g) {
+      g.v.forEach(function (val) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'sd__chip'; b.textContent = val;
+        if (val === st[k]) b.classList.add('is-active');
+        else if (g === cur) b.classList.add('is-mate');
+        b.onclick = function () { st[k] = val; render(); };
+        box.appendChild(b);
+      });
+    });
+    $('h-' + k).textContent = cur.v.length > 1 ? 'Пунктиром отмечены размеры с той же картинкой' : '';
+  }
+
+  function poly(pts, fill, stroke) {
+    return '<polygon points="' + pts.map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' ') + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="1"/>';
+  }
+
+  function draw() {
+    var h = grp('h', st.h).r, w = grp('w', st.w).r, d = grp('d', st.d).r, n = grp('s', st.s).r;
+    var k = 0.14, kx = 0.55, ky = 0.30, post = 40;
+    var ox = (520 - (w + d * kx) * k) / 2, oy = 500;
+    var p3 = function (x, y, z) { return [ox + (x + y * kx) * k, oy - (z + y * ky) * k]; };
+    var out = '<ellipse cx="' + (ox + (w + d * kx) * k / 2) + '" cy="' + (oy + 2) + '" rx="' + ((w + d * kx) * k / 2 + 12) + '" ry="9" fill="rgba(0,0,0,.12)"/>';
+    var postAt = function (x, y) {
+      var b = x + post;
+      return poly([p3(x, y, 0), p3(b, y, 0), p3(b, y, h), p3(x, y, h)], '#3f6fb5', '#2c4f84') +
+             poly([p3(b, y, 0), p3(b, y + post, 0), p3(b, y + post, h), p3(b, y, h)], '#2f5a99', '#2c4f84');
+    };
+    out += postAt(0, d - post) + postAt(w - post, d - post);
+    var gap = (h - 250) / (n - 1);
+    for (var i = 0; i < n; i++) {
+      var z = 150 + i * gap, t = 35;
+      out += poly([p3(0, 0, z), p3(w, 0, z), p3(w, d, z), p3(0, d, z)], '#f0803a', '#b85a1a');
+      out += poly([p3(0, 0, z), p3(w, 0, z), p3(w, 0, z - t), p3(0, 0, z - t)], '#ea5901', '#b85a1a');
+      out += poly([p3(w, 0, z), p3(w, d, z), p3(w, d, z - t), p3(w, 0, z - t)], '#c94b00', '#b85a1a');
+    }
+    out += postAt(0, 0) + postAt(w - post, 0);
+    $('rack').innerHTML = out;
+  }
+
+  function render() {
+    ['h', 'w', 'd', 's'].forEach(chips);
+    draw();
+    $('file').textContent = 'shelf-h' + idx('h', st.h) + '-w' + idx('w', st.w) + '-d' + idx('d', st.d) + '-s' + idx('s', st.s) + '.webp';
+    $('title').textContent = 'Стеллаж полочный ' + st.h + '×' + st.w + '×' + st.d + ' мм, ' + st.s + (st.s < 5 ? ' полки' : ' полок');
+    $('sku').textContent = 'Типоразмер: высота ' + st.h + ', ширина ' + st.w + ', глубина ' + st.d + ', полок ' + st.s;
+    var shared = grp('h', st.h).v.length * grp('d', st.d).v.length;
+    $('badge').hidden = shared < 2;
+    $('badge').textContent = 'Эта картинка у ' + shared + ' товаров';
+    $('note').textContent = shared > 1
+      ? 'Картинка нарисована для высоты ' + grp('h', st.h).r + ' и глубины ' + grp('d', st.d).r + ' мм. Её видят ещё ' + (shared - 1) + ' товаров с близкими размерами — отличие на глаз не заметно.'
+      : 'У этого типоразмера отдельная картинка — он заметно отличается от соседних.';
+  }
+  render();
+})();
+</script>
+</body>
+</html>
