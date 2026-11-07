@@ -711,3 +711,7 @@ button { cursor: pointer; }
 }
 
 body.menu-open { overflow: hidden; }
+
+/* 2026-11-07, правка заказчика: текстовые абзацы выровнены по ширине */
+main p:not(.pill):not(.form__success):not(.form__error),
+.faq__a p, .footer__slogan { text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto; }

@@ -241,9 +241,9 @@ a.pager__item:hover, .pager__item.is-active { color: var(--c-accent); box-shadow
   display: grid; grid-template-rows: 0fr; padding-bottom: 0;
   transition: grid-template-rows .45s cubic-bezier(.2, .8, .2, 1), padding-bottom .45s cubic-bezier(.2, .8, .2, 1);
 }
-.faq.is-anim .faq__a > p { min-height: 0; overflow: hidden; opacity: 0; transform: translateY(-8px); transition: opacity .3s ease, transform .45s cubic-bezier(.2, .8, .2, 1); }
+.faq.is-anim .faq__a > div { min-height: 0; overflow: hidden; opacity: 0; transform: translateY(-8px); transition: opacity .3s ease, transform .45s cubic-bezier(.2, .8, .2, 1); }
 .faq.is-anim .faq__item.is-open .faq__a { grid-template-rows: 1fr; padding-bottom: 43px; }
-.faq.is-anim .faq__item.is-open .faq__a > p { opacity: 1; transform: none; transition-delay: .08s; }
+.faq.is-anim .faq__item.is-open .faq__a > div { opacity: 1; transform: none; transition-delay: .08s; }
 
 /* ---------- Где используют ---------- */
 .section:has(> .c-use) { overflow-x: clip; }
@@ -364,3 +364,4 @@ a.pager__item:hover, .pager__item.is-active { color: var(--c-accent); box-shadow
 
 /* ---------- Форма: иконки преимуществ в натуральном размере, как в макете каталога (38×33, 38×42, 34×38) ---------- */
 .page-catalog .request__perks img { object-fit: none; object-position: center; }
+.faq__body p + p { margin-top: 12px; }

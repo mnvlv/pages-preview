@@ -1,0 +1,162 @@
+/* ==========================================================
+   Диаском — страницы стеллажей (среднегрузовые, паллетные фронтальные, мезонинные)
+   Общие стили — в style.css, mining.css (hero, карточки, характеристики), catalog.css (FAQ)
+   Размеры сняты со скриншотов макета (масштаб ≈ 1,195 к макету 1440 px)
+   ========================================================== */
+
+/* ---------- Hero ---------- */
+.rk-hero::before {
+  background: var(--rk-hero) 0 0 / 100% 100% no-repeat;
+  left: 50%; width: 700px; height: 646px; margin-left: -120px; transform: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 30%, #000 80%, transparent 100%), linear-gradient(180deg, #000 80%, transparent 100%);
+  -webkit-mask-composite: source-in; mask-composite: intersect;
+          mask-image: linear-gradient(90deg, transparent 0, #000 30%, #000 80%, transparent 100%), linear-gradient(180deg, #000 80%, transparent 100%);
+}
+.rk-hero .pill { margin-top: 42px; }
+.rk-hero__title { margin-top: 28px; font-size: clamp(34px, 3.75vw, 54px); }
+.rk-hero .m-hero__lead { max-width: 640px; margin-top: 24px; font-size: 18px; line-height: 1.22; }
+.rk-hero .m-hero__buttons { margin-top: 46px; }
+.rk-hero + .section { padding-top: 24px; }
+.rk-hero .m-hero__features { margin-top: 42px; }
+.rk-hero .m-hero__features li { background: rgba(26, 26, 26, .6); }
+.rk-hero .m-hero__features img { width: auto; max-height: 38px; }
+
+/* ---------- Универсальное решение ---------- */
+.rk-uni { display: grid; grid-template-columns: minmax(0, 1fr) 609px; grid-template-rows: auto 1fr; column-gap: 40px; row-gap: 14px; }
+.rk-uni__title { grid-column: 1 / -1; max-width: 880px; font-size: clamp(22px, 2.23vw, 32px); font-weight: 600; line-height: 1.2; text-transform: uppercase; }
+.rk-uni__text { max-width: 690px; }
+.rk-uni__text p { font-size: 16px; line-height: 22px; color: var(--c-text-2); }
+.rk-uni__text p + p { margin-top: 22px; }
+.rk-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px; align-content: start; }
+.rk-tile {
+  display: flex; flex-direction: column; justify-content: space-between; gap: 18px; min-height: 170px; padding: 17px 20px 16px;
+  font-size: 20px; font-weight: 600; line-height: 1.12; background: #1d1d1d; border-radius: 6px; box-shadow: inset 0 0 0 1px #585858;
+}
+.rk-tile__icon { width: auto; height: 62px; align-self: flex-start; object-fit: contain; object-position: left center; }
+
+/* ---------- 3D-конструктор ---------- */
+.rk-cfg .lead { max-width: 640px; margin-top: 18px; }
+.rk-cfg__frame { margin-top: 28px; overflow: hidden; background: #43464c; border-radius: 8px; box-shadow: inset 0 0 0 1px #585858; }
+.rk-cfg__frame iframe { display: block; width: 100%; height: 760px; border: 0; }
+
+/* ---------- Заголовок с подписью ---------- */
+.rk-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+.rk-head__sub { margin-top: 12px; font-size: 18px; line-height: 1.2; color: var(--c-text-2); }
+.rk-head__sub--lg { margin-top: 12px; margin-bottom: 30px; }
+.rk-head__btn { flex: none; margin-top: 8px; }
+
+/* ---------- Виды стеллажей (паллетные, мезонин) ---------- */
+.rk-types { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 380px); gap: 22px; align-items: stretch; }
+.rk-types__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
+.rk-type { display: flex; flex-direction: column; padding-bottom: 20px; background: var(--c-surface); border-radius: 6px; overflow: hidden; box-shadow: inset 0 0 0 1px #585858; }
+.rk-type__img { width: 100%; height: auto; aspect-ratio: 254 / 264; object-fit: cover; border-bottom: 1px solid #585858; }
+.rk-type__title { margin: 14px 12px 0; font-size: 19px; font-weight: 600; line-height: 1.15; }
+.rk-type p { margin: 10px 12px 0; font-size: 15px; line-height: 1.25; color: #d6d6d6; }
+.rk-side { padding: 26px 24px; background: var(--c-surface); border-radius: 8px; box-shadow: inset 0 0 0 1px #585858; }
+.rk-side__title { font-size: 28px; font-weight: 600; line-height: 1.15; text-transform: uppercase; }
+.rk-side__text { margin-top: 14px; font-size: 14px; line-height: 1.4; color: #d6d6d6; }
+.rk-side__cap { display: flex; justify-content: space-between; gap: 12px; margin-top: 22px; font-size: 12px; font-weight: 600; line-height: 1.2; text-transform: uppercase; }
+.rk-bars { display: grid; gap: 10px; margin-top: 6px; }
+.rk-bars li { display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: end; gap: 14px; font-size: 16px; line-height: 1.2; }
+.rk-bars li > span { padding-bottom: 1px; }
+.rk-bar { position: relative; display: block; padding-top: 22px; }
+.rk-bar b { position: absolute; top: 0; right: 0; font-size: 14px; font-weight: 500; color: var(--c-accent); }
+.rk-bar i { display: block; height: 12px; background: linear-gradient(90deg, var(--c-accent) var(--p), #f2f2f2 var(--p)); border-radius: 6px; }
+.rk-side__btn { margin-top: 28px; min-height: 62px; color: var(--c-accent); border-color: var(--c-accent); }
+.rk-side__btn:hover { background: rgba(234, 89, 1, .1); }
+.rk-floors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; margin-top: 20px; }
+.rk-floors img { width: 100%; height: auto; aspect-ratio: 187 / 84; object-fit: cover; border-radius: 3px; }
+.rk-floors span { display: block; margin-top: 8px; font-size: 15px; font-weight: 600; line-height: 1.15; }
+
+/* ---------- Комплектация и аксессуары ---------- */
+.rk-accs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 22px; margin-top: 34px; }
+.rk-acc__img { width: 100%; height: auto; aspect-ratio: 235 / 226; object-fit: cover; border-radius: 3px; box-shadow: 0 0 0 1px #585858; }
+.rk-acc__title { min-height: 40px; margin-top: 18px; font-size: 18px; font-weight: 600; line-height: 1.12; }
+.rk-acc p { margin-top: 14px; font-size: 15px; line-height: 1.25; color: #d6d6d6; }
+
+/* ---------- Использование объема склада ---------- */
+.rk-vol-wrap { display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr); gap: 32px; }
+.rk-vol__sub { margin-top: 10px; font-size: 13px; line-height: 1.2; color: var(--c-text-2); }
+.rk-vol__cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 20px; align-items: end; }
+.rk-vol__cols li { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+.rk-vol__img { width: 100%; height: auto; aspect-ratio: 1.55; object-fit: contain; object-position: center bottom; mix-blend-mode: lighten; }
+.rk-vol__cols h3 { margin-top: 14px; font-size: 18px; font-weight: 600; line-height: 1.2; }
+.rk-vol__cols p { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-top: 8px; font-size: 16px; line-height: 1.2; color: var(--c-text-2); }
+.rk-vol__cols strong { font-size: 22px; font-weight: 600; color: var(--c-accent); }
+.rk-why__title { font-size: 24px; font-weight: 600; line-height: 1.15; text-transform: uppercase; }
+.rk-why__list { display: grid; gap: 21px; margin-top: 26px; }
+.rk-why__list li { display: flex; align-items: center; gap: 16px; font-size: 16px; line-height: 1.2; }
+.rk-why__list img { flex: none; width: 24px; height: 24px; object-fit: contain; }
+.rk-why__list li:first-child img { width: 20px; height: 16px; margin: 0 2px; }
+
+/* ---------- Как выбрать / где используются (среднегрузовые) ---------- */
+.rk-pair { display: grid; gap: 32px; }
+.rk-pair--choose { grid-template-columns: minmax(0, 400px) minmax(0, 1fr); }
+.rk-choose .m-card__title, .rk-where .m-card__title { font-size: clamp(22px, 1.95vw, 28px); }
+.rk-choose__lead { margin-top: 18px; font-size: 16px; line-height: 1.22; color: var(--c-text-2); }
+.rk-choose__list { display: grid; gap: 16px; margin-top: 20px; }
+.rk-choose__list li { display: flex; align-items: flex-start; gap: 16px; }
+.rk-choose__list img { flex: none; width: 34px; height: auto; margin-top: 4px; }
+.rk-choose__list strong { display: block; font-size: 14px; font-weight: 600; line-height: 1.3; }
+.rk-choose__list span { display: block; margin-top: 2px; font-size: 14px; line-height: 1.3; color: #d6d6d6; }
+.rk-where__list { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 17px; margin-top: 22px; }
+.rk-where__list img { width: 100%; height: auto; aspect-ratio: 160 / 235; object-fit: cover; border-radius: 3px; }
+.rk-where__list span { display: block; margin-top: 14px; font-size: 16px; font-weight: 600; line-height: 1.2; }
+
+/* ---------- Особенности наших стеллажей ---------- */
+.rk-feats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 44px 32px; margin-top: 30px; }
+.rk-feats li { display: grid; grid-template-columns: 62px minmax(0, 1fr); align-items: center; column-gap: 14px; row-gap: 20px; }
+.rk-feats img { width: 100%; height: auto; max-height: 62px; object-fit: contain; }
+.rk-feats h3 { font-size: 20px; font-weight: 600; line-height: 1.15; }
+.rk-feats p { grid-column: 1 / -1; font-size: 15px; line-height: 1.3; color: #d6d6d6; }
+
+/* ---------- Варианты комплектации ---------- */
+.rk-var { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 28px; margin-top: 32px; }
+.rk-var li { position: relative; background: #1f1f1f; border-radius: 6px; overflow: hidden; }
+.rk-var img { width: 100%; height: auto; aspect-ratio: 511 / 340; object-fit: cover; }
+.rk-var span { position: relative; display: block; padding: 18px 12px 14px; font-size: 18px; font-weight: 600; line-height: 1.2; text-align: center; }
+.rk-var span::before { content: ''; position: absolute; top: 6px; left: 50%; width: 6px; height: 6px; margin-left: -3px; border-radius: 50%; background: var(--c-accent); }
+
+/* ==========================================================
+   Адаптив
+   ========================================================== */
+@media (max-width: 1360px) {
+  .rk-uni { grid-template-columns: minmax(0, 1fr) minmax(0, 560px); }
+  .rk-types { grid-template-columns: minmax(0, 1fr); }
+  .rk-bars li { grid-template-columns: 140px minmax(0, 1fr); }
+  .rk-accs { gap: 16px; }
+  .rk-where__list { gap: 12px; }
+}
+@media (max-width: 1200px) {
+  .rk-hero::before { left: 0; width: 100%; margin-left: 0; height: 560px; opacity: .55; }
+  .rk-uni { grid-template-columns: minmax(0, 1fr); }
+  .rk-uni__text { max-width: none; }
+  .rk-accs { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 20px; }
+  .rk-vol-wrap { grid-template-columns: minmax(0, 1fr); }
+  .rk-pair--choose { grid-template-columns: minmax(0, 1fr); }
+  .rk-var { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rk-types__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .rk-hero__title { margin-top: 20px; }
+  .rk-hero .m-hero__lead { font-size: 16px; }
+  .rk-tiles { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .rk-tile { min-height: 130px; font-size: 18px; }
+  .rk-accs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rk-head { flex-direction: column; }
+  .rk-vol__cols { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .rk-vol__img { max-width: 320px; margin: 0 auto; }
+  .rk-where__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rk-feats { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .rk-var { grid-template-columns: minmax(0, 1fr); }
+  .rk-var span { font-size: 16px; }
+  .rk-bars li { grid-template-columns: 96px minmax(0, 1fr); gap: 10px; }
+  .specs th { width: 46%; }
+}
+@media (max-width: 480px) {
+  .rk-types__grid, .rk-accs { grid-template-columns: minmax(0, 1fr); }
+  .rk-where__list { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* подписи в узких карточках — по левому краю */
+.rk-type p, .rk-acc p, .rk-feats p, .rk-tile p { text-align: left; hyphens: manual; }

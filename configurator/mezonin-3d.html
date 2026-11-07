@@ -1,0 +1,1362 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3D-модель мезонина</title>
+<meta name="description" content="Интерактивная 3D-модель двухъярусного мезонина на полочных стеллажах: стойки, балки, раскосы, поперечные балки, опорные профили, настил, лестница, калитка, ограждение, перфостенка, комплектация и анимация сборки.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Layout: full-bleed 3D stage on a grey studio gradient, parts list on the left,
+   live thumbnails + detail card on the right, parameters bar at the bottom. */
+:root {
+  --accent: #ff5a1f;
+  --accent-2: #ff7d4a;
+  --bg-1: #9a9fa6;
+  --bg-2: #6c7077;
+  --bg-3: #43464c;
+  --panel: rgba(34, 34, 34, .9);    /* #222 — the logo's own background, so the logo sits seamlessly */
+  --panel-2: rgba(255, 255, 255, .05);
+  --line: rgba(255, 255, 255, .1);
+  --fg: #f3f4f6;
+  --muted: #a7acb3;
+  --font: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bar-h: 64px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg-3); color: var(--fg); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+button, select { font-family: inherit; }
+
+.rk {
+  position: relative; height: 100vh; min-height: 720px; overflow: hidden;
+  background: radial-gradient(120% 95% at 50% 40%, var(--bg-1) 0%, var(--bg-2) 52%, var(--bg-3) 100%);
+}
+.stage { position: absolute; inset: 0; }
+.stage canvas { display: block; touch-action: none; }
+#labels { position: absolute; inset: 0; pointer-events: none; }
+
+/* side panels */
+.side { position: absolute; top: 24px; bottom: calc(var(--bar-h) + 32px); width: 304px; display: flex; flex-direction: column; gap: 12px; z-index: 2; }
+.left { left: 24px; }
+.right { right: 24px; overflow: auto; scrollbar-width: none; bottom: calc(var(--bar-h) + 78px); }
+.right::-webkit-scrollbar { display: none; }
+.card {
+  background: var(--panel); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--line); border-radius: 16px; padding: 18px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .25);
+}
+.intro { overflow: auto; scrollbar-width: thin; max-height: 100%; display: flex; flex-direction: column; gap: 14px; }
+.brand { display: block; width: 100%; max-width: 300px; height: auto; margin: -6px 0 2px; border-radius: 10px; background: #222; }
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+h2 { margin: -6px 0 0; font-size: 21px; line-height: 1.15; font-weight: 800; text-transform: uppercase; letter-spacing: .01em; }
+h2 span { color: var(--accent); }
+.lead { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+
+.parts { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.parts button {
+  width: 100%; display: flex; align-items: center; gap: 10px; padding: 6px 8px; border: 0; border-radius: 9px;
+  background: transparent; color: var(--fg); font-size: 13px; font-weight: 600; text-align: left; cursor: pointer;
+  transition: background .15s;
+}
+.parts button:hover, .parts button.hov { background: var(--panel-2); }
+.parts button.on { background: rgba(255, 90, 31, .16); }
+.parts .opt { margin-left: auto; font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.num {
+  flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--accent); color: #fff; font-size: 11px; font-weight: 800;
+}
+.parts button.off { opacity: .45; }
+
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.stat { background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; padding: 9px 10px; }
+.stat b { display: block; font-size: 15px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 11px; color: var(--muted); }
+
+.explore {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 11px 14px;
+  border: 1px solid rgba(255, 255, 255, .28); border-radius: 10px; background: transparent; color: var(--fg);
+  font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; cursor: pointer;
+}
+.explore:hover { border-color: var(--accent); }
+.explore[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); }
+
+/* thumbnails */
+.thumbs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.th {
+  position: relative; aspect-ratio: 10 / 7; padding: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; cursor: pointer;
+  background: radial-gradient(110% 100% at 50% 35%, #5d6168 0%, #3c3f45 70%, #2e3035 100%);
+}
+.th img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s; }
+.th img.ready { opacity: 1; }
+.th .num { position: absolute; top: 6px; left: 6px; width: 20px; height: 20px; font-size: 10px; box-shadow: 0 2px 6px rgba(0, 0, 0, .35); }
+.th .cap {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 8px 6px; text-align: left;
+  font-size: 11px; font-weight: 700; color: #fff; background: linear-gradient(transparent, rgba(0, 0, 0, .6));
+}
+.th:hover, .th.hov { border-color: rgba(255, 255, 255, .45); }
+.th.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+.th.off { opacity: .4; }
+
+/* detail card */
+.detail { min-height: 180px; }
+.dh { display: flex; align-items: center; gap: 10px; }
+.dh h3 { margin: 0; font-size: 16px; font-weight: 800; }
+.dh .num { width: 26px; height: 26px; font-size: 12px; }
+.badge { margin-left: auto; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 3px 8px; }
+.detail p { margin: 10px 0 12px; font-size: 13px; line-height: 1.5; color: #d6d9de; }
+.detail dl { margin: 0; display: grid; gap: 0; }
+.detail dl div { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-top: 1px solid var(--line); font-size: 12px; }
+.detail dt { color: var(--muted); }
+.detail dd { margin: 0; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+.empty { display: flex; gap: 12px; align-items: flex-start; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.empty svg { flex: 0 0 auto; color: var(--accent); }
+.empty p { margin: 0; }
+
+/* bottom parameters bar */
+.bar {
+  position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 3;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: center;
+  padding: 8px; width: max-content; max-width: min(1180px, calc(100% - 32px));
+}
+.step { display: flex; align-items: center; gap: 6px; padding: 0 6px; }
+.step > span { font-size: 12px; color: var(--muted); font-weight: 600; }
+.step b { min-width: 16px; text-align: center; font-size: 14px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.step button {
+  width: 28px; height: 28px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel-2);
+  color: var(--fg); font-size: 16px; line-height: 1; cursor: pointer;
+}
+.step button:hover:not(:disabled) { border-color: var(--accent); }
+.step button:disabled { opacity: .35; cursor: default; }
+.step select {
+  height: 28px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel-2); color: var(--fg);
+  font-size: 12px; font-weight: 800; padding: 0 4px; cursor: pointer; font-variant-numeric: tabular-nums;
+}
+.step select:hover { border-color: var(--accent); }
+.step select option { background: #26292e; color: var(--fg); }
+.sep { width: 1px; height: 24px; background: var(--line); margin: 0 4px; }
+.tg {
+  display: inline-flex; align-items: center; gap: 7px; padding: 7px 11px; border-radius: 999px;
+  border: 1px solid var(--line); background: transparent; color: var(--fg); font-size: 12px; font-weight: 700; cursor: pointer;
+}
+.tg .dot { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--accent); }
+.tg[aria-pressed="true"] .dot { background: var(--accent); }
+.tg:hover { border-color: rgba(255, 255, 255, .35); }
+.tg.reset { color: var(--accent); }
+.tg.play { background: var(--accent); border-color: var(--accent); color: #fff; }
+.tg.play:hover { background: var(--accent-2); }
+button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* 3D callouts */
+.pin {
+  pointer-events: auto; position: relative; width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center; cursor: pointer; background: var(--accent); color: #fff;
+  font: 800 12px/1 var(--font); border: 2px solid #fff; box-shadow: 0 3px 10px rgba(0, 0, 0, .35);
+  transition: transform .15s;
+}
+.pin::before {
+  content: ""; position: absolute; inset: -7px; border-radius: 50%; border: 2px solid var(--accent);
+  opacity: 0; animation: ring 2.4s ease-out infinite;
+}
+@keyframes ring { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(1.5); opacity: 0; } }
+.pin .nm {
+  position: absolute; left: 32px; top: 50%; transform: translateY(-50%); white-space: nowrap;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 5px 9px;
+  font: 700 12px/1 var(--font); opacity: 0; pointer-events: none; transition: opacity .15s;
+}
+.pin:hover, .pin.hov, .pin.on { transform: scale(1.18); }
+.pin:hover .nm, .pin.hov .nm, .pin.on .nm { opacity: 1; }
+.dim { font: 800 11px/1 var(--font); color: #fff; background: rgba(20, 22, 26, .8); border: 1px solid rgba(255, 255, 255, .2); padding: 4px 7px; border-radius: 6px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+.tip {
+  position: absolute; z-index: 4; pointer-events: none; display: none; align-items: center; gap: 8px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 6px 10px 6px 6px;
+  font-size: 12px; font-weight: 700; white-space: nowrap; box-shadow: 0 8px 20px rgba(0, 0, 0, .3);
+}
+.hint { position: absolute; right: 24px; bottom: calc(var(--bar-h) + 34px); z-index: 1; font-size: 11px; color: rgba(255, 255, 255, .7); text-align: right; line-height: 1.5; display: none; }
+.loading { position: absolute; inset: 0; display: grid; place-items: center; z-index: 5; font-weight: 700; color: rgba(255, 255, 255, .85); pointer-events: none; transition: opacity .4s; }
+.loading.done { opacity: 0; }
+.nogl { position: absolute; inset: 0; display: none; place-items: center; text-align: center; padding: 24px; color: #fff; z-index: 6; }
+
+/* bill of materials */
+.modal { position: absolute; inset: 0; z-index: 8; display: none; align-items: center; justify-content: center; padding: 16px; background: rgba(10, 11, 13, .45); }
+.modal.open { display: flex; }
+.sheet { width: 600px; max-width: 100%; max-height: 100%; overflow: auto; }
+.sheet .dh { margin-bottom: 4px; }
+.sheet .sub { margin: 6px 0 12px; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+.sheet table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.sheet th, .sheet td { text-align: left; padding: 8px 4px; border-top: 1px solid var(--line); }
+.sheet th { font-size: 10px; color: var(--muted); font-weight: 800; text-transform: uppercase; letter-spacing: .08em; border-top: 0; }
+.sheet td.sz { color: var(--muted); font-variant-numeric: tabular-nums; }
+.sheet td.q { text-align: right; font-weight: 800; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.sheet .acts { display: flex; gap: 8px; justify-content: flex-end; margin-top: 14px; }
+.x { margin-left: auto; width: 28px; height: 28px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel-2); color: var(--fg); font-size: 16px; line-height: 1; cursor: pointer; }
+.x:hover { border-color: var(--accent); }
+.toast { position: absolute; left: 50%; top: 24px; transform: translateX(-50%); z-index: 9; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 8px 14px; font-size: 12px; font-weight: 700; opacity: 0; transition: opacity .25s; pointer-events: none; }
+.toast.show { opacity: 1; }
+
+@media (min-width: 1181px) { .hint { display: block; } }
+/* tablets and phones: stage on top, panels stacked under it */
+@media (max-width: 1180px) {
+  .rk { height: auto; min-height: 0; display: flex; flex-direction: column; overflow: visible; padding-bottom: 16px; }
+  .stage { position: relative; height: 66vh; min-height: 420px; order: 0; }
+  .bar { position: relative; left: auto; bottom: auto; transform: none; order: 1; margin: 12px 16px 0; max-width: none; width: auto; }
+  .side { position: static; width: auto; margin: 12px 16px 0; }
+  .left { order: 2; } .right { order: 3; overflow: visible; }
+  .intro { max-height: none; }
+  .thumbs { grid-template-columns: repeat(4, 1fr); }
+  .modal { position: fixed; }
+}
+@media (max-width: 640px) {
+  .thumbs { grid-template-columns: 1fr 1fr; }
+  .stage { height: 58vh; }
+  .sep { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .pin::before { animation: none; } * { transition: none !important; } }
+</style>
+<meta name="robots" content="noindex">
+<style>
+/* Диаском: вставка в iframe на странице сайта — фиксированная высота сцены на планшетах и телефонах, чтобы страница могла сообщить родителю свою высоту */
+@media (max-width: 1180px) { .stage { height: 520px !important; min-height: 0 !important; } }
+@media (max-width: 640px) { .stage { height: 420px !important; } }
+</style>
+<script>
+/* Диаском: сообщаем родительской странице высоту содержимого (только когда макет в одну колонку) */
+(function () {
+  function send() {
+    if (window.parent === window) return;
+    var h = window.innerWidth <= 1180 ? document.documentElement.scrollHeight : 0;
+    window.parent.postMessage({ rkFrameHeight: h, rkSrc: location.pathname.split('/').pop() }, '*');
+  }
+  addEventListener('load', send); addEventListener('resize', send);
+  if (window.ResizeObserver) new ResizeObserver(send).observe(document.documentElement);
+})();
+</script>
+</head>
+<body>
+
+<section class="rk" aria-label="3D-модель мезонина">
+  <div class="stage" id="stage">
+    <div id="labels"></div>
+    <div class="tip" id="tip"></div>
+    <div class="loading" id="loading">Собираем мезонин…</div>
+    <div class="nogl" id="nogl">Ваш браузер не поддерживает WebGL — 3D-модель недоступна.</div>
+  </div>
+
+  <aside class="side left">
+    <div class="card intro">
+      <img class="brand" id="logo" src="data:image/jpeg;base64,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" alt="ДИАСКОМ — создаём прочность, организуем пространство" width="966" height="278">
+      <div class="eyebrow">Интерактивная модель</div>
+      <h2><span>3D</span>-модель мезонина</h2>
+      <p class="lead">Двухъярусная система хранения: полочные стеллажи несут настил над проходами, на второй ярус ведёт лестница. Наведите курсор на элемент, чтобы узнать его назначение и характеристики.</p>
+      <ol class="parts" id="parts"></ol>
+      <div class="stats" id="stats"></div>
+      <button class="explore" id="explore" aria-pressed="false">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 20 7.2v9.6L12 21.2 4 16.8V7.2z"/><path d="M4 7.2 12 11.6l8-4.4M12 11.6v9.6"/></svg>
+        <span>Исследовать модель</span>
+      </button>
+    </div>
+  </aside>
+
+  <aside class="side right">
+    <div class="card"><div class="thumbs" id="thumbs"></div></div>
+    <div class="card detail" id="detail" aria-live="polite"></div>
+  </aside>
+
+  <div class="card bar" id="bar">
+    <div class="step"><span>Ряды</span><button data-k="R" data-d="-1" aria-label="Меньше рядов">−</button><b id="v-R">3</b><button data-k="R" data-d="1" aria-label="Больше рядов">+</button></div>
+    <div class="step"><span>Секции</span><button data-k="S" data-d="-1" aria-label="Меньше секций">−</button><b id="v-S">3</b><button data-k="S" data-d="1" aria-label="Больше секций">+</button></div>
+    <div class="step"><span>Полок в ярусе</span><button data-k="L" data-d="-1" aria-label="Меньше полок">−</button><b id="v-L">4</b><button data-k="L" data-d="1" aria-label="Больше полок">+</button></div>
+    <span class="sep"></span>
+    <div class="step"><span>Балка</span><select id="sB" aria-label="Длина балки, мм"><option value="1.5">1500</option><option value="1.8" selected>1800</option><option value="2.0">2000</option></select></div>
+    <div class="step"><span>Глубина</span><select id="sD" aria-label="Глубина стеллажа, мм"><option value="0.6">600</option><option value="0.8" selected>800</option><option value="1.0">1000</option></select></div>
+    <div class="step"><span>Проход</span><select id="sA" aria-label="Ширина прохода, мм"><option value="0.9">900</option><option value="1.0" selected>1000</option><option value="1.2">1200</option></select></div>
+    <div class="step"><span>Настил</span><select id="sH" aria-label="Отметка настила, мм"><option value="2.4">2400</option><option value="2.7" selected>2700</option><option value="3.0">3000</option></select></div>
+    <span class="sep"></span>
+    <button class="tg" data-t="loads" aria-pressed="true"><span class="dot"></span>Грузы</button>
+    <button class="tg" data-t="rail" aria-pressed="true"><span class="dot"></span>Ограждение</button>
+    <button class="tg" data-t="perfo" aria-pressed="true"><span class="dot"></span>Перфостенка</button>
+    <button class="tg" data-t="guards" aria-pressed="true"><span class="dot"></span>Защита</button>
+    <button class="tg" data-t="dims" aria-pressed="false"><span class="dot"></span>Размеры</button>
+    <button class="tg" data-t="explode" aria-pressed="false"><span class="dot"></span>Разнести детали</button>
+    <span class="sep"></span>
+    <button class="tg play" id="asm">▶ Сборка</button>
+    <button class="tg" id="bom">Комплект</button>
+    <button class="tg reset" id="reset">⟲ Общий вид</button>
+  </div>
+
+  <div class="hint">ЛКМ — вращать · ПКМ — сдвигать<br>колесо — приблизить · клик — выбрать деталь</div>
+
+  <div class="modal" id="modal">
+    <div class="card sheet" role="dialog" aria-modal="true" aria-labelledby="bomTitle">
+      <div class="dh"><span class="num">≡</span><h3 id="bomTitle">Комплектация</h3><button class="x" id="bomX" aria-label="Закрыть">×</button></div>
+      <p class="sub" id="bomSub"></p>
+      <table><thead><tr><th>Элемент</th><th>Размер</th><th style="text-align:right">Кол-во</th></tr></thead><tbody id="bomBody"></tbody></table>
+      <div class="acts"><button class="tg" id="bomCopy">Скопировать</button><button class="tg play" id="bomOk">Готово</button></div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+</section>
+
+<script>
+/* a classic script with dynamic imports of full +esm URLs (no import map, no module script),
+   so the page also runs when another page injects it, e.g. the gist preview */
+(async () => {
+const CDN = 'https://cdn.jsdelivr.net/npm/three@0.160.0/';
+let THREE, OrbitControls, RoomEnvironment, CSS2DRenderer, CSS2DObject;
+try {
+  [THREE, { OrbitControls }, { RoomEnvironment }, { CSS2DRenderer, CSS2DObject }] = await Promise.all([
+    import(CDN + '+esm'),
+    import(CDN + 'examples/jsm/controls/OrbitControls.js/+esm'),
+    import(CDN + 'examples/jsm/environments/RoomEnvironment.js/+esm'),
+    import(CDN + 'examples/jsm/renderers/CSS2DRenderer.js/+esm'),
+  ]);
+} catch (e) {
+  document.getElementById('loading').textContent = 'Не удалось загрузить 3D-библиотеку. Проверьте подключение к интернету.';
+  return;
+}
+
+/* ---------- state and fixed dimensions, metres ---------- */
+const state = { R: 3, S: 3, L: 4, B: 1.8, D: 0.8, A: 1.0, H1: 2.7, loads: true, rail: true, perfo: true, guards: true, dims: false, explode: false };
+const LIMITS = { R: [2, 4], S: [2, 6], L: [3, 6] };
+const UW = .09, UD = .07;          // upright section, as on the pallet rack: 90 × 70
+const SLOT_X = .034;               // slot column offset from the upright axis
+const BD = .05;                    // beam depth
+const SBH = .1, DBH = .14;         // shelf beam and cross beam heights
+const H2 = 2.4;                    // upper tier height above the deck
+const DECK_T = .04;                // deck panel depth
+const SHELF_LOAD = { 1.5: 600, 1.8: 500, 2.0: 450 };   // kg per shelf level (pair of beams)
+const DECK_LOAD = 350;             // kg/m²
+
+const $ = (s) => document.querySelector(s);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const ZERO = V(0, 0, 0), ONE = V(1, 1, 1);
+const fmt = (n) => Math.round(n).toLocaleString('ru-RU');
+const mm = (m) => fmt(m * 1000);
+function rng(seed) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); }
+const qE = (x, y, z) => new THREE.Quaternion().setFromEuler(new THREE.Euler(x, y, z));
+const IDQ = new THREE.Quaternion();
+const HALF_PI = Math.PI / 2;
+const RX = qE(HALF_PI, 0, 0), RZ = qE(0, 0, HALF_PI);
+
+/* ---------- parts shown in the list, callouts, thumbnails and the detail card ---------- */
+let G = {};          // current layout, filled by build()
+const PARTS = [
+  { key: 'upright', name: 'Стойка рамы', desc: 'Оцинкованный профиль с рёбрами жёсткости проходит через оба яруса. Вдоль обеих кромок — ряды прямоугольных пазов с шагом 50 мм: в них заходят крюки балок, поэтому полки переставляются без сварки.',
+    specs: () => [['Профиль', '90 × 70 мм'], ['Высота', `${mm(G.H)} мм`], ['Шаг перфорации', '50 мм'], ['Покрытие', 'цинк Z275']] },
+  { key: 'bracing', name: 'Раскосы рамы', desc: 'Горизонтальные и диагональные связи превращают две стойки в жёсткую раму и воспринимают боковые нагрузки от настила и лестницы.',
+    specs: () => [['Профиль', 'С 40 × 30 мм'], ['Схема', 'Z-раскос'], ['Шаг узлов', '≈ 850 мм'], ['Крепёж', 'болт М10, кл. 8.8']] },
+  { key: 'beam', name: 'Балка полки', desc: 'Профилированная балка с четырьмя продольными рёбрами на лицевой стороне. Ступень по верхней кромке держит панели полки.',
+    specs: () => [['Сечение', '100 × 50 мм'], ['Длина', `${mm(state.B)} мм`], ['Нагрузка', `до ${SHELF_LOAD[state.B]} кг на уровень`], ['Окраска', 'оранжевая, RAL 2004']] },
+  { key: 'connector', name: 'Зацеп балки', desc: 'Г-образный кронштейн приварен к торцу балки и опускается ниже неё. Узкая полка ложится на стойку, крюки входят в пазы, стопорный болт не даёт балке выскочить при ударе снизу.',
+    specs: () => [['Высота', '180 мм'], ['Крюков', '3 шт.'], ['Толщина', '4 мм'], ['Фиксация', 'стопорный болт']] },
+  { key: 'cross', name: 'Балка поперечная', desc: 'Перекрывает проход между рядами на отметке настила. Фланцами на торцах болтами крепится к стойкам соседних рядов и несёт опорные профили.',
+    specs: () => [['Сечение', '140 × 50 мм'], ['Длина', `${mm(state.A)} мм`], ['Шаг', `${mm(state.B)} мм`], ['Крепление', 'фланец, 4 болта М10']] },
+  { key: 'support', name: 'Опорный профиль', desc: 'Омега-профиль вдоль прохода: лежит на поперечных балках и служит опорой для панелей настила. По три профиля в каждом проходе — по краям и по центру.',
+    specs: () => [['Профиль', 'Ω 90 × 60 мм'], ['Длина', `${mm(state.B)} мм`], ['В проходе', '3 шт.'], ['Сталь', 'оцинкованная, 2 мм']] },
+  { key: 'deck', name: 'Настил мезонина', desc: 'Стальные панели с отбортовкой и противоскользящей перфорацией образуют пол второго яруса над проходами.',
+    specs: () => [['Панель', `${mm(G.deckPw || .5)} × ${mm(state.A - .01)} мм`], ['Борт', '40 мм'], ['Нагрузка', `до ${DECK_LOAD} кг/м²`], ['Покрытие', 'цинк']] },
+  { key: 'shelf', name: 'Настил полки', desc: 'Тонкие оцинкованные панели с рёбрами жёсткости укладываются на ступень балок. Подходят для коробов, ящиков и мелкоштучного хранения.',
+    specs: () => [['Лист', 'оцинкованный, 0,8 мм'], ['Панелей', `${G.shelfN || 4} на уровень`], ['Нагрузка', `до ${SHELF_LOAD[state.B]} кг на уровень`], ['Монтаж', 'укладка на ступень балки']] },
+  { key: 'stair', name: 'Лестница', desc: 'Марш на отметку настила: косоуры из гнутого швеллера, перфорированные ступени, поручни с обеих сторон.',
+    specs: () => [['Ширина марша', `${mm(G.stairW || .8)} мм`], ['Ступеней', `${(G.stairN || 14) - 1} шт.`], ['Подъём ступени', `${mm(G.rise || .19)} мм`], ['Уклон', `${G.stairAngle || 38}°`]] },
+  { key: 'rail', name: 'Ограждение', opt: true, desc: 'Ограждает открытые торцы проходов на втором ярусе: стойки, поручень, средний ригель и бортовая полоса, чтобы с настила ничего не упало.',
+    specs: () => [['Высота', '1 100 мм'], ['Ригели', 'поручень + средний'], ['Бортик', '150 мм'], ['Окраска', 'жёлтая, RAL 1023']] },
+  { key: 'gate', name: 'Калитка', opt: true, desc: 'Самозакрывающаяся калитка на выходе с лестницы на настил. Пружинные петли возвращают створку, и проём не остаётся открытым.',
+    specs: () => [['Ширина', `${mm((G.stairW || .8) - .02)} мм`], ['Высота', '1 000 мм'], ['Петли', 'пружинные'], ['Окраска', 'жёлтая, RAL 1023']] },
+  { key: 'perfo', name: 'Перфостенка', opt: true, desc: 'Перфорированные панели закрывают торцы рядов нижнего яруса. На них навешиваются крючки и полочки для инструмента и мелкого товара.',
+    specs: () => [['Отверстия', 'круглые, Ø 20 мм'], ['Шаг', '40 мм'], ['Высота', `${mm(state.H1 - .35)} мм`], ['Цвет', 'белый, RAL 9016']] },
+  { key: 'guard', name: 'Защита ряда', opt: true, desc: 'Две U-образные стойки и два ригеля на торце ряда. Принимают удар тележки или погрузчика на развороте и берегут раму.',
+    specs: () => [['Высота', '550 мм'], ['Ригели', '2 трубы 80 × 50 мм'], ['Крепление', 'анкеры М12'], ['Окраска', 'жёлтая, RAL 1023']] },
+  { key: 'baseplate', name: 'Подпятник', desc: 'Стальной подпятник под каждой стойкой распределяет нагрузку на пол и крепит раму к бетону анкерами. Неровности пола выбираются подкладными шайбами.',
+    specs: () => [['Размер', '150 × 130 × 6 мм'], ['Анкеры', '2 × М12'], ['Пол', 'бетон от B25'], ['Регулировка', 'шайбы 1–5 мм']] },
+];
+PARTS.forEach((p, i) => { p.n = i + 1; });
+const PART_BY = Object.fromEntries(PARTS.map(p => [p.key, p]));
+
+/* ---------- renderer / scene ---------- */
+const stageEl = $('#stage');
+let renderer;
+try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); }
+catch (e) { $('#nogl').style.display = 'grid'; $('#loading').remove(); throw e; }
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setClearColor(0x000000, 0);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+stageEl.prepend(renderer.domElement);
+const labelRenderer = new CSS2DRenderer({ element: $('#labels') });
+
+const scene = new THREE.Scene();
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), .04).texture;
+
+const camera = new THREE.PerspectiveCamera(36, 1, .03, 300);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = .08;
+controls.screenSpacePanning = true;
+controls.maxPolarAngle = Math.PI * .495;
+controls.minDistance = .3;
+controls.maxDistance = 60;
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0x4b4f56, .75));
+const sun = new THREE.DirectionalLight(0xffffff, 2.5);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+sun.shadow.bias = -.0003;
+sun.shadow.normalBias = .015;
+scene.add(sun, sun.target);
+const rim = new THREE.DirectionalLight(0xe4ecff, .9);
+rim.position.set(9, 7, -9);
+scene.add(rim);
+
+/* ---------- canvas textures (redrawn once the web font has loaded) ---------- */
+const ALL_TEX = [];
+function canvasTex(w, h, draw, { repeat = null, srgb = true } = {}) {
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  const t = new THREE.CanvasTexture(c);
+  if (srgb) t.colorSpace = THREE.SRGBColorSpace;
+  t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  if (repeat) { t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(repeat[0], repeat[1]); }
+  t.userData.redraw = () => { const g = c.getContext('2d'); g.clearRect(0, 0, w, h); draw(g, w, h); t.needsUpdate = true; };
+  t.userData.redraw();
+  ALL_TEX.push(t);
+  return t;
+}
+const FONT = 'Manrope, system-ui, sans-serif';
+function grain(g, w, h, n, seed, a, light = '255,255,255', dark = '50,52,56') {
+  const r = rng(seed);
+  for (let i = 0; i < n; i++) { g.fillStyle = `rgba(${r() < .5 ? light : dark},${r() * a})`; g.fillRect(r() * w, r() * h, 2, 2); }
+}
+
+/* upright face, as on the pallet rack: a column of narrow slots with a tapered bottom near each edge
+   and two stiffening folds; 2000 px/m, one 50 mm pitch per tile */
+const perfTex = canvasTex(180, 100, (g, w, h) => {
+  g.fillStyle = '#fff'; g.fillRect(0, 0, w, h);
+  for (const [x, a] of [[58, .16], [62, .06], [118, .06], [122, .16]]) { g.fillStyle = `rgba(0,0,0,${a})`; g.fillRect(x - 2, 0, 4, h); }   // folds
+  g.fillStyle = 'rgba(255,255,255,.5)'; g.fillRect(64, 0, 2, h); g.fillRect(114, 0, 2, h);
+  g.fillStyle = 'rgba(0,0,0,.1)'; g.fillRect(0, 0, 3, h); g.fillRect(w - 3, 0, 3, h);                                                   // folded edges
+  // slots are painted dark rather than cut out: the shadowed inside of the profile reads as a hole from any distance
+  for (const cx of [90 - SLOT_X * 2000, 90 + SLOT_X * 2000]) {
+    g.beginPath(); g.moveTo(cx - 5, 18); g.lineTo(cx + 5, 18); g.lineTo(cx + 5, 48); g.lineTo(cx + 2, 60); g.lineTo(cx - 2, 60); g.lineTo(cx - 5, 48); g.closePath();
+    g.fillStyle = '#16171a'; g.fill();
+    g.strokeStyle = 'rgba(255,255,255,.55)'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(cx - 5, 61); g.lineTo(cx + 5, 61); g.stroke();   // lit lower lip
+  }
+}, { repeat: [1, 100] });
+/* side flange: bolt holes for the bracing */
+const flangeTex = canvasTex(140, 100, (g, w, h) => {
+  g.fillStyle = '#fff'; g.fillRect(0, 0, w, h);
+  g.globalCompositeOperation = 'destination-out';
+  g.beginPath(); g.arc(70, 50, 6, 0, 7); g.fill();
+  g.globalCompositeOperation = 'source-over';
+}, { repeat: [1, 100] });
+
+/* shelf panel: thin galvanised sheet with rolled stiffening ribs along the depth */
+const lightDeckTex = canvasTex(256, 64, (g, w, h) => {
+  g.fillStyle = '#d3d7db'; g.fillRect(0, 0, w, h);
+  for (const x of [40, 88, 168, 216]) {
+    const gr = g.createLinearGradient(x - 6, 0, x + 6, 0); gr.addColorStop(0, '#9aa0a7'); gr.addColorStop(.5, '#f2f4f6'); gr.addColorStop(1, '#a3a9b0');
+    g.fillStyle = gr; g.fillRect(x - 6, 0, 12, h);
+  }
+  g.fillStyle = 'rgba(60,64,70,.35)'; g.fillRect(0, 0, 3, h); g.fillRect(w - 3, 0, 3, h);   // panel seams
+  const r = rng(61);
+  for (let i = 0; i < 300; i++) { g.fillStyle = `rgba(255,255,255,${r() * .12})`; g.fillRect(r() * w, r() * h, 3, 1); }
+}, { repeat: [1, 8] });
+
+/* mezzanine deck: galvanised plank with staggered anti-slip punchings, one 50 mm tile */
+const drawDeck = (g, w, h) => {
+  g.fillStyle = '#c4c9ce'; g.fillRect(0, 0, w, h);
+  grain(g, w, h, 160, 71, .08);
+  for (const [x, y] of [[16, 16], [48, 48], [48 - 64, 48], [16 + 64, 16], [16, 16 + 64], [48, 48 - 64]]) {
+    g.fillStyle = 'rgba(255,255,255,.75)'; g.beginPath(); g.arc(x - 1, y - 1, 9, 0, 7); g.fill();     // raised lip, lit side
+    g.fillStyle = 'rgba(70,74,80,.6)'; g.beginPath(); g.arc(x + 1, y + 1, 9, 0, 7); g.fill();        // raised lip, shadow side
+    g.fillStyle = '#a9afb5'; g.beginPath(); g.arc(x, y, 8, 0, 7); g.fill();
+    g.fillStyle = '#17181b'; g.beginPath(); g.arc(x, y, 5, 0, 7); g.fill();                        // hole
+  }
+};
+const deckTex = canvasTex(64, 64, drawDeck, { repeat: [1, 1] });
+const treadTex = canvasTex(64, 64, drawDeck, { repeat: [1, 1] });
+
+/* pegboard: white sheet with large round holes, Ø 20 mm on a 40 mm grid; one tile = one cell.
+   The texture keeps its mipmaps and the material uses alpha-to-coverage, so far away the holes blend
+   smoothly into the sheet instead of flickering into moiré ripples. */
+const PEG_PITCH = .04;
+const pegTex = canvasTex(128, 128, (g, w, h) => {
+  g.fillStyle = '#eceeec'; g.fillRect(0, 0, w, h);
+  grain(g, w, h, 160, 81, .05);
+  g.fillStyle = '#c3c7c4'; g.beginPath(); g.arc(64, 64, 35, 0, 7); g.fill();   // pressed rim
+  g.globalCompositeOperation = 'destination-out';
+  g.beginPath(); g.arc(64, 64, 32, 0, 7); g.fill();
+  g.globalCompositeOperation = 'source-over';
+}, { repeat: [1, 1] });
+
+const kraftTex = canvasTex(256, 256, (g, w, h) => {
+  g.fillStyle = '#c39459'; g.fillRect(0, 0, w, h);
+  grain(g, w, h, 1600, 23, .07, '255,235,200', '90,60,30');
+  g.fillStyle = 'rgba(255,230,190,.35)'; g.fillRect(108, 0, 40, h);                    // packing tape
+  g.fillStyle = 'rgba(255,255,255,.18)'; g.fillRect(112, 0, 6, h);
+  g.strokeStyle = '#9c7240'; g.lineWidth = 6; g.strokeRect(0, 0, w, h);             // box edges
+  g.fillStyle = '#f7f5f0'; g.fillRect(168, 178, 70, 50);                             // shipping label
+  const r = rng(5); g.fillStyle = '#222'; for (let i = 0; i < 18; i++) g.fillRect(174 + i * 3.4, 200, r() < .5 ? 1.4 : 2.4, 22);
+  g.fillRect(174, 184, 40, 4); g.fillRect(174, 191, 28, 3);
+  g.strokeStyle = '#4b3420'; g.lineWidth = 3;                                         // "this side up" arrows
+  for (const x of [22, 44]) { g.beginPath(); g.moveTo(x, 56); g.lineTo(x, 24); g.moveTo(x - 8, 34); g.lineTo(x, 24); g.lineTo(x + 8, 34); g.stroke(); }
+  g.beginPath(); g.moveTo(14, 62); g.lineTo(52, 62); g.stroke();
+});
+const whiteBoxTex = canvasTex(256, 256, (g, w, h) => {
+  g.fillStyle = '#eceae6'; g.fillRect(0, 0, w, h);
+  g.fillStyle = '#ff5a1f'; g.fillRect(0, h * .78, w, h * .12);
+  g.fillStyle = '#2a2c30'; g.font = `800 30px ${FONT}`; g.textBaseline = 'top'; g.fillText('CARGO', 22, 26);
+  g.fillStyle = '#fff'; g.fillRect(150, 112, 84, 54);
+  const r = rng(9); g.fillStyle = '#222'; for (let i = 0; i < 20; i++) g.fillRect(156 + i * 3.6, 132, r() < .5 ? 1.4 : 2.4, 26);
+  g.strokeStyle = '#c9c4bb'; g.lineWidth = 6; g.strokeRect(0, 0, w, h);
+});
+const concreteTex = canvasTex(1024, 1024, (g, w, h) => {
+  g.fillStyle = '#b8bbbf'; g.fillRect(0, 0, w, h);
+  const r = rng(31);
+  for (let i = 0; i < 70; i++) { g.fillStyle = `rgba(${r() < .5 ? '255,255,255' : '60,62,66'},${r() * .05})`; g.beginPath(); g.ellipse(r() * w, r() * h, 30 + r() * 120, 20 + r() * 80, r() * 3, 0, 7); g.fill(); }
+  grain(g, w, h, 16000, 32, .09);
+  g.fillStyle = 'rgba(60,62,66,.35)'; g.fillRect(0, 0, w, 3); g.fillRect(0, 0, 3, h);   // saw-cut joints
+}, { repeat: [10, 10] });
+const fadeTex = canvasTex(256, 256, (g, w, h) => {
+  const gr = g.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w / 2);
+  gr.addColorStop(0, '#fff'); gr.addColorStop(.24, '#fff'); gr.addColorStop(.62, '#000'); gr.addColorStop(1, '#000');
+  g.fillStyle = gr; g.fillRect(0, 0, w, h);
+}, { srgb: false });
+
+/* company logo: used in the panel and on the load signs */
+const LOGO = new Image();
+LOGO.src = document.getElementById('logo').src;
+const signTex = canvasTex(512, 440, (g, w, h) => {
+  g.fillStyle = '#fbfbfa'; g.beginPath(); g.roundRect(0, 0, w, h, 22); g.fill();
+  g.fillStyle = '#222222'; g.beginPath(); g.roundRect(0, 0, w, 96, [22, 22, 0, 0]); g.fill();
+  if (LOGO.complete && LOGO.naturalWidth) { const lh = 82, lw = lh * LOGO.naturalWidth / LOGO.naturalHeight; g.drawImage(LOGO, (w - lw) / 2, 7, lw, lh); }
+  g.fillStyle = '#ff5a1f'; g.fillRect(0, 96, w, 62);
+  g.fillStyle = '#fff'; g.font = `800 28px ${FONT}`; g.textBaseline = 'middle'; g.fillText('ТАБЛИЦА НАГРУЗОК', 92, 128);
+  g.beginPath(); g.moveTo(52, 106); g.lineTo(76, 150); g.lineTo(28, 150); g.closePath(); g.fill();
+  g.fillStyle = '#ff5a1f'; g.font = `800 28px ${FONT}`; g.textAlign = 'center'; g.fillText('!', 52, 135); g.textAlign = 'left';
+  const rows = [['На полку', `${SHELF_LOAD[state.B]} кг`], ['На настил', `${DECK_LOAD} кг/м²`], ['Пролёт балки', `${mm(state.B)} мм`], ['Отметка настила', `${mm(state.H1)} мм`]];
+  rows.forEach(([a, b], i) => {
+    const y = 196 + i * 50;
+    g.fillStyle = '#5b6068'; g.font = `600 24px ${FONT}`; g.fillText(a, 28, y);
+    g.fillStyle = '#16181b'; g.font = `800 26px ${FONT}`; g.textAlign = 'right'; g.fillText(b, w - 28, y); g.textAlign = 'left';
+    g.fillStyle = '#e3e4e6'; g.fillRect(28, y + 24, w - 56, 2);
+  });
+  g.fillStyle = '#8a8f96'; g.font = `600 18px ${FONT}`; g.fillText('Не превышать допустимую нагрузку', 28, h - 22);
+});
+LOGO.onload = () => signTex.userData.redraw();
+
+/* ---------- materials, registered per part so they can be highlighted or ghosted together ---------- */
+const CAT = {};
+function reg(key, m) {
+  (CAT[key] ||= { mats: [] }).mats.push(m);
+  m.userData.base = { opacity: m.opacity, transparent: m.transparent, depthWrite: m.depthWrite };
+  return m;
+}
+const std = (o) => new THREE.MeshStandardMaterial(o);
+const GALV = { color: 0xc6cbd1, metalness: .82, roughness: .33 };
+const ORANGE = { color: 0xf04a12, metalness: .2, roughness: .38 };      // RAL 2004 pure orange
+const YELLOW = { color: 0xf2c000, metalness: .25, roughness: .42 };     // RAL 1023 traffic yellow
+const M = {
+  web: reg('upright', std({ ...GALV, map: perfTex, alphaTest: .5, side: THREE.DoubleSide })),
+  flange: reg('upright', std({ ...GALV, map: flangeTex, alphaTest: .5, side: THREE.DoubleSide })),
+  lip: reg('upright', std(GALV)),
+  plate: reg('baseplate', std({ color: 0xa7adb4, metalness: .8, roughness: .42 })),
+  anchor: reg('baseplate', std({ color: 0x8b9198, metalness: .9, roughness: .3 })),
+  brace: reg('bracing', std({ ...GALV, color: 0xb8bec5 })),
+  bolt: reg('bracing', std({ color: 0x7c8289, metalness: .9, roughness: .28 })),
+  beam: reg('beam', std(ORANGE)),
+  conn: reg('connector', std({ color: 0xe0430f, metalness: .22, roughness: .4 })),
+  pin: reg('connector', std({ color: 0x2a2c30, metalness: .6, roughness: .35 })),
+  weld: reg('connector', std({ color: 0xa8340c, metalness: .3, roughness: .7 })),
+  shelf: reg('shelf', std({ map: lightDeckTex, metalness: .7, roughness: .3 })),
+  shelfEdge: reg('shelf', std({ color: 0xc4c9ce, metalness: .75, roughness: .32 })),
+  cross: reg('cross', std(ORANGE)),
+  crossPlate: reg('cross', std({ color: 0xe0430f, metalness: .22, roughness: .4 })),
+  crossBolt: reg('cross', std({ color: 0x2a2c30, metalness: .6, roughness: .35 })),
+  support: reg('support', std({ ...GALV, color: 0xbfc5cc })),
+  deck: reg('deck', std({ map: deckTex, metalness: .75, roughness: .34 })),
+  deckEdge: reg('deck', std({ color: 0xb3b9c0, metalness: .8, roughness: .35 })),
+  stringer: reg('stair', std({ ...GALV, color: 0xb8bec5 })),
+  tread: reg('stair', std({ map: treadTex, metalness: .75, roughness: .34 })),
+  treadEdge: reg('stair', std({ color: 0xb3b9c0, metalness: .8, roughness: .35 })),
+  stairRail: reg('stair', std(YELLOW)),
+  rail: reg('rail', std(YELLOW)),
+  railFoot: reg('rail', std({ color: 0x8b9198, metalness: .9, roughness: .3 })),
+  gate: reg('gate', std(YELLOW)),
+  hinge: reg('gate', std({ color: 0x2a2c30, metalness: .6, roughness: .35 })),
+  peg: reg('perfo', std({ map: pegTex, alphaToCoverage: true, side: THREE.DoubleSide, roughness: .55, metalness: .1 })),
+  pegEdge: reg('perfo', std({ color: 0xe6e8e6, roughness: .55, metalness: .1 })),
+  guard: reg('guard', std(YELLOW)),
+  guardBolt: reg('guard', std({ color: 0x8b9198, metalness: .9, roughness: .3 })),
+  kraft: reg('load', std({ map: kraftTex, roughness: .9 })),
+  white: reg('load', std({ map: whiteBoxTex, roughness: .85 })),
+  bin: reg('load', std({ color: 0x2f6fb5, roughness: .55 })),
+  binRim: reg('load', std({ color: 0x245a95, roughness: .55 })),
+  sign: reg('decor', std({ map: signTex, roughness: .55 })),
+  floor: reg('floor', std({ map: concreteTex, alphaMap: fadeTex, transparent: true, color: 0xa4a8ae, roughness: .86 })),
+  line: reg('floor', std({ color: 0xf5c21b, roughness: .6 })),
+};
+/* boxes whose top face carries the texture: BoxGeometry face order is +x, −x, +y, −y, +z, −z */
+const TOP = (top, edge) => [edge, edge, top, edge, edge, edge];
+const SIDE_X = (face, edge) => [face, face, edge, edge, edge, edge];
+const MB = { shelf: TOP(M.shelf, M.shelfEdge), deck: TOP(M.deck, M.deckEdge), tread: TOP(M.tread, M.treadEdge), peg: SIDE_X(M.peg, M.pegEdge) };
+
+/* floor: concrete that fades into the grey background */
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(70, 70), M.floor);
+floor.rotation.x = -HALF_PI; floor.receiveShadow = true; scene.add(floor);
+
+/* ---------- geometry helpers ---------- */
+const geoCache = new Map();
+function cached(key, make) { let g = geoCache.get(key); if (!g) { g = make(); geoCache.set(key, g); } return g; }
+const boxGeo = (w, h, d) => cached(`b${w.toFixed(4)},${h.toFixed(4)},${d.toFixed(4)}`, () => new THREE.BoxGeometry(w, h, d));
+const cylGeo = (r, h, seg = 16) => cached(`c${r},${h},${seg}`, () => new THREE.CylinderGeometry(r, r, h, seg));
+const planeGeo = (w, h) => cached(`p${w},${h}`, () => new THREE.PlaneGeometry(w, h));
+const UNIT = boxGeo(1, 1, 1);
+
+/* beam section as on the pallet rack: four rolled ribs on the face and a 15 mm step on the inner top edge
+   for the panels; the face is at u = 0 and bulges to u < 0 */
+function beamShape(bh) {
+  const s = new THREE.Shape(), ribs = [.2, .4, .6, .8].map(f => f * bh), rw = bh * .064;
+  s.moveTo(0, 0); s.lineTo(BD, 0); s.lineTo(BD, bh - .015); s.lineTo(BD - .012, bh - .015); s.lineTo(BD - .012, bh);
+  for (let v = bh; v >= -1e-6; v -= .002) {
+    let u = 0;
+    for (const r of ribs) { const d = Math.abs(v - r); if (d < rw) u -= .0045 * (.5 + .5 * Math.cos(d / rw * Math.PI)); }
+    s.lineTo(u, Math.max(0, v));
+  }
+  s.closePath();
+  return s;
+}
+/* shelf beam along X; sign +1 = front beam (face to +z, starts at x), −1 = back beam (face to −z, ends at x) */
+const beamGeo = (len, sign, bh) => cached(`beam${len.toFixed(4)},${sign},${bh}`, () => {
+  const g = new THREE.ExtrudeGeometry(beamShape(bh), { depth: len, bevelEnabled: false });
+  g.rotateY(sign * HALF_PI);
+  return g;
+});
+/* cross beam along Z, centred on x, from z to z + len */
+const crossGeo = (len) => cached(`cross${len.toFixed(4)}`, () => new THREE.ExtrudeGeometry(beamShape(DBH), { depth: len, bevelEnabled: false }).translate(-BD / 2, 0, 0));
+/* omega (hat) support profile along X, centred, flanges down on the cross beams */
+const hatGeo = (len) => cached(`hat${len.toFixed(4)}`, () => {
+  const s = new THREE.Shape();
+  const P = [[-.045, 0], [-.022, 0], [-.016, .057], [.016, .057], [.022, 0], [.045, 0], [.045, .003], [.025, .003], [.019, .06], [-.019, .06], [-.025, .003], [-.045, .003]];
+  s.moveTo(...P[0]); P.slice(1).forEach(p => s.lineTo(...p)); s.closePath();
+  return new THREE.ExtrudeGeometry(s, { depth: len, bevelEnabled: false }).rotateY(HALF_PI).translate(-len / 2, 0, 0);
+});
+
+/* ---------- instanced batches: every put() becomes one instance of a (part, geometry, material) batch ---------- */
+const rack = new THREE.Group(); scene.add(rack);
+const dims = new THREE.Group(); scene.add(dims);
+let batches = new Map(), counts = {};
+const inc = (k, n = 1) => { counts[k] = (counts[k] || 0) + n; };
+const matId = (m) => Array.isArray(m) ? m.map(x => x.id).join(',') : m.id;
+/* o: ex = offset in the exploded view, stage = assembly stage (−1 = always there), q = rotation, s = scale */
+function put(part, geo, mat, x, y, z, o = {}) {
+  const key = `${part}|${geo.uuid}|${matId(mat)}`;
+  let b = batches.get(key);
+  if (!b) batches.set(key, b = { part, geo, mat, items: [] });
+  b.items.push({ p: V(x, y, z), q: o.q || IDQ, s: o.s || ONE, ex: o.ex || ZERO, stage: o.stage ?? -1, jit: Math.random() });
+}
+/* bar from a to b; axis = the axis the bar's plane is normal to ('x' for frame bracing, 'z' for stair stringers) */
+const _m4 = new THREE.Matrix4();
+const AXIS = { x: V(1, 0, 0), z: V(0, 0, 1) };
+function member(part, a, b, w, t, mat, o = {}, axis = 'x') {
+  const d = new THREE.Vector3().subVectors(b, a), L = d.length(); d.normalize();
+  const side = AXIS[axis], up = new THREE.Vector3().crossVectors(side, d).normalize();
+  const q = new THREE.Quaternion().setFromRotationMatrix(_m4.makeBasis(d, up, side));
+  put(part, boxGeo(L, w, t), mat, (a.x + b.x) / 2, (a.y + b.y) / 2, (a.z + b.z) / 2, { ...o, q });
+}
+function finalize() {
+  for (const b of batches.values()) {
+    const im = new THREE.InstancedMesh(b.geo, b.mat, b.items.length);
+    im.castShadow = b.part !== 'floor'; im.receiveShadow = true;
+    im.frustumCulled = false;
+    im.userData = { part: b.part, items: b.items };
+    rack.add(im);
+  }
+}
+
+/* ---------- build the mezzanine from the current parameters ---------- */
+let ANCH = {};       // per part: focus point t, callout point m, explode offset ex, view direction and distance
+let pickables = [];
+
+function build() {
+  for (const o of [...rack.children]) { rack.remove(o); o.dispose(); }
+  batches = new Map(); counts = {};
+  const { R, S, L, B, D, A, H1 } = state;
+  const H = +(H1 + H2).toFixed(3);
+  const DY = H1 + .02;                                         // deck walking surface
+  const xs = [...Array(S + 1)].map((_, i) => -S * B / 2 + i * B);
+  const rowLen = S * B + UW;
+  const W = R * D + (R - 1) * A;
+  const zRow = [...Array(R)].map((_, r) => W / 2 - D / 2 - r * (D + A));          // row 0 at the front (+z)
+  const aisles = [...Array(R - 1)].map((_, a) => { const zTop = zRow[a] - D / 2, zBot = zRow[a + 1] + D / 2; return { zTop, zBot, zc: (zTop + zBot) / 2 }; });
+  /* shelf levels (beam tops): the lower tier evenly from 200 mm, the upper tier from the deck to just under the upright tops */
+  const lv1 = [...Array(L)].map((_, k) => .2 + k * (H1 - .2) / L);
+  const lv2 = [...Array(L)].map((_, k) => H1 + k * (H2 - .12) / (L - 1));
+  const levels = [...lv1, ...lv2];
+  const xOut = [xs[0] - UW / 2, xs[S] + UW / 2];             // outer faces of the end frames
+  G = { R, S, L, B, D, A, H1, H, DY, xs, rowLen, W, zRow, aisles, levels };
+  perfTex.repeat.set(1, (H - .006) / .05);
+  flangeTex.repeat.set(1, (H - .006) / .05);
+  signTex.userData.redraw();
+
+  /* ----- frames: uprights, base plates, bracing ----- */
+  const nSeg = Math.max(3, Math.round((H - .3) / .85));
+  const nodes = [...Array(nSeg + 1)].map((_, j) => .15 + j * (H - .3) / nSeg);
+  G.nSeg = nSeg;
+  for (const zc of zRow) for (const x of xs) {
+    for (const s of [1, -1]) {
+      const zf = zc + s * D / 2, hU = H - .006, yc = .006 + hU / 2;
+      const exU = V(0, .12, s * .3), exP = V(0, 0, s * .3);
+      put('upright', boxGeo(UW, hU, .002), M.web, x, yc, zf - s * .001, { ex: exU, stage: 1 });
+      for (const sx of [-1, 1]) {
+        put('upright', boxGeo(.002, hU, UD), M.flange, x + sx * (UW / 2 - .001), yc, zf - s * UD / 2, { ex: exU, stage: 1 });
+        put('upright', boxGeo(.022, hU, .002), M.lip, x + sx * (UW / 2 - .011), yc, zf - s * (UD - .001), { ex: exU, stage: 1 });
+      }
+      const zp = zf - s * UD / 2;
+      put('baseplate', boxGeo(.15, .006, .13), M.plate, x, .003, zp, { ex: exP, stage: 0 });
+      for (const sx of [-1, 1]) {
+        put('baseplate', cylGeo(.015, .002, 20), M.anchor, x + sx * .058, .007, zp, { ex: exP, stage: 0 });
+        put('baseplate', cylGeo(.011, .009, 6), M.anchor, x + sx * .058, .0125, zp, { ex: exP, stage: 0 });
+        put('baseplate', cylGeo(.0055, .03, 10), M.anchor, x + sx * .058, .02, zp, { ex: exP, stage: 0 });
+      }
+      inc('upright'); inc('baseplate');
+    }
+    const zi = D / 2 - .03, P = (side, y) => V(x, y, zc + side * zi), ob = { stage: 2 };
+    member('bracing', P(1, nodes[0]), P(-1, nodes[0]), .04, .028, M.brace, ob);
+    member('bracing', P(1, nodes[nSeg]), P(-1, nodes[nSeg]), .04, .028, M.brace, ob);
+    for (let j = 0; j < nSeg; j++) { const a = j % 2 ? -1 : 1; member('bracing', P(a, nodes[j]), P(-a, nodes[j + 1]), .04, .028, M.brace, ob); }
+    nodes.forEach((y, j) => {
+      const sides = j === 0 || j === nSeg ? [1, -1] : [j % 2 ? -1 : 1];
+      for (const s of sides) for (const sx of [-1, 1]) put('bracing', cylGeo(.009, .007, 6), M.bolt, x + sx * (UW / 2 + .0035), y, zc + s * zi, { q: RZ, stage: 2 });
+    });
+    inc('frame');
+  }
+
+  /* ----- shelf beams with connectors, shelf panels ----- */
+  const CH = SBH * 1.8, nHooks = Math.floor((CH - .04) / .05) + 1;
+  const bl = B - UW - .006;                                    // beam body between the upright faces
+  const nPan = Math.max(3, Math.round(bl / .45)), spw = (bl - .01) / nPan - .004, dd = D - .08;
+  G.shelfN = nPan;
+  for (const zc of zRow) for (let b = 0; b < S; b++) {
+    const xa = xs[b] + UW / 2 + .003, xb = xs[b + 1] - UW / 2 - .003;
+    for (const y of levels) {
+      for (const s of [1, -1]) {
+        const ex = V(0, 0, s * .6), zf = zc + s * D / 2, o = { ex, stage: 3 };
+        put('beam', beamGeo(bl, s, SBH), M.beam, s > 0 ? xa : xb, y - SBH, zf, o);
+        inc('beam');
+        /* connector as on the pallet rack: an angle bracket welded to the beam end, running from the beam top
+           down past its bottom; the narrow front leg lies on the upright over the slot column, hooks in the slots */
+        for (const [xu, e] of [[xs[b], 1], [xs[b + 1], -1]]) {
+          const yc = y - CH / 2;
+          put('connector', boxGeo(.022, CH, .004), M.conn, xu + e * .041, yc, zf + s * .002, o);
+          put('connector', boxGeo(.004, CH, BD - .004), M.conn, xu + e * .05, yc, zf - s * (BD / 2 - .002), o);
+          for (let r = 0; r < nHooks; r++) put('connector', boxGeo(.009, .02, .008), M.conn, xu + e * SLOT_X, y - .028 - r * .05, zf - s * .001, o);
+          for (const dy of [.035, CH - .05]) put('connector', cylGeo(.0035, .003, 10), M.pin, xu + e * .042, y - dy, zf + s * .0045, { ...o, q: RX });
+          put('connector', boxGeo(.006, SBH - .01, .004), M.weld, xu + e * .0545, y - SBH / 2, zf - s * .001, o);
+        }
+      }
+      for (let j = 0; j < nPan; j++) {
+        const px = xa + .005 + spw / 2 + j * (spw + .004);
+        put('shelf', boxGeo(spw, .017, dd), MB.shelf, px, y - .0065, zc, { ex: V(0, .25, 0), stage: 4 });
+      }
+      inc('shelfPanel', nPan); inc('level');
+    }
+  }
+  lightDeckTex.repeat.set(1, 8);
+
+  /* ----- deck over the aisles: cross beams on the uprights, omega supports on them, panels on top ----- */
+  const yCross = DY - DECK_T - .06 - DBH;                       // cross beam bottom
+  const exC = V(0, .3, 0), exSp = V(0, .6, 0), exD = V(0, 1.05, 0);
+  const deckSizes = new Map();                                  // panel width, mm → count (the end bays are a bit wider)
+  for (const al of aisles) {
+    const len = al.zTop - al.zBot - .012;
+    for (const x of xs) {
+      put('cross', crossGeo(len), M.cross, x, yCross, al.zBot + .006, { ex: exC, stage: 5 });
+      for (const [zp, e] of [[al.zBot + .003, 1], [al.zTop - .003, -1]]) {
+        put('cross', boxGeo(.05, DBH + .04, .006), M.crossPlate, x, yCross + DBH / 2, zp, { ex: exC, stage: 5 });
+        for (const bx of [-.014, .014]) for (const by of [-.07, .07]) put('cross', cylGeo(.006, .006, 6), M.crossBolt, x + bx, yCross + DBH / 2 + by, zp + e * .005, { ex: exC, stage: 5, q: RX });
+      }
+      inc('cross');
+    }
+    for (let b = 0; b < S; b++) {
+      const cx = (xs[b] + xs[b + 1]) / 2;
+      for (const zp of [al.zBot + .07, al.zc, al.zTop - .07]) put('support', hatGeo(B - .006), M.support, cx, yCross + DBH, zp, { ex: exSp, stage: 6 });
+      inc('support', 3);
+      /* panels across the aisle; the end bays reach out to the outer faces of the end frames */
+      const x0 = b === 0 ? xOut[0] : xs[b], x1 = b === S - 1 ? xOut[1] : xs[b + 1];
+      const n = Math.max(2, Math.round((x1 - x0) / .5)), pw = (x1 - x0 - .006 * n) / n;
+      for (let j = 0; j < n; j++) put('deck', boxGeo(pw, DECK_T, len), MB.deck, x0 + .003 + pw / 2 + j * (pw + .006), DY - DECK_T / 2, al.zc, { ex: exD, stage: 7 });
+      const key = Math.round(pw * 1000);
+      deckSizes.set(key, (deckSizes.get(key) || 0) + n);
+      inc('deckPanel', n);
+    }
+  }
+  G.deckSizes = [...deckSizes].sort((a, b) => a[0] - b[0]);
+  G.deckPw = G.deckSizes[0][0] / 1000;
+  deckTex.repeat.set(G.deckPw / .05, (A - .012) / .05);
+
+  /* ----- stair up to the front aisle at the left end, with handrails; gate at its head ----- */
+  const a0 = aisles[0];
+  const xTop = xOut[0] - .004;
+  const nR = Math.ceil(DY / .2), rise = DY / nR, go = .25, run = nR * go, xBot = xTop - run, slope = DY / run;
+  const sw = Math.min(.9, A - .16);
+  const exSt = V(-.9, 0, 0), oSt = { ex: exSt, stage: 8 };
+  Object.assign(G, { stairN: nR, rise, run, stairW: sw, stairAngle: Math.round(Math.atan(slope) * 180 / Math.PI) });
+  for (let i = 1; i < nR; i++) put('stair', boxGeo(go + .03, .04, sw), MB.tread, xTop - (nR - i) * go + go / 2 - .015, i * rise - .02, a0.zc, oSt);
+  treadTex.repeat.set((go + .03) / .05, sw / .05);
+  const drop = rise / 2 + .02;                                  // stringer axis through the tread centres
+  for (const s of [1, -1]) {
+    const z = a0.zc + s * (sw / 2 + .025);
+    member('stair', V(xBot + drop / slope, 0, z), V(xTop, DY - drop, z), .16, .05, M.stringer, oSt, 'z');
+    /* handrail: posts on the stringer, rail 900 mm above the pitch line, knee rail halfway */
+    const zr = z + s * .045, railY = (x) => (x - xBot) * slope + .9, foot = (x) => (x - xBot) * slope - drop + .08;
+    const xp = [xBot + .2, (xBot + xTop) / 2, xTop - .05];
+    for (const x of xp) { const h = railY(x) - foot(x); put('stair', boxGeo(.04, h, .04), M.stairRail, x, foot(x) + h / 2, zr, oSt); }
+    member('stair', V(xp[0] - .05, railY(xp[0] - .05), zr), V(xTop + .02, railY(xTop + .02), zr), .045, .045, M.stairRail, oSt, 'z');
+    member('stair', V(xp[0], railY(xp[0]) - .45, zr), V(xTop - .05, railY(xTop - .05) - .45, zr), .03, .03, M.stairRail, oSt, 'z');
+  }
+  inc('stair');
+
+  /* ----- railing on the open aisle ends of the deck, gate at the stair head ----- */
+  const exR = (e) => V(e * .5, 1.2, 0);
+  if (state.rail) {
+    for (const [ai, al] of aisles.entries()) for (const e of [-1, 1]) {
+      if (ai === 0 && e < 0) continue;                          // stair head
+      const xr = xOut[e < 0 ? 0 : 1] + e * .025, w = al.zTop - al.zBot, o = { ex: exR(e), stage: 9 };
+      const zs = [al.zBot + .04, al.zTop - .04];
+      if (w > 1.25) zs.push(al.zc);
+      for (const z of zs) {
+        put('rail', boxGeo(.04, 1.1, .04), M.rail, xr, DY + .55, z, o);
+        put('rail', boxGeo(.08, .006, .08), M.railFoot, xr - e * .02, DY + .003, z, o);
+      }
+      put('rail', boxGeo(.045, .045, w - .04), M.rail, xr, DY + 1.1, al.zc, o);
+      put('rail', boxGeo(.03, .03, w - .08), M.rail, xr, DY + .55, al.zc, o);
+      put('rail', boxGeo(.004, .15, w - .08), M.rail, xr - e * .022, DY + .075, al.zc, o);
+      inc('railSection'); inc('railLen', w);
+    }
+    /* self-closing gate across the stair head, hinged on the left stair post */
+    const xg = xTop + .02, z0 = a0.zc - sw / 2 + .01, z1 = a0.zc + sw / 2 - .01, gw = z1 - z0, og = { ex: V(-.5, 1.2, 0), stage: 9 };
+    for (const y of [DY + .15, DY + 1.0]) put('gate', boxGeo(.035, .035, gw), M.gate, xg, y, a0.zc, og);
+    for (const z of [z0 + .018, z1 - .018]) put('gate', boxGeo(.035, .885, .035), M.gate, xg, DY + .575, z, og);
+    const nb = Math.floor(gw / .12);
+    for (let i = 1; i < nb; i++) put('gate', boxGeo(.016, .82, .016), M.gate, xg, DY + .575, z0 + i * gw / nb, og);
+    for (const y of [DY + .3, DY + .85]) put('gate', cylGeo(.014, .07, 12), M.hinge, xg, y, z0 - .005, og);
+    inc('gate');
+  }
+
+  /* ----- pegboard on the row ends of the lower tier ----- */
+  const pegH = H1 - .35;
+  if (state.perfo) {
+    for (const zc of zRow) for (const e of [-1, 1]) {
+      put('perfo', boxGeo(.003, pegH, D), MB.peg, xOut[e < 0 ? 0 : 1] + e * .006, .25 + pegH / 2, zc, { ex: V(e * .7, 0, 0), stage: 9 });
+      inc('perfo');
+    }
+    pegTex.repeat.set(D / PEG_PITCH, pegH / PEG_PITCH);
+  }
+
+  /* ----- row-end protection: two yellow U posts and two rails in front of each row end ----- */
+  if (state.guards) {
+    for (const zc of zRow) for (const e of [-1, 1]) {
+      const xo = xOut[e < 0 ? 0 : 1] + e * .065, h = .55, o = { ex: V(e * 1.0, 0, 0), stage: 9 };
+      for (const s of [1, -1]) {
+        const zp = zc + s * (D / 2 - UD / 2);
+        put('guard', boxGeo(.006, h, .13), M.guard, xo, .008 + h / 2, zp, o);
+        for (const sz of [-1, 1]) put('guard', boxGeo(.05, h, .006), M.guard, xo - e * .025, .008 + h / 2, zp + sz * .065, o);
+        put('guard', boxGeo(.17, .008, .18), M.guard, xo - e * .02, .004, zp, o);
+        for (const sz of [-1, 1]) put('guard', cylGeo(.011, .01, 6), M.guardBolt, xo + e * .045, .013, zp + sz * .06, o);
+      }
+      for (const y of [.22, .45]) {
+        put('guard', boxGeo(.05, .08, D + .02), M.guard, xo + e * .028, y, zc, o);
+        for (const s of [1, -1]) put('guard', cylGeo(.009, .006, 6), M.guardBolt, xo + e * .056, y, zc + s * (D / 2 - UD / 2), { ...o, q: RZ });
+      }
+      inc('guard');
+    }
+  }
+
+  /* ----- load signs with the company logo on the front row ends ----- */
+  for (const e of [-1, 1]) {
+    const xsg = xOut[e < 0 ? 0 : 1] + e * .012;
+    put('decor', planeGeo(.34, .292), M.sign, xsg, 1.65, zRow[0], { q: qE(0, e * HALF_PI, 0), stage: 9 });
+  }
+
+  /* ----- floor markings along the front and the back ----- */
+  for (const s of [1, -1]) put('floor', planeGeo(rowLen + run + 3, .08), M.line, -run / 2, .003, s * (W / 2 + .6), { q: qE(-HALF_PI, 0, 0) });
+
+  /* ----- goods: cartons and plastic bins on the shelves ----- */
+  if (state.loads) {
+    const r = rng(12);
+    zRow.forEach((zc) => {
+      for (let b = 0; b < S; b++) {
+        const xa = xs[b] + UW / 2 + .003, xb = xs[b + 1] - UW / 2 - .003;
+        levels.forEach((y, li) => {
+          const next = levels[li + 1] ?? H + .6;
+          const room = Math.min(.48, next - y - SBH - .06);
+          if (room < .14 || r() < .1) return;
+          let x = xa + .04;
+          for (let n = 0; n < 12; n++) {
+            const v = r();
+            if (v < .25 && room > .22 && D - .1 > .44) {         // stacked plastic bin
+              if (x + .38 > xb - .03) break;
+              const z = zc + (r() - .5) * (D - .1 - .44);
+              put('load', UNIT, M.bin, x + .19, y + .002 + .1, z, { s: V(.38, .2, .44), stage: 10 });
+              put('load', UNIT, M.binRim, x + .19, y + .002 + .207, z, { s: V(.4, .014, .46), stage: 10 });
+              x += .38 + .03 + r() * .04;
+              continue;
+            }
+            const w = .26 + r() * .24, d = Math.min(D - .12, .28 + r() * .36), h = Math.min(room, .14 + r() * .3);
+            if (x + w > xb - .03) break;
+            if (r() < .2) { x += w * .7; continue; }
+            put('load', UNIT, v < .7 ? M.kraft : M.white, x + w / 2, y + .002 + h / 2, zc + (r() - .5) * (D - .12 - d), { s: V(w, h, d), stage: 10 });
+            x += w + .025 + r() * .05;
+          }
+        });
+      }
+    });
+  }
+
+  finalize();
+  buildDims();
+
+  /* ----- focus points for the camera and callouts (only for parts the configuration has) ----- */
+  const zc0 = zRow[0], zF = zc0 + D / 2, x1 = xs[1], cx0 = (xs[0] + xs[1]) / 2, yB = lv1[1];
+  ANCH = {
+    upright: { t: V(x1, H * .5, zF), m: V(x1, H * .78, zF + .02), ex: V(0, .12, .3), dir: V(-.45, .18, 1), dist: H * .8 + .8 },
+    bracing: { t: V(xs[S], H * .45, zc0), m: V(xs[S], H1 + .9, zc0 + .12), ex: ZERO, dir: V(1, .22, .3), dist: H * .75 + .8 },
+    beam: { t: V(cx0, yB - .05, zF), m: V(cx0 + .35, yB - .05, zF + .03), ex: V(0, 0, .6), dir: V(-.3, .3, 1), dist: 2.2 },
+    connector: { t: V(x1 + .04, yB - .09, zF), m: V(x1 + .041, yB - .15, zF + .01), ex: V(0, 0, .6), dir: V(-.35, .12, 1), dist: .7 },
+    shelf: { t: V(cx0, lv1[0] + .01, zc0), m: V(cx0 - .35, lv1[0] + .03, zc0 + .2), ex: V(0, .25, 0), dir: V(.15, 1, .75), dist: 1.9 },
+    cross: { t: V(x1, yCross + DBH / 2, a0.zc), m: V(x1 - .03, yCross + DBH / 2, a0.zc + A * .25), ex: exC, dir: V(-.55, -.3, .8), dist: 1.9 },
+    support: { t: V(cx0, yCross + DBH + .03, a0.zc), m: V(cx0 + .25, yCross + DBH + .03, a0.zc), ex: exSp, dir: V(-.45, -.35, .75), dist: 1.7 },
+    deck: { t: V(cx0, DY, a0.zc), m: V(cx0 + .3, DY + .02, a0.zc), ex: exD, dir: V(.1, 1, .6), dist: 2.8 },
+    stair: { t: V(xTop - run / 2, DY / 2, a0.zc), m: V(xTop - run * .55, DY * .55 + .15, a0.zc), ex: exSt, dir: V(-.55, .3, 1), dist: run + 2.4 },
+    baseplate: { t: V(x1, .02, zF - .035), m: V(x1 + .075, .03, zF - .035), ex: V(0, 0, .3), dir: V(-.3, .75, 1), dist: .75 },
+  };
+  if (state.rail) {
+    const xr = xOut[1] + .025;
+    ANCH.rail = { t: V(xr, DY + .6, a0.zc), m: V(xr, DY + 1.1, a0.zc - A * .2), ex: exR(1), dir: V(1, .35, .45), dist: 2.4 };
+    ANCH.gate = { t: V(xTop + .02, DY + .55, a0.zc), m: V(xTop + .02, DY + .9, a0.zc), ex: V(-.5, 1.2, 0), dir: V(-1, .45, .6), dist: 2.2 };
+  }
+  if (state.perfo) ANCH.perfo = { t: V(xOut[0], .25 + pegH / 2, zc0), m: V(xOut[0] - .02, .25 + pegH * .6, zc0 - .15), ex: V(-.7, 0, 0), dir: V(-1, .2, .5), dist: 2.6 };
+  if (state.guards) ANCH.guard = { t: V(xOut[1] + .07, .3, zc0), m: V(xOut[1] + .1, .5, zc0 + .2), ex: V(1, 0, 0), dir: V(1, .5, .55), dist: 1.9 };
+
+  /* shadow frustum around the whole structure */
+  const ext = Math.max(rowLen + run, W, H) / 2 + 3;
+  sun.position.set(-6 - run / 2, 13, 9); sun.target.position.set(-run / 2, 0, 0);
+  Object.assign(sun.shadow.camera, { left: -ext, right: ext, top: ext, bottom: -ext, near: 1, far: 60 });
+  sun.shadow.camera.updateProjectionMatrix();
+
+  pickables = rack.children.filter(o => PART_BY[o.userData.part]);
+  applyPositions();
+  refreshLook();
+  updateStats();
+}
+
+/* ---------- dimensions ---------- */
+function buildDims() {
+  for (const o of [...dims.children]) { dims.remove(o); o.geometry?.dispose(); }
+  const { xs, H, DY, rowLen, B, S, W, A, zRow, D } = G;
+  const mat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: .85, depthTest: false });
+  const seg = [];
+  const tag = (text, p) => { const el = document.createElement('div'); el.className = 'dim'; el.textContent = text; const o = new CSS2DObject(el); o.position.copy(p); dims.add(o); };
+  const dim = (a, b, tick, text) => {
+    seg.push(a, b);
+    for (const p of [a, b]) seg.push(p.clone().addScaledVector(tick, -.07), p.clone().addScaledVector(tick, .07));
+    tag(text, a.clone().lerp(b, .5));
+  };
+  const xr = xs[S] + .5, zf = W / 2 + .3;
+  dim(V(xr, 0, zf), V(xr, H, zf), V(1, 0, 0), `${mm(H)} мм`);
+  dim(V(xr + .45, 0, zf), V(xr + .45, DY, zf), V(1, 0, 0), `настил ${mm(DY - .02)} мм`);
+  dim(V(xs[0] + UW / 2, H + .3, zf - .3), V(xs[1] - UW / 2, H + .3, zf - .3), V(0, 1, 0), `${mm(B)} мм`);
+  dim(V(xs[0] - UW / 2, H + .65, zf - .3), V(xs[S] + UW / 2, H + .65, zf - .3), V(0, 1, 0), `${mm(rowLen)} мм`);
+  dim(V(xs[S] + .3, H + .3, -W / 2), V(xs[S] + .3, H + .3, W / 2), V(0, 1, 0), `${mm(W)} мм`);
+  const zA = zRow[0] - D / 2;
+  dim(V(xs[S] + .3, G.DY + .05, zA - A), V(xs[S] + .3, G.DY + .05, zA), V(0, 1, 0), `проход ${mm(A)}`);
+  const lines = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(seg), mat);
+  lines.renderOrder = 10;
+  dims.add(lines);
+  dimsShown = null;
+}
+let dimsShown = null;
+function showDims(on) {
+  if (on === dimsShown) return;
+  dimsShown = on;
+  for (const o of dims.children) o.visible = on;              // CSS2D labels ignore their parent's visibility
+}
+
+/* ---------- highlight / isolate ---------- */
+let hoverKey = null, selKey = null;
+function setGhost(m, on, op) {
+  const b = m.userData.base, wantT = on || b.transparent;
+  if (m.transparent !== wantT) { m.transparent = wantT; m.needsUpdate = true; }
+  m.opacity = on ? Math.min(b.opacity, op) : b.opacity;
+  m.depthWrite = on ? false : b.depthWrite;
+}
+/* parts that stay half-visible around the selected one, so it doesn't float in the air */
+const CONTEXT = {
+  upright: ['bracing', 'baseplate'], bracing: ['upright'], beam: ['upright', 'connector'], connector: ['upright', 'beam'],
+  shelf: ['beam'], cross: ['upright', 'support'], support: ['cross'], deck: ['support', 'cross'], stair: ['deck'],
+  rail: ['deck'], gate: ['stair', 'deck'], perfo: ['upright'], guard: ['upright', 'baseplate'], baseplate: ['upright'],
+};
+function refreshLook(op = .07) {
+  for (const [k, c] of Object.entries(CAT)) {
+    if (k === 'floor') continue;
+    const ghost = !!selKey && k !== selKey, ctx = ghost && CONTEXT[selKey]?.includes(k);
+    for (const m of c.mats) setGhost(m, ghost, ctx ? .3 : op);
+  }
+  for (const o of rack.children) o.castShadow = o.userData.part !== 'floor' && (!selKey || o.userData.part === selKey);
+}
+/* a part is offered only when the current configuration has it */
+const partVisible = (k) => !!ANCH[k];
+
+/* ---------- explode + assembly animation, applied per instance ---------- */
+let explodeK = 0;
+const asm = { t: 99, playing: false };
+const STAGES = 11, STAGE_DUR = .42, ITEM_DUR = .5;
+const easeOut = t => 1 - Math.pow(1 - t, 3);
+const _p = new THREE.Vector3(), _s = new THREE.Vector3(), _mx = new THREE.Matrix4();
+function applyPositions() {
+  for (const im of rack.children) {
+    const { part, items } = im.userData;
+    if (part === 'load') im.visible = explodeK < .03;
+    for (let i = 0; i < items.length; i++) {
+      const it = items[i];
+      let p = 1;
+      if (asm.t < 98 && it.stage >= 0) p = Math.min(1, Math.max(0, (asm.t - (it.stage * STAGE_DUR + it.jit * .35)) / ITEM_DUR));
+      _p.copy(it.p).addScaledVector(it.ex, explodeK);
+      _p.y += (1 - easeOut(p)) * 1.2;
+      _s.copy(it.s); if (p <= 0) _s.setScalar(1e-5);
+      im.setMatrixAt(i, _mx.compose(_p, it.q, _s));
+    }
+    im.instanceMatrix.needsUpdate = true;
+    im.boundingSphere = null; im.boundingBox = null;          // recomputed lazily for picking
+  }
+}
+function playAssembly() {
+  stopTour(); select(null, false);
+  if (state.explode) { state.explode = false; explodeK = 0; $('[data-t="explode"]').setAttribute('aria-pressed', 'false'); }
+  asm.t = 0; asm.t0 = performance.now(); asm.playing = true;
+  applyPositions();
+  fly(overview(), 700);
+}
+
+/* ---------- camera ---------- */
+const barH = () => stageEl.clientWidth > 1180 ? $('#bar').offsetHeight : 0;
+function overview() {
+  // fit the structure, stair included, into the part of the stage not covered by the side panels and the bar
+  const w = stageEl.clientWidth, h = stageEl.clientHeight, wide = w > 1180;
+  const freeW = wide ? (w - 680) / w : 1, freeH = wide ? (h - barH() - 40) / h : 1;
+  const cx = -G.run / 2;
+  const t = V(cx, G.H * .44 - (wide ? (barH() + 40) / h * G.H * .35 : 0), 0);
+  const k = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+  const extra = state.explode ? 1.4 : 0;
+  const span = (G.rowLen + G.run) * .86 + G.W * .5;
+  const dist = Math.max((G.H + 1.2 + extra) / (k * freeH), (span + .8 + extra) / (k * camera.aspect * freeW)) * 1.02;
+  return { t, p: t.clone().addScaledVector(V(-.62, .42, 1).normalize(), dist) };
+}
+function focus(key) {
+  const a = ANCH[key];
+  const t = a.t.clone().addScaledVector(a.ex, explodeK);
+  return { t, p: t.clone().addScaledVector(a.dir.clone().normalize(), a.dist) };
+}
+let tween = null;
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function fly(v, dur = 1100) {
+  tween = { t0: performance.now(), dur: reduceMotion ? 1 : dur, p0: camera.position.clone(), q0: controls.target.clone(), p1: v.p.clone(), q1: v.t.clone() };
+}
+
+/* ---------- UI: list, callouts, thumbnails, detail ---------- */
+const MARK = {}, THUMB = {};
+$('#parts').innerHTML = PARTS.map(p => `<li><button data-key="${p.key}"><span class="num">${p.n}</span>${p.name}${p.opt ? '<span class="opt">опция</span>' : ''}</button></li>`).join('');
+$('#thumbs').innerHTML = PARTS.map(p => `<button class="th" data-key="${p.key}" aria-label="${p.n}. ${p.name}"><img alt=""><span class="num">${p.n}</span><span class="cap">${p.name}</span></button>`).join('');
+for (const p of PARTS) {
+  THUMB[p.key] = document.querySelector(`.th[data-key="${p.key}"] img`);
+  const el = document.createElement('div');
+  el.className = 'pin'; el.dataset.key = p.key;
+  el.innerHTML = `${p.n}<span class="nm">${p.name}</span>`;
+  const o = new CSS2DObject(el); scene.add(o); MARK[p.key] = o;
+}
+const detail = $('#detail');
+function renderCard() {
+  const p = PART_BY[hoverKey || selKey];
+  if (!p) {
+    detail.innerHTML = `<div class="empty"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 20 7.2v9.6L12 21.2 4 16.8V7.2z"/><path d="M4 7.2 12 11.6l8-4.4M12 11.6v9.6"/></svg><p>Выберите элемент в списке, на модели или на миниатюре — покажем его назначение и характеристики.</p></div>`;
+    return;
+  }
+  detail.innerHTML = `<div class="dh"><span class="num">${p.n}</span><h3>${p.name}</h3>${p.opt ? '<span class="badge">Опция</span>' : ''}</div>
+    <p>${p.desc}</p><dl>${p.specs().map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join('')}</dl>`;
+}
+function syncUI() {
+  document.querySelectorAll('[data-key]').forEach(el => {
+    el.classList.toggle('on', el.dataset.key === selKey);
+    el.classList.toggle('hov', el.dataset.key === hoverKey);
+    if (!el.classList.contains('pin')) el.classList.toggle('off', !partVisible(el.dataset.key));
+  });
+  renderCard();
+}
+function setHover(k) { if (k === hoverKey) return; hoverKey = k; syncUI(); }
+function select(k, flyTo = true) {
+  if (k && !partVisible(k)) return;
+  selKey = k;
+  refreshLook(); syncUI();
+  if (k && flyTo) fly(focus(k));
+}
+/* delegated, so the 3D callouts (added to the DOM by the label renderer later) react too */
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-key]'); if (!el) return;
+  stopTour();
+  select(el.dataset.key === selKey ? null : el.dataset.key);
+  if (!selKey) fly(overview());
+});
+document.addEventListener('pointerover', e => { const el = e.target.closest?.('[data-key]'); if (el) setHover(el.dataset.key); });
+document.addEventListener('pointerout', e => { const el = e.target.closest?.('[data-key]'); if (el && !el.contains(e.relatedTarget)) setHover(null); });
+
+function updateStats() {
+  $('#stats').innerHTML = [
+    [`${mm(G.H)} мм`, 'Высота'],
+    [`${(G.rowLen * G.W).toFixed(1).replace('.', ',')} м²`, 'Площадь под мезонином'],
+    [counts.level, 'Полок'],
+    [`${((G.R - 1) * G.A * G.rowLen).toFixed(1).replace('.', ',')} м²`, 'Настил'],
+  ].map(([v, l]) => `<div class="stat"><b>${v}</b><span>${l}</span></div>`).join('');
+  for (const k of ['R', 'S', 'L']) $(`#v-${k}`).textContent = state[k];
+  document.querySelectorAll('.step button').forEach(b => {
+    const [lo, hi] = LIMITS[b.dataset.k], v = state[b.dataset.k] + +b.dataset.d;
+    b.disabled = v < lo || v > hi;
+  });
+}
+
+/* parameters bar */
+let thumbTimer = null;
+const scheduleThumbs = () => { clearTimeout(thumbTimer); thumbTimer = setTimeout(makeThumbs, 350); };
+function rebuild(refit = true) {
+  asm.t = 99; asm.playing = false;
+  build();
+  if (selKey && !partVisible(selKey)) select(null, false);
+  syncUI();
+  if (selKey) fly(focus(selKey)); else if (refit) fly(overview());
+  scheduleThumbs();
+}
+document.querySelectorAll('.step button').forEach(b => b.addEventListener('click', () => {
+  const k = b.dataset.k, [lo, hi] = LIMITS[k];
+  state[k] = Math.min(hi, Math.max(lo, state[k] + +b.dataset.d));
+  rebuild();
+}));
+[['#sB', 'B'], ['#sD', 'D'], ['#sA', 'A'], ['#sH', 'H1']].forEach(([id, k]) => $(id).addEventListener('change', e => { state[k] = +e.target.value; rebuild(); }));
+document.querySelectorAll('.tg[data-t]').forEach(b => b.addEventListener('click', () => {
+  const k = b.dataset.t; state[k] = !state[k]; b.setAttribute('aria-pressed', state[k]);
+  if (['loads', 'rail', 'perfo', 'guards'].includes(k)) rebuild(false);
+  if (k === 'explode') {
+    if (asm.playing) { asm.playing = false; asm.t = 99; }
+    if (selKey) setTimeout(() => fly(focus(selKey), 900), 450); else fly(overview(), 900);
+  }
+}));
+$('#asm').addEventListener('click', playAssembly);
+$('#reset').addEventListener('click', () => { stopTour(); select(null, false); fly(overview()); });
+addEventListener('keydown', e => { if (e.key === 'Escape') { closeBom(); stopTour(); select(null, false); } });
+
+/* bill of materials */
+const plural = (n, a, b, c) => { const m10 = n % 10, m100 = n % 100; return m10 === 1 && m100 !== 11 ? a : m10 >= 2 && m10 <= 4 && (m100 < 10 || m100 >= 20) ? b : c; };
+function bomRows() {
+  const c = counts;
+  const out = [
+    ['Рама в сборе', `${mm(G.H)} × ${mm(G.D)} мм`, c.frame],
+    ['— стойка', `${mm(G.H)} мм, 90 × 70 мм`, c.upright],
+    ['— горизонтальная связь', `${mm(G.D - .06)} мм`, c.frame * 2],
+    ['— раскос', 'С 40 × 30 мм', c.frame * G.nSeg],
+    ['Подпятник с анкерами', '150 × 130 мм', c.baseplate],
+    ['Балка полки с зацепами', `${mm(G.B)} мм, высота 100 мм`, c.beam],
+    ['Панель полки', `${mm((G.B - UW - .016) / G.shelfN - .004)} × ${mm(G.D - .08)} мм`, c.shelfPanel],
+    ['Балка поперечная с фланцами', `${mm(G.A)} мм, высота 140 мм`, c.cross],
+    ['Опорный профиль', `Ω, ${mm(G.B)} мм`, c.support],
+    ...G.deckSizes.map(([w, n], i) => [i ? 'Панель настила торцевая' : 'Панель настила', `${fmt(w)} × ${mm(G.A - .012)} мм`, n]),
+    ['Лестница', `ширина ${mm(G.stairW)} мм, ${G.stairN - 1} ступ., подъём ${mm(G.DY - .02)} мм`, c.stair],
+  ];
+  if (c.railSection) out.push(['Секция ограждения', `${(c.railLen).toFixed(1).replace('.', ',')} м в сумме, высота 1 100 мм`, c.railSection]);
+  if (c.gate) out.push(['Калитка самозакрывающаяся', `${mm(G.stairW - .02)} × 1 000 мм`, c.gate]);
+  if (c.perfo) out.push(['Перфостенка', `${mm(G.D)} × ${mm(G.H1 - .35)} мм`, c.perfo]);
+  if (c.guard) out.push(['Защита ряда', `${mm(G.D + .02)} мм, высота 550 мм`, c.guard]);
+  out.push(['Комплект крепежа', 'болты М10, анкеры М12', 1]);
+  return out;
+}
+function openBom() {
+  $('#bomSub').textContent = `${G.R} ${plural(G.R, 'ряд', 'ряда', 'рядов')} × ${G.S} ${plural(G.S, 'секция', 'секции', 'секций')}, ${G.L} ${plural(G.L, 'полка', 'полки', 'полок')} в ярусе · длина ${mm(G.rowLen)} мм, ширина ${mm(G.W)} мм, высота ${mm(G.H)} мм, отметка настила ${mm(G.H1)} мм`;
+  $('#bomBody').innerHTML = bomRows().map(([a, b, q]) => `<tr><td>${a}</td><td class="sz">${b}</td><td class="q">${q} шт.</td></tr>`).join('');
+  $('#modal').classList.add('open');
+  $('#bomOk').focus();
+}
+function closeBom() { $('#modal').classList.remove('open'); }
+$('#bom').addEventListener('click', () => { stopTour(); openBom(); });
+$('#bomX').onclick = $('#bomOk').onclick = closeBom;
+$('#modal').addEventListener('click', e => { if (e.target.id === 'modal') closeBom(); });
+let toastT;
+function toast(t) { const el = $('#toast'); el.textContent = t; el.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('show'), 1800); }
+$('#bomCopy').addEventListener('click', async () => {
+  const txt = [$('#bomSub').textContent, ...bomRows().map(([a, b, q]) => `${a}\t${b}\t${q} шт.`)].join('\n');
+  try { await navigator.clipboard.writeText(txt); toast('Комплектация скопирована'); } catch { toast('Не удалось скопировать'); }
+});
+
+/* guided tour through all visible parts */
+let tourTimer = null, tourI = 0;
+const exploreBtn = $('#explore');
+function stopTour() {
+  if (!tourTimer) return;
+  clearInterval(tourTimer); tourTimer = null;
+  exploreBtn.setAttribute('aria-pressed', 'false'); exploreBtn.querySelector('span').textContent = 'Исследовать модель';
+}
+exploreBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  if (tourTimer) { stopTour(); return; }
+  const list = () => PARTS.filter(p => partVisible(p.key));
+  const step = () => { const l = list(); select(l[tourI++ % l.length].key); };
+  tourI = 0; step(); tourTimer = setInterval(step, 3600);
+  exploreBtn.setAttribute('aria-pressed', 'true'); exploreBtn.querySelector('span').textContent = 'Остановить обзор';
+});
+
+/* ---------- picking on the model ---------- */
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(), tip = $('#tip');
+function pickAt(e) {
+  const r = renderer.domElement.getBoundingClientRect();
+  ndc.set((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  ray.setFromCamera(ndc, camera);
+  for (const h of ray.intersectObjects(pickables, false)) if (h.object.visible) return h.object.userData.part;
+  return null;
+}
+{
+  const el = renderer.domElement; let down = null, pending = null;
+  el.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
+  el.addEventListener('pointerup', e => {
+    if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 5) return;
+    stopTour();
+    const k = pickAt(e);
+    if (k) select(k); else if (selKey) select(null, false);
+  });
+  el.addEventListener('pointermove', e => {
+    if (e.buttons || e.pointerType === 'touch') return;
+    pending = e;
+    requestAnimationFrame(() => {
+      if (!pending) return;
+      const ev = pending; pending = null;
+      const k = pickAt(ev);
+      setHover(k);
+      el.style.cursor = k ? 'pointer' : '';
+      if (k) {
+        const r = stageEl.getBoundingClientRect(), p = PART_BY[k];
+        tip.innerHTML = `<span class="num">${p.n}</span>${p.name}`;
+        tip.style.display = 'flex'; tip.style.left = (ev.clientX - r.left + 16) + 'px'; tip.style.top = (ev.clientY - r.top + 12) + 'px';
+      } else tip.style.display = 'none';
+    });
+  });
+  el.addEventListener('pointerleave', () => { tip.style.display = 'none'; setHover(null); });
+}
+controls.addEventListener('start', () => { tween = null; stopTour(); });
+
+/* ---------- thumbnails: close-ups of each part rendered from the live model ---------- */
+const thumbCanvas = document.createElement('canvas'); thumbCanvas.width = 400; thumbCanvas.height = 280;
+const tctx = thumbCanvas.getContext('2d');
+const thumbCam = new THREE.PerspectiveCamera(36, 400 / 280, .02, 150);
+function makeThumbs() {
+  if (asm.playing) { scheduleThumbs(); return; }
+  const el = renderer.domElement, pr = renderer.getPixelRatio(), size = renderer.getSize(new THREE.Vector2());
+  const tw = Math.min(400, size.x), th = Math.round(tw * .7);
+  if (size.y < th || tw < 100) return;
+  const keepSel = selKey, keepHover = hoverKey, keepEx = explodeK;
+  hoverKey = null; showDims(false);
+  explodeK = 0; applyPositions();
+  for (const o of Object.values(MARK)) o.visible = false;
+  const floorItems = [floor, ...rack.children.filter(o => o.userData.part === 'floor')];   // the part alone on the dark tile
+  floorItems.forEach(o => { o.visible = false; });
+  for (const c of Object.values(CAT)) for (const m of c.mats) m.emissiveIntensity = 0;
+  thumbCam.aspect = tw / th; thumbCam.updateProjectionMatrix();
+  renderer.setScissorTest(true);
+  for (const p of PARTS) {
+    if (!partVisible(p.key)) { THUMB[p.key].classList.remove('ready'); continue; }
+    selKey = p.key; refreshLook(.05);
+    const v = focus(p.key); thumbCam.position.copy(v.p); thumbCam.lookAt(v.t);
+    renderer.setViewport(0, 0, tw, th); renderer.setScissor(0, 0, tw, th);
+    renderer.clear(); renderer.render(scene, thumbCam);
+    tctx.clearRect(0, 0, 400, 280);
+    tctx.drawImage(el, 0, el.height - th * pr, tw * pr, th * pr, 0, 0, 400, 280);
+    THUMB[p.key].src = thumbCanvas.toDataURL('image/png');
+    THUMB[p.key].classList.add('ready');
+  }
+  renderer.setScissorTest(false); renderer.setViewport(0, 0, size.x, size.y);
+  floorItems.forEach(o => { o.visible = true; });
+  selKey = keepSel; hoverKey = keepHover; explodeK = keepEx;
+  applyPositions(); refreshLook();
+  dimsShown = null;
+  renderer.render(scene, camera);
+}
+
+/* ---------- loop ---------- */
+function resize() {
+  const w = stageEl.clientWidth, h = stageEl.clientHeight;
+  renderer.setSize(w, h); labelRenderer.setSize(w, h);
+  camera.aspect = w / h; camera.updateProjectionMatrix();
+  document.documentElement.style.setProperty('--bar-h', $('#bar').offsetHeight + 'px');
+}
+new ResizeObserver(resize).observe(stageEl);
+resize();
+
+function frame(now) {
+  requestAnimationFrame(frame);
+  if (tween) {
+    const k = Math.min(1, (now - tween.t0) / tween.dur), e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+    camera.position.lerpVectors(tween.p0, tween.p1, e); controls.target.lerpVectors(tween.q0, tween.q1, e);
+    if (k >= 1) tween = null;
+  }
+  controls.update();
+  let moved = false;
+  const goal = state.explode ? 1 : 0;
+  if (explodeK !== goal) {
+    explodeK += (goal - explodeK) * (reduceMotion ? 1 : .09);
+    if (Math.abs(goal - explodeK) < .002) explodeK = goal;
+    moved = true;
+  }
+  if (asm.playing) {
+    asm.t = (now - asm.t0) / 1000; moved = true;
+    if (asm.t > STAGES * STAGE_DUR + ITEM_DUR + .4) { asm.t = 99; asm.playing = false; scheduleThumbs(); }
+  }
+  if (moved) applyPositions();
+  showDims(state.dims && explodeK < .03 && !asm.playing);
+  const pulse = .3 + .18 * Math.sin(now * .006);
+  for (const [k, c] of Object.entries(CAT)) {
+    const on = k === hoverKey || k === selKey;
+    for (const m of c.mats) { if (on) m.emissive.setHex(0xff5a1f); m.emissiveIntensity = on ? (k === hoverKey ? .5 : pulse) : 0; }
+  }
+  for (const p of PARTS) {
+    const mk = MARK[p.key], a = ANCH[p.key], vis = !!a && !asm.playing;
+    mk.visible = vis;
+    if (vis) mk.position.copy(a.m).addScaledVector(a.ex, explodeK);
+  }
+  renderer.render(scene, camera);
+  labelRenderer.render(scene, camera);
+}
+
+build();
+const ov = overview(); camera.position.copy(ov.p); controls.target.copy(ov.t);
+window.MZ = { camera, controls, state, get G() { return G; }, get counts() { return counts; }, select, overview, fly, rebuild, bomRows };   // console hook for checks
+syncUI();
+requestAnimationFrame(frame);
+
+/* lettering on the canvases needs the web font */
+Promise.race([
+  Promise.all([document.fonts.load('800 30px Manrope'), document.fonts.load('600 24px Manrope')]),
+  new Promise(r => setTimeout(r, 2500)),
+]).catch(() => {}).then(() => {
+  for (const t of ALL_TEX) t.userData.redraw();
+  resize();
+  const v = overview(); camera.position.copy(v.p); controls.target.copy(v.t);
+  $('#loading').classList.add('done');
+  setTimeout(() => $('#loading').remove(), 500);
+  setTimeout(makeThumbs, 120);
+  setTimeout(playAssembly, 400);   // first visit: show the assembly once
+});
+})();
+</script>
+</body>
+</html>
+

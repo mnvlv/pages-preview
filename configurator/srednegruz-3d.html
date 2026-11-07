@@ -1,0 +1,1101 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3D-модель складского стеллажа</title>
+<meta name="description" content="Интерактивная 3D-модель среднегрузового полочного стеллажа: стойки, раскосы, грузовые и поперечные балки, зацепы, полки, разделители, анимация сборки и комплектация.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Layout: full-bleed 3D stage on a grey studio gradient, parts list on the left,
+   live thumbnails + detail card on the right, parameters bar at the bottom. */
+:root {
+  --accent: #ff5a1f;
+  --accent-2: #ff7d4a;
+  --bg-1: #9a9fa6;
+  --bg-2: #6c7077;
+  --bg-3: #43464c;
+  --panel: rgba(22, 24, 28, .84);
+  --panel-2: rgba(255, 255, 255, .05);
+  --line: rgba(255, 255, 255, .1);
+  --fg: #f3f4f6;
+  --muted: #a7acb3;
+  --font: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bar-h: 64px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg-3); color: var(--fg); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+button, select { font-family: inherit; }
+
+.rk {
+  position: relative; height: 100vh; min-height: 700px; overflow: hidden;
+  background: radial-gradient(120% 95% at 50% 40%, var(--bg-1) 0%, var(--bg-2) 52%, var(--bg-3) 100%);
+}
+.stage { position: absolute; inset: 0; }
+.stage canvas { display: block; touch-action: none; }
+#labels { position: absolute; inset: 0; pointer-events: none; }
+
+/* side panels */
+.side { position: absolute; top: 24px; bottom: calc(var(--bar-h) + 32px); width: 304px; display: flex; flex-direction: column; gap: 12px; z-index: 2; }
+.left { left: 24px; }
+.right { right: 24px; overflow: auto; scrollbar-width: none; bottom: calc(var(--bar-h) + 78px); }
+.right::-webkit-scrollbar { display: none; }
+.card {
+  background: var(--panel); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--line); border-radius: 16px; padding: 18px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .25);
+}
+.intro { overflow: auto; scrollbar-width: thin; max-height: 100%; display: flex; flex-direction: column; gap: 14px; }
+.brand { display: block; width: 100%; height: auto; border-radius: 10px; margin: -4px 0 2px; }
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+h2 { margin: -6px 0 0; font-size: 21px; line-height: 1.15; font-weight: 800; text-transform: uppercase; letter-spacing: .01em; }
+h2 span { color: var(--accent); }
+.lead { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+
+.parts { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.parts button {
+  width: 100%; display: flex; align-items: center; gap: 10px; padding: 7px 8px; border: 0; border-radius: 9px;
+  background: transparent; color: var(--fg); font-size: 13px; font-weight: 600; text-align: left; cursor: pointer;
+  transition: background .15s;
+}
+.parts button:hover, .parts button.hov { background: var(--panel-2); }
+.parts button.on { background: rgba(255, 90, 31, .16); }
+.parts .opt { margin-left: auto; font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.num {
+  flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--accent); color: #fff; font-size: 11px; font-weight: 800;
+}
+.parts button.off { opacity: .45; }
+
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.stat { background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; padding: 9px 10px; }
+.stat b { display: block; font-size: 15px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 11px; color: var(--muted); }
+
+.explore {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 11px 14px;
+  border: 1px solid rgba(255, 255, 255, .28); border-radius: 10px; background: transparent; color: var(--fg);
+  font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; cursor: pointer;
+}
+.explore:hover { border-color: var(--accent); }
+.explore[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); }
+
+/* thumbnails */
+.thumbs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.th {
+  position: relative; aspect-ratio: 10 / 7; padding: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; cursor: pointer;
+  background: radial-gradient(110% 100% at 50% 35%, #5d6168 0%, #3c3f45 70%, #2e3035 100%);
+}
+.th img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s; }
+.th img.ready { opacity: 1; }
+.th .num { position: absolute; top: 6px; left: 6px; width: 20px; height: 20px; font-size: 10px; box-shadow: 0 2px 6px rgba(0, 0, 0, .35); }
+.th .cap {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 8px 6px; text-align: left;
+  font-size: 11px; font-weight: 700; color: #fff; background: linear-gradient(transparent, rgba(0, 0, 0, .6));
+}
+.th:hover, .th.hov { border-color: rgba(255, 255, 255, .45); }
+.th.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+.th.off { opacity: .4; }
+
+/* detail card */
+.detail { min-height: 180px; }
+.dh { display: flex; align-items: center; gap: 10px; }
+.dh h3 { margin: 0; font-size: 16px; font-weight: 800; }
+.dh .num { width: 26px; height: 26px; font-size: 12px; }
+.badge { margin-left: auto; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 3px 8px; }
+.detail p { margin: 10px 0 12px; font-size: 13px; line-height: 1.5; color: #d6d9de; }
+.detail dl { margin: 0; display: grid; gap: 0; }
+.detail dl div { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-top: 1px solid var(--line); font-size: 12px; }
+.detail dt { color: var(--muted); }
+.detail dd { margin: 0; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+.empty { display: flex; gap: 12px; align-items: flex-start; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.empty svg { flex: 0 0 auto; color: var(--accent); }
+.empty p { margin: 0; }
+
+/* bottom parameters bar */
+.bar {
+  position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 3;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: center;
+  padding: 8px; width: max-content; max-width: min(1060px, calc(100% - 32px));
+}
+.step { display: flex; align-items: center; gap: 6px; padding: 0 6px; }
+.step > span { font-size: 12px; color: var(--muted); font-weight: 600; }
+.step b { min-width: 16px; text-align: center; font-size: 14px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.step button {
+  width: 28px; height: 28px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel-2);
+  color: var(--fg); font-size: 16px; line-height: 1; cursor: pointer;
+}
+.step button:hover:not(:disabled) { border-color: var(--accent); }
+.step button:disabled { opacity: .35; cursor: default; }
+.step select {
+  height: 28px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel-2); color: var(--fg);
+  font-size: 12px; font-weight: 800; padding: 0 4px; cursor: pointer; font-variant-numeric: tabular-nums;
+}
+.step select:hover { border-color: var(--accent); }
+.step select option { background: #26292e; color: var(--fg); }
+.sep { width: 1px; height: 24px; background: var(--line); margin: 0 4px; }
+.tg {
+  display: inline-flex; align-items: center; gap: 7px; padding: 7px 11px; border-radius: 999px;
+  border: 1px solid var(--line); background: transparent; color: var(--fg); font-size: 12px; font-weight: 700; cursor: pointer;
+}
+.tg .dot { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--accent); }
+.tg[aria-pressed="true"] .dot { background: var(--accent); }
+.tg:hover { border-color: rgba(255, 255, 255, .35); }
+.tg.reset { color: var(--accent); }
+.tg.play { background: var(--accent); border-color: var(--accent); color: #fff; }
+.tg.play:hover { background: var(--accent-2); }
+.sw { width: 20px; height: 20px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, .25); padding: 0; cursor: pointer; }
+.sw[aria-pressed="true"] { border-color: #fff; box-shadow: 0 0 0 2px var(--accent); }
+.swatches { display: flex; align-items: center; gap: 7px; padding: 0 6px; }
+.swatches > span { font-size: 12px; color: var(--muted); font-weight: 600; margin-right: 1px; }
+button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* 3D callouts */
+.pin {
+  pointer-events: auto; position: relative; width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center; cursor: pointer; background: var(--accent); color: #fff;
+  font: 800 12px/1 var(--font); border: 2px solid #fff; box-shadow: 0 3px 10px rgba(0, 0, 0, .35);
+  transition: transform .15s;
+}
+.pin::before {
+  content: ""; position: absolute; inset: -7px; border-radius: 50%; border: 2px solid var(--accent);
+  opacity: 0; animation: ring 2.4s ease-out infinite;
+}
+@keyframes ring { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(1.5); opacity: 0; } }
+.pin .nm {
+  position: absolute; left: 32px; top: 50%; transform: translateY(-50%); white-space: nowrap;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 5px 9px;
+  font: 700 12px/1 var(--font); opacity: 0; pointer-events: none; transition: opacity .15s;
+}
+.pin:hover, .pin.hov, .pin.on { transform: scale(1.18); }
+.pin:hover .nm, .pin.hov .nm, .pin.on .nm { opacity: 1; }
+.dim { font: 800 11px/1 var(--font); color: #fff; background: rgba(20, 22, 26, .8); border: 1px solid rgba(255, 255, 255, .2); padding: 4px 7px; border-radius: 6px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.dim.sm { font-size: 10px; padding: 3px 5px; color: #e9eaec; }
+
+.tip {
+  position: absolute; z-index: 4; pointer-events: none; display: none; align-items: center; gap: 8px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 6px 10px 6px 6px;
+  font-size: 12px; font-weight: 700; white-space: nowrap; box-shadow: 0 8px 20px rgba(0, 0, 0, .3);
+}
+.hint { position: absolute; right: 24px; bottom: calc(var(--bar-h) + 34px); z-index: 1; font-size: 11px; color: rgba(255, 255, 255, .7); text-align: right; line-height: 1.5; display: none; }
+.loading { position: absolute; inset: 0; display: grid; place-items: center; z-index: 5; font-weight: 700; color: rgba(255, 255, 255, .85); pointer-events: none; transition: opacity .4s; }
+.loading.done { opacity: 0; }
+.nogl { position: absolute; inset: 0; display: none; place-items: center; text-align: center; padding: 24px; color: #fff; z-index: 6; }
+
+/* bill of materials */
+.modal { position: absolute; inset: 0; z-index: 8; display: none; align-items: center; justify-content: center; padding: 16px; background: rgba(10, 11, 13, .45); }
+.modal.open { display: flex; }
+.sheet { width: 560px; max-width: 100%; max-height: 100%; overflow: auto; }
+.sheet .dh { margin-bottom: 4px; }
+.sheet .sub { margin: 6px 0 12px; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+.sheet table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.sheet th, .sheet td { text-align: left; padding: 8px 4px; border-top: 1px solid var(--line); }
+.sheet th { font-size: 10px; color: var(--muted); font-weight: 800; text-transform: uppercase; letter-spacing: .08em; border-top: 0; }
+.sheet td.sz { color: var(--muted); font-variant-numeric: tabular-nums; }
+.sheet td.q { text-align: right; font-weight: 800; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.sheet .acts { display: flex; gap: 8px; justify-content: flex-end; margin-top: 14px; }
+.x { margin-left: auto; width: 28px; height: 28px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel-2); color: var(--fg); font-size: 16px; line-height: 1; cursor: pointer; }
+.x:hover { border-color: var(--accent); }
+.toast { position: absolute; left: 50%; top: 24px; transform: translateX(-50%); z-index: 9; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 8px 14px; font-size: 12px; font-weight: 700; opacity: 0; transition: opacity .25s; pointer-events: none; }
+.toast.show { opacity: 1; }
+
+@media (min-width: 1181px) { .hint { display: block; } }
+/* tablets and phones: stage on top, panels stacked under it */
+@media (max-width: 1180px) {
+  .rk { height: auto; min-height: 0; display: flex; flex-direction: column; overflow: visible; padding-bottom: 16px; }
+  .stage { position: relative; height: 66vh; min-height: 420px; order: 0; }
+  .bar { position: relative; left: auto; bottom: auto; transform: none; order: 1; margin: 12px 16px 0; max-width: none; width: auto; }
+  .side { position: static; width: auto; margin: 12px 16px 0; }
+  .left { order: 2; } .right { order: 3; overflow: visible; }
+  .intro { max-height: none; }
+  .thumbs { grid-template-columns: repeat(3, 1fr); }
+  .modal { position: fixed; }
+}
+@media (max-width: 640px) {
+  .thumbs { grid-template-columns: 1fr 1fr; }
+  .stage { height: 58vh; }
+  .sep { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .pin::before { animation: none; } * { transition: none !important; } }
+</style>
+<meta name="robots" content="noindex">
+<style>
+/* Диаском: вставка в iframe на странице сайта — фиксированная высота сцены на планшетах и телефонах, чтобы страница могла сообщить родителю свою высоту */
+@media (max-width: 1180px) { .stage { height: 520px !important; min-height: 0 !important; } }
+@media (max-width: 640px) { .stage { height: 420px !important; } }
+</style>
+<script>
+/* Диаском: сообщаем родительской странице высоту содержимого (только когда макет в одну колонку) */
+(function () {
+  function send() {
+    if (window.parent === window) return;
+    var h = window.innerWidth <= 1180 ? document.documentElement.scrollHeight : 0;
+    window.parent.postMessage({ rkFrameHeight: h, rkSrc: location.pathname.split('/').pop() }, '*');
+  }
+  addEventListener('load', send); addEventListener('resize', send);
+  if (window.ResizeObserver) new ResizeObserver(send).observe(document.documentElement);
+})();
+</script>
+</head>
+<body>
+
+<section class="rk" id="rk" aria-label="3D-модель складского стеллажа">
+  <div class="stage" id="stage">
+    <div id="labels"></div>
+    <div class="tip" id="tip"></div>
+    <div class="loading" id="loading">Собираем стеллаж…</div>
+    <div class="nogl" id="nogl">Ваш браузер не поддерживает WebGL — 3D-модель недоступна.</div>
+  </div>
+
+  <aside class="side left">
+    <div class="card intro">
+      <div class="eyebrow">Интерактивная модель</div>
+      <h2><span>3D</span>-модель стеллажа</h2>
+      <p class="lead">Изучите конструкцию полочного стеллажа: синие рамы, оранжевые балки, оцинкованный настил. Наведите курсор на элемент, чтобы узнать его назначение и характеристики.</p>
+      <ol class="parts" id="parts"></ol>
+      <div class="stats" id="stats"></div>
+      <button class="explore" id="explore" aria-pressed="false">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 20 7.2v9.6L12 21.2 4 16.8V7.2z"/><path d="M4 7.2 12 11.6l8-4.4M12 11.6v9.6"/></svg>
+        <span>Исследовать модель</span>
+      </button>
+    </div>
+  </aside>
+
+  <aside class="side right">
+    <div class="card"><div class="thumbs" id="thumbs"></div></div>
+    <div class="card detail" id="detail" aria-live="polite"></div>
+  </aside>
+
+  <div class="card bar" id="bar">
+    <div class="step"><span>Секции</span><button data-k="S" data-d="-1" aria-label="Меньше секций">−</button><b id="v-S">4</b><button data-k="S" data-d="1" aria-label="Больше секций">+</button></div>
+    <div class="step"><span>Уровни</span><button data-k="L" data-d="-1" aria-label="Меньше уровней">−</button><b id="v-L">5</b><button data-k="L" data-d="1" aria-label="Больше уровней">+</button></div>
+    <span class="sep"></span>
+    <div class="step"><span>Балка</span><select id="sB" aria-label="Длина балки, мм"><option value="1.5">1500</option><option value="1.8">1800</option><option value="2.0" selected>2000</option><option value="2.3">2300</option><option value="2.7">2700</option></select></div>
+    <div class="step"><span>Глубина</span><select id="sD" aria-label="Глубина, мм"><option value="0.6">600</option><option value="0.8" selected>800</option><option value="1.0">1000</option></select></div>
+    <div class="step"><span>Высота</span><select id="sH" aria-label="Высота, мм"><option value="2.5">2500</option><option value="3.0" selected>3000</option><option value="3.5">3500</option><option value="4.0">4000</option></select></div>
+    <span class="sep"></span>
+    <button class="tg" data-t="loads" aria-pressed="true"><span class="dot"></span>Грузы</button>
+    <button class="tg" data-t="double" aria-pressed="true"><span class="dot"></span>Двойной ряд</button>
+    <button class="tg" data-t="dims" aria-pressed="false"><span class="dot"></span>Размеры</button>
+    <button class="tg" data-t="explode" aria-pressed="false"><span class="dot"></span>Разнести детали</button>
+    <span class="sep"></span>
+    <div class="swatches" id="swatches"><span>Балки</span></div>
+    <span class="sep"></span>
+    <button class="tg play" id="asm">▶ Сборка</button>
+    <button class="tg" id="bom">Комплект</button>
+    <button class="tg reset" id="reset">⟲ Общий вид</button>
+  </div>
+
+  <div class="hint">ЛКМ — вращать · ПКМ — сдвигать<br>колесо — приблизить · клик — выбрать деталь</div>
+
+  <div class="modal" id="modal">
+    <div class="card sheet" role="dialog" aria-modal="true" aria-labelledby="bomTitle">
+      <div class="dh"><span class="num">≡</span><h3 id="bomTitle">Комплектация</h3><button class="x" id="bomX" aria-label="Закрыть">×</button></div>
+      <p class="sub" id="bomSub"></p>
+      <table><thead><tr><th>Элемент</th><th>Размер</th><th style="text-align:right">Кол-во</th></tr></thead><tbody id="bomBody"></tbody></table>
+      <div class="acts"><button class="tg" id="bomCopy">Скопировать</button><button class="tg play" id="bomOk">Готово</button></div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+</section>
+
+<script>
+/* a classic script with dynamic imports of full +esm URLs (no import map, no module script),
+   so the page also runs when another page injects it, e.g. the gist preview */
+(async () => {
+const CDN = 'https://cdn.jsdelivr.net/npm/three@0.160.0/';
+let THREE, OrbitControls, RoomEnvironment, CSS2DRenderer, CSS2DObject;
+try {
+  [THREE, { OrbitControls }, { RoomEnvironment }, { CSS2DRenderer, CSS2DObject }] = await Promise.all([
+    import(CDN + '+esm'),
+    import(CDN + 'examples/jsm/controls/OrbitControls.js/+esm'),
+    import(CDN + 'examples/jsm/environments/RoomEnvironment.js/+esm'),
+    import(CDN + 'examples/jsm/renderers/CSS2DRenderer.js/+esm'),
+  ]);
+} catch (e) {
+  document.getElementById('loading').textContent = 'Не удалось загрузить 3D-библиотеку. Проверьте подключение к интернету.';
+  return;
+}
+
+/* ---------- parts shown in the list, callouts, thumbnails and the detail card ---------- */
+const PARTS = [
+  { key: 'upright', name: 'Стойка', desc: 'Вертикальный перфорированный профиль рамы, окрашен в синий. По фронту колонка отверстий и прорезей с шагом 50 мм: балки переставляются по высоте без сварки и инструмента.',
+    specs: [['Ширина', '70 мм'], ['Высота', '3 000 мм'], ['Шаг перфорации', '50 мм'], ['Окраска', 'синяя, порошковая']] },
+  { key: 'bracing', name: 'Раскосы рамы', desc: 'Горизонтальные связи и диагонали между двумя стойками превращают их в жёсткую раму. Диагонали чередуются по направлению (Z-схема), связи стоят внизу, наверху и примерно через каждые 650 мм.',
+    specs: [['Профиль', 'С-профиль'], ['Схема', 'Z-раскос'], ['Крепёж', 'болты'], ['Окраска', 'синяя']] },
+  { key: 'beam', name: 'Грузовая балка', desc: 'Оранжевая ступенчатая балка вдоль фронта и тыла секции. В ступень заподлицо укладываются оцинкованные панели полки, поэтому они не сдвигаются.',
+    specs: [['Высота', '80 мм'], ['Длина', '2 000 мм'], ['Нагрузка', 'до 450 кг на уровень'], ['Окраска', 'оранжевая, порошковая']] },
+  { key: 'connector', name: 'Зацеп балки', desc: 'Узкая пластина на торце балки, примерно вдвое выше неё. Зубья-крюки по краю входят в перфорацию стойки, балка закреплена на пластине двумя болтами.',
+    specs: [['Крюков', '4 шт.'], ['Высота', '≈ 2 высоты балки'], ['Болтов', '2 шт.'], ['Монтаж', 'на зацепах']] },
+  { key: 'shelf', name: 'Полка сплошная', desc: 'Оцинкованные стальные панели с отбортовкой. Лежат в ступени балок по всей длине секции и образуют сплошной настил. Стоит в половине секций ряда.',
+    specs: [['Панелей', '5 на уровень'], ['Ширина панели', '≈ 380 мм'], ['Материал', 'оцинкованная сталь'], ['Толщина', '0,7 мм']] },
+  { key: 'perf', name: 'Полка перфорированная', desc: 'Оцинкованные панели с круглой перфорацией по всей площади: пропускают свет и воздух, на них не скапливаются пыль и влага. Стоят во второй половине секций ряда.',
+    specs: [['Панелей', '5 на уровень'], ['Отверстия', 'Ø 10 мм, шаг 30 мм'], ['Материал', 'оцинкованная сталь'], ['Толщина', '0,7 мм']] },
+  { key: 'spacer', name: 'Межрядная распорка', opt: true, desc: 'Соединяет рамы двух рядов, стоящих спиной друг к другу, в одну устойчивую конструкцию. Стоит на двух уровнях по высоте.',
+    specs: [['Зазор рядов', '200 мм'], ['На раму', '2 шт.'], ['Крепёж', 'болты'], ['Окраска', 'синяя']] },
+  { key: 'baseplate', name: 'Опора стойки', desc: 'Синяя квадратная пластина под стойкой: распределяет нагрузку на пол и крепит раму двумя анкерами.',
+    specs: [['Размер', '120 × 120 × 6 мм'], ['Анкеры', '2 × М10'], ['Пол', 'бетон'], ['Регулировка', 'пластины 1–5 мм']] },
+];
+PARTS.forEach((p, i) => { p.n = i + 1; });
+const PART_BY = Object.fromEntries(PARTS.map(p => [p.key, p]));
+const COLORS = [['#f05a1e', 'оранжевый'], ['#1f3fb0', 'синий'], ['#c8202b', 'красный'], ['#3f4650', 'графит']];
+
+/* ---------- state ---------- */
+const state = { S: 4, L: 5, B: 2.0, D: 0.8, H: 3.0, loads: true, double: true, dims: false, explode: false };
+const LIMITS = { S: [1, 6], L: [2, 7] };
+
+const $ = (s) => document.querySelector(s);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const ZERO = V(0, 0, 0);
+const fmt = (n) => Math.round(n).toLocaleString('ru-RU');
+function rng(seed) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); }
+
+/* ---------- renderer / scene ---------- */
+const stageEl = $('#stage');
+let renderer;
+try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); }
+catch (e) { $('#nogl').style.display = 'grid'; $('#loading').remove(); throw e; }
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setClearColor(0x000000, 0);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+stageEl.prepend(renderer.domElement);
+const labelRenderer = new CSS2DRenderer({ element: $('#labels') });
+
+const scene = new THREE.Scene();
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), .04).texture;
+
+const camera = new THREE.PerspectiveCamera(36, 1, .03, 200);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = .08;
+controls.screenSpacePanning = true;
+controls.maxPolarAngle = Math.PI * .495;
+controls.minDistance = .3;
+controls.maxDistance = 40;
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0x4b4f56, .75));
+const sun = new THREE.DirectionalLight(0xffffff, 2.5);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+sun.shadow.bias = -.0003;
+sun.shadow.normalBias = .015;
+scene.add(sun, sun.target);
+const rim = new THREE.DirectionalLight(0xe4ecff, .9);
+rim.position.set(9, 7, -9);
+scene.add(rim);
+
+/* ---------- canvas textures ---------- */
+function canvasTex(w, h, draw, { repeat = null, srgb = true } = {}) {
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  draw(c.getContext('2d'), w, h);
+  const t = new THREE.CanvasTexture(c);
+  if (srgb) t.colorSpace = THREE.SRGBColorSpace;
+  t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  if (repeat) { t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(repeat[0], repeat[1]); }
+  return t;
+}
+function grain(g, w, h, n, seed, a, light = '255,255,255', dark = '50,52,56') {
+  const r = rng(seed);
+  for (let i = 0; i < n; i++) { g.fillStyle = `rgba(${r() < .5 ? light : dark},${r() * a})`; g.fillRect(r() * w, r() * h, 2, 2); }
+}
+
+/* upright perforation (one tile = 400 mm, 50 mm pitch): a column of round holes down the middle of the face
+   and narrow slots beside it, as on the reference photo; cut out with alphaTest */
+const perfTex = canvasTex(96, 768, (g, w, h) => {
+  g.fillStyle = '#fff'; g.fillRect(0, 0, w, h);
+  g.globalCompositeOperation = 'destination-out';
+  for (let i = 0; i < 8; i++) {
+    const y = i * 96;
+    g.beginPath(); g.arc(48, y + 20, 7, 0, 7); g.fill();                         // round hole
+    for (const x of [20, 70]) { g.beginPath(); g.roundRect(x, y + 40, 7, 34, 3.5); g.fill(); }   // slots
+  }
+  g.globalCompositeOperation = 'source-over';
+  g.fillStyle = 'rgba(0,0,0,.12)'; g.fillRect(0, 0, 4, h); g.fillRect(w - 4, 0, 4, h);   // folded edges
+}, { repeat: [1, 1] });
+
+/* shelf panel: galvanized sheet with a bent edge on both sides (one tile = one panel) */
+const shelfTex = canvasTex(256, 64, (g, w, h) => {
+  const gr = g.createLinearGradient(0, 0, w, 0);
+  gr.addColorStop(0, '#9aa1a8'); gr.addColorStop(.06, '#dfe3e7'); gr.addColorStop(.5, '#cdd2d7'); gr.addColorStop(.94, '#dfe3e7'); gr.addColorStop(1, '#8e959c');
+  g.fillStyle = gr; g.fillRect(0, 0, w, h);
+  grain(g, w, h, 900, 3, .08);
+  g.fillStyle = 'rgba(255,255,255,.35)'; for (let i = 0; i < 6; i++) g.fillRect(30 + i * 37, 0, 1, h);   // spangle streaks
+}, { repeat: [1, 1] });
+/* perforated panel: galvanized sheet with round holes, one tile = one 30 mm cell (repeat set per build), cut out with alphaTest */
+const perfShelfTex = canvasTex(64, 64, (g, w, h) => {
+  g.fillStyle = '#d3d8dd'; g.fillRect(0, 0, w, h);
+  grain(g, w, h, 60, 5, .08);
+  // dark rim keeps the hole pattern readable from afar, the cut-out makes it see-through up close
+  g.fillStyle = '#3c4249'; g.beginPath(); g.arc(32, 32, 13, 0, 7); g.fill();
+  g.globalCompositeOperation = 'destination-out';
+  g.beginPath(); g.arc(32, 32, 11, 0, 7); g.fill();
+}, { repeat: [1, 1] });
+perfShelfTex.minFilter = THREE.LinearFilter;   // no mipmaps: holes stay cut out instead of blurring into a solid sheet
+
+const kraftTex =canvasTex(256, 256, (g, w, h) => {
+  g.fillStyle = '#c39459'; g.fillRect(0, 0, w, h);
+  grain(g, w, h, 1600, 23, .07, '255,235,200', '90,60,30');
+  g.fillStyle = 'rgba(255,230,190,.35)'; g.fillRect(108, 0, 40, h);
+  g.fillStyle = 'rgba(255,255,255,.18)'; g.fillRect(112, 0, 6, h);
+  g.strokeStyle = '#9c7240'; g.lineWidth = 6; g.strokeRect(0, 0, w, h);
+  g.fillStyle = '#f7f5f0'; g.fillRect(168, 178, 70, 50);
+  const r = rng(5); g.fillStyle = '#222'; for (let i = 0; i < 18; i++) g.fillRect(174 + i * 3.4, 200, r() < .5 ? 1.4 : 2.4, 22);
+  g.fillRect(174, 184, 40, 4); g.fillRect(174, 191, 28, 3);
+  g.strokeStyle = '#4b3420'; g.lineWidth = 3;
+  for (const x of [22, 44]) { g.beginPath(); g.moveTo(x, 56); g.lineTo(x, 24); g.moveTo(x - 8, 34); g.lineTo(x, 24); g.lineTo(x + 8, 34); g.stroke(); }
+  g.beginPath(); g.moveTo(14, 62); g.lineTo(52, 62); g.stroke();
+});
+const whiteBoxTex = canvasTex(256, 256, (g, w, h) => {
+  g.fillStyle = '#eceae6'; g.fillRect(0, 0, w, h);
+  g.fillStyle = '#ff5a1f'; g.fillRect(0, h * .78, w, h * .12);
+  g.fillStyle = '#fff'; g.fillRect(150, 112, 84, 54);
+  const r = rng(9); g.fillStyle = '#222'; for (let i = 0; i < 20; i++) g.fillRect(156 + i * 3.6, 132, r() < .5 ? 1.4 : 2.4, 26);
+  g.fillStyle = '#2a2c30'; g.fillRect(22, 30, 70, 8); g.fillRect(22, 44, 46, 6);
+  g.strokeStyle = '#c9c4bb'; g.lineWidth = 6; g.strokeRect(0, 0, w, h);
+});
+const concreteTex = canvasTex(1024, 1024, (g, w, h) => {
+  g.fillStyle = '#b8bbbf'; g.fillRect(0, 0, w, h);
+  const r = rng(31);
+  for (let i = 0; i < 70; i++) { g.fillStyle = `rgba(${r() < .5 ? '255,255,255' : '60,62,66'},${r() * .05})`; g.beginPath(); g.ellipse(r() * w, r() * h, 30 + r() * 120, 20 + r() * 80, r() * 3, 0, 7); g.fill(); }
+  grain(g, w, h, 16000, 32, .09);
+  g.fillStyle = 'rgba(60,62,66,.35)'; g.fillRect(0, 0, w, 3); g.fillRect(0, 0, 3, h);
+}, { repeat: [8, 8] });
+const fadeTex = canvasTex(256, 256, (g, w, h) => {
+  const gr = g.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w / 2);
+  gr.addColorStop(0, '#fff'); gr.addColorStop(.24, '#fff'); gr.addColorStop(.62, '#000'); gr.addColorStop(1, '#000');
+  g.fillStyle = gr; g.fillRect(0, 0, w, h);
+}, { srgb: false });
+
+/* ---------- materials, registered per part so they can be highlighted or ghosted together ---------- */
+const CAT = {};
+function reg(key, m) {
+  (CAT[key] ||= { mats: [] }).mats.push(m);
+  m.userData.base = { opacity: m.opacity, transparent: m.transparent, depthWrite: m.depthWrite };
+  return m;
+}
+const std = (o) => new THREE.MeshStandardMaterial(o);
+const GALV = { color: 0xc6cbd1, metalness: .82, roughness: .33 };
+/* powder-painted steel: blue frames, orange beams; galvanized shelf panels */
+const PAINT = { metalness: .35, roughness: .45 };
+const M = {
+  upright: reg('upright', std({ ...PAINT, color: 0x1f3fb0, map: perfTex, alphaTest: .5, side: THREE.DoubleSide })),
+  brace: reg('bracing', std({ ...PAINT, color: 0x1f3fb0 })),
+  bolt: reg('bracing', std({ color: 0x8b9198, metalness: .9, roughness: .28 })),
+  beam: reg('beam', std({ ...PAINT, color: COLORS[0][0], roughness: .4 })),
+  conn: reg('connector', std({ ...PAINT, color: COLORS[0][0], roughness: .4 })),
+  hook: reg('connector', std({ color: 0x9ba1a7, metalness: .9, roughness: .3 })),
+  connBolt: reg('connector', std({ color: 0x15171a, metalness: .4, roughness: .45 })),
+  shelf: reg('shelf', std({ ...GALV, color: 0xffffff, map: shelfTex, metalness: .75, roughness: .3 })),
+  perf: reg('perf', std({ ...GALV, color: 0xffffff, map: perfShelfTex, alphaTest: .5, side: THREE.DoubleSide, metalness: .75, roughness: .3 })),
+  perfEdge: reg('perf', std({ ...GALV, color: 0xd3d8dd, metalness: .75, roughness: .3 })),
+  spacer: reg('spacer', std({ ...PAINT, color: 0x1f3fb0 })),
+  plate: reg('baseplate', std({ ...PAINT, color: 0x1f3fb0 })),
+  anchor: reg('baseplate', std({ color: 0x8b9198, metalness: .9, roughness: .3 })),
+  kraft: reg('load', std({ map: kraftTex, roughness: .9 })),
+  white: reg('load', std({ map: whiteBoxTex, roughness: .85 })),
+  floor: reg('floor', std({ map: concreteTex, alphaMap: fadeTex, transparent: true, color: 0xa4a8ae, roughness: .86 })),
+  line: reg('floor', std({ color: 0xf5c21b, roughness: .6 })),
+};
+const BEAM_MATS = [M.beam, M.conn];
+
+function setBeamColor(c) {
+  BEAM_MATS.forEach(m => m.color.set(c));
+  document.querySelectorAll('.sw').forEach(s => s.setAttribute('aria-pressed', s.dataset.c === c));
+}
+
+/* floor: concrete that fades into the grey background */
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(50, 50), M.floor);
+floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+
+/* ---------- geometry helpers ---------- */
+const rack = new THREE.Group(); scene.add(rack);
+const dims = new THREE.Group(); scene.add(dims);
+let geos = [];
+const keep = (g) => { geos.push(g); return g; };
+const box = (w, h, d) => keep(new THREE.BoxGeometry(w, h, d));
+let pickables = [];
+
+/* add a mesh: part, geometry, material, position, explode offset, assembly stage */
+function put(part, geo, mat, x, y, z, ex = ZERO, stage = 0) {
+  const m = new THREE.Mesh(geo, mat);
+  m.position.set(x, y, z + (part === 'floor' ? 0 : ROW_Z));
+  m.castShadow = part !== 'floor'; m.receiveShadow = true;
+  m.userData = { part, base: m.position.clone(), ex: ex.clone(), stage, jit: Math.random() };
+  rack.add(m);
+  if (part !== 'floor' && part !== 'load' && part !== 'decor') pickables.push(m);
+  return m;
+}
+/* bar between two points (bracing) */
+function member(part, a, b, w, d, mat, ex, stage) {
+  const m = put(part, box(w, a.distanceTo(b), d), mat, (a.x + b.x) / 2, (a.y + b.y) / 2, (a.z + b.z) / 2, ex, stage);
+  m.quaternion.setFromUnitVectors(V(0, 1, 0), b.clone().sub(a).normalize());
+  return m;
+}
+/* stretch texture coordinates so one tile always covers `tile` metres */
+function scaleUV(geo, axis, len, tile) {
+  const uv = geo.attributes.uv;
+  for (let i = 0; i < uv.count; i++) axis === 'v' ? uv.setY(i, uv.getY(i) * len / tile) : uv.setX(i, uv.getX(i) * len / tile);
+}
+
+/* step beam section, extruded along the bay; the step faces -Z before mirroring.
+   Flat front face, lower inner ledge: the shelf panels lie in the step just below the beam top. */
+const BEAM_H = .08, BEAM_W = .05, WALL_W = .012, PANEL_T = .02, PANEL_DROP = .008;
+const LEDGE = BEAM_H - PANEL_DROP - PANEL_T;     // ledge height inside the beam
+const CONN_H = BEAM_H * 2;                       // connector is about twice the beam height, as on the reference
+function beamGeo(len) {
+  const s = new THREE.Shape();
+  s.moveTo(0, 0); s.lineTo(BEAM_W, 0); s.lineTo(BEAM_W, LEDGE); s.lineTo(WALL_W, LEDGE);
+  s.lineTo(WALL_W, BEAM_H); s.lineTo(0, BEAM_H); s.lineTo(0, 0);
+  const g = new THREE.ExtrudeGeometry(s, { depth: len, bevelEnabled: true, bevelThickness: .0015, bevelSize: .0015, bevelSegments: 1 });
+  g.rotateY(Math.PI / 2);   // extrusion Z -> world X, shape X -> world -Z
+  g.translate(-len / 2, 0, 0);
+  return keep(g);
+}
+
+/* ---------- build the rack ---------- */
+const UW = .07, UD = .055;               // upright section: along the row × along the depth
+const ROW_GAP = .2;                      // gap between back-to-back rows (row spacers)
+let G = {}, ANCH = {}, counts = {};
+let ROW_Z = 0;                           // z offset of the row being built
+
+function build() {
+  rack.clear();
+  geos.forEach(g => g.dispose()); geos = []; pickables = [];
+  counts = { spacer: 0, perf: 0, shelf: 0 }; ANCH = {};
+  const { S, L, B, D, H } = state;
+  const rows = state.double ? 2 : 1;
+  const pitch = B;                             // beam size = distance between upright centres
+  const rowLen = S * pitch + UW;
+  const x0 = -S * pitch / 2;                   // centre of the first frame
+  const zO = D / 2 - .01;                      // beam outer face, |z| from the row centre
+  const zU = zO - .004 - UD / 2;               // upright centre, |z|
+  const last = H - .06;
+  const step = Math.max(.3, (last - .55) / Math.max(1, L - 1));
+  const tops = Array.from({ length: L }, (_, k) => Math.max(.2, last - step * (L - 1 - k)));
+  const vs = Math.min(1, step / .5);           // smaller explode steps when levels are tight
+  const xs = Array.from({ length: S + 1 }, (_, i) => x0 + i * pitch);
+  const rowZ = rows === 2 ? [D / 2 + ROW_GAP / 2, -(D / 2 + ROW_GAP / 2)] : [0];
+  G = { rowLen, H, D, xs, tops, B, S, rows, zFront: rowZ[0] + D / 2, zBack: rowZ[rows - 1] - D / 2 };
+  const inc = (k, n = 1) => counts[k] = (counts[k] || 0) + n;
+  const anchor = (key, m, ex, dir, dist) => { if (!ANCH[key]) ANCH[key] = { m: m.clone().add(V(0, 0, ROW_Z)), t: m.clone().add(V(0, 0, ROW_Z)), ex, dir, dist }; };
+
+  /* frame members shared by every row */
+  const upH = H - .004;
+  const upGeo = box(UW, upH, UD); scaleUV(upGeo, 'v', upH, .4);
+  const plateGeo = box(.12, .006, .12);
+  const boltGeo = keep(new THREE.CylinderGeometry(.008, .008, .014, 10));
+  // horizontal ties: bottom, every ~650 mm, top; a diagonal in every panel, alternating (Z bracing)
+  const ties = [.12];
+  while (ties[ties.length - 1] + .65 < H - .25) ties.push(ties[ties.length - 1] + .65);
+  ties.push(H - .06);
+  G.ties = ties.length; G.diags = ties.length - 1;
+
+  /* bay members */
+  const bl = pitch - UW;                       // beam body between the upright faces
+  const beamF = beamGeo(bl), beamR = beamGeo(bl).rotateY(Math.PI);
+  const connPlate = box(.032, CONN_H, .008);
+  const toothGeo = box(.014, .014, .006);
+  const boltHeadGeo = keep(new THREE.CylinderGeometry(.0075, .0085, .006, 16));
+  const npan = Math.max(3, Math.round(bl / .4)), pg = .003, pw = (bl - .01 - pg * (npan - 1)) / npan;
+  const zIn = zO - WALL_W;                     // panel half-depth: up to the beam walls
+  const panGeo = box(pw, PANEL_T, 2 * zIn); scaleUV(panGeo, 'u', pw, pw);
+  const perfGeo = box(pw - .02, .002, 2 * zIn);
+  const perfEdgeGeo = box(.01, PANEL_T, 2 * zIn);
+  perfShelfTex.repeat.set((pw - .02) / .03, 2 * zIn / .03);
+  G.npan = npan; G.pw = pw;
+  const R = rng(7);
+  const boxSizes = [[.4, .25, .3], [.3, .2, .25], [.5, .3, .35], [.35, .22, .3], [.3, .28, .22], [.6, .35, .4]];
+
+  for (let r = 0; r < rows; r++) {
+    ROW_Z = rowZ[r];
+    for (const [i, x] of xs.entries()) {
+      for (const sz of [1, -1]) {
+        put('upright', upGeo, M.upright, x, .006 + upH / 2, sz * zU, V(0, 0, sz * .3), 1);
+        put('baseplate', plateGeo, M.plate, x, .003, sz * zU, V(0, 0, sz * .55), 0);
+        for (const bx of [-.04, .04]) put('baseplate', boltGeo, M.anchor, x + bx, .013, sz * zU, V(0, 0, sz * .55), 0);
+        inc('upright'); inc('baseplate');
+      }
+      const zi = zU - UD / 2 - .002;
+      for (const y of ties) member('bracing', V(x, y, zi), V(x, y, -zi), .03, .04, M.brace, ZERO, 2);
+      for (let t = 0; t < ties.length - 1; t++) {
+        const s = t % 2 ? 1 : -1;
+        member('bracing', V(x, ties[t] + .03, s * zi), V(x, ties[t + 1] - .03, -s * zi), .03, .03, M.brace, ZERO, 2);
+      }
+      for (const y of ties) for (const sz of [1, -1]) put('bracing', keep(new THREE.CylinderGeometry(.007, .007, UW + .012, 8)).rotateZ(Math.PI / 2), M.bolt, x, y, sz * (zi - .01), ZERO, 2);
+      if (r === 0 && i === 0) {
+        anchor('upright', V(x, H * .45, zU + UD / 2 + .03), V(0, 0, .3), V(-.45, .2, 1), 1.4);
+        anchor('baseplate', V(x - .02, .03, zU + .1), V(0, 0, .55), V(-.55, .5, 1), .6);
+        anchor('bracing', V(x - .03, (ties[1] + ties[2]) / 2, 0), ZERO, V(-1, .25, .25), 1.8);
+      }
+    }
+
+    for (let s = 0; s < S; s++) {
+      const cx = xs[s] + pitch / 2;
+      tops.forEach((top, k) => {
+        const yb = top - BEAM_H;
+        for (const sz of [1, -1]) {
+          put('beam', sz > 0 ? beamF : beamR, M.beam, cx, yb, sz * zO, V(0, .05 * vs, sz * .55), 3);
+          inc('beam');
+          for (const sx of [-1, 1]) {
+            // connector as on the reference reference: a narrow orange plate at the beam end, against the side
+            // of the upright, about twice the beam height; hook teeth along the upright edge step into the
+            // perforation, two black bolts on the face hold the beam
+            const xu = cx + sx * pitch / 2, e = -sx;            // e points from the upright into the bay
+            const ex = V(0, .05 * vs, sz * .7);
+            const px = xu + e * (UW / 2 + .016), py = top + .004 - CONN_H / 2;
+            put('connector', connPlate, M.conn, px, py, sz * (zO + .001), ex, 3);
+            for (let h = 0; h < 4; h++) put('connector', toothGeo, M.conn, xu + e * (UW / 2 - .004), top - .025 - h * .04, sz * (zO - .002), ex, 3);
+            for (const by of [top - .04, top - .115]) put('connector', boltHeadGeo, M.connBolt, px, by, sz * (zO + .008), ex, 3).rotation.x = Math.PI / 2;
+            inc('connector');
+          }
+        }
+        // half of the bays get solid panels, the other half perforated ones
+        const perf = s >= Math.ceil(S / 2);
+        for (let p = 0; p < npan; p++) {
+          const px = cx - bl / 2 + .005 + pw / 2 + p * (pw + pg);
+          if (!perf) { put('shelf', panGeo, M.shelf, px, top - PANEL_DROP - PANEL_T / 2, 0, V(0, .3 * vs, 0), 5); continue; }
+          // perforated sheet on top, solid bent edges along both sides
+          put('perf', perfGeo, M.perf, px, top - PANEL_DROP - .001, 0, V(0, .3 * vs, 0), 5);
+          for (const ex of [-1, 1]) put('perf', perfEdgeGeo, M.perfEdge, px + ex * (pw / 2 - .005), top - PANEL_DROP - PANEL_T / 2, 0, V(0, .3 * vs, 0), 5);
+        }
+        inc(perf ? 'perf' : 'shelf', npan); inc('level');
+        // goods: a few boxes on most shelves
+        if (state.loads) {
+          const room = k === L - 1 ? .45 : step - BEAM_H - .05;
+          let gx = cx - bl / 2 + .05;
+          for (let n = 0; n < 12; n++) {
+            const [w, hh, d] = boxSizes[Math.floor(R() * boxSizes.length)];
+            if (gx + w > cx + bl / 2 - .05) break;
+            if (hh > room || d > 2 * zIn - .04) continue;
+            if (R() < .45) { gx += w * .9; continue; }
+            put('load', box(w, hh, d), R() < .3 ? M.white : M.kraft, gx + w / 2, top - PANEL_DROP + hh / 2 + .001, (R() - .5) * (2 * zIn - d - .04), V(0, .75 * vs, 0), 7)
+              .rotation.y = (R() - .5) * .06;
+            gx += w + .02 + R() * .06;
+          }
+        }
+        if (r === 0 && s === 0 && k === 1) {
+          anchor('beam', V(cx + bl * .2, top - BEAM_H / 2, zO + .03), V(0, .05 * vs, .55), V(.25, .3, 1), 1.4);
+          anchor('connector', V(cx + bl / 2 - .03, top - BEAM_H - .03, zO + .03), V(.08, .05 * vs, .55), V(.55, .25, 1), .55);
+        }
+        if (r === 0 && s === 0 && k === L - 1) anchor('shelf', V(cx + bl * .25, top + .02, zIn * .3), V(0, .3 * vs, 0), V(.35, .9, .75), 1.7);
+        if (r === 0 && s === S - 1 && k === L - 1) anchor('perf', V(cx + bl * .25, top + .02, zIn * .3), V(0, .3 * vs, 0), V(.35, .9, .75), .75);
+      });
+    }
+  }
+  ROW_Z = 0;
+
+  /* row spacers between back-to-back frames */
+  if (rows === 2) {
+    const za = rowZ[0] - zU - UD / 2, zb = rowZ[1] + zU + UD / 2, len = za - zb;
+    const spGeo = box(.04, .04, len + .02);
+    const tabGeo = box(UW + .01, .1, .006);
+    for (const x of xs) for (const y of [H * .38, H * .78]) {
+      put('spacer', spGeo, M.spacer, x, y, (za + zb) / 2, V(0, 0, 0), 2);
+      for (const z of [za, zb]) put('spacer', tabGeo, M.spacer, x, y, z + (z === za ? .003 : -.003), ZERO, 2);
+      inc('spacer');
+    }
+    anchor('spacer', V(xs[0] - .02, H * .78, (za + zb) / 2), ZERO, V(-1, .3, .2), 1.3);
+  }
+
+  /* floor markings along both aisles */
+  put('floor', keep(new THREE.PlaneGeometry(rowLen + 3, .08)).rotateX(-Math.PI / 2), M.line, 0, .003, G.zFront + .55);
+  put('floor', keep(new THREE.PlaneGeometry(rowLen + 3, .08)).rotateX(-Math.PI / 2), M.line, 0, .003, G.zBack - .55);
+
+  const ext = Math.max(rowLen, H, G.zFront - G.zBack) * .75 + 1;
+  sun.position.set(-6, 12, 9); sun.target.position.set(0, 0, 0);
+  Object.assign(sun.shadow.camera, { left: -ext, right: ext, top: ext, bottom: -ext, near: 1, far: 50 });
+  sun.shadow.camera.updateProjectionMatrix();
+
+  buildDims();
+  refreshLook();
+  applyPositions();
+  updateStats();
+}
+
+/* ---------- dimensions ---------- */
+function buildDims() {
+  dims.clear();
+  const { xs, tops, H, rowLen, B, S, D, zFront } = G;
+  const mat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: .85, depthTest: false });
+  const seg = [];
+  const tag = (text, p, cls = 'dim') => { const el = document.createElement('div'); el.className = cls; el.textContent = text; const o = new CSS2DObject(el); o.position.copy(p); dims.add(o); };
+  const dim = (a, b, tick, text, cls) => {
+    seg.push(a, b);
+    for (const p of [a, b]) seg.push(p.clone().addScaledVector(tick, -.05), p.clone().addScaledVector(tick, .05));
+    tag(text, a.clone().lerp(b, .5), cls);
+  };
+  const zf = zFront + .2, xl = xs[0] - .4, zc = zFront - D / 2;
+  dim(V(xl, 0, zf), V(xl, H, zf), V(1, 0, 0), `${fmt(H * 1000)} мм`);
+  tops.forEach(y => { seg.push(V(xl - .04, y, zf), V(xs[0] - .06, y, zf)); tag(fmt(y * 1000), V(xl - .22, y, zf), 'dim sm'); });
+  dim(V(xs[0] + UW / 2, H + .2, zFront), V(xs[1] - UW / 2, H + .2, zFront), V(0, 1, 0), `${fmt(B * 1000)} мм`);
+  if (S > 1) dim(V(xs[0] - UW / 2, H + .45, zFront), V(xs[S] + UW / 2, H + .45, zFront), V(0, 1, 0), `${fmt(rowLen * 1000)} мм`);
+  dim(V(xs[S] + .25, H + .2, zc - D / 2), V(xs[S] + .25, H + .2, zFront), V(0, 1, 0), `${fmt(D * 1000)} мм`);
+  const lines = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(seg), mat);
+  lines.renderOrder = 10;
+  dims.add(lines);
+}
+let dimsShown = null;
+function showDims(on) {
+  if (on === dimsShown) return;
+  dimsShown = on; dims.visible = on;
+  dims.traverse(o => { if (o.isCSS2DObject) o.visible = on; });
+}
+
+/* ---------- highlight / isolate ---------- */
+let hoverKey = null, selKey = null;
+function setGhost(m, on, op) {
+  const b = m.userData.base, wantT = on || b.transparent;
+  if (m.transparent !== wantT) { m.transparent = wantT; m.needsUpdate = true; }
+  m.opacity = on ? Math.min(b.opacity, op) : b.opacity;
+  m.depthWrite = on ? false : b.depthWrite;
+}
+/* parts that stay half-visible around the selected one, so it doesn't float in the air */
+const CONTEXT = {
+  upright: ['bracing', 'baseplate'], bracing: ['upright'], beam: ['upright', 'connector'], connector: ['upright', 'beam'],
+  shelf: ['beam'], perf: ['beam'], spacer: ['upright', 'bracing'], baseplate: ['upright'],
+};
+function refreshLook(op = .07) {
+  for (const [k, c] of Object.entries(CAT)) {
+    if (k === 'floor') continue;
+    const ghost = !!selKey && k !== selKey, ctx = ghost && CONTEXT[selKey]?.includes(k);
+    for (const m of c.mats) setGhost(m, ghost, ctx ? .3 : op);
+  }
+  for (const o of rack.children) o.castShadow = o.userData.part !== 'floor' && (!selKey || o.userData.part === selKey);
+}
+const partVisible = (k) => (k === 'spacer' ? counts.spacer > 0 : true);
+
+/* ---------- explode + assembly animation ---------- */
+let explodeK = 0;
+const asm = { t: 99, playing: false };
+const STAGES = 8, STAGE_DUR = .55, ITEM_DUR = .5;
+const easeOut = t => 1 - Math.pow(1 - t, 3);
+function applyPositions() {
+  for (const o of rack.children) {
+    const u = o.userData; if (u.part === 'floor') continue;
+    let p = 1;
+    if (asm.t < 98) p = Math.min(1, Math.max(0, (asm.t - (u.stage * STAGE_DUR + u.jit * .35)) / ITEM_DUR));
+    o.position.copy(u.base).addScaledVector(u.ex, explodeK);
+    o.position.y += (1 - easeOut(p)) * 1.2;
+    o.visible = p > 0 && (u.part !== 'load' || explodeK < .03);
+  }
+}
+function playAssembly() {
+  stopTour(); select(null, false);
+  if (state.explode) { state.explode = false; explodeK = 0; $('[data-t="explode"]').setAttribute('aria-pressed', 'false'); }
+  asm.t = 0; asm.t0 = performance.now(); asm.playing = true;
+  applyPositions();
+  fly(overview(), 700);
+}
+
+/* ---------- camera ---------- */
+function overview() {
+  // fit the rack into the part of the stage not covered by the side panels and the bar
+  const w = stageEl.clientWidth, h = stageEl.clientHeight, wide = w > 1180;
+  const freeW = wide ? (w - 680) / w : 1;
+  const freeH = wide ? (h - barH() - 40) / h : 1;
+  const t = V(0, G.H * .46 - (wide ? (barH() + 40) / h * G.H * .35 : 0), 0);
+  const k = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+  const extra = state.explode ? 1.2 : 0;
+  const dist = Math.max((G.H + .9 + extra) / (k * freeH), (G.rowLen * .95 + 1 + extra) / (k * camera.aspect * freeW)) * 1.02;
+  return { t, p: t.clone().addScaledVector(V(-.62, .38, 1).normalize(), dist) };
+}
+function focus(key) {
+  const a = ANCH[key];
+  const t = a.t.clone().addScaledVector(a.ex, explodeK);
+  return { t, p: t.clone().addScaledVector(a.dir.clone().normalize(), a.dist) };
+}
+let tween = null;
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function fly(v, dur = 1100) {
+  tween = { t0: performance.now(), dur: reduceMotion ? 1 : dur, p0: camera.position.clone(), q0: controls.target.clone(), p1: v.p.clone(), q1: v.t.clone() };
+}
+const barH = () => stageEl.clientWidth > 1180 ? $('#bar').offsetHeight : 0;
+
+/* ---------- UI: list, callouts, thumbnails, detail ---------- */
+const MARK = {}, THUMB = {};
+$('#parts').innerHTML = PARTS.map(p => `<li><button data-key="${p.key}"><span class="num">${p.n}</span>${p.name}${p.opt ? '<span class="opt">опция</span>' : ''}</button></li>`).join('');
+$('#thumbs').innerHTML = PARTS.map(p => `<button class="th" data-key="${p.key}" aria-label="${p.n}. ${p.name}"><img alt=""><span class="num">${p.n}</span><span class="cap">${p.name}</span></button>`).join('');
+for (const p of PARTS) {
+  THUMB[p.key] = document.querySelector(`.th[data-key="${p.key}"] img`);
+  const el = document.createElement('div');
+  el.className = 'pin'; el.dataset.key = p.key;
+  el.innerHTML = `${p.n}<span class="nm">${p.name}</span>`;
+  const o = new CSS2DObject(el); scene.add(o); MARK[p.key] = o;
+}
+const detail = $('#detail');
+function renderCard() {
+  const p = PART_BY[hoverKey || selKey];
+  if (!p) {
+    detail.innerHTML = `<div class="empty"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 20 7.2v9.6L12 21.2 4 16.8V7.2z"/><path d="M4 7.2 12 11.6l8-4.4M12 11.6v9.6"/></svg><p>Выберите элемент в списке, на модели или на миниатюре — покажем его назначение и характеристики.</p></div>`;
+    return;
+  }
+  detail.innerHTML = `<div class="dh"><span class="num">${p.n}</span><h3>${p.name}</h3>${p.opt ? '<span class="badge">Опция</span>' : ''}</div>
+    <p>${p.desc}</p><dl>${p.specs.map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join('')}</dl>`;
+}
+function syncUI() {
+  document.querySelectorAll('[data-key]').forEach(el => {
+    el.classList.toggle('on', el.dataset.key === selKey);
+    el.classList.toggle('hov', el.dataset.key === hoverKey);
+    if (!el.classList.contains('pin')) el.classList.toggle('off', !partVisible(el.dataset.key));
+  });
+  renderCard();
+}
+function setHover(k) { if (k === hoverKey) return; hoverKey = k; syncUI(); }
+function select(k, flyTo = true) {
+  if (k && !partVisible(k)) return;
+  selKey = k;
+  refreshLook(); syncUI();
+  if (k && flyTo) fly(focus(k));
+}
+document.querySelectorAll('[data-key]').forEach(el => {
+  el.addEventListener('pointerenter', () => setHover(el.dataset.key));
+  el.addEventListener('pointerleave', () => setHover(null));
+  el.addEventListener('click', () => { stopTour(); select(el.dataset.key === selKey ? null : el.dataset.key); if (!selKey) fly(overview()); });
+});
+
+function updateStats() {
+  const perLevel = { 1.5: 600, 1.8: 500, 2.0: 450, 2.3: 400, 2.7: 300 }[state.B];
+  $('#stats').innerHTML = [
+    [`${fmt(G.H * 1000)} мм`, 'Высота рамы'],
+    [`${fmt(G.rowLen * 1000)} мм`, 'Длина ряда'],
+    [counts.level, 'Полок'],
+    [`${perLevel} кг`, 'На уровень'],
+  ].map(([v, l]) => `<div class="stat"><b>${v}</b><span>${l}</span></div>`).join('');
+  $('#v-S').textContent = state.S; $('#v-L').textContent = state.L;
+  document.querySelectorAll('.step button').forEach(b => {
+    const [lo, hi] = LIMITS[b.dataset.k], v = state[b.dataset.k] + +b.dataset.d;
+    b.disabled = v < lo || v > hi;
+  });
+}
+
+/* parameters bar */
+let thumbTimer = null;
+const scheduleThumbs = () => { clearTimeout(thumbTimer); thumbTimer = setTimeout(makeThumbs, 350); };
+function rebuild() {
+  asm.t = 99; asm.playing = false;
+  build();
+  if (selKey && partVisible(selKey)) fly(focus(selKey)); else { select(null, false); fly(overview()); }
+  scheduleThumbs();
+}
+document.querySelectorAll('.step button').forEach(b => b.addEventListener('click', () => {
+  const k = b.dataset.k, [lo, hi] = LIMITS[k];
+  state[k] = Math.min(hi, Math.max(lo, state[k] + +b.dataset.d));
+  rebuild();
+}));
+[['#sB', 'B'], ['#sD', 'D'], ['#sH', 'H']].forEach(([id, k]) => $(id).addEventListener('change', e => { state[k] = +e.target.value; rebuild(); }));
+document.querySelectorAll('.tg[data-t]').forEach(b => b.addEventListener('click', () => {
+  const k = b.dataset.t; state[k] = !state[k]; b.setAttribute('aria-pressed', state[k]);
+  if (k === 'loads' || k === 'double') {
+    build();
+    if (selKey && !partVisible(selKey)) select(null, false);
+    syncUI(); scheduleThumbs();
+    if (k === 'double') fly(overview());
+  }
+  if (k === 'explode') {
+    if (asm.playing) { asm.playing = false; asm.t = 99; }
+    if (selKey) setTimeout(() => fly(focus(selKey), 900), 450); else fly(overview(), 900);
+  }
+}));
+$('#swatches').insertAdjacentHTML('beforeend', COLORS.map(([c, n], i) => `<button class="sw" style="background:${c}" data-c="${c}" aria-pressed="${!i}" title="Балки: ${n}" aria-label="Цвет балок: ${n}"></button>`).join(''));
+$('#swatches').addEventListener('click', e => {
+  const b = e.target.closest('.sw'); if (!b) return;
+  setBeamColor(b.dataset.c);
+  scheduleThumbs();
+});
+$('#asm').addEventListener('click', playAssembly);
+$('#reset').addEventListener('click', () => { stopTour(); select(null, false); fly(overview()); });
+addEventListener('keydown', e => { if (e.key === 'Escape') { closeBom(); stopTour(); select(null, false); } });
+
+/* bill of materials */
+const plural = (n, a, b, c) => { const m10 = n % 10, m100 = n % 100; return m10 === 1 && m100 !== 11 ? a : m10 >= 2 && m10 <= 4 && (m100 < 10 || m100 >= 20) ? b : c; };
+function bomRows() {
+  const rows = G.rows, fr = (state.S + 1) * rows, mm = (m) => fmt(m * 1000);
+  const out = [
+    ['Рама в сборе', `${mm(state.H)} × ${mm(state.D)} мм`, fr],
+    ['— стойка', `${mm(state.H)} мм, ширина 70 мм`, counts.upright],
+    ['— горизонтальная связь', `${mm(state.D - .1)} мм`, fr * G.ties],
+    ['— раскос', 'С-профиль', fr * G.diags],
+    ['Опора стойки с анкерами', '120 × 120 мм', counts.baseplate],
+    ['Грузовая балка с зацепами', `${mm(state.B)} мм, высота 80 мм`, counts.beam],
+    ['Панель настила сплошная', `${mm(G.pw)} × ${mm(state.D - .044)} мм`, counts.shelf],
+  ];
+  if (counts.perf) out.push(['Панель настила перфорированная', `${mm(G.pw)} × ${mm(state.D - .044)} мм`, counts.perf]);
+  if (counts.spacer) out.push(['Межрядная распорка', `${mm(ROW_GAP)} мм`, counts.spacer]);
+  out.push(['Комплект крепежа', 'болты рамы, анкеры М10', 1]);
+  return out;
+}
+function openBom() {
+  $('#bomSub').textContent = `${G.rows === 2 ? 'Двойной ряд, ' : ''}${state.S} ${plural(state.S, 'секция', 'секции', 'секций')} × ${state.L} ${plural(state.L, 'уровень', 'уровня', 'уровней')} · длина ряда ${fmt(G.rowLen * 1000)} мм, высота ${fmt(state.H * 1000)} мм, глубина ${fmt(state.D * 1000)} мм`;
+  $('#bomBody').innerHTML = bomRows().map(([a, b, q]) => `<tr><td>${a}</td><td class="sz">${b}</td><td class="q">${q} шт.</td></tr>`).join('');
+  $('#modal').classList.add('open');
+}
+function closeBom() { $('#modal').classList.remove('open'); }
+$('#bom').addEventListener('click', () => { stopTour(); openBom(); });
+$('#bomX').onclick = $('#bomOk').onclick = closeBom;
+$('#modal').addEventListener('click', e => { if (e.target.id === 'modal') closeBom(); });
+let toastT;
+function toast(t) { const el = $('#toast'); el.textContent = t; el.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('show'), 1800); }
+$('#bomCopy').addEventListener('click', async () => {
+  const txt = [$('#bomSub').textContent, ...bomRows().map(([a, b, q]) => `${a}\t${b}\t${q} шт.`)].join('\n');
+  try { await navigator.clipboard.writeText(txt); toast('Комплектация скопирована'); } catch { toast('Не удалось скопировать'); }
+});
+
+/* guided tour through all visible parts */
+let tourTimer = null, tourI = 0;
+const exploreBtn = $('#explore');
+function stopTour() {
+  if (!tourTimer) return;
+  clearInterval(tourTimer); tourTimer = null;
+  exploreBtn.setAttribute('aria-pressed', 'false'); exploreBtn.querySelector('span').textContent = 'Исследовать модель';
+}
+exploreBtn.addEventListener('click', () => {
+  if (tourTimer) { stopTour(); return; }
+  const list = () => PARTS.filter(p => partVisible(p.key));
+  const step = () => { const l = list(); select(l[tourI++ % l.length].key); };
+  tourI = 0; step(); tourTimer = setInterval(step, 3600);
+  exploreBtn.setAttribute('aria-pressed', 'true'); exploreBtn.querySelector('span').textContent = 'Остановить обзор';
+});
+
+/* ---------- picking on the model ---------- */
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(), tip = $('#tip');
+function pickAt(e) {
+  const r = renderer.domElement.getBoundingClientRect();
+  ndc.set((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  ray.setFromCamera(ndc, camera);
+  for (const h of ray.intersectObjects(pickables, false)) if (h.object.visible) return h.object.userData.part;
+  return null;
+}
+{
+  const el = renderer.domElement; let down = null, pending = null;
+  el.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
+  el.addEventListener('pointerup', e => {
+    if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 5) return;
+    stopTour();
+    const k = pickAt(e);
+    if (k) select(k); else if (selKey) select(null, false);
+  });
+  el.addEventListener('pointermove', e => {
+    if (e.buttons || e.pointerType === 'touch') return;
+    pending = e;
+    requestAnimationFrame(() => {
+      if (!pending) return;
+      const ev = pending; pending = null;
+      const k = pickAt(ev);
+      setHover(k);
+      el.style.cursor = k ? 'pointer' : '';
+      if (k) {
+        const r = stageEl.getBoundingClientRect(), p = PART_BY[k];
+        tip.innerHTML = `<span class="num">${p.n}</span>${p.name}`;
+        tip.style.display = 'flex'; tip.style.left = (ev.clientX - r.left + 16) + 'px'; tip.style.top = (ev.clientY - r.top + 12) + 'px';
+      } else tip.style.display = 'none';
+    });
+  });
+  el.addEventListener('pointerleave', () => { tip.style.display = 'none'; setHover(null); });
+}
+controls.addEventListener('start', () => { tween = null; stopTour(); });
+
+/* ---------- thumbnails: close-ups of each part rendered from the live model ---------- */
+const thumbCanvas = document.createElement('canvas'); thumbCanvas.width = 400; thumbCanvas.height = 280;
+const tctx = thumbCanvas.getContext('2d');
+const thumbCam = new THREE.PerspectiveCamera(36, 400 / 280, .02, 100);
+function makeThumbs() {
+  if (asm.playing) { scheduleThumbs(); return; }
+  const el = renderer.domElement, pr = renderer.getPixelRatio(), size = renderer.getSize(new THREE.Vector2());
+  const tw = Math.min(400, size.x), th = Math.round(tw * .7);
+  if (size.y < th || tw < 100) return;
+  const keepSel = selKey, keepHover = hoverKey, keepEx = explodeK;
+  hoverKey = null; showDims(false);
+  explodeK = 0; applyPositions();
+  const floorItems = [floor, ...rack.children.filter(o => o.userData.part === 'floor')];   // the part alone on the dark tile
+  floorItems.forEach(o => { o.visible = false; });
+  for (const c of Object.values(CAT)) for (const m of c.mats) m.emissiveIntensity = 0;
+  thumbCam.aspect = tw / th; thumbCam.updateProjectionMatrix();
+  renderer.setScissorTest(true);
+  for (const p of PARTS) {
+    if (!partVisible(p.key) || !ANCH[p.key]) { THUMB[p.key].classList.remove('ready'); continue; }
+    selKey = p.key; refreshLook(.05);
+    const v = focus(p.key); thumbCam.position.copy(v.p); thumbCam.lookAt(v.t);
+    renderer.setViewport(0, 0, tw, th); renderer.setScissor(0, 0, tw, th);
+    renderer.clear(); renderer.render(scene, thumbCam);
+    tctx.clearRect(0, 0, 400, 280);
+    tctx.drawImage(el, 0, el.height - th * pr, tw * pr, th * pr, 0, 0, 400, 280);
+    THUMB[p.key].src = thumbCanvas.toDataURL('image/png');
+    THUMB[p.key].classList.add('ready');
+  }
+  renderer.setScissorTest(false); renderer.setViewport(0, 0, size.x, size.y);
+  floorItems.forEach(o => { o.visible = true; });
+  selKey = keepSel; hoverKey = keepHover; explodeK = keepEx;
+  applyPositions(); refreshLook();
+  dimsShown = null;
+  renderer.render(scene, camera);
+}
+
+/* ---------- loop ---------- */
+function resize() {
+  const w = stageEl.clientWidth, h = stageEl.clientHeight;
+  renderer.setSize(w, h); labelRenderer.setSize(w, h);
+  camera.aspect = w / h; camera.updateProjectionMatrix();
+  document.documentElement.style.setProperty('--bar-h', $('#bar').offsetHeight + 'px');
+}
+new ResizeObserver(resize).observe(stageEl);
+resize();
+
+function frame(now) {
+  requestAnimationFrame(frame);
+  if (tween) {
+    const k = Math.min(1, (now - tween.t0) / tween.dur), e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+    camera.position.lerpVectors(tween.p0, tween.p1, e); controls.target.lerpVectors(tween.q0, tween.q1, e);
+    if (k >= 1) tween = null;
+  }
+  controls.update();
+  let moved = false;
+  const goal = state.explode ? 1 : 0;
+  if (explodeK !== goal) {
+    explodeK += (goal - explodeK) * (reduceMotion ? 1 : .09);
+    if (Math.abs(goal - explodeK) < .002) explodeK = goal;
+    moved = true;
+  }
+  if (asm.playing) {
+    asm.t = (now - asm.t0) / 1000; moved = true;
+    if (asm.t > STAGES * STAGE_DUR + ITEM_DUR + .4) { asm.t = 99; asm.playing = false; scheduleThumbs(); }
+  }
+  if (moved) applyPositions();
+  showDims(state.dims && explodeK < .03 && !asm.playing);
+  const pulse = .3 + .18 * Math.sin(now * .006);
+  for (const [k, c] of Object.entries(CAT)) {
+    const on = k === hoverKey || k === selKey;
+    for (const m of c.mats) { if (on) m.emissive.setHex(0xff5a1f); m.emissiveIntensity = on ? (k === hoverKey ? .5 : pulse) : 0; }
+  }
+  for (const p of PARTS) {
+    const mk = MARK[p.key], a = ANCH[p.key], vis = !!a && partVisible(p.key) && !asm.playing;
+    mk.visible = vis;
+    if (vis) mk.position.copy(a.m).addScaledVector(a.ex, explodeK);
+  }
+  renderer.render(scene, camera);
+  labelRenderer.render(scene, camera);
+}
+
+build();
+const ov = overview(); camera.position.copy(ov.p); controls.target.copy(ov.t);
+syncUI();
+requestAnimationFrame(frame);
+
+Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 2500))]).catch(() => {}).then(() => {
+  resize();
+  const v = overview(); camera.position.copy(v.p); controls.target.copy(v.t);
+  $('#loading').classList.add('done');
+  setTimeout(() => $('#loading').remove(), 500);
+  setTimeout(makeThumbs, 120);
+  setTimeout(playAssembly, 400);   // first visit: show the assembly once
+});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1244 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3D-конструктор стеллажа</title>
+<meta name="description" content="Интерактивная 3D-модель паллетного фронтального стеллажа: стойки, балки, раскосы, зацепы, защита, настил и ограничители.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Layout: full-bleed 3D stage on a grey studio gradient, parts list on the left,
+   live thumbnails + detail card on the right, parameters bar at the bottom. */
+:root {
+  --accent: #ff5a1f;
+  --accent-2: #ff7d4a;
+  --bg-1: #9a9fa6;          /* grey studio background: centre */
+  --bg-2: #6c7077;          /* … middle */
+  --bg-3: #43464c;          /* … edges */
+  --panel: rgba(34, 34, 34, .9);    /* #222 — the logo's own background, so the logo sits seamlessly */
+  --panel-2: rgba(255, 255, 255, .05);
+  --line: rgba(255, 255, 255, .1);
+  --fg: #f3f4f6;
+  --muted: #a7acb3;
+  --font: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg-3); color: var(--fg); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+button { font-family: inherit; }
+
+.rk {
+  position: relative; height: 100vh; min-height: 700px; overflow: hidden;
+  background: radial-gradient(120% 95% at 50% 40%, var(--bg-1) 0%, var(--bg-2) 52%, var(--bg-3) 100%);
+}
+.stage { position: absolute; inset: 0; }
+.stage canvas { display: block; touch-action: none; }
+#labels { position: absolute; inset: 0; pointer-events: none; }
+
+/* side panels */
+.side { position: absolute; top: 24px; bottom: 96px; width: 304px; display: flex; flex-direction: column; gap: 12px; z-index: 2; }
+.left { left: 24px; }
+.right { right: 24px; overflow: auto; scrollbar-width: none; }
+.right::-webkit-scrollbar { display: none; }
+.card {
+  background: var(--panel); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--line); border-radius: 16px; padding: 18px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .25);
+}
+.intro { overflow: auto; scrollbar-width: thin; max-height: 100%; display: flex; flex-direction: column; gap: 14px; }
+.brand { display: block; width: 100%; max-width: 300px; height: auto; margin: -6px 0 2px; border-radius: 10px; background: #222; }
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+h2 { margin: -6px 0 0; font-size: 21px; line-height: 1.15; font-weight: 800; text-transform: uppercase; letter-spacing: .01em; }
+h2 span { color: var(--accent); }
+.lead { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+
+.parts { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.parts button {
+  width: 100%; display: flex; align-items: center; gap: 10px; padding: 7px 8px; border: 0; border-radius: 9px;
+  background: transparent; color: var(--fg); font-size: 13px; font-weight: 600; text-align: left; cursor: pointer;
+  transition: background .15s;
+}
+.parts button:hover, .parts button.hov { background: var(--panel-2); }
+.parts button.on { background: rgba(255, 90, 31, .16); }
+.parts .opt { margin-left: auto; font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.num {
+  flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--accent); color: #fff; font-size: 11px; font-weight: 800;
+}
+.parts button.off { opacity: .45; }
+
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.stat { background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; padding: 9px 10px; }
+.stat b { display: block; font-size: 15px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 11px; color: var(--muted); }
+
+.explore {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 11px 14px;
+  border: 1px solid rgba(255, 255, 255, .28); border-radius: 10px; background: transparent; color: var(--fg);
+  font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; cursor: pointer;
+}
+.explore:hover { border-color: var(--accent); }
+.explore[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); }
+
+/* thumbnails */
+.thumbs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.th {
+  position: relative; aspect-ratio: 10 / 7; padding: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; cursor: pointer;
+  background: radial-gradient(110% 100% at 50% 35%, #5d6168 0%, #3c3f45 70%, #2e3035 100%);
+}
+.th img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s; }
+.th img.ready { opacity: 1; }
+.th .num { position: absolute; top: 6px; left: 6px; width: 20px; height: 20px; font-size: 10px; box-shadow: 0 2px 6px rgba(0, 0, 0, .35); }
+.th .cap {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 8px 6px; text-align: left;
+  font-size: 11px; font-weight: 700; color: #fff; background: linear-gradient(transparent, rgba(0, 0, 0, .6));
+}
+.th:hover, .th.hov { border-color: rgba(255, 255, 255, .45); }
+.th.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+.th.off { opacity: .4; }
+
+/* detail card */
+.detail { min-height: 180px; }
+.dh { display: flex; align-items: center; gap: 10px; }
+.dh h3 { margin: 0; font-size: 16px; font-weight: 800; }
+.dh .num { width: 26px; height: 26px; font-size: 12px; }
+.badge { margin-left: auto; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 3px 8px; }
+.detail p { margin: 10px 0 12px; font-size: 13px; line-height: 1.5; color: #d6d9de; }
+.detail dl { margin: 0; display: grid; gap: 0; }
+.detail dl div { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-top: 1px solid var(--line); font-size: 12px; }
+.detail dt { color: var(--muted); }
+.detail dd { margin: 0; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+.empty { display: flex; gap: 12px; align-items: flex-start; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.empty svg { flex: 0 0 auto; color: var(--accent); }
+.empty p { margin: 0; }
+
+/* bottom parameters bar */
+.bar {
+  position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 3;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: center;
+  padding: 8px; max-width: calc(100% - 32px);
+}
+.step { display: flex; align-items: center; gap: 6px; padding: 0 6px; }
+.step > span { font-size: 12px; color: var(--muted); font-weight: 600; }
+.step b { min-width: 16px; text-align: center; font-size: 14px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.step button {
+  width: 28px; height: 28px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel-2);
+  color: var(--fg); font-size: 16px; line-height: 1; cursor: pointer;
+}
+.step button:hover:not(:disabled) { border-color: var(--accent); }
+.step button:disabled { opacity: .35; cursor: default; }
+.sep { width: 1px; height: 24px; background: var(--line); margin: 0 4px; }
+.tg {
+  display: inline-flex; align-items: center; gap: 7px; padding: 7px 11px; border-radius: 999px;
+  border: 1px solid var(--line); background: transparent; color: var(--fg); font-size: 12px; font-weight: 700; cursor: pointer;
+}
+.tg .dot { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--accent); }
+.tg[aria-pressed="true"] .dot { background: var(--accent); }
+.tg:hover { border-color: rgba(255, 255, 255, .35); }
+.tg.reset { color: var(--accent); }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* 3D callouts */
+.pin {
+  pointer-events: auto; position: relative; width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center; cursor: pointer; background: var(--accent); color: #fff;
+  font: 800 12px/1 var(--font); border: 2px solid #fff; box-shadow: 0 3px 10px rgba(0, 0, 0, .35);
+  transition: transform .15s;
+}
+.pin::before {
+  content: ""; position: absolute; inset: -7px; border-radius: 50%; border: 2px solid var(--accent);
+  opacity: 0; animation: ring 2.4s ease-out infinite;
+}
+@keyframes ring { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(1.5); opacity: 0; } }
+.pin .nm {
+  position: absolute; left: 32px; top: 50%; transform: translateY(-50%); white-space: nowrap;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 5px 9px;
+  font: 700 12px/1 var(--font); opacity: 0; pointer-events: none; transition: opacity .15s;
+}
+.pin:hover, .pin.hov, .pin.on { transform: scale(1.18); }
+.pin:hover .nm, .pin.hov .nm, .pin.on .nm { opacity: 1; }
+.dim { font: 800 11px/1 var(--font); color: #fff; background: rgba(20, 22, 26, .8); border: 1px solid rgba(255, 255, 255, .2); padding: 4px 7px; border-radius: 6px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.dim.sm { font-size: 10px; padding: 3px 5px; color: #e9eaec; }
+
+.tip {
+  position: absolute; z-index: 4; pointer-events: none; display: none; align-items: center; gap: 8px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 6px 10px 6px 6px;
+  font-size: 12px; font-weight: 700; white-space: nowrap; box-shadow: 0 8px 20px rgba(0, 0, 0, .3);
+}
+.hint { position: absolute; right: 24px; bottom: 30px; z-index: 1; font-size: 11px; color: rgba(255, 255, 255, .7); text-align: right; line-height: 1.5; }
+.loading { position: absolute; inset: 0; display: grid; place-items: center; z-index: 5; font-weight: 700; color: rgba(255, 255, 255, .85); pointer-events: none; transition: opacity .4s; }
+.loading.done { opacity: 0; }
+.nogl { position: absolute; inset: 0; display: none; place-items: center; text-align: center; padding: 24px; color: #fff; z-index: 6; }
+
+/* tablets and phones: stage on top, panels stacked under it */
+@media (max-width: 1180px) {
+  .rk { height: auto; min-height: 0; display: flex; flex-direction: column; overflow: visible; padding-bottom: 16px; }
+  .stage { position: relative; height: 66vh; min-height: 420px; order: 0; }
+  .bar { position: relative; left: auto; bottom: auto; transform: none; order: 1; margin: 12px 16px 0; max-width: none; }
+  .side { position: static; width: auto; margin: 12px 16px 0; }
+  .left { order: 2; } .right { order: 3; overflow: visible; }
+  .intro { max-height: none; }
+  .thumbs { grid-template-columns: repeat(4, 1fr); }
+  .hint { display: none; }
+}
+@media (max-width: 640px) {
+  .thumbs { grid-template-columns: 1fr 1fr; }
+  .stage { height: 58vh; }
+  .sep { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .pin::before { animation: none; } * { transition: none !important; } }
+</style>
+<meta name="robots" content="noindex">
+<style>
+/* Диаском: вставка в iframe на странице сайта — фиксированная высота сцены на планшетах и телефонах, чтобы страница могла сообщить родителю свою высоту */
+@media (max-width: 1180px) { .stage { height: 520px !important; min-height: 0 !important; } }
+@media (max-width: 640px) { .stage { height: 420px !important; } }
+</style>
+<script>
+/* Диаском: сообщаем родительской странице высоту содержимого (только когда макет в одну колонку) */
+(function () {
+  function send() {
+    if (window.parent === window) return;
+    var h = window.innerWidth <= 1180 ? document.documentElement.scrollHeight : 0;
+    window.parent.postMessage({ rkFrameHeight: h, rkSrc: location.pathname.split('/').pop() }, '*');
+  }
+  addEventListener('load', send); addEventListener('resize', send);
+  if (window.ResizeObserver) new ResizeObserver(send).observe(document.documentElement);
+})();
+</script>
+</head>
+<body>
+
+<section class="rk" aria-label="3D-конструктор стеллажа">
+  <div class="stage" id="stage">
+    <div id="labels"></div>
+    <div class="tip" id="tip"></div>
+    <div class="loading" id="loading">Собираем стеллаж…</div>
+    <div class="nogl" id="nogl">Ваш браузер не поддерживает WebGL — 3D-модель недоступна.</div>
+  </div>
+
+  <aside class="side left">
+    <div class="card intro">
+      <img class="brand" id="logo" src="data:image/jpeg;base64,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" alt="ДИАСКОМ — создаём прочность, организуем пространство" width="966" height="278">
+      <div class="eyebrow">Интерактивная модель</div>
+      <h2><span>3D</span>-конструктор стеллажа</h2>
+      <p class="lead">Изучите конструкцию фронтального стеллажа. Наведите курсор на элемент, чтобы узнать его назначение и характеристики.</p>
+      <ol class="parts" id="parts"></ol>
+      <div class="stats" id="stats"></div>
+      <button class="explore" id="explore" aria-pressed="false">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 20 7.2v9.6L12 21.2 4 16.8V7.2z"/><path d="M4 7.2 12 11.6l8-4.4M12 11.6v9.6"/></svg>
+        <span>Исследовать модель</span>
+      </button>
+    </div>
+  </aside>
+
+  <aside class="side right">
+    <div class="card"><div class="thumbs" id="thumbs"></div></div>
+    <div class="card detail" id="detail" aria-live="polite"></div>
+  </aside>
+
+  <div class="card bar" id="bar">
+    <div class="step"><span>Секции</span><button data-k="bays" data-d="-1" aria-label="Меньше секций">−</button><b id="v-bays">2</b><button data-k="bays" data-d="1" aria-label="Больше секций">+</button></div>
+    <div class="step"><span>Уровни</span><button data-k="levels" data-d="-1" aria-label="Меньше уровней">−</button><b id="v-levels">3</b><button data-k="levels" data-d="1" aria-label="Больше уровней">+</button></div>
+    <span class="sep"></span>
+    <button class="tg" data-t="loads" aria-pressed="true"><span class="dot"></span>Грузы</button>
+    <button class="tg" data-t="decking" aria-pressed="true"><span class="dot"></span>Настил</button>
+    <button class="tg" data-t="guards" aria-pressed="true"><span class="dot"></span>Защита</button>
+    <button class="tg" data-t="dims" aria-pressed="false"><span class="dot"></span>Размеры</button>
+    <button class="tg" data-t="explode" aria-pressed="false"><span class="dot"></span>Разнести детали</button>
+    <span class="sep"></span>
+    <button class="tg reset" id="reset">⟲ Общий вид</button>
+  </div>
+
+  <div class="hint">ЛКМ — вращать · ПКМ — сдвигать<br>колесо — приблизить · клик — выбрать деталь</div>
+</section>
+
+<script>
+/* a classic script with dynamic imports of full +esm URLs (no import map, no module script),
+   so the page also runs when another page injects it, e.g. the gist preview */
+(async () => {
+const CDN = 'https://cdn.jsdelivr.net/npm/three@0.160.0/';
+const [THREE, { OrbitControls }, { RoomEnvironment }, { CSS2DRenderer, CSS2DObject }, { mergeGeometries }] = await Promise.all([
+  import(CDN + '+esm'),
+  import(CDN + 'examples/jsm/controls/OrbitControls.js/+esm'),
+  import(CDN + 'examples/jsm/environments/RoomEnvironment.js/+esm'),
+  import(CDN + 'examples/jsm/renderers/CSS2DRenderer.js/+esm'),
+  import(CDN + 'examples/jsm/utils/BufferGeometryUtils.js/+esm'),
+]);
+
+/* ---------- parts shown in the list, callouts, thumbnails and the detail card ---------- */
+const PARTS = [
+  { key: 'upright', name: 'Стойка', desc: 'Оцинкованный профиль рамы с рёбрами жёсткости. Вдоль обеих кромок — ряды прямоугольных пазов с шагом 50 мм: в них заходят крюки балок, поэтому уровни переставляются без сварки.',
+    specs: [['Профиль', '90 × 70 мм'], ['Сталь', 'S350GD, 2,0 мм'], ['Покрытие', 'цинк Z275'], ['Шаг перфорации', '50 мм']] },
+  { key: 'beam', name: 'Балка', desc: 'Профилированная балка с четырьмя продольными рёбрами на лицевой стороне: рёбра повышают жёсткость при той же толщине металла. Ступень сверху держит настил.',
+    specs: [['Сечение', '140 × 50 мм'], ['Пролёт', '2 700 мм'], ['Нагрузка', 'до 3 000 кг на пару'], ['Окраска', 'оранжевая, RAL 2004']] },
+  { key: 'bracing', name: 'Раскосная система', desc: 'Горизонтальные и диагональные связи превращают две стойки в жёсткую раму и воспринимают боковые нагрузки.',
+    specs: [['Профиль', 'С 40 × 30 мм'], ['Схема', 'Z-раскос'], ['Крепёж', 'болт М10, кл. 8.8'], ['Шаг узлов', '≈ 850 мм']] },
+  { key: 'connector', name: 'Зацеп балки', desc: 'Г-образный кронштейн приварен к торцу балки и опускается ниже неё. Узкая полка ложится на стойку, пять крюков входят в пазы. Стопорный болт не даёт балке выскочить при ударе снизу.',
+    specs: [['Высота', '250 мм'], ['Крюков', '5 шт.'], ['Толщина', '4 мм'], ['Фиксация', 'стопорный болт']] },
+  { key: 'guard', name: 'Защита стойки', desc: 'U-образный стальной отбойник охватывает стойку снизу и анкеруется в пол. Принимает удар вил погрузчика и бережёт несущий профиль.',
+    specs: [['Высота', '450 мм'], ['Сталь', '5 мм'], ['Крепление', '2 анкера М12'], ['Окраска', 'жёлтая, RAL 1023']] },
+  { key: 'endguard', name: 'Защита торца', desc: 'Две U-образные стойки на торцевой раме и две поперечные трубы между ними. Закрывают торец ряда от удара погрузчика на развороте.',
+    specs: [['Высота', '550 мм'], ['Ригели', '2 трубы 80 × 50 мм'], ['Крепление', 'анкеры М12 + болты'], ['Окраска', 'жёлтая, RAL 1023']] },
+  { key: 'baseplate', name: 'Подпятник металлический', desc: 'Стальной подпятник под каждой стойкой: распределяет нагрузку на пол и крепит раму к бетону анкерами. Неровности пола выбираются подкладными пластинами.',
+    specs: [['Размер', '150 × 130 × 6 мм'], ['Анкеры', '2 × М12'], ['Пол', 'бетон от B25'], ['Регулировка', 'шайбы 1–5 мм']] },
+  { key: 'deckHeavy', name: 'Настил усиленный', opt: true, desc: 'Стальные панели из рифлёного листа с отбортовкой. Держат тяжёлые непаллетированные грузы: электродвигатели, редукторы, узлы оборудования.',
+    specs: [['Лист', 'рифлёный, 3 мм'], ['Панель', 'короб с отбортовкой 40 мм'], ['Нагрузка', 'до 2 000 кг на ячейку'], ['Покрытие', 'цинк']] },
+  { key: 'deckMesh', name: 'Настил решётчатый', opt: true, desc: 'Сетчатый настил для штучных грузов и защиты от падения. Пропускает свет и воду спринклеров.',
+    specs: [['Проволока', '5 мм'], ['Ячейка', '100 × 50 мм'], ['Опоры', '3 П-профиля'], ['Нагрузка', 'до 1 000 кг']] },
+  { key: 'deckLight', name: 'Настил лёгкий', opt: true, desc: 'Тонкие оцинкованные панели с рёбрами жёсткости. Подходит для коробов, ящиков и мелкоштучного хранения.',
+    specs: [['Лист', 'оцинкованный, 0,8 мм'], ['Ширина панели', '≈ 450 мм'], ['Нагрузка', 'до 600 кг на ячейку'], ['Монтаж', 'укладка на ступень балки']] },
+  { key: 'stopper', name: 'Ограничитель паллет', opt: true, desc: 'Труба с тыльной стороны рамы, выше уровня балки. На каждой задней стойке — высокая пластина с крюками в пазах, из неё наружу выступает кронштейн из квадратной трубы с болтом, в кронштейны входят концы трубы. Свес паллеты упирается в трубу, и погрузчик не сдвинет паллету за пределы ячейки.',
+    specs: [['Труба', '45 × 30 мм'], ['Кронштейн-выступ', '160 × 65 × 50 мм'], ['Высота над балкой', '≈ 200 мм'], ['Монтаж', '5 крюков в пазы, болт М10'], ['Окраска', 'RAL 2004']] },
+];
+PARTS.forEach((p, i) => { p.n = i + 1; });
+const PART_BY = Object.fromEntries(PARTS.map(p => [p.key, p]));
+
+/* ---------- rack dimensions, metres ---------- */
+const BAY = 2.7;      // clear beam span
+const UW = .09;       // upright width (along the aisle)
+const UD = .07;       // upright depth
+const D = 1.1;        // frame depth
+const PITCH = 1.55;   // level pitch
+const BH = .14, BD = .05;   // beam section, ribbed face as on the site photos
+const CH = .25;             // connector height: from the beam top down past its bottom
+const STOP_DY = .19, STOP_D = .05;   // pallet stopper: tube axis above the beam top, bracket depth out of the frame
+const state = { bays: 2, levels: 3, loads: true, decking: true, guards: true, dims: false, explode: false };
+const LIMITS = { bays: [1, 4], levels: [2, 5] };
+
+const $ = (s) => document.querySelector(s);
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const ZERO = V(0, 0, 0);
+const fmt = (n) => Math.round(n).toLocaleString('ru-RU');
+function rng(seed) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); }
+
+/* ---------- renderer / scene ---------- */
+const stageEl = $('#stage');
+let renderer;
+try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); }
+catch (e) { $('#nogl').style.display = 'grid'; $('#loading').remove(); throw e; }
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setClearColor(0x000000, 0);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+stageEl.prepend(renderer.domElement);
+const labelRenderer = new CSS2DRenderer({ element: $('#labels') });
+
+const scene = new THREE.Scene();
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), .04).texture;
+
+const camera = new THREE.PerspectiveCamera(36, 1, .03, 200);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = .08;
+controls.screenSpacePanning = true;
+controls.maxPolarAngle = Math.PI * .495;
+controls.minDistance = .35;
+controls.maxDistance = 40;
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0x4b4f56, .75));
+const sun = new THREE.DirectionalLight(0xffffff, 2.5);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+sun.shadow.bias = -.0003;
+sun.shadow.normalBias = .015;
+scene.add(sun, sun.target);
+const rim = new THREE.DirectionalLight(0xe4ecff, .9);
+rim.position.set(9, 7, -9);
+scene.add(rim);
+
+/* ---------- canvas textures (redrawn once the web font has loaded) ---------- */
+const ALL_TEX = [];
+function canvasTex(w, h, draw, { repeat = null, srgb = true } = {}) {
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  const t = new THREE.CanvasTexture(c);
+  if (srgb) t.colorSpace = THREE.SRGBColorSpace;
+  t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  if (repeat) { t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(repeat[0], repeat[1]); }
+  t.userData.redraw = () => { const g = c.getContext('2d'); g.clearRect(0, 0, w, h); draw(g, w, h); t.needsUpdate = true; };
+  t.userData.redraw();
+  ALL_TEX.push(t);
+  return t;
+}
+const FONT = 'Manrope, system-ui, sans-serif';
+
+/* upright face as on the site: a column of narrow rectangular slots with a tapered bottom near each edge
+   (beam hooks go in there) and two stiffening folds; 2000 px/m, one 50 mm pitch per tile */
+const SLOT_X = .034;   // slot column offset from the upright axis
+const perfTex = canvasTex(180, 100, (g, w, h) => {
+  g.fillStyle = '#fff'; g.fillRect(0, 0, w, h);
+  for (const [x, a] of [[58, .16], [62, .06], [118, .06], [122, .16]]) { g.fillStyle = `rgba(0,0,0,${a})`; g.fillRect(x - 2, 0, 4, h); }   // folds
+  g.fillStyle = 'rgba(255,255,255,.5)'; g.fillRect(64, 0, 2, h); g.fillRect(114, 0, 2, h);
+  g.fillStyle = 'rgba(0,0,0,.1)'; g.fillRect(0, 0, 3, h); g.fillRect(w - 3, 0, 3, h);                                                   // folded edges
+  // slots are painted dark rather than cut out: the shadowed inside of the profile reads as a hole from any distance
+  for (const cx of [90 - SLOT_X * 2000, 90 + SLOT_X * 2000]) {
+    g.beginPath(); g.moveTo(cx - 5, 18); g.lineTo(cx + 5, 18); g.lineTo(cx + 5, 48); g.lineTo(cx + 2, 60); g.lineTo(cx - 2, 60); g.lineTo(cx - 5, 48); g.closePath();
+    g.fillStyle = '#16171a'; g.fill();
+    g.strokeStyle = 'rgba(255,255,255,.55)'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(cx - 5, 61); g.lineTo(cx + 5, 61); g.stroke();   // lit lower lip
+  }
+}, { repeat: [1, 100] });
+/* side flange: bolt holes for the bracing */
+const flangeTex = canvasTex(140, 100, (g, w, h) => {
+  g.fillStyle = '#fff'; g.fillRect(0, 0, w, h);
+  g.globalCompositeOperation = 'destination-out';
+  g.beginPath(); g.arc(70, 50, 6, 0, 7); g.fill();
+  g.globalCompositeOperation = 'source-over';
+}, { repeat: [1, 100] });
+
+const woodTex = canvasTex(256, 256, (g, w, h) => {
+  g.fillStyle = '#d4b588'; g.fillRect(0, 0, w, h);
+  const r = rng(17);
+  for (let i = 0; i < 46; i++) {
+    g.strokeStyle = `rgba(${120 + r() * 40},${85 + r() * 25},${50 + r() * 20},${.18 + r() * .22})`; g.lineWidth = 1 + r() * 2;
+    const y = r() * h; g.beginPath(); g.moveTo(0, y);
+    for (let x = 0; x <= w; x += 16) g.lineTo(x, y + Math.sin(x * .03 + i) * 3 * r());
+    g.stroke();
+  }
+  for (let i = 0; i < 3; i++) { g.fillStyle = 'rgba(110,70,35,.45)'; g.beginPath(); g.ellipse(r() * w, r() * h, 6, 3, 0, 0, 7); g.fill(); }
+});
+
+const kraftTex = canvasTex(256, 256, (g, w, h) => {
+  g.fillStyle = '#c39459'; g.fillRect(0, 0, w, h);
+  const r = rng(23);
+  for (let i = 0; i < 1600; i++) { g.fillStyle = `rgba(${r() < .5 ? '255,235,200' : '90,60,30'},${r() * .07})`; g.fillRect(r() * w, r() * h, 2, 2); }
+  g.fillStyle = 'rgba(255,230,190,.35)'; g.fillRect(108, 0, 40, h);                    // packing tape
+  g.fillStyle = 'rgba(255,255,255,.18)'; g.fillRect(112, 0, 6, h);
+  g.strokeStyle = '#9c7240'; g.lineWidth = 6; g.strokeRect(0, 0, w, h);             // box edges
+  g.fillStyle = '#f7f5f0'; g.fillRect(168, 178, 70, 50);                             // shipping label
+  g.fillStyle = '#222'; for (let i = 0; i < 18; i++) g.fillRect(174 + i * 3.4, 200, r() < .5 ? 1.4 : 2.4, 22);
+  g.fillRect(174, 184, 40, 4); g.fillRect(174, 191, 28, 3);
+  g.strokeStyle = '#4b3420'; g.lineWidth = 3;                                         // "this side up" arrows
+  for (const x of [22, 44]) { g.beginPath(); g.moveTo(x, 56); g.lineTo(x, 24); g.moveTo(x - 8, 34); g.lineTo(x, 24); g.lineTo(x + 8, 34); g.stroke(); }
+  g.beginPath(); g.moveTo(14, 62); g.lineTo(52, 62); g.stroke();
+});
+
+const whiteBoxTex = canvasTex(256, 256, (g, w, h) => {
+  g.fillStyle = '#eceae6'; g.fillRect(0, 0, w, h);
+  g.fillStyle = '#ff5a1f'; g.fillRect(0, h * .78, w, h * .12);
+  g.fillStyle = '#2a2c30'; g.font = `800 30px ${FONT}`; g.textBaseline = 'top'; g.fillText('CARGO', 22, 26);
+  g.fillStyle = '#ff5a1f'; g.beginPath(); g.moveTo(140, 24); g.lineTo(160, 56); g.lineTo(120, 56); g.closePath(); g.fill();
+  g.fillStyle = '#fff'; g.fillRect(150, 112, 84, 54);
+  g.fillStyle = '#222'; const r = rng(9); for (let i = 0; i < 20; i++) g.fillRect(156 + i * 3.6, 132, r() < .5 ? 1.4 : 2.4, 26);
+  g.strokeStyle = '#c9c4bb'; g.lineWidth = 6; g.strokeRect(0, 0, w, h);
+});
+
+const concreteTex = canvasTex(1024, 1024, (g, w, h) => {
+  g.fillStyle = '#b8bbbf'; g.fillRect(0, 0, w, h);
+  const r = rng(31);
+  for (let i = 0; i < 70; i++) { g.fillStyle = `rgba(${r() < .5 ? '255,255,255' : '60,62,66'},${r() * .05})`; g.beginPath(); g.ellipse(r() * w, r() * h, 30 + r() * 120, 20 + r() * 80, r() * 3, 0, 7); g.fill(); }
+  for (let i = 0; i < 16000; i++) { g.fillStyle = `rgba(${r() < .5 ? '255,255,255' : '50,52,56'},${r() * .09})`; g.fillRect(r() * w, r() * h, 2, 2); }
+  g.fillStyle = 'rgba(60,62,66,.35)'; g.fillRect(0, 0, w, 3); g.fillRect(0, 0, 3, h);   // saw-cut joints
+}, { repeat: [8, 8] });
+const fadeTex = canvasTex(256, 256, (g, w, h) => {
+  const gr = g.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w / 2);
+  gr.addColorStop(0, '#fff'); gr.addColorStop(.24, '#fff'); gr.addColorStop(.62, '#000'); gr.addColorStop(1, '#000');
+  g.fillStyle = gr; g.fillRect(0, 0, w, h);
+}, { srgb: false });
+
+/* company logo: used in the panel and on the load signs */
+const LOGO = new Image();
+LOGO.src = document.getElementById('logo').src;
+const signTex = canvasTex(512, 440, (g, w, h) => {
+  g.fillStyle = '#fbfbfa'; g.beginPath(); g.roundRect(0, 0, w, h, 22); g.fill();
+  g.fillStyle = '#222222'; g.beginPath(); g.roundRect(0, 0, w, 96, [22, 22, 0, 0]); g.fill();
+  if (LOGO.complete && LOGO.naturalWidth) { const lh = 82, lw = lh * LOGO.naturalWidth / LOGO.naturalHeight; g.drawImage(LOGO, (w - lw) / 2, 7, lw, lh); }
+  g.fillStyle = '#ff5a1f'; g.fillRect(0, 96, w, 62);
+  g.fillStyle = '#fff'; g.font = `800 28px ${FONT}`; g.textBaseline = 'middle'; g.fillText('ТАБЛИЦА НАГРУЗОК', 92, 128);
+  g.beginPath(); g.moveTo(52, 106); g.lineTo(76, 150); g.lineTo(28, 150); g.closePath(); g.fill();
+  g.fillStyle = '#ff5a1f'; g.font = `800 28px ${FONT}`; g.textAlign = 'center'; g.fillText('!', 52, 135); g.textAlign = 'left';
+  const rows = [['На уровень (пара балок)', '3 000 кг'], ['На раму', '18 000 кг'], ['Пролёт балки', '2 700 мм'], ['Шаг уровней', '1 550 мм']];
+  rows.forEach(([a, b], i) => {
+    const y = 196 + i * 50;
+    g.fillStyle = '#5b6068'; g.font = `600 24px ${FONT}`; g.fillText(a, 28, y);
+    g.fillStyle = '#16181b'; g.font = `800 26px ${FONT}`; g.textAlign = 'right'; g.fillText(b, w - 28, y); g.textAlign = 'left';
+    g.fillStyle = '#e3e4e6'; g.fillRect(28, y + 24, w - 56, 2);
+  });
+  g.fillStyle = '#8a8f96'; g.font = `600 18px ${FONT}`; g.fillText('Не превышать допустимую нагрузку', 28, h - 22);
+});
+const stickerTex = canvasTex(256, 80, (g, w, h) => {
+  g.fillStyle = '#fbfbfa'; g.fillRect(0, 0, w, h);
+  g.fillStyle = '#16181b'; g.fillRect(0, 0, 70, h);
+  g.fillStyle = '#fff'; g.font = `800 26px ${FONT}`; g.textBaseline = 'middle'; g.textAlign = 'center'; g.fillText('кг', 35, h / 2);
+  g.fillStyle = '#16181b'; g.textAlign = 'left'; g.font = `800 34px ${FONT}`; g.fillText('3 000', 84, 32);
+  g.fillStyle = '#6a6f77'; g.font = `600 15px ${FONT}`; g.fillText('на пару балок', 86, 62);
+});
+/* logo plate for the beam faces: the logo on its own dark background, with a thin metal rim */
+const logoTex = canvasTex(512, 148, (g, w, h) => {
+  g.fillStyle = '#222222'; g.fillRect(0, 0, w, h);
+  if (LOGO.complete && LOGO.naturalWidth) {
+    const lh = h - 16, lw = Math.min(w - 16, lh * LOGO.naturalWidth / LOGO.naturalHeight);
+    g.drawImage(LOGO, (w - lw) / 2, (h - lw * LOGO.naturalHeight / LOGO.naturalWidth) / 2, lw, lw * LOGO.naturalHeight / LOGO.naturalWidth);
+  }
+  g.strokeStyle = '#8d939a'; g.lineWidth = 4; g.strokeRect(2, 2, w - 4, h - 4);
+});
+LOGO.onload = () => { signTex.userData.redraw(); logoTex.userData.redraw(); };
+
+/* reinforced decking: galvanised chequer plate, one 100 mm tile */
+const chequerTex = canvasTex(128, 128, (g, w, h) => {
+  g.fillStyle = '#c9cdd2'; g.fillRect(0, 0, w, h);
+  const r = rng(51);
+  for (let i = 0; i < 500; i++) { g.fillStyle = `rgba(${r() < .5 ? '255,255,255' : '70,74,80'},${r() * .08})`; g.fillRect(r() * w, r() * h, 2, 2); }
+  const lens = (x, y, a) => {
+    g.save(); g.translate(x, y); g.rotate(a);
+    const gr = g.createLinearGradient(0, -6, 0, 6); gr.addColorStop(0, '#f4f6f8'); gr.addColorStop(1, '#7d838a');
+    g.fillStyle = gr; g.beginPath(); g.ellipse(0, 0, 17, 4.2, 0, 0, 7); g.fill(); g.restore();
+  };
+  for (const [x, y] of [[32, 32], [96, 96], [32 + 128, 32], [-32, 96]]) lens(x, y, .785);
+  for (const [x, y] of [[96, 32], [32, 96], [96 - 128, 32], [160, 96]]) lens(x, y, -.785);
+}, { repeat: [1, 1] });
+/* light decking: thin galvanised sheet with rolled stiffening ribs along the depth */
+const lightDeckTex = canvasTex(256, 64, (g, w, h) => {
+  g.fillStyle = '#d3d7db'; g.fillRect(0, 0, w, h);
+  for (const x of [40, 88, 168, 216]) {
+    const gr = g.createLinearGradient(x - 6, 0, x + 6, 0); gr.addColorStop(0, '#9aa0a7'); gr.addColorStop(.5, '#f2f4f6'); gr.addColorStop(1, '#a3a9b0');
+    g.fillStyle = gr; g.fillRect(x - 6, 0, 12, h);
+  }
+  g.fillStyle = 'rgba(60,64,70,.35)'; g.fillRect(0, 0, 3, h); g.fillRect(w - 3, 0, 3, h);   // panel seams
+  const r = rng(61);
+  for (let i = 0; i < 300; i++) { g.fillStyle = `rgba(255,255,255,${r() * .12})`; g.fillRect(r() * w, r() * h, 3, 1); }
+}, { repeat: [1, 8] });
+
+/* ---------- materials, registered per part so they can be highlighted or ghosted together ---------- */
+const CAT = {};
+function reg(key, m) {
+  (CAT[key] ||= { mats: [] }).mats.push(m);
+  m.userData.base = { opacity: m.opacity, transparent: m.transparent, depthWrite: m.depthWrite };
+  return m;
+}
+const std = (o) => new THREE.MeshStandardMaterial(o);
+const GALV = { color: 0xc6cbd1, metalness: .82, roughness: .33 };
+const M = {
+  web: reg('upright', std({ ...GALV, map: perfTex, alphaTest: .5, side: THREE.DoubleSide })),
+  flange: reg('upright', std({ ...GALV, map: flangeTex, alphaTest: .5, side: THREE.DoubleSide })),
+  lip: reg('upright', std(GALV)),
+  plate: reg('baseplate', std({ color: 0xa7adb4, metalness: .8, roughness: .42 })),
+  anchor: reg('baseplate', std({ color: 0x8b9198, metalness: .9, roughness: .3 })),
+  brace: reg('bracing', std({ ...GALV, color: 0xb8bec5 })),
+  bolt: reg('bracing', std({ color: 0x7c8289, metalness: .9, roughness: .28 })),
+  beam: reg('beam', std({ color: 0xf04a12, metalness: .2, roughness: .38 })),          // RAL 2004 pure orange
+  conn: reg('connector', std({ color: 0xe0430f, metalness: .22, roughness: .4 })),
+  pin: reg('connector', std({ color: 0x2a2c30, metalness: .6, roughness: .35 })),
+  weld: reg('connector', std({ color: 0xa8340c, metalness: .3, roughness: .7 })),
+  deck: reg('deckMesh', std({ color: 0xb6bcc3, metalness: .85, roughness: .36 })),
+  heavy: reg('deckHeavy', std({ map: chequerTex, metalness: .75, roughness: .32 })),
+  heavyEdge: reg('deckHeavy', std({ color: 0xb3b9c0, metalness: .8, roughness: .35 })),
+  light: reg('deckLight', std({ map: lightDeckTex, metalness: .7, roughness: .3 })),
+  lightEdge: reg('deckLight', std({ color: 0xc4c9ce, metalness: .75, roughness: .32 })),
+  stop: reg('stopper', std({ color: 0xf04a12, metalness: .2, roughness: .38 })),
+  stopConn: reg('stopper', std({ color: 0xe0430f, metalness: .22, roughness: .4 })),
+  stopHole: reg('stopper', std({ color: 0x1a1b1e, roughness: .6 })),
+  guard: reg('guard', std({ color: 0xf2c000, metalness: .25, roughness: .42 })),       // RAL 1023 traffic yellow
+  guardBolt: reg('guard', std({ color: 0x8b9198, metalness: .9, roughness: .3 })),
+  guardHole: reg('guard', std({ color: 0x1a1b1e, roughness: .6 })),
+  end: reg('endguard', std({ color: 0xf2c000, metalness: .25, roughness: .42 })),
+  endBolt: reg('endguard', std({ color: 0x8b9198, metalness: .9, roughness: .3 })),
+  motor: reg('load', std({ color: 0x2f5d8a, metalness: .45, roughness: .45 })),       // electric motors, gearboxes
+  motor2: reg('load', std({ color: 0x5f6b74, metalness: .45, roughness: .45 })),
+  gear: reg('load', std({ color: 0x3f6f58, metalness: .4, roughness: .5 })),
+  steelPart: reg('load', std({ color: 0xcfd3d7, metalness: .9, roughness: .25 })),
+  darkPart: reg('load', std({ color: 0x1f2124, metalness: .4, roughness: .55 })),
+  bin: reg('load', std({ color: 0x2f6fb5, roughness: .55 })),                          // plastic storage bins
+  bin2: reg('load', std({ color: 0x7c8590, roughness: .55 })),
+  wood: reg('load', std({ map: woodTex, roughness: .85 })),
+  kraft: reg('load', std({ map: kraftTex, roughness: .9 })),
+  white: reg('load', std({ map: whiteBoxTex, roughness: .85 })),
+  film: reg('load', new THREE.MeshPhysicalMaterial({ color: 0xeef4f8, roughness: .12, metalness: 0, transparent: true, opacity: .2, depthWrite: false })),
+  sign: reg('decor', std({ map: signTex, roughness: .55 })),
+  sticker: reg('decor', std({ map: stickerTex, roughness: .55 })),
+  logo: reg('decor', std({ map: logoTex, roughness: .45, metalness: .15 })),
+  floor: reg('floor', std({ map: concreteTex, alphaMap: fadeTex, transparent: true, color: 0xa4a8ae, roughness: .86 })),
+  line: reg('floor', std({ color: 0xf5c21b, roughness: .6 })),
+};
+
+/* floor: concrete that fades into the grey background */
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(50, 50), M.floor);
+floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+
+/* ---------- geometry helpers ---------- */
+const geoCache = new Map();
+function cached(key, make) { let g = geoCache.get(key); if (!g) { g = make(); geoCache.set(key, g); } return g; }
+const boxGeo = (w, h, d) => cached(`b${w.toFixed(4)},${h.toFixed(4)},${d.toFixed(4)}`, () => new THREE.BoxGeometry(w, h, d));
+const cylGeo = (r, h, seg = 16) => cached(`c${r},${h},${seg}`, () => new THREE.CylinderGeometry(r, r, h, seg));
+const planeGeo = (w, h) => cached(`p${w},${h}`, () => new THREE.PlaneGeometry(w, h));
+const UNIT = boxGeo(1, 1, 1);
+
+/* beam section extruded along the bay: four rolled ribs on the face (as on the site photos)
+   and a 15 mm step on the inner top edge for decking; sign +1 = front beam, -1 = back beam */
+const RIBS = [.028, .056, .084, .112];
+function beamGeo(len, sign) {
+  const s = new THREE.Shape();
+  s.moveTo(0, 0); s.lineTo(BD, 0); s.lineTo(BD, BH - .015); s.lineTo(BD - .012, BH - .015); s.lineTo(BD - .012, BH);
+  for (let v = BH; v >= -1e-6; v -= .002) {                      // face, top to bottom, with smooth outward ribs
+    let u = 0;
+    for (const r of RIBS) { const d = Math.abs(v - r); if (d < .009) u -= .0045 * (.5 + .5 * Math.cos(d / .009 * Math.PI)); }
+    s.lineTo(u, Math.max(0, v));
+  }
+  s.closePath();
+  const g = new THREE.ExtrudeGeometry(s, { depth: len, bevelEnabled: false });
+  g.rotateY(sign * Math.PI / 2);
+  return g;
+}
+const BEAM_F = beamGeo(BAY - .006, 1), BEAM_B = beamGeo(BAY - .006, -1);
+
+/* Euro pallet 800 × 1200 × 144, boards merged into one geometry */
+const PALLET = (() => {
+  const parts = [];
+  const b = (w, h, d, x, y, z) => parts.push(new THREE.BoxGeometry(w, h, d).translate(x, y, z));
+  for (const x of [-.35, 0, .35]) b(.1, .022, 1.2, x, .011, 0);                                   // bottom boards
+  for (const x of [-.35, 0, .35]) for (const z of [-.5275, 0, .5275]) b(.1, .078, .145, x, .061, z); // blocks
+  for (const z of [-.5275, 0, .5275]) b(.8, .022, .145, 0, .111, z);                               // stringer boards
+  [[-.3275, .145], [-.1638, .1], [0, .145], [.1638, .1], [.3275, .145]].forEach(([x, w]) => b(w, .022, 1.2, x, .133, 0));  // top boards
+  return mergeGeometries(parts);
+})();
+
+const rack = new THREE.Group(); scene.add(rack);
+const dims = new THREE.Group(); scene.add(dims);
+/* CSS2D labels ignore their parent's visibility, so every child is switched */
+const showDims = (v) => { for (const o of dims.children) o.visible = v; };
+
+/* add a part mesh; ex = offset in the exploded view */
+function put(part, geo, mat, x, y, z, ex = ZERO) {
+  const m = new THREE.Mesh(geo, mat);
+  m.position.set(x, y, z);
+  m.userData = { part, ex, base: m.position.clone() };
+  m.castShadow = m.receiveShadow = true;
+  rack.add(m);
+  return m;
+}
+/* bar from a to b lying in a plane x = const (frame bracing) */
+const _m4 = new THREE.Matrix4();
+function member(part, a, b, w, t, mat, ex) {
+  const d = new THREE.Vector3().subVectors(b, a), L = d.length(); d.normalize();
+  const side = V(1, 0, 0), up = new THREE.Vector3().crossVectors(side, d);
+  const m = put(part, boxGeo(L, w, t), mat, (a.x + b.x) / 2, (a.y + b.y) / 2, (a.z + b.z) / 2, ex);
+  m.quaternion.setFromRotationMatrix(_m4.makeBasis(d, up, side));
+  return m;
+}
+const _q0 = new THREE.Quaternion();
+const mat4 = (x, y, z, sx = 1, sy = 1, sz = 1) => new THREE.Matrix4().compose(V(x, y, z), _q0, V(sx, sy, sz));
+function instanced(part, geo, mat, list, ex = ZERO) {
+  if (!list.length) return null;
+  const im = new THREE.InstancedMesh(geo, mat, list.length);
+  list.forEach((m, i) => im.setMatrixAt(i, m));
+  im.computeBoundingSphere();
+  im.frustumCulled = false;
+  im.castShadow = im.receiveShadow = true;
+  im.userData = { part, ex, base: V(0, 0, 0) };
+  rack.add(im);
+  return im;
+}
+
+/* ---------- heavy goods for the reinforced decking: electric motors and gearboxes ---------- */
+const HALF_PI = Math.PI / 2;
+const good = (g, m, x, y, z) => put('load', g, m, x, y, z, ZERO);
+function motor(xc, y, zc, len, rad, mat) {
+  const ya = y + .035 + rad;                                                   // shaft axis height
+  good(boxGeo(len * .82, .02, rad * 1.7), M.darkPart, xc, y + .01, zc);        // base frame
+  for (const sx of [-1, 1]) good(boxGeo(.07, rad * .75, rad * 1.5), mat, xc + sx * len * .26, y + .02 + rad * .375, zc);   // feet
+  good(cylGeo(rad, len * .66, 32), mat, xc - len * .03, ya, zc).rotation.z = HALF_PI;                                      // stator housing
+  for (let i = 0; i < 7; i++) good(cylGeo(rad * 1.07, .012, 32), mat, xc - len * .3 + i * len * .09, ya, zc).rotation.z = HALF_PI;   // cooling fins
+  good(cylGeo(rad * .97, len * .14, 32), M.darkPart, xc - len * .43, ya, zc).rotation.z = HALF_PI;                         // fan cover
+  good(cylGeo(rad * .85, .04, 32), mat, xc + len * .31, ya, zc).rotation.z = HALF_PI;                                      // bearing shield
+  good(cylGeo(rad * .16, .13, 16), M.steelPart, xc + len * .31 + .085, ya, zc).rotation.z = HALF_PI;                       // shaft
+  good(boxGeo(rad * .7, rad * .4, rad * .7), mat, xc, ya + rad * 1.18, zc);                                               // terminal box
+  good(cylGeo(rad * .12, rad * .25, 12), M.steelPart, xc + len * .12, ya + rad * 1.1, zc);                                // lifting eye
+}
+function gearbox(xc, y, zc, s, mat) {
+  const hh = .34 * s, w = .42 * s, d = .36 * s, yb = y + .03;
+  good(boxGeo(w * 1.15, .03, d * 1.2), mat, xc, y + .015, zc);                                                            // foot flange
+  good(boxGeo(w, hh, d), mat, xc, yb + hh / 2, zc);                                                                       // housing
+  good(cylGeo(d * .5, w * .9, 32), mat, xc, yb + hh, zc).rotation.z = HALF_PI;                                             // rounded top
+  for (const sx of [-1, 0, 1]) good(boxGeo(.012, hh * .9, d * 1.08), mat, xc + sx * w * .3, yb + hh * .5, zc);           // ribs
+  good(cylGeo(.13 * s, .03, 32), mat, xc + w / 2 + .015, yb + hh * .45, zc).rotation.z = HALF_PI;                          // output flange
+  good(cylGeo(.055 * s, .14 * s, 16), M.steelPart, xc + w / 2 + .03 + .07 * s, yb + hh * .45, zc).rotation.z = HALF_PI;   // output shaft
+  good(cylGeo(.04 * s, .16 * s, 16), M.steelPart, xc - w * .2, yb + hh * .75, zc + d / 2 + .08 * s).rotation.x = HALF_PI; // input shaft
+  good(cylGeo(.02, .04, 12), M.darkPart, xc + w * .2, yb + hh + d * .5, zc);                                               // vent plug
+}
+function heavyGoods(x0, y, r) {
+  let x = x0 + .1;
+  const end = x0 + BAY - .1;
+  for (;;) {
+    if (r() < .5) {
+      const len = .55 + r() * .3, rad = .14 + r() * .07;
+      if (x + len > end) break;
+      motor(x + len / 2, y, (r() - .5) * .25, len, rad, r() < .6 ? M.motor : M.motor2);
+      x += len + .12;
+    } else {
+      const s = .8 + r() * .5, fw = .7 * s;
+      if (x + fw > end) break;
+      gearbox(x + fw / 2 - .08 * s, y, (r() - .5) * .25, s, r() < .5 ? M.gear : M.motor2);
+      x += fw + .14;
+    }
+  }
+}
+
+/* ---------- build the rack from the current parameters ---------- */
+let G = {};          // current dimensions
+let ANCH = {};       // per part: focus point t, callout point m, explode offset ex, view direction and distance
+let pickables = [];
+
+function build() {
+  for (const o of [...rack.children]) { rack.remove(o); if (o.isInstancedMesh) o.dispose(); }
+  for (const o of [...dims.children]) { dims.remove(o); if (o.geometry) o.geometry.dispose(); }
+
+  const B = state.bays, L = state.levels;
+  const H = +(L * PITCH + .45).toFixed(3);
+  const STEP = BAY + UW;
+  const xs = [...Array(B + 1)].map((_, i) => -B * STEP / 2 + i * STEP);
+  const ys = [...Array(L)].map((_, k) => (k + 1) * PITCH);
+  const rowLen = B * STEP + UW;
+  G = { B, L, H, xs, ys, rowLen };
+  perfTex.repeat.set(1, (H - .006) / .05);
+  flangeTex.repeat.set(1, (H - .006) / .05);
+
+  /* what each bay carries on each beam level: the first level holds heavy units on reinforced decking in the left
+     half of the bays and cartons and bins on light decking in the right half; every level above it holds pallets
+     on wire decking; with the decking off, pallets sit straight on the beams */
+  const heavyBays = Math.ceil(B / 2);
+  const deckType = (b, k) => !state.decking ? 'none' : k > 0 ? 'mesh' : b < heavyBays ? 'heavy' : 'light';
+  const types = [...Array(B)].map((_, b) => ys.map((_, k) => deckType(b, k)));
+  const palletLevel = (b, k) => types[b][k] === 'mesh' || types[b][k] === 'none';
+  const firstMesh = types[0].indexOf('mesh');
+  G.pallets = B * 3 * (1 + (state.decking ? L - 1 : L));     // pallet places: the floor and every pallet level
+
+  /* frames: uprights (open top, no caps) and base plates */
+  for (const x of xs) for (const s of [1, -1]) {
+    const zf = s * D / 2, hU = H - .006, yc = .006 + hU / 2;
+    const exU = V(0, .12, s * .3), exP = V(0, 0, s * .3);
+    put('upright', boxGeo(UW, hU, .002), M.web, x, yc, zf - s * .001, exU);
+    for (const sx of [-1, 1]) {
+      put('upright', boxGeo(.002, hU, UD), M.flange, x + sx * (UW / 2 - .001), yc, zf - s * UD / 2, exU);
+      put('upright', boxGeo(.022, hU, .002), M.lip, x + sx * (UW / 2 - .011), yc, zf - s * (UD - .001), exU);
+    }
+    const zc = zf - s * UD / 2;
+    put('baseplate', boxGeo(.15, .006, .13), M.plate, x, .003, zc, exP);
+    for (const sx of [-1, 1]) {
+      put('baseplate', cylGeo(.015, .002, 20), M.anchor, x + sx * .058, .007, zc, exP);
+      put('baseplate', cylGeo(.011, .009, 6), M.anchor, x + sx * .058, .0125, zc, exP);
+      put('baseplate', cylGeo(.0055, .03, 10), M.anchor, x + sx * .058, .02, zc, exP);
+    }
+  }
+
+  /* bracing: horizontals at the bottom and top, Z-diagonals between, bolted through both flanges */
+  const zi = D / 2 - .03;
+  const nSeg = Math.max(3, Math.round((H - .3) / .85));
+  const nodes = [...Array(nSeg + 1)].map((_, j) => .15 + j * (H - .3) / nSeg);
+  for (const x of xs) {
+    const P = (side, y) => V(x, y, side * zi);
+    member('bracing', P(1, nodes[0]), P(-1, nodes[0]), .04, .028, M.brace, ZERO);
+    member('bracing', P(1, nodes[nSeg]), P(-1, nodes[nSeg]), .04, .028, M.brace, ZERO);
+    for (let j = 0; j < nSeg; j++) { const a = j % 2 ? -1 : 1; member('bracing', P(a, nodes[j]), P(-a, nodes[j + 1]), .04, .028, M.brace, ZERO); }
+    nodes.forEach((y, j) => {
+      const sides = j === 0 || j === nSeg ? [1, -1] : [j % 2 ? -1 : 1];
+      for (const s of sides) for (const sx of [-1, 1]) {
+        put('bracing', cylGeo(.009, .007, 6), M.bolt, x + sx * (UW / 2 + .0035), y, s * zi, ZERO).rotation.z = Math.PI / 2;
+      }
+    });
+  }
+
+  /* beams, connectors, load stickers, pallet stoppers, decking */
+  const deck = [];
+  chequerTex.repeat.set((BAY - .02) / 5 / .1, (D - .08) / .1);
+  for (let b = 0; b < B; b++) {
+    const xa = xs[b] + UW / 2 + .003, xb = xs[b + 1] - UW / 2 - .003, cx = (xs[b] + xs[b + 1]) / 2;
+    for (const [k, y] of ys.entries()) {
+      for (const s of [1, -1]) {
+        const exB = V(0, 0, s * .75), exC = V(0, 0, s * .95);
+        put('beam', s > 0 ? BEAM_F : BEAM_B, M.beam, s > 0 ? xa : xb, y - BH, s * D / 2, exB);
+        /* connector as on the site photos: an angle bracket welded to the beam end, as tall as CH from the beam top down.
+           Its narrow front leg lies on the upright face over the slot column, five hooks go into the slots,
+           the side leg carries the beam end. e points from the upright into the bay. */
+        for (const [xu, e] of [[xs[b], 1], [xs[b + 1], -1]]) {
+          const yc = y - CH / 2;
+          put('connector', boxGeo(.022, CH, .004), M.conn, xu + e * .041, yc, s * (D / 2 + .002), exC);                 // front leg
+          put('connector', boxGeo(.004, CH, BD - .004), M.conn, xu + e * .05, yc, s * (D / 2 - BD / 2 + .002), exC);    // side leg
+          for (let r = 0; r < 5; r++) {                                                                                   // hooks in the slots
+            put('connector', boxGeo(.009, .02, .008), M.conn, xu + e * SLOT_X, y - .028 - r * .05, s * (D / 2 - .001), exC);
+          }
+          for (const dy of [.035, .1]) put('connector', cylGeo(.0035, .003, 10), M.pin, xu + e * .042, y - dy, s * (D / 2 + .0045), exC).rotation.x = Math.PI / 2;   // locking bolt
+          put('connector', boxGeo(.006, BH - .01, .004), M.weld, xu + e * .0545, y - BH / 2, s * (D / 2 - .001), exC);   // weld seam
+        }
+        if (s > 0) {
+          put('decor', planeGeo(.16, .05), M.sticker, cx - .45, y - .072, D / 2 + .0065, exB);
+          put('decor', planeGeo(.42, .121), M.logo, cx + .45, y - .07, D / 2 + .0065, exB);      // company logo plate
+        }
+      }
+      /* pallet stopper on pallet levels, as on the reference photo: it hangs on the OUTSIDE of the back frame.
+         A tall plate hooks into the slots of each back upright; a square-tube bracket with a bolt hole sticks out
+         of the plate away from the frame (the "выступ"); the stopper tube runs between the brackets behind the
+         back beam, about 200 mm above it, and the overhanging pallet butts against it */
+      if (palletLevel(b, k)) {
+        const exS = V(0, .2, -1.05), ys0 = y + STOP_DY, PH = .46, pyc = y + .04 + PH / 2;
+        const zPl = -(D / 2 + .002), zBr = -(D / 2 + .004 + STOP_D / 2);                                       // plate, bracket and tube
+        put('stopper', boxGeo(BAY - .03, .045, .032), M.stop, cx, ys0, zBr, exS);
+        for (const [xu, e] of [[xs[b], 1], [xs[b + 1], -1]]) {
+          put('stopper', boxGeo(.022, PH, .004), M.stopConn, xu + e * .041, pyc, zPl, exS);                      // plate on the upright face
+          for (let r = 0; r < 8; r++) put('stopper', boxGeo(.009, .02, .008), M.stopConn, xu + e * SLOT_X, pyc + PH / 2 - .03 - r * .05, -(D / 2 - .001), exS);   // hooks in the slots
+          put('stopper', boxGeo(.16, .065, STOP_D), M.stopConn, xu + e * .132, ys0, zBr, exS);                  // bracket tube sticking out of the frame
+          put('stopper', cylGeo(.009, .002, 16), M.stopHole, xu + e * .17, ys0, zBr - STOP_D / 2 - .001, exS).rotation.x = Math.PI / 2;   // bolt hole
+        }
+      }
+
+      const dd = D - .08;
+      const type = types[b][k];
+      if (type === 'heavy') {                       // boxed chequer-plate panels, 40 mm deep, sitting on the beam steps
+        const n = 5, pw = (BAY - .02) / n - .006;
+        for (let j = 0; j < n; j++) {
+          const px = xs[b] + UW / 2 + .013 + j * (pw + .006) + pw / 2;
+          put('deckHeavy', boxGeo(pw, .04, dd), [M.heavyEdge, M.heavyEdge, M.heavy, M.heavyEdge, M.heavyEdge, M.heavyEdge], px, y + .005, 0, V(0, .3, 0));
+        }
+      }
+      if (type === 'light') {                           // thin galvanised panels with rolled ribs
+        const n = 6, pw = (BAY - .02) / n - .004;
+        for (let j = 0; j < n; j++) {
+          const px = xs[b] + UW / 2 + .012 + j * (pw + .004) + pw / 2;
+          put('deckLight', boxGeo(pw, .017, dd), [M.lightEdge, M.lightEdge, M.light, M.lightEdge, M.lightEdge, M.lightEdge], px, y - .0065, 0, V(0, .3, 0));
+        }
+      }
+      if (type === 'mesh') {
+        const pw = (BAY - .04) / 3 - .01;
+        for (let j = 0; j < 3; j++) {
+          const px = xs[b] + UW / 2 + .025 + j * (pw + .01) + pw / 2;
+          for (const o of [-pw / 2 + .05, 0, pw / 2 - .05]) deck.push(mat4(px + o, y, 0, .03, .03, dd));        // channel supports
+          const n = Math.floor(pw / .1);
+          for (let t = 0; t <= n; t++) deck.push(mat4(px - pw / 2 + t * pw / n, y + .0175, 0, .005, .005, dd));
+          const m = Math.round(dd / .05);
+          for (let t = 0; t <= m; t++) deck.push(mat4(px, y + .0225, -dd / 2 + t * dd / m, pw, .005, t === 0 || t === m ? .008 : .005));
+        }
+      }
+    }
+  }
+  instanced('deckMesh', UNIT, M.deck, deck, V(0, .3, 0));
+
+  if (state.guards) {
+    /* column guards on the inner aisle uprights: a yellow U that wraps the upright from the aisle, anchored to the floor */
+    for (let i = 1; i < B; i++) {
+      const x = xs[i], z0 = D / 2, ex = V(0, 0, 1.2), h = .45;
+      put('guard', boxGeo(.15, h, .006), M.guard, x, .008 + h / 2, z0 + .03, ex);
+      for (const sx of [-1, 1]) put('guard', boxGeo(.006, h, .12), M.guard, x + sx * .072, .008 + h / 2, z0 - .03, ex);
+      put('guard', boxGeo(.24, .008, .07), M.guard, x, .004, z0 + .065, ex);
+      for (const sx of [-1, 1]) put('guard', cylGeo(.011, .01, 6), M.guardBolt, x + sx * .09, .013, z0 + .07, ex);
+      for (const y of [.16, .34]) put('guard', cylGeo(.008, .002, 16), M.guardHole, x, y, z0 + .0335, ex).rotation.x = Math.PI / 2;
+    }
+    /* end-of-row protection, as on the reference photo: yellow U posts round both end uprights
+       and two cross rails bolted to them across the frame */
+    for (const e of [-1, 1]) {
+      const xEnd = e < 0 ? xs[0] : xs[B], xo = xEnd + e * (UW / 2 + .012), ex = V(e * .6, 0, 0), h = .55;
+      for (const s of [1, -1]) {
+        const zc = s * (D / 2 - UD / 2);
+        put('endguard', boxGeo(.006, h, .13), M.end, xo, .008 + h / 2, zc, ex);
+        for (const sz of [-1, 1]) put('endguard', boxGeo(.1, h, .006), M.end, xo - e * .047, .008 + h / 2, zc + sz * .065, ex);
+        put('endguard', boxGeo(.17, .008, .18), M.end, xEnd + e * .03, .004, zc, ex);
+        for (const sz of [-1, 1]) put('endguard', cylGeo(.011, .01, 6), M.endBolt, xEnd + e * .095, .013, zc + sz * .06, ex);
+      }
+      for (const y of [.22, .45]) {
+        put('endguard', boxGeo(.05, .08, D + .02), M.end, xo + e * .028, y, 0, ex);
+        for (const s of [1, -1]) put('endguard', cylGeo(.009, .006, 6), M.endBolt, xo + e * .056, y, s * (D / 2 - UD / 2), ex).rotation.z = Math.PI / 2;
+      }
+    }
+  }
+
+  /* load signs with the company logo on both end frames */
+  for (const e of [-1, 1]) {
+    const m = put('decor', planeGeo(.34, .292), M.sign, (e < 0 ? xs[0] : xs[B]) + e * .016, 1.75, 0, ZERO);
+    m.rotation.y = e * Math.PI / 2;
+  }
+
+  /* floor markings along both aisles */
+  for (const s of [1, -1]) {
+    const m = put('floor', planeGeo(rowLen + 3, .08), M.line, 0, .003, s * (D / 2 + .55), ZERO);
+    m.rotation.x = -Math.PI / 2; m.castShadow = false; m.userData.noCast = true;
+  }
+
+  /* goods: heavy units on the reinforced decking, light boxes and bins on the light decking,
+     pallets on the floor and on the other levels; one wire-deck slot stays empty so the mesh shows */
+  if (state.loads) {
+    const r = rng(12), pal = [], kraft = [], white = [], film = [], small = [], bins = [], rims = [];
+    const tiers = [0, ...ys];
+    for (let b = 0; b < B; b++) tiers.forEach((ty, ti) => {
+      const type = ti === 0 ? 'floor' : types[b][ti - 1];
+      const room = ti === L ? 1.2 : PITCH - BH - .12;
+      if (type === 'heavy') { heavyGoods(xs[b] + UW / 2, ty + .025, r); return; }
+      if (type === 'light') {
+        for (let c = 0; c < 6; c++) for (const z of [-.25, .27]) {
+          const x = xs[b] + UW / 2 + .26 + c * .435, v = r();
+          if (v < .5) {                                    // small cartons, one to three high
+            const n = 1 + Math.floor(r() * Math.min(3, room / .26)), w = .36 + r() * .04;
+            for (let i = 0; i < n; i++) small.push(mat4(x + (r() - .5) * .02, ty + .002 + .125 + i * .25, z, w, .244, .3 + r() * .1));
+          } else if (v < .85) {                            // stacked plastic bins
+            const n = 1 + Math.floor(r() * Math.min(3, room / .22));
+            for (let i = 0; i < n; i++) {
+              const y = ty + .002 + i * .215;
+              bins.push(mat4(x, y + .1, z, .38, .2, .44));
+              rims.push(mat4(x, y + .207, z, .4, .014, .46));
+            }
+          }
+        }
+        return;
+      }
+      const deckH = type === 'mesh' ? .025 : 0;
+      for (let j = 0; j < 3; j++) {
+        if (b === B - 1 && ti - 1 === firstMesh && j === 0) continue;
+        if (r() < .1) continue;
+        const px = xs[b] + UW / 2 + .075 + .4 + j * .875, pz = .6 - (D / 2 + .002);   // back edge overhangs the back beam up to the stopper plates
+        const y0 = ti === 0 ? 0 : ty + deckH;
+        const maxH = ti === L ? 1.2 : PITCH - BH - .144 - .1 - deckH;
+        pal.push(mat4(px, y0, pz));
+        const v = r(), kind = v < .45 ? 'kraft' : v < .72 ? 'white' : 'wrap';
+        const h = .24 + r() * .08, layers = Math.max(1, Math.floor(maxH * (.62 + r() * .38) / h));
+        const arr = kind === 'white' ? white : kraft;
+        for (let l = 0; l < layers; l++) for (let ix = 0; ix < 2; ix++) for (let iz = 0; iz < 4; iz++) {
+          if (l === layers - 1 && kind !== 'wrap' && r() < .18) continue;    // partly picked top layer
+          arr.push(mat4(px + (ix - .5) * .4, y0 + .144 + l * h + h / 2, pz + (iz - 1.5) * .3, .394, h - .006, .294));
+        }
+        if (kind === 'wrap') film.push(mat4(px, y0 + .144 + layers * h / 2, pz, .815, layers * h + .012, 1.215));
+      }
+    });
+    instanced('load', PALLET, M.wood, pal);
+    instanced('load', UNIT, M.kraft, [...kraft, ...small]);
+    instanced('load', UNIT, M.bin, bins);
+    instanced('load', UNIT, M.bin2, rims);
+    instanced('load', UNIT, M.white, white);
+    const f = instanced('load', UNIT, M.film, film);
+    if (f) f.castShadow = false, f.userData.noCast = true;
+  }
+
+  /* dimension lines */
+  buildDims();
+
+  /* focus points for the camera and callouts */
+  const x1 = xs[Math.min(1, B)], bl = B - 1, cx0 = (xs[0] + xs[1]) / 2, cxl = (xs[bl] + xs[bl + 1]) / 2, y1 = ys[0], yL = ys[L - 1];
+  ANCH = {
+    upright: { t: V(x1, H * .5, D / 2), m: V(x1, H * .8, D / 2 + .02), ex: V(0, .12, .3), dir: V(-.45, .18, 1), dist: H * .95 + .6 },
+    beam: { t: V(cx0, yL - .06, D / 2), m: V(cx0 + .7, yL - .06, D / 2 + .03), ex: V(0, 0, .75), dir: V(-.3, .3, 1), dist: 2.6 },
+    bracing: { t: V(xs[0], H * .45, 0), m: V(xs[0], nodes[Math.min(2, nSeg)] + .25, -.12), ex: ZERO, dir: V(-1, .22, .3), dist: H * .9 + .6 },
+    connector: { t: V(x1 + .04, y1 - .12, D / 2), m: V(x1 + .041, y1 - .22, D / 2 + .01), ex: V(0, 0, .95), dir: V(-.35, .12, 1), dist: .8 },
+    endguard: { t: V(xs[0] - .07, .3, 0), m: V(xs[0] - .1, .5, .25), ex: V(-.6, 0, 0), dir: V(-1, .5, .55), dist: 1.9 },
+    baseplate: { t: V(xs[0], .02, D / 2 - .035), m: V(xs[0] + .075, .03, D / 2 - .035), ex: V(0, 0, .3), dir: V(-.3, .75, 1), dist: .75 },
+  };
+  if (B > 1) ANCH.guard = { t: V(xs[1], .24, D / 2 + .03), m: V(xs[1], .34, D / 2 + .04), ex: V(0, 0, 1.2), dir: V(-.35, .45, 1), dist: 1.3 };
+  const where = (t) => { for (const [b, row] of types.entries()) { const k = row.indexOf(t); if (k >= 0) return { b, y: ys[k], cx: (xs[b] + xs[b + 1]) / 2 }; } return null; };
+  const hv = where('heavy'), lt = where('light');
+  if (hv) ANCH.deckHeavy = { t: V(hv.cx, hv.y + .03, .1), m: V(xs[hv.b] + UW / 2 + .2, hv.y + .03, .45), ex: V(0, .3, 0), dir: V(.1, .9, 1), dist: 3.4 };
+  if (firstMesh >= 0) { const y = ys[firstMesh]; ANCH.deckMesh = { t: V(xs[bl] + UW / 2 + .475, y + .02, 0), m: V(xs[bl] + UW / 2 + .475, y + .03, .15), ex: V(0, .3, 0), dir: V(.15, 1, .75), dist: 1.9 }; }
+  if (lt) ANCH.deckLight = { t: V(lt.cx, lt.y + .01, 0), m: V(xs[lt.b + 1] - UW / 2 - .22, lt.y + .01, .48), ex: V(0, .3, 0), dir: V(.15, 1, .75), dist: 2.3 };
+  const sl = ys.findLastIndex((_, k) => palletLevel(bl, k));
+  if (sl >= 0) ANCH.stopper = { t: V(xs[bl] + .3, ys[sl] + STOP_DY, -(D / 2 + .03)), m: V(xs[bl] + .5, ys[sl] + STOP_DY + .06, -(D / 2 + .06)), ex: V(0, .2, -1.05), dir: V(.35, .3, -1), dist: 1.3 };
+
+  /* shadow frustum around the rack */
+  const ext = Math.max(rowLen, H) / 2 + 3;
+  sun.position.set(-6, 12, 9); sun.target.position.set(0, 0, 0);
+  Object.assign(sun.shadow.camera, { left: -ext, right: ext, top: ext, bottom: -ext, near: 1, far: 50 });
+  sun.shadow.camera.updateProjectionMatrix();
+
+  pickables = rack.children.filter(o => PART_BY[o.userData.part]);
+  applyExplode();
+  refreshLook();
+  updateStats();
+  syncUI();
+}
+
+function buildDims() {
+  const { xs, ys, H, rowLen, B } = G;
+  const mat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: .85, depthTest: false });
+  const seg = [];
+  const tag = (text, p, cls = 'dim') => { const el = document.createElement('div'); el.className = cls; el.textContent = text; const o = new CSS2DObject(el); o.position.copy(p); dims.add(o); };
+  const dim = (a, b, tick, text, cls) => {
+    seg.push(a, b);
+    for (const p of [a, b]) seg.push(p.clone().addScaledVector(tick, -.07), p.clone().addScaledVector(tick, .07));
+    tag(text, a.clone().lerp(b, .5), cls);
+  };
+  const zf = D / 2 + .25, xl = xs[0] - .55;
+  dim(V(xl, 0, zf), V(xl, H, zf), V(1, 0, 0), `${fmt(H * 1000)} мм`);
+  ys.forEach(y => { seg.push(V(xl - .06, y, zf), V(xs[0] - .08, y, zf)); tag(fmt(y * 1000), V(xl - .3, y, zf), 'dim sm'); });
+  dim(V(xs[0] + UW / 2, H + .3, D / 2), V(xs[1] - UW / 2, H + .3, D / 2), V(0, 1, 0), `${fmt(BAY * 1000)} мм`);
+  if (B > 1) dim(V(xs[0] - UW / 2, H + .65, D / 2), V(xs[B] + UW / 2, H + .65, D / 2), V(0, 1, 0), `${fmt(rowLen * 1000)} мм`);
+  dim(V(xs[B] + .3, H + .3, -D / 2), V(xs[B] + .3, H + .3, D / 2), V(0, 1, 0), `${fmt(D * 1000)} мм`);
+  const lines = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(seg), mat);
+  lines.renderOrder = 10;
+  dims.add(lines);
+}
+
+/* ---------- highlight / isolate ---------- */
+let hoverKey = null, selKey = null;
+function setGhost(m, on, op) {
+  const b = m.userData.base, wantT = on || b.transparent;
+  if (m.transparent !== wantT) { m.transparent = wantT; m.needsUpdate = true; }
+  m.opacity = on ? Math.min(b.opacity, op) : b.opacity;
+  m.depthWrite = on ? false : b.depthWrite;
+}
+/* parts that stay half-visible around the selected one, so it doesn't float in the air */
+const CONTEXT = {
+  upright: ['bracing', 'baseplate'], beam: ['upright', 'connector'], bracing: ['upright'], connector: ['upright', 'beam'],
+  guard: ['upright', 'baseplate'], endguard: ['upright', 'baseplate', 'bracing'], baseplate: ['upright'],
+  deckHeavy: ['beam'], deckMesh: ['beam'], deckLight: ['beam'], stopper: ['beam', 'upright'],
+};
+function refreshLook(op = .07) {
+  for (const [k, c] of Object.entries(CAT)) {
+    if (k === 'floor') continue;
+    const ghost = !!selKey && k !== selKey, ctx = ghost && CONTEXT[selKey]?.includes(k);
+    for (const m of c.mats) setGhost(m, ghost, ctx ? .3 : op);
+  }
+  for (const o of rack.children) o.castShadow = !o.userData.noCast && (!selKey || o.userData.part === selKey);
+}
+/* a part is offered only when the current configuration has it (e.g. no column guards with a single bay) */
+const partVisible = (k) => !!ANCH[k];
+
+/* ---------- explode ---------- */
+let explodeK = 0;
+function applyExplode() {
+  for (const o of rack.children) {
+    const u = o.userData; if (!u.base) continue;
+    o.position.copy(u.base).addScaledVector(u.ex, explodeK);
+    if (u.part === 'load') o.visible = explodeK < .03;
+  }
+}
+
+/* ---------- camera ---------- */
+function overview() {
+  // fit the rack (with goods on top) into the part of the stage not covered by the side panels
+  const t = V(0, G.H * .46, 0), w = stageEl.clientWidth;
+  const free = w > 1180 ? (w - 680) / w : 1;
+  const k = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+  const dist = Math.max((G.H + 1.6) / k, (G.rowLen * .95 + 1.6) / (k * camera.aspect * free)) * 1.08;
+  return { t, p: t.clone().addScaledVector(V(-.62, .38, 1).normalize(), dist) };
+}
+function focus(key) {
+  const a = ANCH[key];
+  const t = a.t.clone().addScaledVector(a.ex, explodeK);
+  return { t, p: t.clone().addScaledVector(a.dir.clone().normalize(), a.dist) };
+}
+let tween = null;
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function fly(v, dur = 1100) {
+  tween = { t0: performance.now(), dur: reduceMotion ? 1 : dur, p0: camera.position.clone(), q0: controls.target.clone(), p1: v.p.clone(), q1: v.t.clone() };
+}
+
+/* ---------- UI: list, callouts, thumbnails, detail ---------- */
+const MARK = {}, THUMB = {};
+$('#parts').innerHTML = PARTS.map(p => `<li><button data-key="${p.key}"><span class="num">${p.n}</span>${p.name}${p.opt ? '<span class="opt">опция</span>' : ''}</button></li>`).join('');
+$('#thumbs').innerHTML = PARTS.map(p => `<button class="th" data-key="${p.key}" aria-label="${p.n}. ${p.name}"><img alt=""><span class="num">${p.n}</span><span class="cap">${p.name}</span></button>`).join('');
+for (const p of PARTS) {
+  THUMB[p.key] = document.querySelector(`.th[data-key="${p.key}"] img`);
+  const el = document.createElement('div');
+  el.className = 'pin'; el.dataset.key = p.key;
+  el.innerHTML = `${p.n}<span class="nm">${p.name}</span>`;
+  const o = new CSS2DObject(el); scene.add(o); MARK[p.key] = o;
+}
+const detail = $('#detail');
+function renderCard() {
+  const p = PART_BY[hoverKey || selKey];
+  if (!p) {
+    detail.innerHTML = `<div class="empty"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 20 7.2v9.6L12 21.2 4 16.8V7.2z"/><path d="M4 7.2 12 11.6l8-4.4M12 11.6v9.6"/></svg><p>Выберите элемент в списке, на модели или на миниатюре — покажем его назначение и характеристики.</p></div>`;
+    return;
+  }
+  detail.innerHTML = `<div class="dh"><span class="num">${p.n}</span><h3>${p.name}</h3>${p.opt ? '<span class="badge">Опция</span>' : ''}</div>
+    <p>${p.desc}</p><dl>${p.specs.map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join('')}</dl>`;
+}
+function syncUI() {
+  document.querySelectorAll('[data-key]').forEach(el => {
+    el.classList.toggle('on', el.dataset.key === selKey);
+    el.classList.toggle('hov', el.dataset.key === hoverKey);
+    if (!el.classList.contains('pin')) el.classList.toggle('off', !partVisible(el.dataset.key));
+  });
+  renderCard();
+}
+function setHover(k) { if (k === hoverKey) return; hoverKey = k; syncUI(); }
+function select(k, flyTo = true) {
+  if (k && !partVisible(k)) return;
+  selKey = k;
+  refreshLook(); syncUI();
+  if (k && flyTo) fly(focus(k));
+}
+document.querySelectorAll('[data-key]').forEach(el => {
+  el.addEventListener('pointerenter', () => setHover(el.dataset.key));
+  el.addEventListener('pointerleave', () => setHover(null));
+  el.addEventListener('click', () => { stopTour(); select(el.dataset.key === selKey ? null : el.dataset.key); if (!selKey) fly(overview()); });
+});
+
+function updateStats() {
+  $('#stats').innerHTML = [
+    [`${fmt(G.H * 1000)} мм`, 'Высота рамы'],
+    [`${fmt(G.rowLen * 1000)} мм`, 'Длина ряда'],
+    [G.pallets, 'Паллетомест'],
+    ['3 000 кг', 'На уровень'],
+  ].map(([v, l]) => `<div class="stat"><b>${v}</b><span>${l}</span></div>`).join('');
+  $('#v-bays').textContent = state.bays; $('#v-levels').textContent = state.levels;
+  document.querySelectorAll('.step button').forEach(b => {
+    const [lo, hi] = LIMITS[b.dataset.k], v = state[b.dataset.k] + +b.dataset.d;
+    b.disabled = v < lo || v > hi;
+  });
+}
+
+/* parameters bar */
+let thumbTimer = null;
+const scheduleThumbs = () => { clearTimeout(thumbTimer); thumbTimer = setTimeout(makeThumbs, 350); };
+document.querySelectorAll('.step button').forEach(b => b.addEventListener('click', () => {
+  const k = b.dataset.k, [lo, hi] = LIMITS[k];
+  state[k] = Math.min(hi, Math.max(lo, state[k] + +b.dataset.d));
+  build();
+  if (selKey && partVisible(selKey)) fly(focus(selKey)); else { select(null, false); fly(overview()); }
+  scheduleThumbs();
+}));
+document.querySelectorAll('.tg[data-t]').forEach(b => b.addEventListener('click', () => {
+  const k = b.dataset.t; state[k] = !state[k]; b.setAttribute('aria-pressed', state[k]);
+  if (k === 'loads' || k === 'decking' || k === 'guards') {
+    build();
+    if (selKey && !partVisible(selKey)) select(null, false);
+    scheduleThumbs();
+  }
+  if (k === 'explode' && selKey) setTimeout(() => fly(focus(selKey), 900), 450);
+}));
+$('#reset').addEventListener('click', () => { stopTour(); select(null, false); fly(overview()); });
+addEventListener('keydown', e => { if (e.key === 'Escape') { stopTour(); select(null, false); } });
+
+/* guided tour through all visible parts */
+let tourTimer = null, tourI = 0;
+const exploreBtn = $('#explore');
+function stopTour() {
+  if (!tourTimer) return;
+  clearInterval(tourTimer); tourTimer = null;
+  exploreBtn.setAttribute('aria-pressed', 'false'); exploreBtn.querySelector('span').textContent = 'Исследовать модель';
+}
+exploreBtn.addEventListener('click', () => {
+  if (tourTimer) { stopTour(); return; }
+  const list = () => PARTS.filter(p => partVisible(p.key));
+  const step = () => { const l = list(); select(l[tourI++ % l.length].key); };
+  tourI = 0; step(); tourTimer = setInterval(step, 3600);
+  exploreBtn.setAttribute('aria-pressed', 'true'); exploreBtn.querySelector('span').textContent = 'Остановить обзор';
+});
+
+/* ---------- picking on the model ---------- */
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(), tip = $('#tip');
+function pickAt(e) {
+  const r = renderer.domElement.getBoundingClientRect();
+  ndc.set((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  ray.setFromCamera(ndc, camera);
+  for (const h of ray.intersectObjects(pickables, false)) if (h.object.visible) return h.object.userData.part;
+  return null;
+}
+{
+  const el = renderer.domElement; let down = null, pending = null;
+  el.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
+  el.addEventListener('pointerup', e => {
+    if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 5) return;
+    stopTour();
+    const k = pickAt(e);
+    if (k) select(k); else if (selKey) select(null, false);
+  });
+  el.addEventListener('pointermove', e => {
+    if (e.buttons || e.pointerType === 'touch') return;
+    pending = e;
+    requestAnimationFrame(() => {
+      if (!pending) return;
+      const ev = pending; pending = null;
+      const k = pickAt(ev);
+      setHover(k);
+      el.style.cursor = k ? 'pointer' : '';
+      if (k) {
+        const r = stageEl.getBoundingClientRect(), p = PART_BY[k];
+        tip.innerHTML = `<span class="num">${p.n}</span>${p.name}`;
+        tip.style.display = 'flex'; tip.style.left = (ev.clientX - r.left + 16) + 'px'; tip.style.top = (ev.clientY - r.top + 12) + 'px';
+      } else tip.style.display = 'none';
+    });
+  });
+  el.addEventListener('pointerleave', () => { tip.style.display = 'none'; setHover(null); });
+}
+controls.addEventListener('start', () => { tween = null; stopTour(); });
+
+/* ---------- thumbnails: close-ups of each part rendered from the live model ---------- */
+const thumbCanvas = document.createElement('canvas'); thumbCanvas.width = 400; thumbCanvas.height = 280;
+const tctx = thumbCanvas.getContext('2d');
+const thumbCam = new THREE.PerspectiveCamera(36, 400 / 280, .02, 100);
+function makeThumbs() {
+  const el = renderer.domElement, pr = renderer.getPixelRatio(), size = renderer.getSize(new THREE.Vector2());
+  const tw = Math.min(400, size.x), th = Math.round(tw * .7);
+  if (size.y < th || tw < 100) return;
+  const keepSel = selKey, keepHover = hoverKey;
+  hoverKey = null; showDims(false);
+  const floorItems = [floor, ...rack.children.filter(o => o.userData.part === 'floor')];   // the part alone on the dark tile
+  floorItems.forEach(o => { o.visible = false; });
+  for (const c of Object.values(CAT)) for (const m of c.mats) m.emissiveIntensity = 0;
+  thumbCam.aspect = tw / th; thumbCam.updateProjectionMatrix();
+  renderer.setScissorTest(true);
+  for (const p of PARTS) {
+    if (!partVisible(p.key)) { THUMB[p.key].classList.remove('ready'); continue; }
+    selKey = p.key; refreshLook(.05);
+    const v = focus(p.key); thumbCam.position.copy(v.p); thumbCam.lookAt(v.t);
+    renderer.setViewport(0, 0, tw, th); renderer.setScissor(0, 0, tw, th);
+    renderer.clear(); renderer.render(scene, thumbCam);
+    tctx.clearRect(0, 0, 400, 280);
+    tctx.drawImage(el, 0, el.height - th * pr, tw * pr, th * pr, 0, 0, 400, 280);
+    THUMB[p.key].src = thumbCanvas.toDataURL('image/png');
+    THUMB[p.key].classList.add('ready');
+  }
+  renderer.setScissorTest(false); renderer.setViewport(0, 0, size.x, size.y);
+  floorItems.forEach(o => { o.visible = true; });
+  selKey = keepSel; hoverKey = keepHover;
+  refreshLook();
+  renderer.render(scene, camera);
+}
+
+/* ---------- loop ---------- */
+function resize() {
+  const w = stageEl.clientWidth, h = stageEl.clientHeight;
+  renderer.setSize(w, h); labelRenderer.setSize(w, h);
+  camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(stageEl);
+resize();
+
+function frame(now) {
+  requestAnimationFrame(frame);
+  if (tween) {
+    const k = Math.min(1, (now - tween.t0) / tween.dur), e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+    camera.position.lerpVectors(tween.p0, tween.p1, e); controls.target.lerpVectors(tween.q0, tween.q1, e);
+    if (k >= 1) tween = null;
+  }
+  controls.update();
+  const goal = state.explode ? 1 : 0;
+  if (explodeK !== goal) {
+    explodeK += (goal - explodeK) * (reduceMotion ? 1 : .09);
+    if (Math.abs(goal - explodeK) < .002) explodeK = goal;
+    applyExplode();
+  }
+  showDims(state.dims && explodeK < .03);
+  const pulse = .3 + .18 * Math.sin(now * .006);
+  for (const [k, c] of Object.entries(CAT)) {
+    const on = k === hoverKey || k === selKey;
+    for (const m of c.mats) { if (on) m.emissive.setHex(0xff5a1f); m.emissiveIntensity = on ? (k === hoverKey ? .5 : pulse) : 0; }
+  }
+  for (const p of PARTS) {
+    const mk = MARK[p.key], a = ANCH[p.key], vis = !!a && partVisible(p.key);
+    mk.visible = vis;
+    if (vis) mk.position.copy(a.m).addScaledVector(a.ex, explodeK);
+  }
+  renderer.render(scene, camera);
+  labelRenderer.render(scene, camera);
+}
+
+build();
+const ov = overview(); camera.position.copy(ov.p); controls.target.copy(ov.t);
+window.RK = { camera, controls, state, get G() { return G; }, select, overview, fly };   // console hook for checks
+syncUI();
+requestAnimationFrame(frame);
+requestAnimationFrame(() => $('#loading').classList.add('done'));
+
+/* lettering on the canvases needs the web font */
+Promise.race([
+  Promise.all([document.fonts.load(`800 30px Manrope`), document.fonts.load(`600 24px Manrope`)]),
+  new Promise(r => setTimeout(r, 2500)),
+]).catch(() => {}).then(() => {
+  for (const t of ALL_TEX) t.userData.redraw();
+  $('#loading').classList.add('done');
+  setTimeout(makeThumbs, 120);
+});
+})();
+</script>
+</body>
+</html>
