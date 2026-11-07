@@ -51,11 +51,11 @@
 .rk-type { display: flex; flex-direction: column; padding-bottom: 20px; background: var(--c-surface); border-radius: 6px; overflow: hidden; box-shadow: inset 0 0 0 1px #585858; }
 .rk-type__img { width: 100%; height: auto; aspect-ratio: 254 / 264; object-fit: cover; border-bottom: 1px solid #585858; }
 .rk-type__title { margin: 14px 12px 0; min-height: 2.3em; font-size: 17px; font-weight: 600; line-height: 1.15; }
-.rk-type p { margin: 8px 12px 0; padding-right: 22px; font-size: 16px; line-height: 1.2; color: #d6d6d6; }
+.rk-type p { margin: 8px 12px 0; padding-right: 10px; font-size: 15px; line-height: 1.2; color: #d6d6d6; }
 .rk-side { padding: 26px 24px; background: var(--c-surface); border-radius: 8px; box-shadow: inset 0 0 0 1px #585858; }
 .rk-side__title { font-size: 24px; font-weight: 600; line-height: 1.15; text-transform: uppercase; }
 .rk-side__text { margin-top: 14px; font-size: 14px; line-height: 1.4; color: #d6d6d6; }
-.rk-side__cap { display: flex; justify-content: space-between; gap: 12px; margin-top: 22px; font-size: 12px; font-weight: 600; line-height: 1.2; text-transform: uppercase; }
+.rk-side__cap { display: flex; justify-content: space-between; gap: 8px; margin-top: 22px; white-space: nowrap; font-size: 11px; font-weight: 600; line-height: 1.2; text-transform: uppercase; }
 .rk-bars { display: grid; gap: 10px; margin-top: 6px; }
 .rk-bars li { display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: end; gap: 14px; font-size: 16px; line-height: 1.2; }
 .rk-bars li > span { padding-bottom: 1px; }
@@ -66,17 +66,17 @@
 .rk-side__btn:hover { background: rgba(234, 89, 1, .1); }
 .rk-floors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; margin-top: 20px; }
 .rk-floors img { width: 100%; height: auto; aspect-ratio: 187 / 84; object-fit: cover; border-radius: 3px; }
-.rk-floors span { display: block; margin-top: 8px; font-size: 15px; font-weight: 600; line-height: 1.15; }
+.rk-floors span { display: block; margin-top: 8px; font-size: 14px; font-weight: 600; line-height: 1.15; }
 
 /* ---------- Комплектация и аксессуары ---------- */
 .rk-accs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 22px; margin-top: 34px; }
 .rk-acc__img { width: 100%; height: auto; aspect-ratio: 235 / 226; object-fit: cover; border-radius: 3px; box-shadow: 0 0 0 1px #585858; }
-.rk-acc__title { min-height: 40px; max-width: 76%; margin-top: 18px; font-size: 18px; font-weight: 600; line-height: 1.12; }
-.rk-acc p { max-width: 86%; margin-top: 14px; font-size: 16px; line-height: 1.2; color: #d6d6d6; }
+.rk-acc__title { min-height: 40px; max-width: 100%; margin-top: 18px; font-size: 17px; font-weight: 600; line-height: 1.12; }
+.rk-acc p { max-width: 90%; margin-top: 14px; font-size: 15px; line-height: 1.2; color: #d6d6d6; }
 
 /* ---------- Использование объема склада ---------- */
 .rk-vol-wrap { display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr); gap: 32px; }
-.rk-vol__sub { margin-top: 10px; font-size: 13px; line-height: 1.2; color: var(--c-text-2); }
+.rk-vol__sub { margin-top: 10px; font-size: 13px; font-weight: 400; line-height: 1.2; color: var(--c-text-2); }
 .rk-vol__cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 20px; align-items: end; }
 .rk-vol__cols li { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
 .rk-vol__img { width: 100%; height: auto; aspect-ratio: 1.55; object-fit: contain; object-position: center bottom; mix-blend-mode: lighten; }
@@ -197,3 +197,6 @@ main .rk-uni__text p { hyphens: manual !important; -webkit-hyphens: manual !impo
 .rk-cfg__frame.is-loading { position: relative; }
 .rk-cfg__frame.is-loading iframe { position: absolute; inset: 0; visibility: hidden; }
 @media (max-width: 760px) { .rk-cfg__start { min-height: 420px; } }
+
+/* «Примеры реализации» по макету: кадры выше, 2×2 заполняют карточку */
+.page-racks .examples img { aspect-ratio: 292 / 186; }
