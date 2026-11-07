@@ -164,8 +164,8 @@ main .rk-type p, main .rk-acc p, main .rk-feats p, main .rk-tile p, main .rk-sid
 main .rk-vol__cols p, main .rk-vol__sub, main .rk-head__sub { text-align: left !important; hyphens: manual !important; }
 
 /* ---------- Ховеры (как на каталоге и складских стеллажах: рамка акцентом, зум фото, заголовок акцентом) ---------- */
-.rk-tile, .rk-type, .rk-var li, .rk-side, .rk-hero .m-hero__features li { transition: box-shadow .25s ease, background-color .25s ease; }
-.rk-tile:hover, .rk-type:hover, .rk-side:hover { box-shadow: inset 0 0 0 1px var(--c-accent); }
+.rk-type, .rk-var li, .rk-side, .rk-hero .m-hero__features li { transition: box-shadow .25s ease, background-color .25s ease; }
+.rk-type:hover, .rk-side:hover { box-shadow: inset 0 0 0 1px var(--c-accent); }
 .rk-hero .m-hero__features li { transition: border-color .25s ease; }
 .rk-hero .m-hero__features li:hover { border-color: var(--c-accent); }
 .rk-var li:hover { box-shadow: 0 0 0 1px var(--c-accent); }
@@ -176,6 +176,9 @@ main .rk-vol__cols p, main .rk-vol__sub, main .rk-head__sub { text-align: left !
 .rk-acc, .rk-where__list li, .rk-floors li, .rk-vol__cols li, .rk-feats li, .rk-why__list li, .rk-choose__list li { transition: color .2s ease; }
 .rk-acc:hover .rk-acc__img, .rk-where__list li:hover img, .rk-floors li:hover img, .examples li:hover img { box-shadow: 0 0 0 1px var(--c-accent); }
 .rk-acc:hover .rk-acc__title, .rk-where__list li:hover span, .rk-floors li:hover span, .rk-vol__cols li:hover h3,
-.rk-feats li:hover h3, .rk-why__list li:hover, .rk-choose__list li:hover strong, .rk-tile:hover, .rk-type:hover .rk-type__title { color: var(--c-accent); }
+.rk-feats li:hover h3, .rk-why__list li:hover, .rk-choose__list li:hover strong, .rk-type:hover .rk-type__title { color: var(--c-accent); }
 .rk-side__btn { transition: background-color .25s ease, color .25s ease; }
 .rk-side__btn:hover, .rk-side__btn:focus-visible { color: var(--c-text); background: var(--c-accent); }
+
+/* вводный текст — без переносов слов, как в макете */
+main .rk-uni__text p { hyphens: manual !important; -webkit-hyphens: manual !important; }
