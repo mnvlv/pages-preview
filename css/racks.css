@@ -164,10 +164,8 @@ main .rk-type p, main .rk-acc p, main .rk-feats p, main .rk-tile p, main .rk-sid
 main .rk-vol__cols p, main .rk-vol__sub, main .rk-head__sub { text-align: left !important; hyphens: manual !important; }
 
 /* ---------- Ховеры (как на каталоге и складских стеллажах: рамка акцентом, зум фото, заголовок акцентом) ---------- */
-.rk-type, .rk-var li, .rk-side, .rk-hero .m-hero__features li { transition: box-shadow .25s ease, background-color .25s ease; }
+.rk-type, .rk-var li, .rk-side { transition: box-shadow .25s ease, background-color .25s ease; }
 .rk-type:hover, .rk-side:hover { box-shadow: inset 0 0 0 1px var(--c-accent); }
-.rk-hero .m-hero__features li { transition: border-color .25s ease; }
-.rk-hero .m-hero__features li:hover { border-color: var(--c-accent); }
 .rk-var li:hover { box-shadow: 0 0 0 1px var(--c-accent); }
 .rk-type__img, .rk-var img, .rk-acc__img, .rk-where__list img, .rk-floors img, .examples img { transition: transform .5s ease, box-shadow .25s ease; }
 .rk-type:hover .rk-type__img, .rk-var li:hover img { transform: scale(1.04); }
