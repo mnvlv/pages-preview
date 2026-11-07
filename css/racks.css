@@ -167,14 +167,14 @@ main .rk-vol__cols p, main .rk-vol__sub, main .rk-head__sub { text-align: left !
 .rk-type, .rk-var li, .rk-side { transition: box-shadow .25s ease, background-color .25s ease; }
 .rk-type:hover, .rk-side:hover { box-shadow: inset 0 0 0 1px var(--c-accent); }
 .rk-var li:hover { box-shadow: 0 0 0 1px var(--c-accent); }
-.rk-type__img, .rk-var img, .rk-acc__img, .rk-where__list img, .rk-floors img, .examples img { transition: transform .5s ease, box-shadow .25s ease; }
+.rk-type__img, .rk-var img, .rk-acc__img, .rk-floors img, .examples img { transition: transform .5s ease, box-shadow .25s ease; }
 .rk-type:hover .rk-type__img, .rk-var li:hover img { transform: scale(1.04); }
 .rk-type, .rk-var li { overflow: hidden; }
 .rk-type__img { position: relative; }
-.rk-acc, .rk-where__list li, .rk-floors li, .rk-vol__cols li, .rk-feats li, .rk-why__list li, .rk-choose__list li { transition: color .2s ease; }
-.rk-acc:hover .rk-acc__img, .rk-where__list li:hover img, .rk-floors li:hover img, .examples li:hover img { box-shadow: 0 0 0 1px var(--c-accent); }
-.rk-acc:hover .rk-acc__title, .rk-where__list li:hover span, .rk-floors li:hover span, .rk-vol__cols li:hover h3,
-.rk-feats li:hover h3, .rk-why__list li:hover, .rk-choose__list li:hover strong, .rk-type:hover .rk-type__title { color: var(--c-accent); }
+.rk-acc, .rk-floors li, .rk-vol__cols li, .rk-feats li, .rk-why__list li { transition: color .2s ease; }
+.rk-acc:hover .rk-acc__img, .rk-floors li:hover img, .examples li:hover img { box-shadow: 0 0 0 1px var(--c-accent); }
+.rk-acc:hover .rk-acc__title, .rk-floors li:hover span, .rk-vol__cols li:hover h3,
+.rk-feats li:hover h3, .rk-why__list li:hover, .rk-type:hover .rk-type__title { color: var(--c-accent); }
 .rk-side__btn { transition: background-color .25s ease, color .25s ease; }
 .rk-side__btn:hover, .rk-side__btn:focus-visible { color: var(--c-text); background: var(--c-accent); }
 
