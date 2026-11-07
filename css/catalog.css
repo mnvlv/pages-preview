@@ -224,6 +224,7 @@ a.pager__item:hover, .pager__item.is-active { color: var(--c-accent); box-shadow
 .faq__item:hover { background: #262626; box-shadow: 0 0 0 1px rgba(234, 89, 1, .55), 0 10px 30px -18px rgba(234, 89, 1, .45); }
 .faq__item.is-open { box-shadow: 0 0 0 1px var(--c-accent), 0 14px 40px -22px rgba(234, 89, 1, .55); }
 .faq__item:has(.faq__q button:active) { transform: scale(.995); }
+.faq__q { display: flex; }
 .faq__q button {
   position: relative; display: flex; align-items: center; width: 100%; min-height: 80px; padding: 20px 80px 20px 28px; text-align: left;
   font-size: 20px; font-weight: 600; line-height: 24px; color: var(--c-text-2); background: none; border: 0;
