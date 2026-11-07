@@ -35,13 +35,13 @@
 .rk-tile__icon { width: auto; height: 62px; align-self: flex-start; object-fit: contain; object-position: left center; }
 
 /* ---------- 3D-конструктор ---------- */
-.rk-cfg .lead { max-width: 640px; margin-top: 18px; }
+.rk-cfg .lead { max-width: 900px; margin-top: 18px; }
 .rk-cfg__frame { margin-top: 28px; overflow: hidden; background: #43464c; border-radius: 8px; box-shadow: inset 0 0 0 1px #585858; }
 .rk-cfg__frame iframe { display: block; width: 100%; height: 760px; border: 0; }
 
 /* ---------- Заголовок с подписью ---------- */
 .rk-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
-.rk-head__sub { margin-top: 12px; font-size: 18px; line-height: 1.2; color: var(--c-text-2); }
+.rk-head__sub { margin-top: 12px; font-size: 20px; line-height: 1.2; color: var(--c-text-2); }
 .rk-head__sub--lg { margin-top: 12px; margin-bottom: 30px; }
 .rk-head__btn { flex: none; margin-top: 8px; }
 
@@ -50,10 +50,10 @@
 .rk-types__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
 .rk-type { display: flex; flex-direction: column; padding-bottom: 20px; background: var(--c-surface); border-radius: 6px; overflow: hidden; box-shadow: inset 0 0 0 1px #585858; }
 .rk-type__img { width: 100%; height: auto; aspect-ratio: 254 / 264; object-fit: cover; border-bottom: 1px solid #585858; }
-.rk-type__title { margin: 14px 12px 0; font-size: 19px; font-weight: 600; line-height: 1.15; }
-.rk-type p { margin: 10px 12px 0; font-size: 15px; line-height: 1.25; color: #d6d6d6; }
+.rk-type__title { margin: 14px 12px 0; min-height: 2.3em; font-size: 17px; font-weight: 600; line-height: 1.15; }
+.rk-type p { margin: 8px 12px 0; padding-right: 22px; font-size: 16px; line-height: 1.2; color: #d6d6d6; }
 .rk-side { padding: 26px 24px; background: var(--c-surface); border-radius: 8px; box-shadow: inset 0 0 0 1px #585858; }
-.rk-side__title { font-size: 28px; font-weight: 600; line-height: 1.15; text-transform: uppercase; }
+.rk-side__title { font-size: 24px; font-weight: 600; line-height: 1.15; text-transform: uppercase; }
 .rk-side__text { margin-top: 14px; font-size: 14px; line-height: 1.4; color: #d6d6d6; }
 .rk-side__cap { display: flex; justify-content: space-between; gap: 12px; margin-top: 22px; font-size: 12px; font-weight: 600; line-height: 1.2; text-transform: uppercase; }
 .rk-bars { display: grid; gap: 10px; margin-top: 6px; }
@@ -71,8 +71,8 @@
 /* ---------- Комплектация и аксессуары ---------- */
 .rk-accs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 22px; margin-top: 34px; }
 .rk-acc__img { width: 100%; height: auto; aspect-ratio: 235 / 226; object-fit: cover; border-radius: 3px; box-shadow: 0 0 0 1px #585858; }
-.rk-acc__title { min-height: 40px; margin-top: 18px; font-size: 18px; font-weight: 600; line-height: 1.12; }
-.rk-acc p { margin-top: 14px; font-size: 15px; line-height: 1.25; color: #d6d6d6; }
+.rk-acc__title { min-height: 40px; max-width: 76%; margin-top: 18px; font-size: 18px; font-weight: 600; line-height: 1.12; }
+.rk-acc p { max-width: 86%; margin-top: 14px; font-size: 16px; line-height: 1.2; color: #d6d6d6; }
 
 /* ---------- Использование объема склада ---------- */
 .rk-vol-wrap { display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr); gap: 32px; }
@@ -158,5 +158,24 @@
   .rk-where__list { grid-template-columns: minmax(0, 1fr); }
 }
 
-/* подписи в узких карточках — по левому краю */
-.rk-type p, .rk-acc p, .rk-feats p, .rk-tile p { text-align: left; hyphens: manual; }
+/* ---------- Выравнивание подписей в узких карточках ---------- */
+/* глобальное «по ширине» даёт в коротких строках карточек большие пробелы — здесь по левому краю */
+main .rk-type p, main .rk-acc p, main .rk-feats p, main .rk-tile p, main .rk-side__text, main .rk-choose__list span,
+main .rk-vol__cols p, main .rk-vol__sub, main .rk-head__sub { text-align: left !important; hyphens: manual !important; }
+
+/* ---------- Ховеры (как на каталоге и складских стеллажах: рамка акцентом, зум фото, заголовок акцентом) ---------- */
+.rk-tile, .rk-type, .rk-var li, .rk-side, .rk-hero .m-hero__features li { transition: box-shadow .25s ease, background-color .25s ease; }
+.rk-tile:hover, .rk-type:hover, .rk-side:hover { box-shadow: inset 0 0 0 1px var(--c-accent); }
+.rk-hero .m-hero__features li { transition: border-color .25s ease; }
+.rk-hero .m-hero__features li:hover { border-color: var(--c-accent); }
+.rk-var li:hover { box-shadow: 0 0 0 1px var(--c-accent); }
+.rk-type__img, .rk-var img, .rk-acc__img, .rk-where__list img, .rk-floors img, .examples img { transition: transform .5s ease, box-shadow .25s ease; }
+.rk-type:hover .rk-type__img, .rk-var li:hover img { transform: scale(1.04); }
+.rk-type, .rk-var li { overflow: hidden; }
+.rk-type__img { position: relative; }
+.rk-acc, .rk-where__list li, .rk-floors li, .rk-vol__cols li, .rk-feats li, .rk-why__list li, .rk-choose__list li { transition: color .2s ease; }
+.rk-acc:hover .rk-acc__img, .rk-where__list li:hover img, .rk-floors li:hover img, .examples li:hover img { box-shadow: 0 0 0 1px var(--c-accent); }
+.rk-acc:hover .rk-acc__title, .rk-where__list li:hover span, .rk-floors li:hover span, .rk-vol__cols li:hover h3,
+.rk-feats li:hover h3, .rk-why__list li:hover, .rk-choose__list li:hover strong, .rk-tile:hover, .rk-type:hover .rk-type__title { color: var(--c-accent); }
+.rk-side__btn { transition: background-color .25s ease, color .25s ease; }
+.rk-side__btn:hover, .rk-side__btn:focus-visible { color: var(--c-text); background: var(--c-accent); }
