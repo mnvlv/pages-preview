@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="css/style.css?v=62">
   <link rel="stylesheet" href="css/mining.css?v=3">
   <link rel="stylesheet" href="css/catalog.css?v=18">
-  <link rel="stylesheet" href="css/racks.css?v=24">
+  <link rel="stylesheet" href="css/racks.css?v=27">
 </head>
 <body class="page-racks">
 
@@ -159,8 +159,12 @@
     <div class="container">
       <h2 class="h2">3D визуализация стеллажа</h2>
       <p class="lead lead--lg">Изучите строение среднегрузового стеллажа в нашем конструкторе. Наведите на элемент, чтобы узнать его назначение</p>
-      <div class="rk-cfg__frame">
-        <iframe src="configurator/srednegruz-3d.html" title="3D-конструктор среднегрузового стеллажа" loading="lazy" data-rk-frame allowfullscreen></iframe>
+      <div class="rk-cfg__frame" data-rk-cfg data-src="configurator/srednegruz-3d.html" data-title="3D-конструктор среднегрузового стеллажа">
+        <div class="rk-cfg__start">
+          <svg class="rk-cfg__cube" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M24 4 42 14v20L24 44 6 34V14zM6 14l18 10 18-10M24 24v20"/></svg>
+          <button type="button" class="btn btn--primary btn--md" data-rk-start>Запустить 3D-конструктор</button>
+          <p>Модель загружается по нажатию, так страница открывается быстрее</p>
+        </div>
       </div>
     </div>
   </section>
@@ -395,6 +399,6 @@
 
 <script src="js/main.js?v=52"></script>
 <script src="js/catalog.js?v=3"></script>
-<script src="js/racks.js?v=1"></script>
+<script src="js/racks.js?v=2"></script>
 </body>
 </html>

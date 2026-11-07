@@ -188,3 +188,12 @@ main .rk-uni__text p { hyphens: manual !important; -webkit-hyphens: manual !impo
 .page-racks .m-request .request__info { display: flex; flex-direction: column; align-items: flex-start; align-self: stretch; }
 .page-racks .m-request__call { margin-top: auto; }
 @media (max-width: 768px) { .page-racks .m-request__call { margin-top: 14px; } }
+
+/* ---------- 3D-конструктор: заглушка до запуска (lazy-load) ---------- */
+.rk-cfg__start { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; min-height: 760px; padding: 40px 20px; text-align: center; }
+.rk-cfg__cube { width: 56px; height: 56px; color: var(--c-accent); }
+.rk-cfg__start p { max-width: 380px; font-size: 14px; line-height: 1.35; color: #d6d6d6; text-align: center !important; }
+.rk-cfg__start .btn[disabled] { opacity: .7; cursor: progress; }
+.rk-cfg__frame.is-loading { position: relative; }
+.rk-cfg__frame.is-loading iframe { position: absolute; inset: 0; visibility: hidden; }
+@media (max-width: 760px) { .rk-cfg__start { min-height: 420px; } }
