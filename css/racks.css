@@ -183,3 +183,8 @@ main .rk-uni__text p { hyphens: manual !important; -webkit-hyphens: manual !impo
 /* ширина описаний подобрана под переносы макета */
 .rk-feats li:nth-child(1) p { width: 332px; max-width: none; }
 @media (max-width: 1200px) { .rk-feats li:nth-child(1) p { width: auto; max-width: 307px; } }
+
+/* форма: «Позвонить сейчас» внизу, на одной линии с «Оставить заявку» (как в макете) */
+.page-racks .m-request .request__info { display: flex; flex-direction: column; align-items: flex-start; align-self: stretch; }
+.page-racks .m-request__call { margin-top: auto; }
+@media (max-width: 768px) { .page-racks .m-request__call { margin-top: 14px; } }
