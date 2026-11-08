@@ -374,7 +374,8 @@ button { cursor: pointer; }
 .stat__text { display: block; margin-top: 17px; font-size: 16px; font-weight: 600; line-height: 1.1; color: var(--c-text-2); }
 .geo__text .line { width: 50px; margin-top: 14px; }
 .geo__text .h3 { line-height: 31px; }
-.geo__text .lead { margin-top: 16px; text-align: left !important; hyphens: manual !important; text-wrap: balance; }
+.geo__text .lead { margin-top: 16px; text-align: left !important; -webkit-hyphens: manual !important; hyphens: manual !important; overflow-wrap: normal; word-break: normal; text-wrap: pretty; }
+@media (max-width: 768px) { .geo__text .lead br { display: none; } }
 .geo__text .btn { margin-top: 36px; }
 
 /* ---------- Нам доверяют (бегущая строка) ---------- */
