@@ -141,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const n = originals.length;
     const active = new Set();
     let pointer = null;
-    let paused = false;
     const setActive = (i, on) => {
       if (on === active.has(i)) return;
       if (on) active.add(i); else active.delete(i);
@@ -162,9 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       active.forEach((i) => { if (!hovered.has(i)) setActive(i, false); });
       hovered.forEach((i) => setActive(i, true));
-      // пока курсор на логотипе — лента стоит: подсветка не «уезжает» на соседний логотип
-      const hold = hovered.size > 0;
-      if (hold !== paused) { paused = hold; logos.style.animationPlayState = hold ? 'paused' : ''; }
     };
     window.addEventListener('pointermove', (e) => {
       pointer = e.pointerType === 'mouse' ? { x: e.clientX, y: e.clientY } : null;
