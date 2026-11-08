@@ -13,13 +13,21 @@
 .pd-gallery { display: grid; grid-template-columns: 94px minmax(0, 1fr); gap: 20px; align-items: start; }
 .pd-thumbs { display: grid; gap: 16px; }
 .pd-thumb {
-  display: block; width: 94px; height: 94px; padding: 0; overflow: hidden; background: #232323; border: 0; border-radius: 6px;
-  box-shadow: inset 0 0 0 1px #585858; opacity: .85; transition: opacity .2s, box-shadow .2s;
+  position: relative; display: block; width: 94px; height: 94px; padding: 0; overflow: hidden; background: #232323; border: 0; border-radius: 6px;
+  opacity: .85; transition: opacity .2s;
 }
 .pd-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
-.pd-thumb:hover { opacity: 1; box-shadow: inset 0 0 0 1px var(--c-accent); }
+/* контур поверх фото (inset-тень скрывалась бы под картинкой) */
+.pd-thumb::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  border: 1px solid #585858; transition: border-color .2s, border-width .2s;
+}
+.pd-thumb:hover { opacity: 1; }
+.pd-thumb:hover::after { border-color: var(--c-accent); }
 .pd-thumb:hover img { transform: scale(1.04); }
-.pd-thumb.is-active { opacity: 1; box-shadow: inset 0 0 0 2px var(--c-accent); }
+.pd-thumb.is-active { opacity: 1; }
+.pd-thumb.is-active::after { border: 3px solid var(--c-accent); }
+.pd-thumb:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
 .pd-photo { overflow: hidden; border-radius: 8px; background: #232323; aspect-ratio: 743 / 706; }
 .pd-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
