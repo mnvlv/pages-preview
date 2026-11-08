@@ -32,7 +32,7 @@
       <ul class="nav__list">
         <li class="nav__item nav__item--drop nav__item--mega">
           <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-catalog">
-            <span class="nav__text">Каталог</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            <span class="nav__text">Стеллажи</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
           </button>
           <div class="mega" id="nav-catalog">
             <ul class="mega__grid">
@@ -227,15 +227,15 @@
     <div class="container whs">
       <div class="whs__intro">
         <p class="eyebrow">Подберем решение за 2 минуты</p>
-        <h2 class="h2">Какой склад<br> нужно оснастить?</h2>
+        <h2 class="h2">Какое пространство<br> нужно оборудовать?</h2>
         <p class="lead">Ответьте на несколько вопросов и получите рекомендации<br> по оборудованию и расчет стоимости</p>
         <a href="#request" class="btn btn--primary btn--lg">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
       <ul class="whs__grid">
         <li><a href="#request" class="whs__tile" data-warehouse="logistics"><img src="img/icons/wh-1.svg" width="54" height="35" alt="">Логистический<br> склад</a></li>
         <li><a href="#request" class="whs__tile" data-warehouse="production"><img src="img/icons/wh-2.svg" width="53" height="44" alt="">Производственный<br> склад</a></li>
-        <li><a href="#request" class="whs__tile" data-warehouse="trade"><img src="img/icons/wh-3.svg" width="55" height="43" alt="">Торговый<br> склад</a></li>
-        <li><a href="#request" class="whs__tile" data-warehouse="console"><img src="img/icons/wh-4.svg" width="54" height="37" alt="">Консольный<br> склад</a></li>
+        <li><a href="#request" class="whs__tile" data-warehouse="trade"><img src="img/icons/wh-3.svg" width="55" height="43" alt="">Склад<br> для маркетплейсов</a></li>
+        <li><a href="#request" class="whs__tile" data-warehouse="console"><img src="img/icons/wh-4.svg" width="54" height="37" alt="">Склад<br> металлопроката</a></li>
         <li><a href="#request" class="whs__tile" data-warehouse="cold"><img src="img/icons/wh-5.svg" width="53" height="44" alt="">Холодильный<br> склад</a></li>
         <li><a href="#request" class="whs__tile" data-warehouse="archive"><img src="img/icons/wh-6.svg" width="34" height="54" alt="">Архив и офис</a></li>
       </ul>
@@ -257,11 +257,11 @@
       <button class="slider-nav__btn slider-wrap__btn slider-wrap__btn--prev" type="button" data-slider-prev="projectsSlider" aria-label="Предыдущий проект"><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
       <button class="slider-nav__btn slider-wrap__btn slider-wrap__btn--next" type="button" data-slider-next="projectsSlider" aria-label="Следующий проект"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
       <ul class="slider" id="projectsSlider">
-        <li class="project"><div class="project__img" style="--img:url('../img/project-1.webp')"></div><h3 class="project__title">Распределительный центр<br> Wildberries, Подольск</h3></li>
-        <li class="project"><div class="project__img" style="--img:url('../img/project-2.webp')"></div><h3 class="project__title">Логистический центр<br> Ozon, Тверь</h3></li>
-        <li class="project"><div class="project__img" style="--img:url('../img/project-3.webp')"></div><h3 class="project__title">Складской комплекс<br> X5 Group, Казань</h3></li>
-        <li class="project"><div class="project__img" style="--img:url('../img/project-4.webp')"></div><h3 class="project__title">Производственный склад<br> «МеталлПроф»,<br> Екатеринбург</h3></li>
-        <li class="project"><div class="project__img" style="--img:url('../img/project-5.webp')"></div><h3 class="project__title">Склад архивного<br> хранения РЖД, Москва</h3></li>
+        <li class="project"><div class="project__img" style="--img:url('../img/project-1.webp')"></div><h3 class="project__title">Холодильный склад:<br> Фронтальные стеллажи для хранения пищевой продукции, г. Красноярск</h3></li>
+        <li class="project"><div class="project__img" style="--img:url('../img/project-2.webp')"></div><h3 class="project__title">Фармацевтический склад:<br> Среднегрузовые стеллажи, г. Красноярск</h3></li>
+        <li class="project"><div class="project__img" style="--img:url('../img/project-3.webp')"></div><h3 class="project__title">Автосервис:<br> Стеллажное хранение запчастей и комплектующих, г. Красноярск</h3></li>
+        <li class="project"><div class="project__img" style="--img:url('../img/project-4.webp')"></div><h3 class="project__title">Склад оптово-розничной сети:<br> Хранение метизов и крепежа, г. Красноярск</h3></li>
+        <li class="project"><div class="project__img" style="--img:url('../img/project-5.webp')"></div><h3 class="project__title">Архивное хранение:<br> Мобильные стеллажи для хранения документов, г. Красноярск</h3></li>
       </ul>
       </div>
       <a href="/services/sborka-i-montazh/" class="btn btn--primary btn--lg slider-all-mob">Смотреть все проекты <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
@@ -317,13 +317,12 @@
     </div>
     <div class="marquee">
       <ul class="marquee__track" id="logos">
-        <li class="partner" style="--w:278;--h:85"><img class="partner__img" src="img/partners/x5.webp" width="278" height="85" alt="X5 Group" loading="lazy"><img class="partner__img partner__img--color" src="img/partners/x5-color.webp" width="278" height="85" alt="" aria-hidden="true" loading="lazy"></li>
-        <li class="partner" style="--w:177;--h:42"><img class="partner__img" src="img/partners/paks.webp" width="177" height="42" alt="ПАКС Металл" loading="lazy"><img class="partner__img partner__img--color" src="img/partners/paks-color.webp" width="177" height="42" alt="" aria-hidden="true" loading="lazy"></li>
-        <li class="partner" style="--w:280;--h:65"><img class="partner__img" src="img/partners/sber-logistika.webp" width="280" height="65" alt="Сбер Логистика" loading="lazy"><img class="partner__img partner__img--color" src="img/partners/sber-logistika-color.webp" width="280" height="65" alt="" aria-hidden="true" loading="lazy"></li>
-        <li class="partner" style="--w:240;--h:70"><img class="partner__img" src="img/partners/rosseti.webp" width="240" height="70" alt="Россети Сибирь" loading="lazy"><img class="partner__img partner__img--color" src="img/partners/rosseti-color.webp" width="240" height="70" alt="" aria-hidden="true" loading="lazy"></li>
+        <li class="partner" style="--w:236;--h:53"><img class="partner__img" src="img/partners/virage.webp" width="236" height="53" alt="Вираж Техмаркеты" loading="lazy"><img class="partner__img partner__img--color" src="img/partners/virage-color.webp" width="236" height="53" alt="" aria-hidden="true" loading="lazy"></li>
         <li class="partner" style="--w:280;--h:80"><img class="partner__img" src="img/partners/rushydro.webp" width="280" height="80" alt="РусГидро" loading="lazy"><img class="partner__img partner__img--color" src="img/partners/rushydro-color.webp" width="280" height="80" alt="" aria-hidden="true" loading="lazy"></li>
+        <li class="partner" style="--w:300;--h:19"><img class="partner__img" src="img/partners/gubernskie.webp" width="300" height="19" alt="Губернские аптеки" loading="lazy"><img class="partner__img partner__img--color" src="img/partners/gubernskie-color.webp" width="300" height="19" alt="" aria-hidden="true" loading="lazy"></li>
         <li class="partner" style="--w:174;--h:53"><img class="partner__img" src="img/partners/rosneft.webp" width="174" height="53" alt="Роснефть" loading="lazy"><img class="partner__img partner__img--color" src="img/partners/rosneft-color.webp" width="174" height="53" alt="" aria-hidden="true" loading="lazy"></li>
-        <li class="partner" style="--w:272;--h:85"><img class="partner__img" src="img/partners/severstal.webp" width="272" height="85" alt="Северсталь" loading="lazy"><img class="partner__img partner__img--color" src="img/partners/severstal-color.webp" width="272" height="85" alt="" aria-hidden="true" loading="lazy"></li>
+        <li class="partner" style="--w:198;--h:75"><img class="partner__img" src="img/partners/suek.webp" width="198" height="75" alt="СУЭК" loading="lazy"><img class="partner__img partner__img--color" src="img/partners/suek-color.webp" width="198" height="75" alt="" aria-hidden="true" loading="lazy"></li>
+        <li class="partner" style="--w:240;--h:70"><img class="partner__img" src="img/partners/rosseti.webp" width="240" height="70" alt="Россети Сибирь" loading="lazy"><img class="partner__img partner__img--color" src="img/partners/rosseti-color.webp" width="240" height="70" alt="" aria-hidden="true" loading="lazy"></li>
       </ul>
     </div>
   </section>
@@ -362,8 +361,8 @@
             <ul class="form__options" id="whList" role="listbox" aria-labelledby="whLabel" tabindex="-1" hidden>
               <li role="option" id="wh-logistics" data-value="logistics" aria-selected="false">Логистический склад</li>
               <li role="option" id="wh-production" data-value="production" aria-selected="false">Производственный склад</li>
-              <li role="option" id="wh-trade" data-value="trade" aria-selected="false">Торговый склад</li>
-              <li role="option" id="wh-console" data-value="console" aria-selected="false">Консольный склад</li>
+              <li role="option" id="wh-trade" data-value="trade" aria-selected="false">Склад для маркетплейсов</li>
+              <li role="option" id="wh-console" data-value="console" aria-selected="false">Склад металлопроката</li>
               <li role="option" id="wh-cold" data-value="cold" aria-selected="false">Холодильный склад</li>
               <li role="option" id="wh-archive" data-value="archive" aria-selected="false">Архив и офис</li>
             </ul>

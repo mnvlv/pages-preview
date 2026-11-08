@@ -7,8 +7,8 @@
 /* ---------- Hero ---------- */
 .w-hero { position: relative; margin-top: calc(-1 * var(--header-h)); padding-top: var(--header-h); isolation: isolate; overflow-x: clip; }
 .w-hero::before {
-  content: ''; position: absolute; z-index: -1; top: 0; left: 50%; width: 1440px; height: 646px; transform: translateX(-50%);
-  background: url(../img/warehouse/hero.webp) center top / 100% 100% no-repeat;
+  content: ''; position: absolute; z-index: -1; top: 4px; left: 50%; width: 957px; height: 640px; margin-left: -440px;
+  background: url(../img/warehouse/hero.webp?v=2) 0 0 / 100% 100% no-repeat;
 }
 .w-hero__inner { display: grid; grid-template-columns: minmax(0, 1fr) 270px; gap: 32px; }
 .w-hero__main .pill { margin: 29px 0 0; height: 37px; padding: 0 12px 0 11px; gap: 10px; border-color: #585858; }

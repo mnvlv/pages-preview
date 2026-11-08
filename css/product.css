@@ -1,0 +1,178 @@
+/* ==========================================================
+   Диаском — карточка товара (product-sp-200.html)
+   Размеры сняты со скриншотов макета (масштаб ≈ 1,195 к 1440 px). Общие стили — style.css, catalog.css, racks.css (3D-блок)
+   ========================================================== */
+
+.page-product main { overflow-x: clip; }
+.pd-top { margin-top: calc(-1 * var(--header-h)); padding-top: var(--header-h); }
+.pd-top .crumbs { margin-top: 42px; }
+.pd-title { margin-top: 18px; font-size: var(--fs-h1); font-weight: 600; line-height: 1; text-transform: uppercase; }
+
+/* ---------- Верх: галерея и блок покупки ---------- */
+.pd-main { display: grid; grid-template-columns: minmax(0, 1fr) 592px; gap: 38px; align-items: start; margin-top: 36px; }
+.pd-gallery { display: grid; grid-template-columns: 94px minmax(0, 1fr); gap: 20px; align-items: start; }
+.pd-thumbs { display: grid; gap: 16px; }
+.pd-thumb {
+  display: block; width: 94px; height: 94px; padding: 0; overflow: hidden; background: #232323; border: 0; border-radius: 6px;
+  box-shadow: inset 0 0 0 1px #585858; opacity: .85; transition: opacity .2s, box-shadow .2s;
+}
+.pd-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.pd-thumb:hover { opacity: 1; box-shadow: inset 0 0 0 1px var(--c-accent); }
+.pd-thumb:hover img { transform: scale(1.04); }
+.pd-thumb.is-active { opacity: 1; box-shadow: inset 0 0 0 2px var(--c-accent); }
+.pd-photo { overflow: hidden; border-radius: 8px; background: #232323; aspect-ratio: 743 / 706; }
+.pd-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.pd-buy { padding: 24px 25px 25px; background: var(--c-surface); border-radius: 8px; box-shadow: inset 0 0 0 1px #585858; }
+.pd-buy__top { display: flex; align-items: center; gap: 12px; }
+.pd-sku { flex: 1; font-size: 16px; color: #a0a0a0; }
+.pd-sku strong { font-weight: 600; color: #fff; }
+.pd-3d {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 48px; padding: 0 22px;
+  font-size: 14px; font-weight: 600; text-transform: uppercase; color: var(--c-accent); white-space: nowrap;
+  background: rgba(234, 89, 1, .1); border-radius: 3px; box-shadow: inset 0 0 0 1px var(--c-accent);
+  transition: background-color .2s, color .2s;
+}
+.pd-3d svg { width: 20px; height: 20px; }
+/* кнопку конфигуратора выделяем мягкой пульсацией — не конкурирует с кнопкой «В корзину» */
+.pd-3d::after { content: ''; position: absolute; inset: -1px; border-radius: 3px; box-shadow: 0 0 0 0 rgba(234, 89, 1, .55); animation: pd-pulse 2.6s ease-out infinite; pointer-events: none; }
+@keyframes pd-pulse { 0% { box-shadow: 0 0 0 0 rgba(234, 89, 1, .55); } 70%, 100% { box-shadow: 0 0 0 10px rgba(234, 89, 1, 0); } }
+.pd-3d:hover { color: #fff; background: var(--c-accent); }
+@media (prefers-reduced-motion: reduce) { .pd-3d::after { animation: none; } }
+.pd-fav {
+  display: grid; place-items: center; flex: none; width: 48px; height: 48px; padding: 0; color: #fff; background: none; border: 0; border-radius: 3px;
+  box-shadow: inset 0 0 0 1px #585858; cursor: pointer; transition: box-shadow .2s, color .2s;
+}
+.pd-fav svg { width: 20px; height: 20px; }
+.pd-fav:hover { box-shadow: inset 0 0 0 1px var(--c-accent); color: var(--c-accent); }
+.pd-fav[aria-pressed="true"] { color: var(--c-accent); box-shadow: inset 0 0 0 1px var(--c-accent); }
+.pd-fav[aria-pressed="true"] svg { fill: currentColor; }
+
+.pd-price { display: flex; align-items: center; gap: 16px; margin-top: 30px; line-height: 1; }
+.pd-price strong { font-size: 48px; font-weight: 600; color: var(--c-accent); white-space: nowrap; }
+.pd-price s { font-size: 20px; color: #888; white-space: nowrap; }
+.pd-price__badge { padding: 0 9px; font-size: 14px; font-weight: 600; line-height: 32px; color: #fff; background: var(--c-accent); border-radius: 2px; }
+.pd-price__note { margin-top: 14px; font-size: 14px; color: #a0a0a0; }
+.pd-btn { margin-top: 18px; min-height: 56px; }
+.pd-price__note + .pd-btn { margin-top: 28px; }
+.pd-ico { width: 20px; height: 15px; }
+.pd-btn .pd-ico { margin-left: 8px; }
+.btn.is-added { background: transparent; border-color: var(--c-accent); color: var(--c-accent); }
+
+/* ---------- Таблицы характеристик ---------- */
+.pd-table { width: 100%; border-collapse: separate; border-spacing: 0; overflow: hidden; font-size: 16px; line-height: 1.2; border-radius: 8px; box-shadow: 0 0 0 1px #585858; }
+.pd-table tr:nth-child(even) { background: #1a1a1a; }
+.pd-table tr:nth-child(odd) { background: #232323; }
+.pd-table th, .pd-table td { padding: 20px 24px; text-align: left; vertical-align: middle; }
+.pd-table th { width: 33%; font-weight: 400; color: #a0a0a0; }
+.pd-table td { font-weight: 600; color: #fff; }
+.pd-table--mini { margin-top: 24px; font-size: 15px; }
+.pd-table--mini th, .pd-table--mini td { padding: 16px 20px; }
+.pd-table--mini th { width: 48%; font-size: 15px; }
+
+/* ---------- Табы и описание ---------- */
+.pd-info { margin-top: 80px; }
+.pd-tabs { display: flex; flex-wrap: wrap; gap: 0 56px; border-bottom: 1px solid #585858; }
+.pd-tabs__a {
+  position: relative; padding: 0 0 22px; margin-bottom: -1px; font-size: 14px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  color: #a0a0a0; border-bottom: 2px solid transparent; transition: color .2s, border-color .2s;
+}
+.pd-tabs__a:hover { color: var(--c-accent); }
+.pd-tabs__a.is-active { color: #fff; border-bottom-color: var(--c-accent); }
+.pd-block { margin-top: 56px; scroll-margin-top: calc(var(--header-h) + 16px); }
+.pd-tabs + .pd-block { margin-top: 44px; }
+.pd-h2 { font-size: 36px; font-weight: 600; line-height: 1.1; text-transform: uppercase; }
+.pd-label { font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--c-accent); }
+.pd-text { max-width: 944px; margin-top: 24px; }
+.pd-h2 + .pd-text { margin-top: 28px; }
+.pd-text p { margin-top: 18px; line-height: 1.55; color: #d6d6d6; }
+.pd-text p:first-child { margin-top: 0; }
+.pd-block .pd-table, .pd-docs { margin-top: 24px; }
+.pd-lead { text-align: left !important; hyphens: manual !important; max-width: 700px; margin-top: 24px; line-height: 1.4; }
+.pd-list { display: grid; gap: 16px; margin-top: 26px; }
+.pd-list li { position: relative; padding-left: 22px; line-height: 1.3; color: #d6d6d6; }
+.pd-list li::before { content: ''; position: absolute; top: .5em; left: 2px; width: 5px; height: 5px; background: var(--c-accent); border-radius: 50%; }
+
+/* ---------- Документы ---------- */
+.pd-docs { display: grid; gap: 12px; }
+.pd-doc {
+  display: flex; align-items: center; gap: 20px; padding: 14px 24px 14px 20px; background: var(--c-surface); border-radius: 8px;
+  box-shadow: inset 0 0 0 1px #585858; transition: box-shadow .2s;
+}
+.pd-doc:hover { box-shadow: inset 0 0 0 1px var(--c-accent); }
+.pd-doc__icon { display: grid; place-items: center; flex: none; width: 52px; height: 52px; color: var(--c-accent); background: #1a1a1a; border-radius: 6px; box-shadow: inset 0 0 0 1px #585858; }
+.pd-doc__icon svg { width: 26px; height: 26px; }
+.pd-doc__text { flex: 1; display: grid; gap: 6px; }
+.pd-doc__text strong { font-size: 18px; font-weight: 600; line-height: 1.2; }
+.pd-doc__text span { font-size: 14px; color: #a0a0a0; }
+.pd-doc__btn { display: grid; place-items: center; flex: none; width: 52px; height: 42px; color: var(--c-accent); border-radius: 4px; box-shadow: inset 0 0 0 1px #585858; transition: box-shadow .2s, background-color .2s, color .2s; }
+.pd-doc__btn svg { width: 22px; height: 22px; }
+.pd-doc__btn:hover { color: #fff; background: var(--c-accent); box-shadow: inset 0 0 0 1px var(--c-accent); }
+
+/* ---------- 3D-конфигуратор (заглушка и iframe — как на страницах стеллажей, racks.css) ---------- */
+.pd-block--cfg .rk-cfg__frame { margin-top: 28px; }
+
+/* ---------- Похожие товары ---------- */
+.pd-similar { margin-top: 100px; padding-bottom: 20px; }
+.pd-similar__head { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.pd-cards { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 4px - 3 * 36px) / 4); gap: 36px; margin: 32px -2px 0; padding: 2px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 2px; }
+.pd-cards::-webkit-scrollbar { display: none; }
+.pd-card { position: relative; display: flex; flex-direction: column; scroll-snap-align: start; overflow: hidden; background: var(--c-surface); border-radius: 4px; box-shadow: 0 0 0 1px #585858; transition: box-shadow .2s; }
+.pd-card:hover { box-shadow: 0 0 0 1px var(--c-accent); }
+.pd-card__img { position: relative; display: block; aspect-ratio: 376 / 282; overflow: hidden; }
+.pd-card__img img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.pd-card:hover .pd-card__img img { transform: scale(1.04); }
+.pd-badge { position: absolute; top: 12px; left: 12px; padding: 0 9px; font-size: 14px; font-weight: 600; line-height: 26px; color: #fff; background: var(--c-accent); border-radius: 2px; }
+.pd-fav--sm { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; background: rgba(26, 26, 26, .72); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); }
+.pd-fav--sm svg { width: 18px; height: 18px; }
+.pd-card__body { display: flex; flex: 1; flex-direction: column; padding: 22px 24px 24px; }
+.pd-card__sku { font-size: 14px; color: #a0a0a0; }
+.pd-card__title { min-height: 2.4em; margin-top: 14px; font-size: 18px; font-weight: 600; line-height: 1.2; text-transform: uppercase; }
+.pd-card__title a:hover { color: var(--c-accent); }
+.pd-card__spec { margin-top: 22px; font-size: 13px; line-height: 1.3; color: #a0a0a0; }
+.pd-card__price { display: flex; align-items: baseline; gap: 12px; margin-top: auto; padding-top: 18px; line-height: 1; }
+.pd-card__price strong { font-size: 30px; font-weight: 600; color: var(--c-accent); white-space: nowrap; }
+.pd-card__price s { font-size: 15px; color: #888; white-space: nowrap; }
+.pd-card__buy { margin-top: 20px; min-height: 56px; gap: 10px; }
+.pd-card__buy .pd-ico { margin: 0; }
+.pd-card__title, .pd-card__spec { text-align: left !important; hyphens: manual !important; }
+
+/* ---------- Адаптив ---------- */
+@media (max-width: 1280px) {
+  .pd-main { grid-template-columns: minmax(0, 1fr) 520px; gap: 28px; }
+  .pd-price strong { font-size: 42px; }
+  .pd-3d { padding: 0 16px; }
+}
+@media (max-width: 1100px) {
+  .pd-main { grid-template-columns: minmax(0, 1fr); }
+  .pd-cards { grid-auto-columns: calc((100% - 2 * 24px) / 3); gap: 24px; }
+  .pd-tabs { gap: 0 36px; }
+}
+@media (max-width: 860px) {
+  .pd-gallery { grid-template-columns: minmax(0, 1fr); }
+  .pd-thumbs { grid-auto-flow: column; grid-auto-columns: 1fr; order: 2; gap: 10px; }
+  .pd-thumb { width: 100%; height: auto; aspect-ratio: 1; }
+  .pd-cards { grid-auto-columns: calc((100% - 16px) / 2); gap: 16px; }
+  .pd-h2 { font-size: 28px; }
+  .pd-tabs { flex-wrap: nowrap; gap: 0 28px; overflow-x: auto; scrollbar-width: none; }
+  .pd-tabs::-webkit-scrollbar { display: none; }
+  .pd-tabs__a { flex: none; }
+}
+@media (max-width: 600px) {
+  .pd-main { margin-top: 24px; }
+  .pd-buy { padding: 18px 16px 20px; }
+  .pd-buy__top { flex-wrap: wrap; }
+  .pd-sku { flex: 1 1 100%; }
+  .pd-3d { flex: 1; padding: 0 10px; }
+  .pd-price { flex-wrap: wrap; gap: 10px 14px; }
+  .pd-price strong { font-size: 36px; }
+  .pd-table th, .pd-table td { padding: 14px 14px; font-size: 15px; }
+  .pd-table th { width: 44%; }
+  .pd-info { margin-top: 56px; }
+  .pd-block { margin-top: 44px; }
+  .pd-doc { gap: 14px; padding: 12px 14px; }
+  .pd-doc__text strong { font-size: 16px; }
+  .pd-cards { grid-auto-columns: 82%; }
+  .pd-similar { margin-top: 64px; }
+  .pd-similar__head .slider-nav { width: auto; }
+}

@@ -141,4 +141,28 @@ document.addEventListener('DOMContentLoaded', () => {
       if (count) count.textContent = Math.max(0, num(count.textContent) + (added ? 1 : -1));
     });
   });
+
+  /* ---------- Демо: вид плиток категорий (убрать после выбора клиентом) ---------- */
+  const catsBox = document.querySelector('.cats-box');
+  if (catsBox) {
+    const modes = [['', 'Как сейчас'], ['plain', 'Без картинок'], ['big', 'Крупные изображения']];
+    const bar = document.createElement('div');
+    bar.className = 'cats-demo';
+    bar.setAttribute('data-demo', '');
+    bar.append('Вид плиток (демо): ');
+    const apply = (m) => {
+      catsBox.classList.remove('cats-box--plain', 'cats-box--big');
+      if (m) catsBox.classList.add('cats-box--' + m);
+      bar.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
+    };
+    modes.forEach(([m, label]) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.dataset.mode = m; b.textContent = label;
+      b.addEventListener('click', () => apply(m));
+      bar.append(b);
+    });
+    catsBox.prepend(bar);
+    const q = new URLSearchParams(location.search).get('cats');
+    apply(q === 'plain' || q === 'big' ? q : '');
+  }
 });
