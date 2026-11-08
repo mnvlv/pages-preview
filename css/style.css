@@ -385,7 +385,7 @@ button { cursor: pointer; }
 .partner {
   --k: 1;
   position: relative; isolation: isolate;
-  display: grid; place-items: center; flex: none; width: 280px; height: 85px; margin-right: 32px;
+  display: grid; place-items: center; flex: none; width: calc(var(--w) * var(--k) * 1px); height: 85px; margin-right: 72px;
 }
 /* обе версии одного размера (--w × --h — размер серой), на узких экранах уменьшаются пропорционально.
    Серый вид «запечён» в файлы (без filter/opacity) — иначе при переходе браузер мог класть серый слой поверх цветного */
@@ -673,7 +673,7 @@ button { cursor: pointer; }
   .stat__num { font-size: 30px; }
   .stat__text { font-size: 14px; }
   .marquee { margin-top: 32px; }
-  .partner { --k: .7; width: 200px; height: 60px; margin-right: 24px; }
+  .partner { --k: .7; height: 60px; margin-right: 44px; }
   .request { gap: 40px; padding: 28px 20px; }
   .request__perks { grid-template-columns: 1fr; gap: 20px; }
   .request__perks img { width: 32px; height: 32px; }
