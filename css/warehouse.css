@@ -86,8 +86,8 @@
 .w-dots li { position: relative; padding-left: 20px; font-weight: 600; line-height: 19px; color: var(--c-text-2); }
 .w-dots li::before { content: ''; position: absolute; top: 3.5px; left: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--c-accent); }
 .w-brands { display: grid; gap: 24px; margin-top: 45px; width: 100%; }
-.w-marq { --k: .5; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-.w-marq .partner { height: 56px; margin-right: 44px; }
+.w-marq { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.w-marq .partner { --k: .5; height: 56px; margin-right: 44px; }
 .w-marq__track { display: flex; align-items: center; width: max-content; animation: w-marq-left 30s linear infinite; }
 .w-marq--right .w-marq__track { animation-name: w-marq-right; }
 @keyframes w-marq-left { to { transform: translateX(-50%); } }
