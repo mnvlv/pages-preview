@@ -35,7 +35,8 @@
 .rk-tile__icon { width: auto; height: auto; max-height: 64px; align-self: flex-start; object-fit: contain; object-position: left center; }
 
 /* ---------- 3D-конструктор ---------- */
-.rk-cfg .lead { max-width: 900px; margin-top: 18px; }
+.rk-cfg .lead { max-width: 900px; margin-top: 18px; text-align: left !important; hyphens: manual !important; }
+@media (max-width: 760px) { .rk-cfg .lead br { display: none; } }
 .rk-cfg__frame { margin-top: 28px; overflow: hidden; background: #43464c; border-radius: 8px; box-shadow: inset 0 0 0 1px #585858; }
 .rk-cfg__frame iframe { display: block; width: 100%; height: 760px; border: 0; }
 
