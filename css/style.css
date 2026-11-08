@@ -303,6 +303,8 @@ button { cursor: pointer; }
 .whs { display: grid; grid-template-columns: 1fr 761px; gap: 32px; align-items: start; }
 .whs__intro .btn { margin-top: 48px; }
 .whs__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (min-width: 1201px) { .whs__intro .h2 { font-size: 44px; } }
+@media (min-width: 1201px) and (max-width: 1360px) { .whs__intro .h2 { font-size: min(44px, calc((100vw - 120px) / 31)); } }
 /* плитка по макету: 243×154, радиус 8px, рамка 1px #585858 снаружи (тенью, чтобы не менять размер) */
 .whs__tile {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
