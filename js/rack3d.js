@@ -18,8 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       viewer.setAttribute('src', viewer.dataset.src);
     };
+    // LAZY = true — грузить, только когда блок подходит к экрану; false (сейчас) — сразу со страницей
+    const LAZY = false;
     const near = () => stage.getBoundingClientRect().top < window.innerHeight + 400;
-    if (near() || !('IntersectionObserver' in window)) load();
+    if (!LAZY || near() || !('IntersectionObserver' in window)) load();
     else {
       new IntersectionObserver((entries, io) => {
         if (entries[0].isIntersecting) { io.disconnect(); load(); }

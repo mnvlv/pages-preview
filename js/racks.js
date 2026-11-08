@@ -1,12 +1,15 @@
-/* Диаском — страницы стеллажей: 3D-конструктор подключается по нажатию (lazy-load), высота iframe подстраивается под содержимое на планшетах и телефонах */
+/* Диаском — страницы стеллажей: 3D-конструктор, высота iframe подстраивается под содержимое на планшетах и телефонах.
+   LAZY = true — конструктор подключается по нажатию кнопки (ленивая загрузка);
+   LAZY = false (сейчас) — грузится сразу вместе со страницей. Чтобы вернуть ленивую загрузку, поставить true. */
 (function () {
+  var LAZY = false;
   var boxes = document.querySelectorAll('[data-rk-cfg]');
   if (!boxes.length) return;
 
   boxes.forEach(function (box) {
     var btn = box.querySelector('[data-rk-start]');
     if (!btn) return;
-    btn.addEventListener('click', function () {
+    var run = function () {
       var start = box.querySelector('.rk-cfg__start');
       var frame = document.createElement('iframe');
       frame.src = box.dataset.src;
@@ -22,7 +25,8 @@
         if (start) start.remove();
       });
       box.append(frame);
-    });
+    };
+    if (LAZY) btn.addEventListener('click', run); else run();
   });
 
   window.addEventListener('message', function (e) {
