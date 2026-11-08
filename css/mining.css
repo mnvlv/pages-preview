@@ -108,6 +108,7 @@
 .checks--lg li { padding-left: 23px; line-height: 1.2; }
 .checks--lg li::before { top: 2px; left: 0; width: 18px; height: 14.5px; }
 .m-request__call { margin-top: 14px; }
+.m-request .checks--lg { margin-bottom: 36px; }
 .btn--outline.btn--lg.m-request__call { min-width: 266px; padding: 0 41px; gap: 16px; }
 
 /* ==========================================================
@@ -172,6 +173,7 @@
   .m-when__cards br { display: none; }
   .checks--lg { padding-left: 0; }
   .btn--outline.btn--lg.m-request__call { width: 100%; }
+  .m-request .checks--lg { margin-bottom: 14px; }
 }
 
 @media (max-width: 600px) {
