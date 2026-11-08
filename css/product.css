@@ -125,6 +125,11 @@
 .pd-similar__head { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .pd-cards { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 4px - 3 * 36px) / 4); gap: 36px; margin: 32px -2px 0; padding: 2px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 2px; }
 .pd-cards::-webkit-scrollbar { display: none; }
+.pd-dots { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 32px; }
+.pd-dots[hidden] { display: none; }
+.pd-dots__dot { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 5px; background: #585858; cursor: pointer; transition: width .25s, background .25s; }
+.pd-dots__dot:hover { background: #8a8a8a; }
+.pd-dots__dot.is-active { width: 34px; background: var(--c-accent); }
 .pd-card { position: relative; display: flex; flex-direction: column; scroll-snap-align: start; overflow: hidden; background: var(--c-surface); border-radius: 4px; box-shadow: 0 0 0 1px #585858; transition: box-shadow .2s; }
 .pd-card:hover { box-shadow: 0 0 0 1px var(--c-accent); }
 .pd-card__img { position: relative; display: block; aspect-ratio: 376 / 282; overflow: hidden; }

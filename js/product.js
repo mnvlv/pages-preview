@@ -57,4 +57,29 @@ document.addEventListener('DOMContentLoaded', () => {
       track.scrollBy({ left: step * Number(btn.dataset.pdSlide), behavior: 'smooth' });
     });
   });
+  /* точки под слайдером: одна точка = одна «страница» (видимая группа карточек) */
+  const dotsBox = document.getElementById('pdDots');
+  if (track && dotsBox) {
+    let dots = [];
+    const pages = () => Math.max(1, Math.round(track.scrollWidth / track.clientWidth));
+    const cur = () => { const max = track.scrollWidth - track.clientWidth; return max > 0 ? Math.round(track.scrollLeft / max * (dots.length - 1)) : 0; };
+    const mark = () => { const c = cur(); dots.forEach((d, i) => { d.classList.toggle('is-active', i === c); d.setAttribute('aria-selected', i === c); }); };
+    const build = () => {
+      const n = pages();
+      if (dots.length === n) { mark(); return; }
+      dotsBox.innerHTML = '';
+      dots = Array.from({ length: n }, (_, i) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'pd-dots__dot'; b.setAttribute('role', 'tab'); b.setAttribute('aria-label', 'Страница ' + (i + 1));
+        b.addEventListener('click', () => track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' }));
+        dotsBox.append(b);
+        return b;
+      });
+      dotsBox.hidden = n < 2;
+      mark();
+    };
+    track.addEventListener('scroll', mark, { passive: true });
+    window.addEventListener('resize', build);
+    build();
+  }
 });
