@@ -169,6 +169,45 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(tick);
   }
 
+  /* ---------- Карточка «Наши партнёры» (склад): две бегущие строки, цвет по координатам курсора ---------- */
+  const wRows = [...document.querySelectorAll('.w-marq')].map((row) => {
+    const track = row.querySelector('.w-marq__track');
+    [...track.children].forEach((li) => {
+      const copy = li.cloneNode(true);
+      copy.setAttribute('aria-hidden', 'true');
+      track.append(copy);
+    });
+    return { row, items: [...track.children], n: track.children.length / 2 };
+  });
+  if (wRows.length) {
+    let wp = null;
+    window.addEventListener('pointermove', (e) => {
+      wp = e.pointerType === 'mouse' ? { x: e.clientX, y: e.clientY } : null;
+    }, { passive: true });
+    document.documentElement.addEventListener('mouseleave', () => { wp = null; });
+    const wTick = () => {
+      requestAnimationFrame(wTick);
+      wRows.forEach(({ row, items, n }) => {
+        const b = row.getBoundingClientRect();
+        const inRow = wp && wp.x >= b.left && wp.x <= b.right && wp.y >= b.top && wp.y <= b.bottom;
+        items.forEach((item, k) => {
+          let on = false;
+          if (inRow) {
+            const r = item.getBoundingClientRect();
+            on = wp.x >= r.left && wp.x <= r.right && wp.y >= r.top && wp.y <= r.bottom;
+          }
+          item.classList.toggle('is-hot', on);
+        });
+        // цвет держим на паре (оригинал + копия), чтобы на стыке не мигал
+        for (let i = 0; i < n; i++) {
+          const on = items[i].classList.contains('is-hot') || items[i + n].classList.contains('is-hot');
+          if (items[i].classList.contains('is-active') !== on) { items[i].classList.toggle('is-active', on); items[i + n].classList.toggle('is-active', on); }
+        }
+      });
+    };
+    requestAnimationFrame(wTick);
+  }
+
   /* ---------- Выпадающий список «Тип склада» (по UI kit, с клавиатурой) ---------- */
   const selects = [...document.querySelectorAll('[data-select]')].map((root) => {
     const btn = root.querySelector('.form__select-btn');
