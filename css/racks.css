@@ -233,4 +233,15 @@ main .rk-uni__text p { hyphens: manual !important; -webkit-hyphens: manual !impo
   .page-racks--s .rk-var-sec .h2 { font-size: 22px; text-transform: none; letter-spacing: 0; }
   .page-racks--s .rk-var { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
   .page-racks--s .rk-var span { padding: 14px 8px 12px; font-size: 14px; }
+
+  /* 5. «Где используются»: компактные карточки 2 в ряд (фото + подпись внутри), как «Виды стеллажей» в макете */
+  .page-racks--s .rk-where { padding: 20px 16px; }
+  .page-racks--s .rk-where .m-card__title { font-size: 22px; text-transform: none; letter-spacing: 0; }
+  .page-racks--s .rk-where__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+  .page-racks--s .rk-where__list li { display: flex; flex-direction: column; overflow: hidden; background: #1d1d1d; border-radius: 6px; box-shadow: inset 0 0 0 1px #585858; }
+  .page-racks--s .rk-where__list img { aspect-ratio: 4 / 3; border-radius: 0; }
+  .page-racks--s .rk-where__list span { flex: 1; margin: 0; padding: 10px 10px 12px; font-size: 14px; line-height: 1.2; }
+  .page-racks--s .rk-where__list span br { display: none; }
+  .page-racks--s .rk-where__list li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .page-racks--s .rk-where__list li:last-child:nth-child(odd) img { aspect-ratio: 16 / 9; }
 }
