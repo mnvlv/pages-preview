@@ -244,4 +244,13 @@ main .rk-uni__text p { hyphens: manual !important; -webkit-hyphens: manual !impo
   .page-racks--s .rk-where__list span br { display: none; }
   .page-racks--s .rk-where__list li:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .page-racks--s .rk-where__list li:last-child:nth-child(odd) img { aspect-ratio: 16 / 9; }
+
+  /* Особенности: компактные карточки 2 в ряд */
+  .page-racks--s .rk-feats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+  .page-racks--s .rk-feats li { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 14px 12px 16px; background: #1d1d1d; border-radius: 6px; box-shadow: inset 0 0 0 1px #585858; }
+  .page-racks--s .rk-feats img { width: auto; height: 40px; max-height: 40px; }
+  .page-racks--s .rk-feats h3 { font-size: 16px; line-height: 1.15; }
+  .page-racks--s .rk-feats p, .page-racks--s .rk-feats li:nth-child(1) p { width: auto; max-width: none; font-size: 13px; line-height: 1.3; }
+  .page-racks--s .rk-feats p br { display: none; }
+  .page-racks--s .rk-feats-sec .m-card__title, .page-racks--s .m-card:has(.rk-feats) .m-card__title { font-size: 22px; text-transform: none; letter-spacing: 0; }
 }
