@@ -257,3 +257,16 @@ main .rk-uni__text p { hyphens: manual !important; -webkit-hyphens: manual !impo
   .page-racks--s .rk-feats p br { display: none; }
   .page-racks--s .rk-feats-sec .m-card__title, .page-racks--s .m-card:has(.rk-feats) .m-card__title { font-size: 22px; text-transform: none; letter-spacing: 0; }
 }
+
+/* «Виды стеллажей» на телефоне (палетные, мезонинные): компактные карточки 2 в ряд, как в макете заказчика */
+@media (max-width: 760px) {
+  .page-racks--fold .section:has(.rk-types) .h2 { font-size: 22px; text-transform: none; letter-spacing: 0; }
+  .page-racks--fold .section:has(.rk-types) .rk-head__sub--lg { display: none; }
+  .page-racks--fold .rk-types { margin-top: 18px; }
+  .page-racks--fold .rk-types__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .page-racks--fold .rk-type { padding-bottom: 12px; }
+  .page-racks--fold .rk-type__img { aspect-ratio: 4 / 3; }
+  .page-racks--fold .rk-type__title { margin: 10px 10px 0; min-height: 0; font-size: 15px; }
+  .page-racks--fold .rk-type p { margin: 4px 10px 0; padding-right: 0; font-size: 13px; line-height: 1.25; }
+}
+
