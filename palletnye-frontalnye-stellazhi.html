@@ -12,9 +12,9 @@
   <link rel="stylesheet" href="css/style.css?v=68">
   <link rel="stylesheet" href="css/mining.css?v=4">
   <link rel="stylesheet" href="css/catalog.css?v=18">
-  <link rel="stylesheet" href="css/racks.css?v=33">
+  <link rel="stylesheet" href="css/racks.css?v=39">
 </head>
-<body class="page-racks">
+<body class="page-racks page-racks--fold">
 
 <!-- ============ ИКОНКИ ИНТЕРФЕЙСА ============ -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
@@ -147,10 +147,10 @@
           <p>Осуществляем доставку и профессиональный монтаж «под ключ» по всей России.</p>
       </div>
       <ul class="rk-tiles">
-        <li class="rk-tile"><img class="rk-tile__icon" src="img/racks/icons/t-1.svg" width="61.6" height="62.2" alt=""><span>В наличии стеллажи и<br> комплектующие</span></li>
-        <li class="rk-tile"><img class="rk-tile__icon" src="img/racks/icons/t-2.svg" width="76.6" height="53.9" alt=""><span>Доставка по всей России</span></li>
-        <li class="rk-tile"><img class="rk-tile__icon" src="img/racks/icons/t-3.svg" width="46.1" height="61.6" alt=""><span>Гарантия качества<br> и надежности</span></li>
-        <li class="rk-tile"><img class="rk-tile__icon" src="img/racks/icons/t-4.svg" width="59.5" height="60.5" alt=""><span>Индивидуальный подбор<br> и проектирование</span></li>
+        <li class="rk-tile"><img class="rk-tile__icon" src="img/racks/icons/t-1.svg" width="61.6" height="62.2" alt=""><span class="rk-tile__d">В наличии стеллажи и<br> комплектующие</span><span class="rk-tile__m"><b>В наличии</b><small>Стеллажи и комплектующие</small></span></li>
+        <li class="rk-tile"><img class="rk-tile__icon" src="img/racks/icons/t-2.svg" width="76.6" height="53.9" alt=""><span class="rk-tile__d">Доставка по всей России</span><span class="rk-tile__m"><b>Доставка</b><small>По всей России</small></span></li>
+        <li class="rk-tile"><img class="rk-tile__icon" src="img/racks/icons/t-3.svg" width="46.1" height="61.6" alt=""><span class="rk-tile__d">Гарантия качества<br> и надежности</span><span class="rk-tile__m"><b>Гарантия</b><small>Качество и надёжность</small></span></li>
+        <li class="rk-tile"><img class="rk-tile__icon" src="img/racks/icons/t-4.svg" width="59.5" height="60.5" alt=""><span class="rk-tile__d">Индивидуальный подбор<br> и проектирование</span><span class="rk-tile__m"><b>Проектирование</b><small>Индивидуальный подбор и расчёт</small></span></li>
       </ul>
     </div>
   </section>
@@ -159,7 +159,7 @@
     <div class="container">
       <h2 class="h2">3D визуализация стеллажа</h2>
       <p class="lead lead--lg">Изучите строение паллетного фронтального стеллажа в нашем<br> конструкторе. Наведите на элемент, чтобы узнать его назначение</p>
-      <div class="rk-cfg__frame" data-rk-cfg data-src="configurator/pallet-3d.html" data-title="3D-конструктор паллетного стеллажа">
+      <div class="rk-cfg__frame" data-rk-cfg data-src="configurator/pallet-3d.html?lite=1" data-title="3D-конструктор паллетного стеллажа">
         <div class="rk-cfg__start">
           <svg class="rk-cfg__cube" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M24 4 42 14v20L24 44 6 34V14zM6 14l18 10 18-10M24 24v20"/></svg>
           <button type="button" class="btn btn--primary btn--md" data-rk-start>Запустить 3D-конструктор</button>
@@ -482,6 +482,6 @@
 
 <script src="js/main.js?v=55"></script>
 <script src="js/catalog.js?v=3"></script>
-<script src="js/racks.js?v=3"></script>
+<script src="js/racks.js?v=6"></script>
 </body>
 </html>

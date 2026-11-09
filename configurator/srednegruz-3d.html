@@ -817,7 +817,7 @@ function playAssembly() {
 /* ---------- camera ---------- */
 function overview() {
   // fit the rack into the part of the stage not covered by the side panels and the bar
-  const w = stageEl.clientWidth, h = stageEl.clientHeight, wide = w > 1180;
+  const w = stageEl.clientWidth, h = stageEl.clientHeight, wide = w > 1180 && !LITE;
   const freeW = wide ? (w - 680) / w : 1;
   const freeH = wide ? (h - barH() - 40) / h : 1;
   const t = V(0, G.H * .46 - (wide ? (barH() + 40) / h * G.H * .35 : 0), 0);

@@ -192,6 +192,25 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 </style>
 <meta name="robots" content="noindex">
 <style>
+/* Диаском: облегчённый вид для страниц сайта (?lite=1): только модель, при наведении — название детали, водяной знак.
+   Панели и управление скрыты (разметка и скрипты не тронуты); без параметра конструктор работает как прежде (карточка товара). */
+html.lite .side.left, html.lite .bar, html.lite .modal { display: none !important; }
+html.lite .side.right { display: none !important; }
+html.lite .rk { padding-bottom: 0; }
+/* планшет и телефон: под моделью карточка выбранной детали (назначение и характеристики) — по нажатию на цифру на модели; миниатюры скрыты */
+@media (max-width: 1180px) {
+  html.lite .side.right { display: flex !important; margin: 12px 16px 0; }
+  html.lite .side.right .card:not(.detail) { display: none; }
+  html.lite .rk { padding-bottom: 16px; }
+  html.lite .detail { min-height: 0; }
+}
+html.lite, html.lite body { height: auto; }
+html.lite .stage::after { content: ''; position: absolute; left: 22px; bottom: 18px; width: 150px; height: 44px; z-index: 3; pointer-events: none;
+  background: url(../img/icons/logo.svg) left center / contain no-repeat; opacity: .45; }
+@media (max-width: 640px) { html.lite .stage::after { left: 14px; bottom: 12px; width: 110px; height: 32px; } }
+</style>
+<script>if (/[?&]lite=1(&|$)/.test(location.search)) document.documentElement.classList.add('lite');</script>
+<style>
 /* Диаском: вставка в iframe на странице сайта — фиксированная высота сцены на планшетах и телефонах, чтобы страница могла сообщить родителю свою высоту */
 @media (max-width: 1180px) { .stage { height: 520px !important; min-height: 0 !important; } }
 @media (max-width: 640px) { .stage { height: 420px !important; } }
@@ -201,7 +220,8 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 (function () {
   function send() {
     if (window.parent === window) return;
-    var h = window.innerWidth <= 1180 ? document.documentElement.scrollHeight : 0;
+    var lite = document.documentElement.classList.contains('lite');
+    var h = window.innerWidth <= 1180 ? (lite ? document.querySelector('.rk').offsetHeight : document.documentElement.scrollHeight) : 0;
     window.parent.postMessage({ rkFrameHeight: h, rkSrc: location.pathname.split('/').pop() }, '*');
   }
   addEventListener('load', send); addEventListener('resize', send);
@@ -1003,7 +1023,7 @@ function applyExplode() {
 function overview() {
   // fit the rack (with goods on top) into the part of the stage not covered by the side panels
   const t = V(0, G.H * .46, 0), w = stageEl.clientWidth;
-  const free = w > 1180 ? (w - 680) / w : 1;
+  const free = w > 1180 && !LITE ? (w - 680) / w : 1;
   const k = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
   const dist = Math.max((G.H + 1.6) / k, (G.rowLen * .95 + 1.6) / (k * camera.aspect * free)) * 1.08;
   return { t, p: t.clone().addScaledVector(V(-.62, .38, 1).normalize(), dist) };
@@ -1021,6 +1041,7 @@ function fly(v, dur = 1100) {
 
 /* ---------- UI: list, callouts, thumbnails, detail ---------- */
 const MARK = {}, THUMB = {};
+const LITE = document.documentElement.classList.contains('lite');
 $('#parts').innerHTML = PARTS.map(p => `<li><button data-key="${p.key}"><span class="num">${p.n}</span>${p.name}${p.opt ? '<span class="opt">опция</span>' : ''}</button></li>`).join('');
 $('#thumbs').innerHTML = PARTS.map(p => `<button class="th" data-key="${p.key}" aria-label="${p.n}. ${p.name}"><img alt=""><span class="num">${p.n}</span><span class="cap">${p.name}</span></button>`).join('');
 for (const p of PARTS) {
@@ -1029,17 +1050,25 @@ for (const p of PARTS) {
   el.className = 'pin'; el.dataset.key = p.key;
   el.innerHTML = `${p.n}<span class="nm">${p.name}</span>`;
   const o = new CSS2DObject(el); scene.add(o); MARK[p.key] = o;
+  if (LITE) {
+    el.setAttribute('role', 'button'); el.setAttribute('tabindex', '0'); el.setAttribute('aria-label', p.n + '. ' + p.name);
+    el.addEventListener('pointerenter', () => setHover(p.key));
+    el.addEventListener('pointerleave', () => setHover(null));
+    el.addEventListener('click', () => { stopTour(); select(p.key === selKey ? null : p.key); if (!selKey) fly(overview()); });
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); } });
+  }
 }
 const detail = $('#detail');
 function renderCard() {
   const p = PART_BY[hoverKey || selKey];
   if (!p) {
-    detail.innerHTML = `<div class="empty"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 20 7.2v9.6L12 21.2 4 16.8V7.2z"/><path d="M4 7.2 12 11.6l8-4.4M12 11.6v9.6"/></svg><p>Выберите элемент в списке, на модели или на миниатюре — покажем его назначение и характеристики.</p></div>`;
+    detail.innerHTML = `<div class="empty"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 20 7.2v9.6L12 21.2 4 16.8V7.2z"/><path d="M4 7.2 12 11.6l8-4.4M12 11.6v9.6"/></svg><p>${LITE ? 'Нажмите на цифру на модели — покажем назначение и характеристики детали.' : 'Выберите элемент в списке, на модели или на миниатюре — покажем его назначение и характеристики.'}</p></div>`;
     return;
   }
   detail.innerHTML = `<div class="dh"><span class="num">${p.n}</span><h3>${p.name}</h3>${p.opt ? '<span class="badge">Опция</span>' : ''}</div>
-    <p>${p.desc}</p><dl>${p.specs.map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join('')}</dl>`;
+    <p>${p.desc}</p><dl>${p.specs.map(([a, b]) => `<div><dt>${a}</dt><dd>${b}</dd></div>`).join('')}</dl>${LITE && selKey ? '<button type="button" class="tg reset" data-lite-reset style="margin-top:12px">⟲ Общий вид</button>' : ''}`;
 }
+detail.addEventListener('click', e => { if (e.target.closest('[data-lite-reset]')) { stopTour(); select(null, false); fly(overview()); } });
 function syncUI() {
   document.querySelectorAll('[data-key]').forEach(el => {
     el.classList.toggle('on', el.dataset.key === selKey);

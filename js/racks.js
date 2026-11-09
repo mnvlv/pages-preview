@@ -43,7 +43,7 @@
       more.setAttribute('aria-label', (open ? 'Свернуть ' : 'Показать ') + label);
     });
   }
-  var uniText = document.querySelector('.page-racks--s .rk-uni__text');
+  var uniText = document.querySelector('.page-racks--fold .rk-uni__text');
   if (uniText) fold(uniText, 'весь текст');
   /* Среднегрузовые, телефон: таблица характеристик — видны 2–3 строки с затемнением, остальное раскрывается стрелкой */
   var specs = document.querySelector('.page-racks--s .specs');
