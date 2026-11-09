@@ -223,6 +223,17 @@ button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); o
 </style>
 <meta name="robots" content="noindex">
 <style>
+/* Диаском: облегчённый вид для страницы «Среднегрузовые стеллажи» (?lite=1): только модель, при наведении — название детали, водяной знак.
+   Панели и управление скрыты (разметка и скрипты не тронуты); без параметра конструктор работает как прежде (карточка товара). */
+html.lite .side, html.lite .bar, html.lite .modal { display: none !important; }
+html.lite .rk { padding-bottom: 0; }
+html.lite, html.lite body { height: auto; }
+html.lite .stage::after { content: ''; position: absolute; left: 22px; bottom: 18px; width: 150px; height: 44px; z-index: 3; pointer-events: none;
+  background: url(../img/icons/logo.svg) left center / contain no-repeat; opacity: .45; }
+@media (max-width: 640px) { html.lite .stage::after { left: 14px; bottom: 12px; width: 110px; height: 32px; } }
+</style>
+<script>if (/[?&]lite=1(&|$)/.test(location.search)) document.documentElement.classList.add('lite');</script>
+<style>
 /* Диаском: вставка в iframe на странице сайта — фиксированная высота сцены на планшетах и телефонах, чтобы страница могла сообщить родителю свою высоту */
 @media (max-width: 1180px) { .stage { height: 520px !important; min-height: 0 !important; } }
 @media (max-width: 640px) { .stage { height: 420px !important; } }
@@ -232,7 +243,8 @@ button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); o
 (function () {
   function send() {
     if (window.parent === window) return;
-    var h = window.innerWidth <= 1180 ? document.documentElement.scrollHeight : 0;
+    var lite = document.documentElement.classList.contains('lite');
+    var h = window.innerWidth <= 1180 ? (lite ? document.getElementById('rk').offsetHeight : document.documentElement.scrollHeight) : 0;
     window.parent.postMessage({ rkFrameHeight: h, rkSrc: location.pathname.split('/').pop() }, '*');
   }
   addEventListener('load', send); addEventListener('resize', send);

@@ -4,7 +4,6 @@
 (function () {
   var LAZY = false;
   var boxes = document.querySelectorAll('[data-rk-cfg]');
-  if (!boxes.length) return;
 
   boxes.forEach(function (box) {
     var btn = box.querySelector('[data-rk-start]');
@@ -28,6 +27,23 @@
     };
     if (LAZY) btn.addEventListener('click', run); else run();
   });
+
+  /* Среднегрузовые, телефон: длинный вводный текст сворачивается до 2 строк, раскрывается стрелкой (кнопка видна только в мобильной вёрстке, см. racks.css) */
+  var uniText = document.querySelector('.page-racks--s .rk-uni__text');
+  if (uniText) {
+    var more = document.createElement('button');
+    more.type = 'button'; more.className = 'rk-uni__more'; more.setAttribute('aria-expanded', 'false'); more.setAttribute('aria-label', 'Показать весь текст');
+    more.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg>';
+    uniText.after(more);
+    var fit = function () { uniText.style.setProperty('--rk-open-h', uniText.scrollHeight + 'px'); };
+    fit(); window.addEventListener('resize', fit); window.addEventListener('load', fit);
+    more.addEventListener('click', function () {
+      fit();
+      var open = uniText.classList.toggle('is-open');
+      more.setAttribute('aria-expanded', String(open));
+      more.setAttribute('aria-label', open ? 'Свернуть текст' : 'Показать весь текст');
+    });
+  }
 
   window.addEventListener('message', function (e) {
     var d = e.data;
