@@ -29,20 +29,30 @@
   });
 
   /* Среднегрузовые, телефон: длинный вводный текст сворачивается до 2 строк, раскрывается стрелкой (кнопка видна только в мобильной вёрстке, см. racks.css) */
-  var uniText = document.querySelector('.page-racks--s .rk-uni__text');
-  if (uniText) {
+  function fold(box, label) {
     var more = document.createElement('button');
-    more.type = 'button'; more.className = 'rk-uni__more'; more.setAttribute('aria-expanded', 'false'); more.setAttribute('aria-label', 'Показать весь текст');
+    more.type = 'button'; more.className = 'rk-uni__more'; more.setAttribute('aria-expanded', 'false'); more.setAttribute('aria-label', 'Показать ' + label);
     more.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg>';
-    uniText.after(more);
-    var fit = function () { uniText.style.setProperty('--rk-open-h', uniText.scrollHeight + 'px'); };
+    box.after(more);
+    var fit = function () { box.style.setProperty('--rk-open-h', box.scrollHeight + 'px'); };
     fit(); window.addEventListener('resize', fit); window.addEventListener('load', fit);
     more.addEventListener('click', function () {
       fit();
-      var open = uniText.classList.toggle('is-open');
+      var open = box.classList.toggle('is-open');
       more.setAttribute('aria-expanded', String(open));
-      more.setAttribute('aria-label', open ? 'Свернуть текст' : 'Показать весь текст');
+      more.setAttribute('aria-label', (open ? 'Свернуть ' : 'Показать ') + label);
     });
+  }
+  var uniText = document.querySelector('.page-racks--s .rk-uni__text');
+  if (uniText) fold(uniText, 'весь текст');
+  /* Среднегрузовые, телефон: таблица характеристик — видны 2–3 строки с затемнением, остальное раскрывается стрелкой */
+  var specs = document.querySelector('.page-racks--s .specs');
+  if (specs) {
+    var wrap = document.createElement('div');
+    wrap.className = 'rk-specs-fold';
+    specs.parentNode.insertBefore(wrap, specs);
+    wrap.appendChild(specs);
+    fold(wrap, 'все характеристики');
   }
 
   window.addEventListener('message', function (e) {

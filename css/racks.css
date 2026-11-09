@@ -207,6 +207,9 @@ main .rk-uni__text p { hyphens: manual !important; -webkit-hyphens: manual !impo
 @media (max-width: 760px) {
   /* 1. Длинный текст: видны 2 строки с затемнением снизу, остальное раскрывается стрелкой (текст остаётся в HTML) */
   .page-racks--s .rk-uni__text p { text-align: left !important; }
+  .page-racks--s .rk-specs-fold { position: relative; overflow: hidden; max-height: 150px; transition: max-height .35s ease;
+    -webkit-mask-image: linear-gradient(#000 45%, transparent); mask-image: linear-gradient(#000 45%, transparent); }
+  .page-racks--s .rk-specs-fold.is-open { max-height: var(--rk-open-h, 3000px); -webkit-mask-image: none; mask-image: none; }
   .page-racks--s .rk-uni__text { position: relative; overflow: hidden; max-height: 50px; transition: max-height .35s ease;
     -webkit-mask-image: linear-gradient(#000 40%, transparent); mask-image: linear-gradient(#000 40%, transparent); }
   .page-racks--s .rk-uni__text.is-open { max-height: var(--rk-open-h, 2000px); -webkit-mask-image: none; mask-image: none; }
