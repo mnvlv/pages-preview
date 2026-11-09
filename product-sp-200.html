@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="css/style.css?v=68">
   <link rel="stylesheet" href="css/catalog.css?v=19">
   <link rel="stylesheet" href="css/racks.css?v=42">
-  <link rel="stylesheet" href="css/product.css?v=4">
+  <link rel="stylesheet" href="css/product.css?v=5">
 </head>
 <body class="page-catalog page-product">
 
@@ -152,7 +152,7 @@
         <div class="pd-buy">
           <div class="pd-buy__top">
             <p class="pd-sku">Артикул: <strong>СП-200-45</strong></p>
-            <a href="#pd-config" class="pd-3d"><svg aria-hidden="true"><use href="#p-cube"/></svg>3D - визуализация</a>
+            <a href="#pd-config" class="pd-3d" data-pd-cfg-open aria-haspopup="dialog"><svg aria-hidden="true"><use href="#p-cube"/></svg>3D - визуализация</a>
             <button class="pd-fav" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="#p-heart"/></svg></button>
           </div>
           <p class="pd-price"><strong>12 490 ₽</strong><s>15 600 ₽</s><span class="pd-price__badge">−20%</span></p>
@@ -178,7 +178,7 @@
       <nav class="pd-tabs" aria-label="Разделы карточки товара">
         <a href="#pd-desc" class="pd-tabs__a is-active">Описание</a>
         <a href="#pd-specs" class="pd-tabs__a">Характеристики</a>
-        <a href="#pd-config" class="pd-tabs__a">3D - конфигуратор</a>
+        <a href="#pd-config" class="pd-tabs__a" data-pd-cfg-open aria-haspopup="dialog">3D - конфигуратор</a>
         <a href="#pd-docs" class="pd-tabs__a">Документы</a>
         <a href="#pd-delivery" class="pd-tabs__a">Доставка</a>
         <a href="#pd-payment" class="pd-tabs__a">Оплата</a>
@@ -251,15 +251,14 @@
         </div>
       </div>
 
-      <div class="pd-block pd-block--cfg" id="pd-config">
-        <h3 class="pd-label">3D визуализация стеллажа</h3>
-        <p class="pd-lead">Изучите строение среднегрузового стеллажа в нашем конструкторе. Наведите на элемент, чтобы узнать его назначение</p>
-        <div class="rk-cfg__frame" data-rk-cfg data-src="configurator/srednegruz-3d.html" data-title="3D-конструктор среднегрузового стеллажа">
-          <div class="rk-cfg__start">
-            <svg class="rk-cfg__cube" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M24 4 42 14v20L24 44 6 34V14zM6 14l18 10 18-10M24 24v20"/></svg>
-            <button type="button" class="btn btn--primary btn--md" data-rk-start>Запустить 3D-конструктор</button>
-            <p>Модель загружается по нажатию, так страница открывается быстрее</p>
+      <div class="pd-modal" id="pdCfgModal" hidden role="dialog" aria-modal="true" aria-labelledby="pdCfgTitle" data-src="configurator/srednegruz-3d.html?lite=1" data-title="3D-конструктор среднегрузового стеллажа">
+        <div class="pd-modal__back" data-pd-cfg-close></div>
+        <div class="pd-modal__panel">
+          <div class="pd-modal__head">
+            <h2 class="pd-modal__title" id="pdCfgTitle">3D-конструктор стеллажа</h2>
+            <button type="button" class="pd-modal__x" data-pd-cfg-close aria-label="Закрыть"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg></button>
           </div>
+          <div class="pd-modal__body"><p class="pd-modal__load">Загружаем конструктор…</p></div>
         </div>
       </div>
     </div>
@@ -481,7 +480,7 @@
 
 <script src="js/main.js?v=55"></script>
 <script src="js/catalog.js?v=3"></script>
-<script src="js/product.js?v=3"></script>
+<script src="js/product.js?v=4"></script>
 <script src="js/racks.js?v=7"></script>
 </body>
 </html>

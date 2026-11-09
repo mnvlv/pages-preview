@@ -83,3 +83,33 @@ document.addEventListener('DOMContentLoaded', () => {
     build();
   }
 });
+
+/* 3D-конструктор в окне поверх страницы: размытый фон, закрытие крестом, Esc и кликом по фону; iframe создаётся при первом открытии */
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('pdCfgModal');
+  if (!modal) return;
+  const body = modal.querySelector('.pd-modal__body');
+  const closeBtn = modal.querySelector('.pd-modal__x');
+  let opener = null;
+  const open = (from) => {
+    opener = from || null;
+    if (!body.querySelector('iframe')) {
+      const f = document.createElement('iframe');
+      f.src = modal.dataset.src; f.title = modal.dataset.title || '3D-конструктор';
+      f.setAttribute('data-rk-frame', ''); f.setAttribute('allowfullscreen', '');
+      f.addEventListener('load', () => { const l = body.querySelector('.pd-modal__load'); if (l) l.remove(); });
+      body.append(f);
+    }
+    modal.hidden = false;
+    document.documentElement.classList.add('pd-modal-open');
+    closeBtn.focus();
+  };
+  const close = () => {
+    modal.hidden = true;
+    document.documentElement.classList.remove('pd-modal-open');
+    if (opener) opener.focus();
+  };
+  document.querySelectorAll('[data-pd-cfg-open]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); open(a); }));
+  modal.querySelectorAll('[data-pd-cfg-close]').forEach((b) => b.addEventListener('click', close));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) close(); });
+});
