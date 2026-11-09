@@ -283,3 +283,18 @@ main .rk-uni__text p { hyphens: manual !important; -webkit-hyphens: manual !impo
   .page-racks--fold .rk-acc p { max-width: none; margin: 4px 10px 0; font-size: 13px; line-height: 1.25; }
 }
 
+/* «Использование объёма склада»: слайдер с точками (телефон) */
+.rk-vol__dots { display: none; }
+@media (max-width: 760px) {
+  .page-racks--fold .rk-vol .m-card__title { font-size: 22px; text-transform: none; letter-spacing: 0; }
+  .page-racks--fold .rk-vol__cols { display: grid; grid-auto-flow: column; grid-auto-columns: 100%; grid-template-columns: none; gap: 0; align-items: stretch;
+    overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+  .page-racks--fold .rk-vol__cols::-webkit-scrollbar { display: none; }
+  .page-racks--fold .rk-vol__cols li { scroll-snap-align: start; justify-content: flex-end; }
+  .page-racks--fold .rk-vol__img { max-width: 300px; }
+  .rk-vol__dots { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 22px; }
+  .rk-vol__dot { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 5px; background: #585858; cursor: pointer; transition: width .25s, background .25s; }
+  .rk-vol__dot:hover { background: #8a8a8a; }
+  .rk-vol__dot.is-active { width: 34px; background: var(--c-accent); }
+}
+

@@ -55,6 +55,28 @@
     fold(wrap, 'все характеристики');
   }
 
+  /* Телефон: «Использование объёма склада» — слайдер из 3 слайдов с точками-пагинацией (как в «Похожих товарах»); на десктопе точки скрыты */
+  var volCols = document.querySelector('.page-racks--fold .rk-vol__cols');
+  if (volCols) {
+    var vdots = document.createElement('div');
+    vdots.className = 'rk-vol__dots'; vdots.setAttribute('role', 'tablist'); vdots.setAttribute('aria-label', 'Слайды');
+    volCols.after(vdots);
+    var vitems = Array.prototype.slice.call(volCols.children);
+    var vbtn = vitems.map(function (_, i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'rk-vol__dot'; b.setAttribute('role', 'tab'); b.setAttribute('aria-label', 'Слайд ' + (i + 1));
+      b.addEventListener('click', function () { volCols.scrollTo({ left: i * volCols.clientWidth, behavior: 'smooth' }); });
+      vdots.appendChild(b); return b;
+    });
+    var vmark = function () {
+      var c = volCols.clientWidth ? Math.round(volCols.scrollLeft / volCols.clientWidth) : 0;
+      vbtn.forEach(function (b, i) { b.classList.toggle('is-active', i === c); b.setAttribute('aria-selected', String(i === c)); });
+    };
+    volCols.addEventListener('scroll', vmark, { passive: true });
+    window.addEventListener('resize', vmark);
+    vmark();
+  }
+
   window.addEventListener('message', function (e) {
     var d = e.data;
     if (!d || typeof d.rkFrameHeight !== 'number') return;
