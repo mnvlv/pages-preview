@@ -270,3 +270,16 @@ main .rk-uni__text p { hyphens: manual !important; -webkit-hyphens: manual !impo
   .page-racks--fold .rk-type p { margin: 4px 10px 0; padding-right: 0; font-size: 13px; line-height: 1.25; }
 }
 
+/* «Комплектация и аксессуары» на телефоне (палетные, мезонинные): карточки 2 в ряд, как «Виды стеллажей» */
+@media (max-width: 760px) {
+  .page-racks--fold .section:has(.rk-accs) .h2 { font-size: 22px; text-transform: none; letter-spacing: 0; }
+  .page-racks--fold .section:has(.rk-accs) .rk-head__sub { display: none; }
+  .page-racks--fold .rk-head { gap: 14px; }
+  .page-racks--fold .rk-head__btn { margin-top: 0; }
+  .page-racks--fold .rk-accs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
+  .page-racks--fold .rk-acc { display: flex; flex-direction: column; overflow: hidden; padding-bottom: 12px; background: var(--c-surface); border-radius: 6px; box-shadow: inset 0 0 0 1px #585858; }
+  .page-racks--fold .rk-acc__img { aspect-ratio: 4 / 3; border-radius: 0; box-shadow: none; border-bottom: 1px solid #585858; }
+  .page-racks--fold .rk-acc__title { min-height: 0; margin: 10px 10px 0; font-size: 15px; }
+  .page-racks--fold .rk-acc p { max-width: none; margin: 4px 10px 0; font-size: 13px; line-height: 1.25; }
+}
+
