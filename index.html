@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=68">
+  <link rel="stylesheet" href="css/style.css?v=70">
 </head>
 <body>
 
@@ -32,7 +32,7 @@
       <ul class="nav__list">
         <li class="nav__item nav__item--drop nav__item--mega">
           <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-catalog">
-            <span class="nav__text">Стеллажи</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            <span class="nav__text">Каталог</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
           </button>
           <div class="mega" id="nav-catalog">
             <ul class="mega__grid">
@@ -87,6 +87,8 @@
         </li>
         <li class="nav__item"><a href="/about/" class="nav__link"><span class="nav__text">О компании</span></a></li>
         <li class="nav__item"><a href="/services/" class="nav__link"><span class="nav__text">Комплексные решения</span></a></li>
+        <li class="nav__item"><a href="#" class="nav__link"><span class="nav__text">Банк знаний</span></a></li>
+        <li class="nav__item"><a href="#" class="nav__link"><span class="nav__text">Блог</span></a></li>
       </ul>
       <div class="nav__mobile">
         <div class="icon-links">
@@ -257,11 +259,11 @@
       <button class="slider-nav__btn slider-wrap__btn slider-wrap__btn--prev" type="button" data-slider-prev="projectsSlider" aria-label="Предыдущий проект"><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
       <button class="slider-nav__btn slider-wrap__btn slider-wrap__btn--next" type="button" data-slider-next="projectsSlider" aria-label="Следующий проект"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
       <ul class="slider" id="projectsSlider">
-        <li class="project"><div class="project__img" style="--img:url('../img/project-1.webp')"></div><h3 class="project__title">Холодильный склад</h3><p class="project__text">Фронтальные стеллажи для хранения пищевой продукции</p></li>
-        <li class="project"><div class="project__img" style="--img:url('../img/project-2.webp')"></div><h3 class="project__title">Фармацевтический склад</h3><p class="project__text">Среднегрузовые стеллажи</p></li>
-        <li class="project"><div class="project__img" style="--img:url('../img/project-3.webp')"></div><h3 class="project__title">Автосервис</h3><p class="project__text">Стеллажное хранение запчастей и комплектующих</p></li>
-        <li class="project"><div class="project__img" style="--img:url('../img/project-4.webp')"></div><h3 class="project__title">Склад оптово-розничной сети</h3><p class="project__text">Хранение метизов и крепежа</p></li>
-        <li class="project"><div class="project__img" style="--img:url('../img/project-5.webp')"></div><h3 class="project__title">Архивное хранение</h3><p class="project__text">Мобильные стеллажи для хранения документов</p></li>
+        <li class="project"><div class="project__img" style="--img:url('../img/project-1.webp')"></div><h3 class="project__title">Холодильный склад</h3><p class="project__text">Фронтальные стеллажи для хранения пищевой продукции, г. Красноярск</p></li>
+        <li class="project"><div class="project__img" style="--img:url('../img/project-2.webp')"></div><h3 class="project__title">Фармацевтический склад</h3><p class="project__text">Среднегрузовые стеллажи, г. Красноярск</p></li>
+        <li class="project"><div class="project__img" style="--img:url('../img/project-3.webp')"></div><h3 class="project__title">Автосервис</h3><p class="project__text">Стеллажное хранение запчастей и комплектующих, г. Красноярск</p></li>
+        <li class="project"><div class="project__img" style="--img:url('../img/project-4.webp')"></div><h3 class="project__title">Склад оптово-розничной сети</h3><p class="project__text">Хранение метизов и крепежа, г. Красноярск</p></li>
+        <li class="project"><div class="project__img" style="--img:url('../img/project-5.webp')"></div><h3 class="project__title">Архивное хранение</h3><p class="project__text">Мобильные стеллажи для хранения документов, г. Красноярск</p></li>
       </ul>
       </div>
       <a href="/services/sborka-i-montazh/" class="btn btn--primary btn--lg slider-all-mob">Смотреть все проекты <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
@@ -294,12 +296,12 @@
   <!-- ============ 7. ГЕОГРАФИЯ ============ -->
   <section class="section">
     <div class="container geo">
-      <img class="geo__map" src="img/map.webp" width="446" height="243" alt="Карта поставок по России">
+      <div class="geo__map-box"><div class="map-wrap"><img class="geo__map" src="img/map.webp" width="446" height="243" alt="Карта поставок по России"><span class="map-pin" aria-hidden="true"><span class="map-pin__label">Красноярск</span></span></div></div>
       <ul class="geo__stats">
         <li class="stat"><strong class="stat__num">85+</strong><span class="stat__text">регионов поставок</span></li>
         <li class="stat"><strong class="stat__num">1500+</strong><span class="stat__text">проектов<br> по всей России</span></li>
         <li class="stat"><strong class="stat__num">2000+</strong><span class="stat__text">довольных<br> клиентов</span></li>
-        <li class="stat"><strong class="stat__num">12+</strong><span class="stat__text">лет успешной<br> работы</span></li>
+        <li class="stat"><strong class="stat__num">10+</strong><span class="stat__text">лет успешной<br> работы</span></li>
       </ul>
       <div class="geo__text">
         <h2 class="h3">Работаем по всей России</h2>
@@ -413,7 +415,7 @@
         <ul>
           <li><a href="/catalog/metallicheskie-stellazhi/">Металлические стеллажи</a></li>
           <li><a href="/catalog/stellazhi-dlya-sklada/">Стеллажи для склада</a></li>
-          <li><a href="/catalog/metallicheskie-shkafy/">Шкафы металлические</a></li>
+          <li><a href="/catalog/metallicheskie-shkafy/">Металлические шкафы</a></li>
           <li><a href="/catalog/proizvodstvennaya-mebel/">Производственная мебель</a></li>
           <li><a href="/catalog/tekhnika-dlya-sklada/">Техника для склада</a></li>
           <li><a href="/catalog/seyfy/">Сейфы</a></li>

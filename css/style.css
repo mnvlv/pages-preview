@@ -148,10 +148,10 @@ button { cursor: pointer; }
   content: ''; position: absolute; inset: 0; z-index: -1;
   background: rgba(26, 26, 26, .78); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
 }
-.header__inner { display: flex; align-items: center; gap: 78px; height: 100%; }
+.header__inner { display: flex; align-items: center; gap: 40px; height: 100%; }
 .nav { margin-left: auto; }
-.nav__list { display: flex; align-items: center; gap: 48px; }
-.nav__item--drop { position: relative; margin-right: 38px; }
+.nav__list { display: flex; align-items: center; gap: 32px; }
+.nav__item--drop { position: relative; }
 .nav__link {
   display: inline-flex; align-items: center; gap: 12px; padding: 8px 0;
   font-size: 16px; font-weight: 400; text-transform: uppercase; white-space: nowrap;
@@ -526,10 +526,9 @@ button { cursor: pointer; }
    Адаптив
    ========================================================== */
 @media (max-width: 1360px) {
-  .header__inner { gap: 40px; }
-  .nav__list { gap: 32px; }
-  .nav__item--drop { margin-right: 0; }
-  .header__btn { padding: 0 28px; }
+  .header__inner { gap: 32px; }
+  .nav__list { gap: 24px; }
+  .header__btn { padding: 0 24px; }
   .whs { grid-template-columns: 1fr 1.3fr; }
   .geo { grid-template-columns: 1fr 1fr; }
   .geo__text { grid-column: 1 / -1; }
@@ -549,10 +548,10 @@ button { cursor: pointer; }
 @media (max-width: 1200px) {
   :root { --section-y: 88px; --gap: 24px; }
   /* шапка до перехода на бургер (1024): компактнее меню, чтобы кнопка не выходила за край */
-  .header__inner { gap: 24px; }
-  .nav__list { gap: 20px; }
-  .nav__link { font-size: 15px; }
-  .header__btn { padding: 0 20px; }
+  .header__inner { gap: 16px; }
+  .nav__list { gap: 14px; }
+  .nav__link { font-size: 13px; gap: 6px; }
+  .header__btn { padding: 0 12px; }
   .cat--small { grid-column: span 6; }
   .whs { grid-template-columns: 1fr; gap: 40px; }
   .steps { grid-template-columns: repeat(2, 1fr); }
@@ -668,7 +667,7 @@ button { cursor: pointer; }
   .advantage br, .request .h2 br, .lead br, .footer__slogan br { display: none; }
   /* география по UI kit: блок в рамке, цифры в одну колонку */
   .geo { grid-template-columns: 1fr; gap: 24px; }
-  .geo__map { padding: 16px; background: var(--c-surface); border-radius: 8px; box-shadow: 0 0 0 1px #585858; }
+  .geo__map-box { padding: 16px; background: var(--c-surface); border-radius: 8px; box-shadow: 0 0 0 1px #585858; }
   .geo__stats { grid-template-columns: 1fr; gap: 12px; }
   .geo__text .btn { margin-top: 32px; width: 100%; }
   .stat { min-height: 0; padding: 16px; }
@@ -719,3 +718,18 @@ body.menu-open { overflow: hidden; }
 /* 2026-11-07, правка заказчика: текстовые абзацы выровнены по ширине */
 main p:not(.pill):not(.form__success):not(.form__error),
 .faq__a p, .footer__slogan { text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto; }
+
+/* 2026-11-12, подпись «Красноярск» на карте поставок (положение большой точки: 50.6% / 76.8% картинки) */
+.map-wrap { position: relative; }
+.map-wrap > img { display: block; }
+.map-pin { position: absolute; left: 50.6%; top: 76.8%; width: 0; height: 0; pointer-events: none; }
+.map-pin::before { content: ''; position: absolute; left: -9px; top: -9px; width: 18px; height: 18px; box-sizing: border-box; border: 1.5px solid #fff; border-radius: 50%; }
+.map-pin__label {
+  position: absolute; left: 12px; bottom: 10px; padding: 2px 7px; white-space: nowrap;
+  font-size: 12px; font-weight: 600; line-height: 16px; color: #fff; text-transform: none; letter-spacing: 0;
+  background: rgba(26, 26, 26, .92); border: 1px solid var(--c-accent); border-radius: 3px;
+}
+@media (max-width: 600px) {
+  .map-pin::before { left: -7px; top: -7px; width: 14px; height: 14px; }
+  .map-pin__label { left: 9px; bottom: 7px; padding: 1px 5px; font-size: 10px; line-height: 14px; }
+}

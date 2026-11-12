@@ -402,8 +402,9 @@ controls.enableDamping = true;
 controls.dampingFactor = .08;
 controls.screenSpacePanning = true;
 controls.maxPolarAngle = Math.PI * .495;
-controls.minDistance = .3;
-controls.maxDistance = 40;
+controls.minDistance = .7;
+controls.maxDistance = 20;   // уточняется в frame() по ракурсу «Общий вид»
+controls.zoomSpeed = .6;       // мягче шаг колёсика (было 1)
 
 scene.add(new THREE.HemisphereLight(0xffffff, 0x4b4f56, .75));
 const sun = new THREE.DirectionalLight(0xffffff, 2.5);
@@ -1083,12 +1084,17 @@ function resize() {
 new ResizeObserver(resize).observe(stageEl);
 resize();
 
+let limT = 0;
 function frame(now) {
   requestAnimationFrame(frame);
   if (tween) {
     const k = Math.min(1, (now - tween.t0) / tween.dur), e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
     camera.position.lerpVectors(tween.p0, tween.p1, e); controls.target.lerpVectors(tween.q0, tween.q1, e);
     if (k >= 1) tween = null;
+  }
+  if (now - limT > 400) {   // дальность отъезда не больше 1.35 расстояния «Общего вида», чтобы модель не улетала в точку
+    limT = now; const o = overview();
+    controls.maxDistance = Math.max(o.p.distanceTo(o.t) * 1.35, 6);
   }
   controls.update();
   let moved = false;
