@@ -1,0 +1,46 @@
+/* Единый стиль карточек и стрелок (подключается последним на всех страницах).
+   Карточка: радиус 8px, рамка 1px var(--c-border) #585858, фон #232323, отступ 24px.
+   Вложенная плашка на карточке/секции: радиус 8px, фон #1a1a1a, та же рамка.
+   Плашка поверх фото: радиус 8px, фон rgba(26,26,26,.6).
+   Стрелка в кнопке — по размеру кнопки; стрелка текстовой ссылки 17×12; слайдер — оранжевый квадрат 8px;
+   стрелка между шагами — серая 24px. */
+
+/* --- радиус: всё 8px --- */
+.step, .sv-step, .sv-ic, .sv-pc, .sv-panel, .sv-org__card, .sv-partner, .bl-card, .bl-feat, .sv-cta, .sv-tab,
+.sv-mini li, .sv-tiles li, .sv-ills li, .rk-tile, .rk-type, .rk-side,
+.page-racks--s .rk-where__list li, .page-racks--s .rk-feats li, .page-racks--fold .rk-acc,
+.cat, .product, .c-seo__cards li, .pd-card { border-radius: 8px; }
+
+/* --- отступ карточек 24px --- */
+.step, .sv-step, .sv-ic, .sv-org__card, .sv-partner, .sv-ills li { padding: 24px; }
+.sv-mini li { padding: 16px; }
+
+/* --- фон вложенных плашек: один тон --- */
+.rk-tile, .page-racks--s .rk-where__list li, .page-racks--s .rk-feats li { background: var(--c-bg); }
+.sv-plaques li { background: rgba(26, 26, 26, .6); }
+
+/* --- стрелка текстовой ссылки: 17×12, зазор 8 --- */
+.sv-link, .sv-link-all, .bl-card__more, .w-more { display: inline-flex; align-items: center; gap: 8px; }
+.sv-link .btn__icon, .sv-link-all .btn__icon, .bl-card__more .btn__icon, .w-more .btn__icon, .sv-pc__btn .btn__icon { width: 17px; height: 12px; }
+
+/* --- слайдер: оранжевый квадрат 8px, как на Главной --- */
+.bl-nav { gap: 8px; }
+.bl-nav .slider-nav__btn { width: 40px; height: 40px; cursor: pointer; }
+.bl-nav .slider-nav__btn svg { width: 15.5px; height: 11px; }
+.bl-nav [data-counter] { min-width: 48px; text-align: center; }
+
+/* --- стрелка между шагами: одна на всех, 24px --- */
+.sv-step::after { width: 24px; height: 24px; }
+.sv-mini li:not(:last-child)::after {
+  content: ''; right: -16px; width: 16px; height: 16px; font-size: 0; background: var(--c-text-2);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Cpath d='M3 12h17M14 6l6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Cpath d='M3 12h17M14 6l6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+@media (max-width: 1100px) { .sv-mini li:not(:last-child)::after { display: none; } }
+
+/* --- страница товара: мелкие элементы тоже 8px --- */
+.pd-3d, .pd-3d::after, .pd-doc__icon, .pd-doc__btn { border-radius: 8px; }
+
+/* --- отступы: карточка 24px, крупная панель 28px --- */
+.rk-side, .pd-buy, .c-seo__cards li { padding: 24px; }
+.sv-panel { padding: 28px; }
