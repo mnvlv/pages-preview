@@ -192,3 +192,9 @@
   .m-hero__features li { height: auto; min-height: 100px; gap: 12px; padding: 14px 12px; }
   .m-when__cards li { font-size: 16px; line-height: 20px; }
 }
+
+/* 2026-11-12, телефоны до 380 px: подпись «реализованных проектов» помещается в карточку цифр */
+@media (max-width: 380px) {
+  .m-stats li { padding: 14px 10px; }
+  .m-stats span { font-size: 14px; line-height: 18px; }
+}

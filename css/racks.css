@@ -298,3 +298,30 @@ main .rk-uni__text p { hyphens: manual !important; -webkit-hyphens: manual !impo
   .rk-vol__dot.is-active { width: 34px; background: var(--c-accent); }
 }
 
+
+/* 2026-11-12, узкие экраны: подписи «Ширина прохода / Использование площади» переносятся, а не выходят за край */
+@media (max-width: 480px) {
+  .rk-side__cap { white-space: normal; align-items: flex-end; }
+  .rk-side__cap span:last-child { text-align: right; }
+}
+
+/* 2026-11-12, телефоны 360–400 px: длинные слова («Проектирование», «Широкопроходные») помещаются в карточку */
+@media (max-width: 440px) {
+  .page-racks--fold .rk-tile { padding: 14px 12px 16px; }
+  .page-racks--fold .rk-tile__m b { font-size: 15px; }
+  .page-racks--fold .rk-type__title { margin: 10px 8px 0; font-size: 14px; }
+}
+
+/* «Где используются» (среднегрузовые): длинное слово «Производственные» не выходит за карточку */
+@media (max-width: 400px) {
+  .page-racks--s .rk-where__list span { font-size: 13px; letter-spacing: -.01em; }
+  .page-racks--s .rk-where { padding: 20px 12px; }
+}
+
+/* 360–380 px: самое длинное слово заголовка и «Перфорированный настил» не выходят за поля */
+@media (max-width: 380px) {
+  .page-racks--s .rk-hero__title { font-size: 31px; }
+  .rk-floors span { font-size: 13px; }
+  .page-racks--s .rk-feats li { padding: 14px 10px 16px; }
+  .page-racks--s .rk-feats p, .page-racks--s .rk-feats li:nth-child(1) p { font-size: 12px; }
+}
