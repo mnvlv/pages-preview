@@ -733,3 +733,8 @@ main p:not(.pill):not(.form__success):not(.form__error),
   .map-pin::before { left: -7px; top: -7px; width: 14px; height: 14px; }
   .map-pin__label { left: 9px; bottom: 7px; padding: 1px 5px; font-size: 10px; line-height: 14px; }
 }
+
+/* Описания категорий на Главной: слева, без растяжки; в широких карточках — не поверх всего фото */
+main .cat p.cat__text:not(.pill):not(.form__success):not(.form__error) { text-align: left; hyphens: none; -webkit-hyphens: none; }
+.cat--wide .cat__text { max-width: 60%; }
+.cat--small .cat__text { max-width: 100%; }
