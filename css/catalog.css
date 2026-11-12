@@ -380,6 +380,3 @@ a.pager__item:hover, .pager__item.is-active { color: var(--c-accent); box-shadow
 .cats-demo button { padding: 7px 14px; font: inherit; color: var(--c-text); background: none; border-radius: 6px; box-shadow: inset 0 0 0 1px #585858; cursor: pointer; transition: box-shadow .2s, color .2s; }
 .cats-demo button:hover { box-shadow: inset 0 0 0 1px var(--c-accent); }
 .cats-demo button[aria-pressed="true"] { color: #fff; background: var(--c-accent); box-shadow: none; }
-
-/* шапка раздела без текста на картинке: фон общий для категории, заголовок и крошки выводятся живым текстом */
-.c-hero--kartoteki::before { background-image: url(../img/catalog/hero-kartoteki.svg); }

@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Демо: вид плиток категорий (убрать после выбора клиентом) ---------- */
   const catsBox = document.querySelector('.cats-box');
-  if (catsBox) {
+  if (catsBox && !catsBox.hasAttribute('data-fixed-view')) {
     const modes = [['', 'Как сейчас'], ['plain', 'Без картинок'], ['big', 'Крупные изображения']];
     const bar = document.createElement('div');
     bar.className = 'cats-demo';
