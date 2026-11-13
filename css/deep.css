@@ -98,7 +98,7 @@
 .dp-when__list p { padding-left: 24px; font-size: 16px; line-height: 1.25; color: var(--c-text-2); border-left: 1px solid #585858; text-align: left !important; hyphens: manual !important; }
 
 /* ---------- Форма с фото ---------- */
-.dp-request { grid-template-columns: minmax(0, 1fr) 250px 580px; gap: 32px; overflow: visible; position: relative; z-index: 3; }
+.dp-request { grid-template-columns: minmax(0, 1fr) 220px 400px 250px; gap: 28px; overflow: visible; position: relative; z-index: 3; }
 .dp-request .h2 { font-size: clamp(30px, 2.8vw, 40px); }
 .dp-man { align-self: end; justify-self: center; width: 100%; height: auto; margin-bottom: -27px; pointer-events: none; }
 @media (max-width: 1280px) { .dp-man { display: none; } .dp-request { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
@@ -177,3 +177,18 @@
   .dp-lf__side b, .dp-lf__out b { max-width: none; }
   .dp-lf__p span { font-size: 16px; }
 }
+
+/* контакты справа от формы */
+.dp-contact { align-self: start; min-width: 0; }
+.dp-contact__t { font-size: 20px; font-weight: 600; line-height: 1.2; text-transform: uppercase; }
+.dp-contact__list { display: grid; gap: 18px; margin-top: 24px; padding-bottom: 24px; border-bottom: 1px solid #3d3d3d; }
+.dp-contact__list li { display: flex; align-items: center; gap: 14px; font-size: 16px; line-height: 1.25; color: #fff; }
+.dp-contact__list svg { flex: none; width: 26px; height: 26px; fill: none; stroke: var(--c-accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.dp-contact__list a { color: inherit; }
+.dp-contact__ok { margin-top: 24px; font-size: 16px; line-height: 1.25; color: #1fd286; }
+.dp-contact__call { width: 100%; margin-top: 24px; padding: 0 16px; gap: 12px; }
+@media (max-width: 1280px) { .dp-contact { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, auto); align-items: center; gap: 16px 32px; padding-top: 24px; border-top: 1px solid #3d3d3d; } .dp-contact__t { grid-column: 1 / -1; } .dp-contact__list { display: contents; } .dp-contact__list li { } .dp-contact__ok, .dp-contact__call { margin-top: 0; } .dp-contact__call { width: auto; } .dp-contact__list { border: 0; padding: 0; } }
+@media (max-width: 900px) { .dp-contact { grid-template-columns: minmax(0, 1fr); } .dp-contact__call { width: 100%; } }
+
+@media (min-width: 1281px) { .dp-request .m-request__call { display: none; } }
+@media (max-width: 1280px) { .dp-contact__call { display: none; } }
