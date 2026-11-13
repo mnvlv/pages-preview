@@ -97,7 +97,7 @@
 .mb-hc { display: grid; gap: 8px; margin-top: 70px; }
 .mb-hc li { display: flex; align-items: center; gap: 14px; height: 64px; padding: 0 16px; font-size: 14px; font-weight: 600; line-height: 1.2; color: #fff; background: rgba(30, 30, 30, .55); border: 1px solid #585858; border-radius: 6px; }
 .mb-hc__i { flex: none; width: 30px; height: 30px; color: var(--c-accent); }
-.mb-hero::before { filter: brightness(.8); }
+.mb-hero::before { filter: contrast(.9) brightness(.82); }
 @media (max-width: 1100px) {
   .mb-hero .m-hero__inner { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .mb-hc { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 0; }
