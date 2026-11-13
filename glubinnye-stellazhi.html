@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Глубинные набивные стеллажи — Диаском</title>
+  <meta name="description" content="Глубинные (набивные) стеллажи: до 85% использования объёма склада, до 12 паллет в глубину, схемы LIFO и FIFO, нагрузка до 1500 кг на паллетоместо. Проектирование, доставка и монтаж по всей России.">
+  <meta name="theme-color" content="#1c1c1c">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=76">
+  <link rel="stylesheet" href="css/mining.css?v=7">
+  <link rel="stylesheet" href="css/catalog.css?v=22">
+  <link rel="stylesheet" href="css/racks.css?v=48">
+  <link rel="stylesheet" href="css/deep.css?v=5">
+  <link rel="stylesheet" href="css/unify.css?v=4">
+</head>
+<body class="page-racks page-racks--fold page-deep">
+
+<!-- ============ ИКОНКИ ИНТЕРФЕЙСА ============ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="i-arrow" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M.75 6.836h18M12 .836l6.75 6-6.75 6"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.75 6.836h-18M7.5 .836l-6.75 6 6.75 6"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5v7l5.5-3.5z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-download" viewBox="489.50 518.50 15.00 15.00"><path fill="currentColor" d="M491.00 528.25C491.00 527.84 490.66 527.50 490.25 527.50C489.84 527.50 489.50 527.84 489.50 528.25L490.25 528.25L491.00 528.25M504.50 528.25C504.50 527.84 504.16 527.50 503.75 527.50C503.34 527.50 503.00 527.84 503.00 528.25L503.75 528.25L504.50 528.25M490.25 528.25L489.50 528.25C489.50 529.29 489.50 530.14 489.59 530.82C489.68 531.51 489.89 532.13 490.38 532.62L490.91 532.09L491.44 531.56C491.27 531.39 491.15 531.15 491.08 530.62C491.00 530.07 491.00 529.33 491.00 528.25L490.25 528.25M490.91 532.09L490.38 532.62C490.87 533.11 491.49 533.32 492.18 533.41C492.86 533.50 493.71 533.50 494.75 533.50L494.75 532.75L494.75 532.00C493.67 532.00 492.93 532.00 492.38 531.92C491.85 531.85 491.61 531.73 491.44 531.56L490.91 532.09M494.75 532.75L494.75 533.50L499.25 533.50L499.25 532.75L499.25 532.00L494.75 532.00L494.75 532.75M499.25 532.75L499.25 533.50C500.29 533.50 501.14 533.50 501.82 533.41C502.51 533.32 503.13 533.11 503.62 532.62L503.09 532.09L502.56 531.56C502.39 531.73 502.15 531.85 501.62 531.92C501.07 532.00 500.33 532.00 499.25 532.00L499.25 532.75M503.09 532.09L503.62 532.62C504.11 532.13 504.32 531.51 504.41 530.82C504.50 530.14 504.50 529.29 504.50 528.25L503.75 528.25L503.00 528.25C503.00 529.33 503.00 530.07 502.92 530.62C502.85 531.15 502.73 531.39 502.56 531.56L503.09 532.09"/><path fill="currentColor" d="M497.75 519.25C497.75 518.84 497.41 518.50 497.00 518.50C496.59 518.50 496.25 518.84 496.25 519.25L497.00 519.25L497.75 519.25M497.00 529.00L496.45 529.51C496.59 529.66 496.79 529.75 497.00 529.75C497.21 529.75 497.41 529.66 497.55 529.51L497.00 529.00M500.55 526.22C500.83 525.92 500.81 525.44 500.51 525.17C500.20 524.89 499.73 524.91 499.45 525.21L500.00 525.72L500.55 526.22M494.55 525.21C494.27 524.91 493.80 524.89 493.49 525.17C493.19 525.44 493.17 525.92 493.45 526.22L494.00 525.72L494.55 525.21M497.00 519.25L496.25 519.25L496.25 529.00L497.00 529.00L497.75 529.00L497.75 519.25L497.00 519.25M497.00 529.00L497.55 529.51L500.55 526.22L500.00 525.72L499.45 525.21L496.45 528.49L497.00 529.00L497.55 528.49L494.55 525.21L494.00 525.72L493.45 526.22L496.45 529.51L497.00 529.00"/></symbol>
+  <symbol id="i-phone" viewBox="267.00 3669.50 17.00 17.00"><path fill="currentColor" d="M276.87 3681.43L276.43 3682.32C276.44 3682.33 276.45 3682.33 276.46 3682.33L276.87 3681.43M277.78 3681.20L276.99 3680.59L276.99 3680.59L277.78 3681.20M278.05 3680.85L278.84 3681.46L278.85 3681.45L278.05 3680.85M281.50 3685.50L281.50 3686.50L281.50 3685.50M268.00 3672.00L269.00 3672.00L268.00 3672.00M269.50 3670.50L269.50 3669.50L269.50 3670.50M271.75 3670.50L271.75 3669.50L271.75 3670.50M272.65 3675.45L273.25 3676.25L272.65 3675.45M272.30 3675.71L271.70 3674.91L271.69 3674.92L272.30 3675.71M272.08 3676.64L271.18 3677.08L271.18 3677.08L272.08 3676.64M276.87 3681.43L276.46 3682.33C276.82 3682.50 277.23 3682.54 277.61 3682.44L277.37 3681.47L277.13 3680.50C277.18 3680.49 277.24 3680.49 277.29 3680.52L276.87 3681.43M277.37 3681.47L277.61 3682.44C278.00 3682.35 278.34 3682.12 278.58 3681.80L277.78 3681.20L276.99 3680.59C277.02 3680.55 277.07 3680.52 277.13 3680.50L277.37 3681.47M277.78 3681.20L278.58 3681.81L278.84 3681.46L278.05 3680.85L277.26 3680.24L276.99 3680.59L277.78 3681.20M278.05 3680.85L278.85 3681.45C278.90 3681.39 278.96 3681.34 279.03 3681.30L278.58 3680.41L278.13 3679.51C277.78 3679.69 277.48 3679.94 277.25 3680.25L278.05 3680.85M278.58 3680.41L279.03 3681.30C279.10 3681.27 279.17 3681.25 279.25 3681.25L279.25 3680.25L279.25 3679.25C278.86 3679.25 278.48 3679.34 278.13 3679.51L278.58 3680.41M279.25 3680.25L279.25 3681.25L281.50 3681.25L281.50 3680.25L281.50 3679.25L279.25 3679.25L279.25 3680.25M281.50 3680.25L281.50 3681.25C281.63 3681.25 281.76 3681.30 281.85 3681.40L282.56 3680.69L283.27 3679.98C282.80 3679.51 282.16 3679.25 281.50 3679.25L281.50 3680.25M282.56 3680.69L281.85 3681.40C281.95 3681.49 282.00 3681.62 282.00 3681.75L283.00 3681.75L284.00 3681.75C284.00 3681.09 283.74 3680.45 283.27 3679.98L282.56 3680.69M283.00 3681.75L282.00 3681.75L282.00 3684.00L283.00 3684.00L284.00 3684.00L284.00 3681.75L283.00 3681.75M283.00 3684.00L282.00 3684.00C282.00 3684.13 281.95 3684.26 281.85 3684.35L282.56 3685.06L283.27 3685.77C283.74 3685.30 284.00 3684.66 284.00 3684.00L283.00 3684.00M282.56 3685.06L281.85 3684.35C281.76 3684.45 281.63 3684.50 281.50 3684.50L281.50 3685.50L281.50 3686.50C282.16 3686.50 282.80 3686.24 283.27 3685.77L282.56 3685.06M281.50 3685.50L281.50 3684.50C278.18 3684.50 275.01 3683.18 272.66 3680.84L271.95 3681.55L271.25 3682.25C273.97 3684.97 277.65 3686.50 281.50 3686.50L281.50 3685.50M271.95 3681.55L272.66 3680.84C270.32 3678.49 269.00 3675.32 269.00 3672.00L268.00 3672.00L267.00 3672.00C267.00 3675.85 268.53 3679.53 271.25 3682.25L271.95 3681.55M268.00 3672.00L269.00 3672.00C269.00 3671.87 269.05 3671.74 269.15 3671.65L268.44 3670.94L267.73 3670.23C267.26 3670.70 267.00 3671.34 267.00 3672.00L268.00 3672.00M268.44 3670.94L269.15 3671.65C269.24 3671.55 269.37 3671.50 269.50 3671.50L269.50 3670.50L269.50 3669.50C268.84 3669.50 268.20 3669.76 267.73 3670.23L268.44 3670.94M269.50 3670.50L269.50 3671.50L271.75 3671.50L271.75 3670.50L271.75 3669.50L269.50 3669.50L269.50 3670.50M271.75 3670.50L271.75 3671.50C271.88 3671.50 272.01 3671.55 272.10 3671.65L272.81 3670.94L273.52 3670.23C273.05 3669.76 272.41 3669.50 271.75 3669.50L271.75 3670.50M272.81 3670.94L272.10 3671.65C272.20 3671.74 272.25 3671.87 272.25 3672.00L273.25 3672.00L274.25 3672.00C274.25 3671.34 273.99 3670.70 273.52 3670.23L272.81 3670.94M273.25 3672.00L272.25 3672.00L272.25 3674.25L273.25 3674.25L274.25 3674.25L274.25 3672.00L273.25 3672.00M273.25 3674.25L272.25 3674.25C272.25 3674.33 272.23 3674.40 272.20 3674.47L273.09 3674.92L273.99 3675.37C274.16 3675.02 274.25 3674.64 274.25 3674.25L273.25 3674.25M273.09 3674.92L272.20 3674.47C272.16 3674.54 272.11 3674.60 272.05 3674.65L272.65 3675.45L273.25 3676.25C273.56 3676.02 273.81 3675.72 273.99 3675.37L273.09 3674.92M272.65 3675.45L272.05 3674.65L271.70 3674.91L272.30 3675.71L272.90 3676.51L273.25 3676.25L272.65 3675.45M272.30 3675.71L271.69 3674.92C271.37 3675.16 271.14 3675.51 271.05 3675.91L272.02 3676.14L273.00 3676.37C272.98 3676.42 272.95 3676.47 272.91 3676.51L272.30 3675.71M272.02 3676.14L271.05 3675.91C270.96 3676.30 271.00 3676.71 271.18 3677.08L272.08 3676.64L272.98 3676.20C273.00 3676.25 273.01 3676.31 273.00 3676.37L272.02 3676.14M272.08 3676.64L271.18 3677.08C272.31 3679.36 274.15 3681.20 276.43 3682.32L276.87 3681.43L277.31 3680.53C275.43 3679.60 273.90 3678.08 272.98 3676.20L272.08 3676.64"/></symbol>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header class="header">
+  <div class="container header__inner">
+    <a href="/" class="logo" aria-label="Диаском — на главную">
+      <img src="img/icons/logo.svg" width="158" height="41" alt="">
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Основное меню">
+      <ul class="nav__list">
+        <li class="nav__item nav__item--drop nav__item--mega">
+          <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-catalog">
+            <span class="nav__text">Каталог</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </button>
+          <div class="mega" id="nav-catalog">
+            <ul class="mega__grid">
+              <li class="mega__col">
+                <a href="/catalog/metallicheskie-stellazhi/" class="mega__head">Металлические стеллажи</a>
+                <ul class="mega__links"><li><a href="#">Серия MS Standart (до 100 кг на полку)</a></li><li><a href="#">Серия MS Strong (до 150 кг на полку)</a></li><li><a href="#">Серия MS Hard (до 200 кг на полку)</a></li><li><a href="#">Полочные MS U (до 300 кг на полку)</a></li></ul>
+              </li>
+              <li class="mega__col">
+                <a href="/catalog/stellazhi-dlya-sklada/" class="mega__head">Стеллажи для склада</a>
+                <ul class="mega__links"><li><a href="#">Паллетные фронтальные</a></li><li><a href="#">Мезонинные стеллажи</a></li><li><a href="#">Набивные (глубинные) стеллажи</a></li><li><a href="#">Консольные стеллажи</a></li></ul>
+              </li>
+              <li class="mega__col">
+                <a href="/catalog/metallicheskie-shkafy/" class="mega__head">Металлические шкафы</a>
+                <ul class="mega__links"><li><a href="#">Для раздевалок (локеры)</a></li><li><a href="#">Для офиса</a></li><li><a href="#">Сумочницы для сумок</a></li><li><a href="#">Картотечные</a></li></ul>
+              </li>
+              <li class="mega__col">
+                <a href="/catalog/proizvodstvennaya-mebel/" class="mega__head">Производственная мебель</a>
+                <ul class="mega__links"><li><a href="#">Верстаки серии GARAGE</a></li><li><a href="#">Верстаки серии MASTER</a></li><li><a href="#">Верстаки серии PROFI W</a></li><li><a href="#">Верстаки слесарные ВП</a></li></ul>
+              </li>
+              <li class="mega__col">
+                <a href="/catalog/tekhnika-dlya-sklada/" class="mega__head">Складская техника</a>
+                <ul class="mega__links"><li><a href="#">Рохля гидравлическая</a></li><li><a href="#">Штабелеры</a></li></ul>
+              </li>
+              <li class="mega__col">
+                <a href="/catalog/seyfy/" class="mega__head">Сейфы</a>
+                <ul class="mega__links"><li><a href="#">Сейфы европейской сертификации</a></li><li><a href="#">Взломостойкие сейфы I класса</a></li><li><a href="#">Взломостойкие сейфы II класса</a></li><li><a href="#">Взломостойкие сейфы III класса</a></li></ul>
+              </li>
+              <li class="mega__col">
+                <a href="/catalog/metallicheskaya-meditsinskaya-mebel/" class="mega__head">Медицинская мебель</a>
+                <ul class="mega__links"><li><a href="#">Аптечки</a></li><li><a href="#">Медицинские шкафы</a></li><li><a href="#">Медицинские стеллажи CTM MS</a></li><li><a href="#">Медицинские столы</a></li></ul>
+              </li>
+              <li class="mega__col">
+                <a href="/catalog/pochtovye-yashchiki/" class="mega__head">Почтовые ящики</a>
+                <ul class="mega__links"><li><a href="#">Практик PB RB</a></li><li><a href="#">Почтовые ящики ПМ</a></li></ul>
+              </li>
+              <li class="mega__col">
+                <a href="/catalog/metallicheskie-klyuchnitsy/" class="mega__head">Ключницы</a>
+                <ul class="mega__links"><li><a href="#">AIKO KEY</a></li><li><a href="#">AIKO KEY EL</a></li><li><a href="#">AIKO KEY G</a></li><li><a href="#">KEY FIRE</a></li></ul>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav__item nav__item--sub">
+          <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-sub-services">
+            <span class="nav__text">Услуги</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </button>
+          <ul class="nav__sub" id="nav-sub-services">
+            <li><a href="/services/sborka-i-montazh/">Сборка и монтаж</a></li>
+            <li><a href="/services/razrabotka-tz-dlya-auktsionov/">Подготовка тех. задания</a></li>
+            <li><a href="/services/proektirovanie-sklada/">Проектирование склада</a></li>
+          </ul>
+        </li>
+        <li class="nav__item"><a href="/about/" class="nav__link"><span class="nav__text">О компании</span></a></li>
+        <li class="nav__item"><a href="/services/" class="nav__link"><span class="nav__text">Комплексные решения</span></a></li>
+        <li class="nav__item"><a href="#" class="nav__link"><span class="nav__text">Банк знаний</span></a></li>
+        <li class="nav__item"><a href="#" class="nav__link"><span class="nav__text">Блог</span></a></li>
+      </ul>
+      <div class="nav__mobile">
+        <div class="icon-links">
+        <a href="tel:+73912592659" aria-label="Позвонить"><span class="socials__icon socials__icon--phone"></span></a>
+        <a href="https://t.me/+79138374659" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span class="socials__icon socials__icon--telegram"></span></a>
+        <a href="https://max.ru/id2464149300_bot" target="_blank" rel="noopener" aria-label="Написать в Max"><span class="socials__icon socials__icon--max"></span></a>
+        </div>
+        <a href="#request" class="btn btn--primary nav__btn">Заказать звонок</a>
+      </div>
+    </nav>
+
+    <a href="#request" class="btn btn--primary header__btn">Заказать звонок</a>
+    <div class="icon-links header__icons">
+        <a href="tel:+73912592659" aria-label="Позвонить"><span class="socials__icon socials__icon--phone"></span></a>
+        <a href="https://t.me/+79138374659" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span class="socials__icon socials__icon--telegram"></span></a>
+        <a href="https://max.ru/id2464149300_bot" target="_blank" rel="noopener" aria-label="Написать в Max"><span class="socials__icon socials__icon--max"></span></a>
+    </div>
+    <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <section class="m-hero rk-hero dp-hero" style="--rk-hero:url(../img/deep/hero.webp?v=1);--rk-w:960px;--rk-h:640px;--rk-ml:-260px;--rk-top:0px">
+    <div class="container m-hero__inner">
+      <div class="m-hero__main">
+        <p class="pill"><img class="pill__icon" src="img/icons/logo-mark.svg" width="16" height="18" alt="">Официальный дилер стеллажных систем</p>
+        <h1 class="m-hero__title rk-hero__title">Глубинные<br> <span class="accent rk-hero__line">набивные</span> стеллажи</h1>
+        <p class="m-hero__lead">Система хранения однородных паллетированных грузов с максимальной плотностью. Погрузчик заезжает прямо в канал стеллажа, поэтому проходов становится меньше, а паллетомест на том же складе — больше.</p>
+        <div class="m-hero__buttons">
+          <a href="#request" class="btn btn--primary btn--md">Получить расчет <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a href="#" class="btn btn--outline btn--md">Скачать каталог <svg class="btn__icon btn__icon--dl" aria-hidden="true"><use href="#i-download"/></svg></a>
+        </div>
+      </div>
+      <aside class="dp-params" aria-label="Ключевые параметры">
+        <h2 class="dp-params__title">Ключевые параметры</h2>
+        <dl>
+          <div><dt>до 85%</dt><dd>использование объёма склада</dd></div>
+          <div><dt>до 12</dt><dd>паллет в глубину канала</dd></div>
+          <div><dt>LIFO / FIFO</dt><dd>две схемы работы: Drive-In и Drive-Through</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section rk-uni-sec">
+    <div class="container rk-uni">
+      <h2 class="rk-uni__title">Глубинные набивные стеллажи — максимум паллет на каждом квадратном метре</h2>
+      <div class="rk-uni__text">
+          <p>Глубинные (набивные) стеллажи — система хранения однородных паллетированных грузов, в которой погрузчик заезжает прямо в канал стеллажа. Паллеты устанавливаются на консольные направляющие по 2–12 штук в глубину, а проходы между рядами почти не нужны. Это позволяет использовать до 85% объёма склада — на 30–40% больше, чем при фронтальном хранении.</p>
+          <p>Работаем с обеими схемами: Drive-In с одним торцом для загрузки и выгрузки (принцип LIFO — подходит для товаров с длительным сроком хранения) и Drive-Through со сквозным каналом (принцип FIFO — для продуктов, где важна ротация партий). Нагрузка — до 1500 кг на паллетоместо, высота — до 12 м.</p>
+          <p>Наши инженеры подберут конфигурацию под ваш погрузчик и товар, рассчитают нагрузки и подготовят проект расстановки. Выпускаем металлоконструкции из прочной стали с порошковым покрытием, выполняем монтаж «под ключ».</p>
+          <p>Осуществляем доставку набивных стеллажей по всей России.</p>
+      </div>
+      <ul class="rk-tiles">
+        <li class="rk-tile"><img class="rk-tile__icon" src="img/racks/icons/t-1.svg" width="61.6" height="62.2" alt=""><span class="rk-tile__d">В наличии стеллажи и<br> комплектующие</span><span class="rk-tile__m"><b>В наличии</b><small>Стеллажи и комплектующие</small></span></li>
+        <li class="rk-tile"><img class="rk-tile__icon" src="img/racks/icons/t-2.svg" width="76.6" height="53.9" alt=""><span class="rk-tile__d">Доставка по всей России</span><span class="rk-tile__m"><b>Доставка</b><small>По всей России</small></span></li>
+        <li class="rk-tile"><img class="rk-tile__icon" src="img/racks/icons/t-3.svg" width="46.1" height="61.6" alt=""><span class="rk-tile__d">Гарантия качества<br> и надежности</span><span class="rk-tile__m"><b>Гарантия</b><small>Качество и надёжность</small></span></li>
+        <li class="rk-tile"><img class="rk-tile__icon" src="img/racks/icons/t-4.svg" width="59.5" height="60.5" alt=""><span class="rk-tile__d">Индивидуальный подбор<br> и проектирование</span><span class="rk-tile__m"><b>Проектирование</b><small>Индивидуальный подбор и расчёт</small></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section rk-cfg" id="configurator">
+    <div class="container">
+      <h2 class="h2">3D-визуализация глубинного стеллажа</h2>
+      <p class="lead lead--lg">Изучите строение глубинного стеллажа в нашем<br> конструкторе. Наведите на элемент, чтобы узнать его назначение</p>
+      <div class="rk-cfg__frame dp-cfg">
+        <div class="rk-cfg__start">
+          <svg class="rk-cfg__cube" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M24 4 42 14v20L24 44 6 34V14zM6 14l18 10 18-10M24 24v20"/></svg>
+          <p>Здесь будет 3D-конструктор глубинного стеллажа</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="h2">LIFO или FIFO — выбор за вами</h2>
+      <p class="rk-head__sub rk-head__sub--lg">Схему работы определяет тип товара и скорость его оборачиваемости</p>
+      <div class="dp-schemes">
+        <article class="m-card dp-scheme">
+          <p class="dp-scheme__tag">Drive-In</p>
+          <h3 class="dp-scheme__title">LIFO — последним зашёл, первым вышел</h3>
+          <ul class="dp-scheme__list">
+            <li><img src="img/svc/i-check.svg" width="24" height="24" alt="">Один торец канала для загрузки и выгрузки</li>
+            <li><img src="img/svc/i-check.svg" width="24" height="24" alt="">Максимальная плотность хранения</li>
+            <li><img src="img/svc/i-check.svg" width="24" height="24" alt="">Подходит для товаров с длительным сроком хранения</li>
+          </ul>
+        </article>
+        <article class="m-card dp-scheme">
+          <p class="dp-scheme__tag">Drive-Through</p>
+          <h3 class="dp-scheme__title">FIFO — первым зашёл, первым вышел</h3>
+          <ul class="dp-scheme__list">
+            <li><img src="img/svc/i-check.svg" width="24" height="24" alt="">Сквозной канал: загрузка с одной стороны, выгрузка с другой</li>
+            <li><img src="img/svc/i-check.svg" width="24" height="24" alt="">Ротация партий без перекладывания паллет</li>
+            <li><img src="img/svc/i-check.svg" width="24" height="24" alt="">Подходит для продуктов, где важна ротация партий</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="h2 dp-h2--line">Как работает глубинный стеллаж</h2>
+      <ol class="dp-steps">
+        <li class="dp-step"><img class="dp-step__img" src="img/deep/step1.webp" width="490" height="750" alt="Погрузчик заезжает в канал" loading="lazy"><span class="dp-step__n">1</span><p>Погрузчик заезжает в канал</p></li>
+        <li class="dp-step"><img class="dp-step__img" src="img/deep/step2.webp" width="480" height="750" alt="Размещает паллету на направляющих" loading="lazy"><span class="dp-step__n">2</span><p>Размещает паллету на направляющих</p></li>
+        <li class="dp-step"><img class="dp-step__img" src="img/deep/step3.webp" width="486" height="750" alt="Движется вглубь канала" loading="lazy"><span class="dp-step__n">3</span><p>Движется вглубь канала</p></li>
+        <li class="dp-step"><img class="dp-step__img" src="img/deep/step4.webp" width="482" height="750" alt="Заполняет канал паллетами в глубину" loading="lazy"><span class="dp-step__n">4</span><p>Заполняет канал паллетами в глубину</p></li>
+        <li class="dp-step"><img class="dp-step__img" src="img/deep/step5.webp" width="482" height="750" alt="Выезжает из канала" loading="lazy"><span class="dp-step__n">5</span><p>Выезжает из канала</p></li>
+      </ol>
+      <p class="dp-note"><img src="img/deep/i-pallets.svg" width="24" height="24" alt="">Паллеты опираются на консоли по краям, поэтому погрузчик свободно проходит по каналу между стойками.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="dp-head">
+        <h2 class="h2 dp-h2--line">Где используются набивные стеллажи</h2>
+        <p class="dp-head__sub">Эффективное решение для хранения больших объёмов однотипных товаров с низкой оборачиваемостью</p>
+      </div>
+      <ul class="dp-uses">
+        <li class="dp-use"><img src="img/deep/cold.webp" width="900" height="600" alt="Холодильная камера с глубинными стеллажами" loading="lazy"><span class="dp-use__cap"><img class="dp-use__ic" src="img/svc/i-snow.svg" width="24" height="24" alt=""><b>Замороженная и охлаждённая продукция</b></span></li>
+        <li class="dp-use"><img src="img/deep/bev.webp" width="900" height="600" alt="Напитки на паллетах в глубинных стеллажах" loading="lazy"><span class="dp-use__cap"><img class="dp-use__ic" src="img/deep/i-bottles.svg" width="24" height="24" alt=""><b>Пищевые продукты и напитки</b></span></li>
+        <li class="dp-use"><img src="img/deep/pack.webp" width="900" height="600" alt="Упакованные товары на паллетах" loading="lazy"><span class="dp-use__cap"><img class="dp-use__ic" src="img/deep/i-box.svg" width="24" height="24" alt=""><b>Упакованные массовые товары</b></span></li>
+        <li class="dp-use"><img src="img/deep/chem.webp" width="900" height="600" alt="Химическая продукция в бочках и ёмкостях" loading="lazy"><span class="dp-use__cap"><img class="dp-use__ic" src="img/deep/i-flask.svg" width="24" height="24" alt=""><b>Химическая продукция и сырьё</b></span></li>
+        <li class="dp-use"><img src="img/deep/tire.webp" width="900" height="600" alt="Шины на паллетах" loading="lazy"><span class="dp-use__cap"><img class="dp-use__ic" src="img/deep/i-tire.svg" width="24" height="24" alt=""><b>Шины и автотовары</b></span></li>
+        <li class="dp-use"><img src="img/deep/build.webp" width="900" height="600" alt="Мешки со строительными смесями" loading="lazy"><span class="dp-use__cap"><img class="dp-use__ic" src="img/svc/i-layers.svg" width="24" height="24" alt=""><b>Строительные материалы</b></span></li>
+        <li class="dp-use"><img src="img/deep/raw.webp" width="900" height="600" alt="Мешки с сырьём для производства" loading="lazy"><span class="dp-use__cap"><img class="dp-use__ic" src="img/svc/i-gear.svg" width="24" height="24" alt=""><b>Сырьё и материалы для производства</b></span></li>
+        <li class="dp-use"><img src="img/deep/fmcg.webp" width="900" height="600" alt="Товары повседневного спроса" loading="lazy"><span class="dp-use__cap"><img class="dp-use__ic" src="img/svc/i-cart.svg" width="24" height="24" alt=""><b>Товары повседневного спроса (FMCG)</b></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="dp-head">
+        <h2 class="h2 dp-h2--line">Эффективное использование площади склада</h2>
+        <p class="dp-head__sub">Глубинные стеллажи позволяют увеличить вместимость склада за счёт размещения паллет в несколько рядов по глубине канала.</p>
+      </div>
+      <div class="dp-area">
+        <div class="dp-area__photo">
+          <img src="img/deep/front.webp" width="900" height="600" alt="Фронтальные стеллажи с рабочими проходами" loading="lazy">
+          <img src="img/deep/deep.webp" width="900" height="600" alt="Глубинные стеллажи: погрузчик заезжает в канал" loading="lazy">
+          <div class="dp-badge"><span>до</span><b>+40%</b><span>вместимости<br> на той же<br> площади</span></div>
+        </div>
+        <article class="m-card dp-cmp">
+          <div class="dp-cmp__head"><img class="dp-cmp__ic" src="img/deep/i-pallets.svg" width="24" height="24" alt=""><div><h3>Фронтальные стеллажи</h3><p>Универсальное решение для хранения разнообразного ассортимента</p></div></div>
+          <ul class="dp-rows">
+            <li><img class="dp-row__s" src="img/deep/ok.svg" width="24" height="24" alt="Плюс"><img class="dp-row__i" src="img/svc/i-layers.svg" width="24" height="24" alt=""><span>Прямой доступ к каждой паллете — удобно при частом отборе.</span></li>
+            <li><img class="dp-row__s" src="img/deep/ok.svg" width="24" height="24" alt="Плюс"><img class="dp-row__i" src="img/svc/i-grid.svg" width="24" height="24" alt=""><span>Подходят для широкого ассортимента и разных товарных групп.</span></li>
+            <li><img class="dp-row__s" src="img/deep/no.svg" width="24" height="24" alt="Минус"><img class="dp-row__i" src="img/deep/i-arrows-h.svg" width="24" height="24" alt=""><span>Требуют больше рабочих проходов — меньшая плотность хранения.</span></li>
+            <li><img class="dp-row__s" src="img/deep/no.svg" width="24" height="24" alt="Минус"><img class="dp-row__i" src="img/deep/i-coins.svg" width="24" height="24" alt=""><span>Более высокая стоимость при той же вместимости склада.</span></li>
+          </ul>
+        </article>
+        <article class="m-card dp-cmp dp-cmp--deep">
+          <div class="dp-cmp__head"><img class="dp-cmp__ic" src="img/deep/i-pallets.svg" width="24" height="24" alt=""><div><h3>Глубинные (набивные) стеллажи</h3><p>Максимальная плотность хранения больших партий однотипного груза</p></div></div>
+          <ul class="dp-rows">
+            <li><img class="dp-row__s" src="img/deep/ok.svg" width="24" height="24" alt="Плюс"><img class="dp-row__i" src="img/deep/i-stackup.svg" width="24" height="24" alt=""><span>Высокая плотность хранения — до +40% больше паллетомест на той же площади.</span></li>
+            <li><img class="dp-row__s" src="img/deep/ok.svg" width="24" height="24" alt="Плюс"><img class="dp-row__i" src="img/deep/i-arrows-in.svg" width="24" height="24" alt=""><span>Меньше межстеллажных проходов — рациональное использование площади.</span></li>
+            <li><img class="dp-row__s" src="img/deep/no.svg" width="24" height="24" alt="Минус"><img class="dp-row__i" src="img/deep/i-cycle.svg" width="24" height="24" alt=""><span>Ограниченный доступ к паллетам — работа по принципу LIFO (последним зашёл — первым вышел).</span></li>
+            <li><img class="dp-row__s" src="img/deep/no.svg" width="24" height="24" alt="Минус"><img class="dp-row__i" src="img/svc/i-gear.svg" width="24" height="24" alt=""><span>Требуют тщательного планирования и подходят для однородных грузов с большим объёмом хранения.</span></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="m-card dp-when" style="--dp-when:url(../img/deep/when.webp)">
+        <div class="dp-when__side">
+          <h2 class="h2 dp-h2--line">Когда выбирать глубинные стеллажи</h2>
+          <p>Решение подходит для складов с большими объёмами однотипного товара и высокой потребностью в плотном хранении.</p>
+        </div>
+        <ul class="dp-when__list">
+          <li><span class="dp-when__ic"><img src="img/svc/i-b-boxes.svg" width="24" height="24" alt=""></span><h3>Большие партии товара</h3><p>Хранение однородной продукции с одинаковыми параметрами.</p></li>
+          <li><span class="dp-when__ic"><img src="img/deep/i-expand.svg" width="24" height="24" alt=""></span><h3>Максимальное использование площади</h3><p>Больше паллетомест на той же площади за счёт размещения в глубину канала.</p></li>
+          <li><span class="dp-when__ic"><img src="img/svc/i-forklift.svg" width="24" height="24" alt=""></span><h3>Стабильный грузооборот</h3><p>Подходит для складов с прогнозируемым и равномерным движением товара.</p></li>
+          <li><span class="dp-when__ic"><img src="img/svc/i-package-check.svg" width="24" height="24" alt=""></span><h3>Оптимизация затрат</h3><p>Сокращение количества проходов и эффективное использование объёма склада.</p></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container m-cards">
+      <div class="m-card">
+        <h2 class="m-card__title">Примеры реализации</h2>
+        <span class="m-card__line" aria-hidden="true"></span>
+        <ul class="examples">
+          <li><img src="img/deep/ex1.webp" width="900" height="600" alt="Глубинные стеллажи с паллетами в картонных упаковках" loading="lazy"></li>
+          <li><img src="img/deep/ex2.webp" width="900" height="600" alt="Погрузчик в канале глубинного стеллажа" loading="lazy"></li>
+          <li><img src="img/deep/ex3.webp" width="900" height="600" alt="Склад с глубинными стеллажами и погрузчиком" loading="lazy"></li>
+          <li><img src="img/deep/ex4.webp" width="900" height="600" alt="Ряды глубинных стеллажей в складском комплексе" loading="lazy"></li>
+        </ul>
+      </div>
+      <div class="m-card m-card--photo">
+        <h2 class="m-card__title">Диаском в цифрах</h2>
+        <span class="m-card__line" aria-hidden="true"></span>
+        <ul class="m-stats">
+          <li><strong>10+</strong><span>лет на рынке<br> стеллажных систем</span></li>
+          <li><strong>1500+</strong><span>реализованных<br> проектов</span></li>
+          <li><strong>85</strong><span>регионов<br> поставок</span></li>
+          <li><strong>98%</strong><span>клиентов<br> рекомендуют нас</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="h2">Вопросы и ответы</h2>
+      <div class="faq" data-faq>
+        <div class="faq__item">
+          <h3 class="faq__q"><button type="button" aria-expanded="true" aria-controls="faq-0" id="faq-q-0">Чем глубинные стеллажи отличаются от фронтальных?<span class="faq__icon" aria-hidden="true"></span></button></h3>
+          <div class="faq__a" id="faq-0" role="region" aria-labelledby="faq-q-0"><div class="faq__body"><p>Во фронтальной системе каждая паллета доступна непосредственно из рабочего прохода. В глубинных стеллажах погрузчик заезжает внутрь канала, а паллеты размещаются последовательно на продольных опорных направляющих. Это позволяет сократить количество проходов и увеличить плотность хранения, но ограничивает доступ к отдельным паллетам.</p></div></div>
+        </div>
+        <div class="faq__item">
+          <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="faq-1" id="faq-q-1">Сколько паллет можно разместить в глубину одного канала?<span class="faq__icon" aria-hidden="true"></span></button></h3>
+          <div class="faq__a" id="faq-1" role="region" aria-labelledby="faq-q-1" hidden><div class="faq__body"><p>Количество паллет зависит от размеров груза, глубины канала, высоты ярусов и характеристик погрузчика. При проектировании также учитываются масса паллет и условия их загрузки и выгрузки. Оптимальную глубину определяют индивидуально под объём запасов и особенности складских операций.</p></div></div>
+        </div>
+        <div class="faq__item">
+          <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="faq-2" id="faq-q-2">Какой погрузчик подходит для работы с набивными стеллажами?<span class="faq__icon" aria-hidden="true"></span></button></h3>
+          <div class="faq__a" id="faq-2" role="region" aria-labelledby="faq-q-2" hidden><div class="faq__body"><p>Погрузчик должен иметь возможность безопасно заезжать внутрь канала и устанавливать паллеты на опорные направляющие. При подборе учитываются ширина и высота машины, радиус поворота, длина вил, грузоподъёмность и высота подъёма. Совместимость техники со стеллажами проверяется на этапе проектирования.</p></div></div>
+        </div>
+        <div class="faq__item">
+          <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="faq-3" id="faq-q-3">Нужно ли проектирование перед установкой глубинных стеллажей?<span class="faq__icon" aria-hidden="true"></span></button></h3>
+          <div class="faq__a" id="faq-3" role="region" aria-labelledby="faq-q-3" hidden><div class="faq__body"><p>Да. До монтажа определяют размеры и конфигурацию каналов, нагрузку на ярусы, параметры паллет и требования к погрузочной технике. Также проверяют состояние и несущую способность пола, расположение колонн, ворот и инженерных коммуникаций. На основании этих данных разрабатывается схема размещения оборудования.</p></div></div>
+        </div>
+        <div class="faq__item">
+          <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="faq-4" id="faq-q-4">От чего зависят сроки поставки и монтажа?<span class="faq__icon" aria-hidden="true"></span></button></h3>
+          <div class="faq__a" id="faq-4" role="region" aria-labelledby="faq-q-4" hidden><div class="faq__body"><p>Сроки определяются комплектацией стеллажной системы, количеством секций, объёмом заказа, наличием оборудования и логистикой. Продолжительность монтажа зависит от размеров проекта и готовности помещения. Конкретные сроки рассчитываются после согласования проекта и комплектации.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- ============ 6. ФОРМА ============ -->
+  <section class="section" id="request">
+    <div class="container">
+      <div class="request m-request dp-request">
+        <div class="request__info">
+          <h2 class="h2">Получите проект<br> вашего склада<br> <span class="accent">бесплатно за 15 минут</span></h2>
+          <span class="line" aria-hidden="true"></span>
+          <ul class="checks checks--lg">
+            <li>Проектирование под ваш склад</li>
+            <li>Подбор оборудования</li>
+            <li>Расчет стоимости и сроков</li>
+            <li>Коммерческое предложение</li>
+          </ul>
+          <a href="tel:+73912592659" class="btn btn--outline btn--lg m-request__call">Позвонить сейчас <svg class="btn__icon btn__icon--phone" aria-hidden="true"><use href="#i-phone"/></svg></a>
+        </div>
+
+        <img class="dp-man" src="img/deep/man.webp" width="540" height="900" alt="Инженер Диаском с планшетом" loading="lazy">
+        <form class="form" id="requestForm" novalidate>
+          <label class="form__field">
+            <span class="visually-hidden">Ваше имя</span>
+            <input type="text" name="name" placeholder="Ваше имя" autocomplete="name">
+          </label>
+          <label class="form__field">
+            <span class="visually-hidden">Ваш телефон</span>
+            <input type="tel" name="phone" placeholder="Ваш телефон" autocomplete="tel" required data-phone>
+            <span class="form__error" role="alert">Введите номер полностью</span>
+          </label>
+          <label class="form__field">
+            <span class="visually-hidden">Ваша почта</span>
+            <input type="email" name="email" placeholder="Ваша почта" autocomplete="email">
+          </label>
+          <div class="form__field form__select" data-select>
+            <span class="visually-hidden" id="whLabel">Тип склада</span>
+            <button type="button" class="form__select-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="whList" aria-labelledby="whLabel whValue">
+              <span class="form__select-value" id="whValue">Тип склада</span>
+              <svg class="form__chevron" viewBox="0 0 25.8 13.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M.9.9l12 12 12-12"/></svg>
+            </button>
+            <ul class="form__options" id="whList" role="listbox" aria-labelledby="whLabel" tabindex="-1" hidden>
+              <li role="option" id="wh-logistics" data-value="logistics" aria-selected="false">Логистический склад</li>
+              <li role="option" id="wh-production" data-value="production" aria-selected="false">Производственный склад</li>
+              <li role="option" id="wh-trade" data-value="trade" aria-selected="false">Склад для маркетплейсов</li>
+              <li role="option" id="wh-console" data-value="console" aria-selected="false">Склад металлопроката</li>
+              <li role="option" id="wh-cold" data-value="cold" aria-selected="false">Холодильный склад</li>
+              <li role="option" id="wh-archive" data-value="archive" aria-selected="false">Архив и офис</li>
+            </ul>
+            <input type="hidden" name="warehouse" value="">
+          </div>
+          <label class="form__check">
+            <input type="checkbox" name="agree" required>
+            <span class="form__box" aria-hidden="true"></span>
+            <span>Соглашаюсь с условиями <a href="/terms/">Политики конфиденциальности</a>.</span>
+          </label>
+          <button type="submit" class="btn btn--primary btn--lg btn--block">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <p class="form__success" role="status" hidden>Заявка отправлена. Мы перезвоним вам в ближайшее время.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<!-- ============ 10. ПОДВАЛ ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__card">
+      <div class="footer__brand">
+        <a href="/" class="logo logo--lg" aria-label="Диаском — на главную">
+          <img src="img/icons/logo-footer.svg" width="358" height="94" alt="">
+        </a>
+        <p class="footer__slogan">Металлическая мебель и складское оборудование<br> для вашего бизнеса</p>
+        <div class="footer__contact">
+          <img src="img/icons/phone.svg" width="26" height="26" alt="">
+          <div>
+            <a href="tel:+73912592659" class="footer__phone">+7 (391) 259-26-59</a>
+            <span class="footer__hours">Ежедневно с 9:00 до 18:00</span>
+          </div>
+        </div>
+        <div class="footer__contact footer__contact--address">
+          <img src="img/icons/pin.svg" width="26" height="32" alt="">
+          <address class="footer__address">проспект имени газеты Красноярский рабочий, 170а, офис 3-27</address>
+        </div>
+        <ul class="socials">
+          <li><a href="mailto:info@diaskom.ru" aria-label="Написать на почту"><span class="socials__icon socials__icon--mail"></span></a></li>
+          <li><a href="https://max.ru/id2464149300_bot" target="_blank" rel="noopener" aria-label="Написать в Max"><span class="socials__icon socials__icon--max"></span></a></li>
+          <li><a href="https://t.me/+79138374659" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span class="socials__icon socials__icon--telegram"></span></a></li>
+        </ul>
+      </div>
+      <nav class="footer__col" aria-label="Каталог">
+        <h3 class="footer__title">Каталог</h3>
+        <ul>
+          <li><a href="palletnye-frontalnye-stellazhi.html">Паллетные стеллажи</a></li>
+          <li><a href="mezoninnye-stellazhi.html">Мезонинные стеллажи</a></li>
+          <li><a href="glubinnye-stellazhi.html">Глубинные стеллажи</a></li>
+          <li><a href="/catalog/konsolnye-stellazhi/">Консольные стеллажи</a></li>
+          <li><a href="/catalog/polochnye-stellazhi/">Полочные стеллажи</a></li>
+          <li><a href="/catalog/peredvizhnye-stellazhi/">Передвижные стеллажи</a></li>
+          <li><a href="/catalog/metallicheskie-stellazhi/" class="footer__all">Все стеллажи</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__col" aria-label="Компания">
+        <h3 class="footer__title">Компания</h3>
+        <ul>
+          <li><a href="/about/">О компании</a></li>
+          <li><a href="/rekvizity/">Документы и сертификаты</a></li>
+          <li><a href="https://yandex.ru/maps/org/diaskom/194174337631/reviews/" target="_blank" rel="noopener">Отзывы</a></li>
+          <li><a href="/contact/">Контакты</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__col" aria-label="Услуги">
+        <h3 class="footer__title">Услуги</h3>
+        <ul>
+          <li><a href="/services/sborka-i-montazh/">Сборка и монтаж</a></li>
+          <li><a href="/services/razrabotka-tz-dlya-auktsionov/">Подготовка тех. задания</a></li>
+          <li><a href="/services/proektirovanie-sklada/">Проектирование склада</a></li>
+        </ul>
+      </nav>
+      <div class="footer__bottom">
+        <span>2026 © Диаском</span>
+        <a href="/terms/">Политика конфиденциальности</a>
+        <a href="/terms/">Согласие на обработку персональных данных</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js?v=57"></script>
+<script src="js/catalog.js?v=3"></script>
+<script src="js/racks.js?v=7"></script>
+</body>
+</html>
