@@ -124,7 +124,7 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
   content: ''; position: absolute; top: 1px; left: 0; width: 18px; height: 18px; border-radius: 4px; background: var(--c-accent);
   -webkit-mask: none; mask: none;
 }
-.sv-checks li::after { content: ''; position: absolute; top: 5px; left: 5px; width: 8px; height: 5px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(-45deg); }
+.sv-checks li::after { content: ''; position: absolute; top: 5px; left: 5px; width: 8px; height: 5px; border-left: 2px solid #1a1a1a; border-bottom: 2px solid #1a1a1a; transform: rotate(-45deg); }
 .sv-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
 .sv-tiles li { display: flex; align-items: center; gap: 14px; min-height: 66px; padding: 12px 16px; font-size: 15px; line-height: 1.25; background: var(--c-bg); border: 1px solid var(--c-border); border-radius: 6px; }
 .sv-tiles img { flex: none; width: 26px; height: 26px; }
