@@ -313,11 +313,12 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 
 /* ---------- Партнёры ---------- */
 .sv-partners { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: 40px; }
-.sv-partner { display: grid; place-content: center; justify-items: center; gap: 12px; min-height: 200px; padding: 24px; text-align: center; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 8px; }
+.sv-partner { display: grid; grid-template-columns: minmax(0, 1fr); align-content: center; justify-items: center; gap: 12px; min-height: 200px; padding: 24px; text-align: center; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 8px; }
 .sv-partner b { font-size: 28px; font-weight: 600; line-height: 1.1; }
 .sv-partner span { font-size: 15px; line-height: 1.3; color: var(--c-text-2); text-align: center; hyphens: none; }
 .sv-partner__logo { display: flex; align-items: center; justify-content: center; width: 100%; height: 88px; padding: 0 20px; background: #fff; border-radius: 6px; }
 .sv-partner__logo img { display: block; max-width: 100%; max-height: 52px; width: auto; height: auto; object-fit: contain; }
+.sv-partner .sv-partner__name { font-size: 22px; font-weight: 700; line-height: 1.1; color: #1a1a1a; text-transform: uppercase; letter-spacing: .01em; }
 .sv-partner .sv-partner__cap { font-size: 15px; }
 
 /* ---------- Вкладки-фильтры (блог, документация) ---------- */
