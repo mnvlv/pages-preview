@@ -28,7 +28,7 @@
   background: rgba(26, 26, 26, .55); border: 1px solid #585858; border-radius: 8px;
 }
 .sv-plaques img { flex: none; width: 30px; height: 30px; }
-.sv-hstats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px; margin-top: 44px; padding-bottom: 8px; }
+.sv-hstats { display: grid; grid-template-columns: repeat(5, 198px); justify-content: start; gap: 24px; margin-top: 44px; padding-bottom: 8px; }
 .sv-hstats li { display: flex; align-items: flex-start; gap: 12px; }
 .sv-hstats img { flex: none; width: 32px; height: 32px; }
 .sv-hstats span { display: grid; gap: 3px; }
