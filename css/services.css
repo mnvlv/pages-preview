@@ -99,7 +99,7 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
   background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 8px;
 }
 .sv-step__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
-.sv-step__top img { width: 28px; height: 28px; }
+.sv-step__top img { width: 30px; height: 30px; }
 .sv-step__num { font-size: 24px; font-weight: 600; line-height: 1; color: var(--c-accent); }
 .sv-step__title { font-size: 18px; font-weight: 600; line-height: 1.2; }
 .sv-step__text { font-size: 14px; line-height: 1.4; color: var(--c-text-2); }
