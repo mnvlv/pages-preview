@@ -479,3 +479,17 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 @media (max-width: 560px) { .sv-step__title br { display: none; } }
 .sv-pc--wide .sv-pc__text small { max-width: none; }
 .sv-pc--wide .sv-pc__text { padding-right: 14px; }
+
+/* ---------- Направления деятельности: плитки «фото + кнопка» ---------- */
+.sv-dirs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; margin-top: 40px; }
+.sv-dir { position: relative; display: grid; grid-template-rows: 206px 38px; overflow: hidden; isolation: isolate; background: #1a1a1a; border: 1px solid #585858; border-radius: 8px; transition: border-color .2s; }
+.sv-dir:hover { border-color: #ea5901; }
+.sv-dir__photo { position: absolute; z-index: -1; top: 0; left: 0; width: 100%; height: 206px; object-fit: cover; object-position: right center; }
+.sv-dir__txt { display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; padding: 0 16px 22px 24px; }
+.sv-dir__txt b { max-width: 252px; font-size: 22px; font-weight: 600; line-height: 1.15; color: var(--c-text-2); }
+.sv-dir__txt b a { color: inherit; }
+.sv-dir__txt b a::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+.sv-dir__txt span { font-size: 14px; line-height: 1.3; color: var(--c-text-2); }
+.sv-dir__more { display: flex; align-items: center; justify-content: center; gap: 10px; font-style: normal; font-size: 14px; font-weight: 600; text-transform: uppercase; color: #fff; background: #ea5901; }
+@media (max-width: 1100px) { .sv-dirs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; } }
+@media (max-width: 640px) { .sv-dirs { grid-template-columns: minmax(0, 1fr); gap: 16px; margin-top: 24px; } }
