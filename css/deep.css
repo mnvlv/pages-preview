@@ -192,3 +192,6 @@
 
 @media (min-width: 1281px) { .dp-request .m-request__call { display: none; } }
 @media (max-width: 1280px) { .dp-contact__call { display: none; } }
+
+/* Глубинные: расстояние от заголовка до текста по макету */
+.page-deep .rk-uni { row-gap: 44px; }
