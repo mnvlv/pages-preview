@@ -15,7 +15,7 @@
 .mb-opt { position: relative; overflow: hidden; padding: 0; }
 .mb-opt--mob { box-shadow: inset 0 0 0 1px var(--c-accent); }
 .mb-opt__body { position: relative; z-index: 1; padding: 28px 0 14px 28px; }
-.mb-opt__body h3 { max-width: 62%; margin-bottom: 14px; font-size: 24px; font-weight: 600; line-height: 1.2; text-transform: uppercase; }
+.mb-opt__body h3 { max-width: 62%; margin-bottom: 14px; font-size: 20px; font-weight: 600; line-height: 1.2; text-transform: uppercase; }
 .mb-opt__body h3::after { content: ''; display: block; width: 50px; height: 2px; margin-top: 14px; background: var(--c-accent); }
 .mb-opt__img { position: absolute; right: 0; top: 0; width: 48%; height: 100%; object-fit: cover; -webkit-mask-image: linear-gradient(90deg, transparent, #000 45%); mask-image: linear-gradient(90deg, transparent, #000 45%); }
 .mb-opt .mb-rows { max-width: 60%; }
@@ -26,11 +26,11 @@
 .mb-drive__img { width: 100%; height: auto; aspect-ratio: 27 / 10; object-fit: cover; }
 .mb-drive__body { padding: 24px 28px 14px; }
 .mb-drive__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 16px; padding-bottom: 14px; }
-.mb-drive__head h3 { font-size: 22px; font-weight: 600; line-height: 1.2; text-transform: uppercase; }
+.mb-drive__head h3 { font-size: 20px; font-weight: 600; line-height: 1.2; text-transform: uppercase; }
 .mb-drive__tag { flex: none; padding: 6px 14px; font-size: 14px; line-height: 1.2; color: #fff; border-radius: 999px; box-shadow: inset 0 0 0 1px #8a8a8a; white-space: nowrap; }
 
 /* ---------- Преимущества + применение ---------- */
-.mb-why { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px; }
+.mb-why { display: grid; grid-template-columns: minmax(0, 9fr) minmax(0, 15fr); gap: 32px; }
 .mb-adv { position: relative; overflow: hidden; padding: 32px; }
 .mb-adv::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, #232323 35%, rgba(35, 35, 35, .82) 100%), var(--mb-adv) right center / cover no-repeat; pointer-events: none; }
 .mb-adv > * { position: relative; }
@@ -38,17 +38,17 @@
 .mb-adv ul { display: grid; gap: 22px; margin-top: 28px; }
 .mb-adv li { display: flex; align-items: center; gap: 16px; }
 .mb-adv__i { flex: none; width: 36px; height: 36px; }
-.mb-adv h3 { font-size: 18px; font-weight: 600; line-height: 1.25; }
-.mb-adv p { margin-top: 2px; font-size: 14px; line-height: 1.25; color: var(--c-text-2); text-align: left !important; hyphens: manual !important; }
+.mb-adv h3 { font-size: 20px; font-weight: 600; line-height: 1.25; }
+.mb-adv p { margin-top: 2px; font-size: 16px; line-height: 1.25; color: var(--c-text-2); text-align: left !important; hyphens: manual !important; }
 .mb-uses { padding: 32px; }
 .mb-uses__sub { margin-top: 18px; font-size: 16px; line-height: 1.3; color: var(--c-text-2); text-align: left !important; hyphens: manual !important; }
 .mb-uses__list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 26px; }
 .mb-use { display: flex; flex-direction: column; overflow: hidden; background: #1d1d1d; border: 1px solid #585858; border-radius: 10px; }
 .mb-use > img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
 .mb-use > div { padding: 14px 14px 16px; }
-.mb-use h3 { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; font-size: 15px; font-weight: 600; line-height: 1.2; }
+.mb-use h3 { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; font-size: 18px; font-weight: 600; overflow-wrap: break-word; line-height: 1.2; }
 .mb-use__i { flex: none; width: 26px; height: 26px; }
-.mb-use p { margin-top: 10px; font-size: 14px; line-height: 1.3; color: var(--c-text-2); text-align: left !important; hyphens: manual !important; }
+.mb-use p { margin-top: 10px; font-size: 16px; line-height: 1.3; color: var(--c-text-2); text-align: left !important; hyphens: manual !important; }
 
 /* ---------- Адаптив ---------- */
 @media (max-width: 1280px) {
@@ -71,8 +71,8 @@
   .mb-adv, .mb-uses { padding: 24px 16px; }
   .mb-uses__list { gap: 10px; }
   .mb-use > div { padding: 10px 10px 12px; }
-  .mb-use h3 { font-size: 14px; }
-  .mb-use p { font-size: 13px; }
+  .mb-use h3 { font-size: 18px; }
+  .mb-use p { font-size: 14px; }
 }
 @media (max-width: 480px) {
   .page-mobile .dp-head .h2 { font-size: 24px; overflow-wrap: anywhere; }
