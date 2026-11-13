@@ -454,3 +454,8 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 
 /* Текст в списках панелей — #F0F0F0 по макету */
 .sv-checks li, .sv-ticks li, .sv-rows li { color: #f0f0f0; }
+
+/* Шаги «Как мы проектируем склад» — по макету: описание 16px, ниже плотность */
+.sv-steps--lg .sv-step { min-height: 190px; gap: 10px; }
+.sv-steps--lg .sv-step__top { margin-bottom: 10px; }
+.sv-steps--lg .sv-step__text { font-size: 16px; line-height: 1.4; }
