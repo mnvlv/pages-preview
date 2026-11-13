@@ -170,7 +170,7 @@ fieldset.filter__group { margin: 16px 0 0; padding: 0; border: 0; min-width: 0; 
 }
 .badge--new { background: #016f33; }
 .badge--sale { background: #016aea; }
-.product__title { min-height: 3.6em; margin-top: 16px; font-size: 16px; font-weight: 400; line-height: 1.2; }
+.product__title { min-height: 3.6em; margin-top: 16px; font-size: 16px; font-weight: 600; line-height: 1.2; }
 .product__title a:hover { color: var(--c-accent); }
 .product__sku { margin-top: 12px; font-size: 12px; color: #a0a0a0; }
 .product__size { margin-top: 12px; }

@@ -17,7 +17,7 @@
 .sv-hero__inner { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 32px; }
 .sv-hero__main .crumbs { margin: 42px 0 0 8px; }
 .sv-hero__title {
-  margin-top: 15px; font-size: clamp(34px, 5vw, 72px); font-weight: 600; line-height: 1; text-transform: uppercase; color: var(--c-text-2);
+  margin-top: 15px; font-size: var(--fs-h1); font-weight: 600; line-height: 1; text-transform: uppercase; color: var(--c-text-2);
 }
 .sv-hero__title .accent { display: block; }
 .sv-hero__lead { max-width: 560px; margin-top: 33px; line-height: 1.3; font-size: 18px; }
@@ -114,7 +114,7 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 /* ---------- Панели рядом (список с галочками + плитки) ---------- */
 .sv-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
 .sv-panel { position: relative; overflow: hidden; isolation: isolate; padding: 30px 28px; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 8px; }
-.sv-panel__title { font-size: 24px; font-weight: 600; line-height: 1.2; }
+.sv-panel__title { font-size: 20px; font-weight: 600; line-height: 1.3; }
 .sv-panel .line { width: 60px; margin-top: 14px; }
 .sv-panel__sub { margin-top: 14px; color: var(--c-text-2); }
 .sv-panel__img { position: absolute; z-index: -1; top: 0; right: 0; width: auto; max-width: 60%; height: 100%; object-fit: cover; object-position: left center;
@@ -495,7 +495,7 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 .sv-dir__txt b a { color: inherit; }
 .sv-dir__txt b a::after { content: ''; position: absolute; inset: 0; z-index: 1; }
 .sv-dir__txt span { font-size: 14px; line-height: 1.3; color: var(--c-text-2); }
-.sv-dir__more { display: flex; align-items: center; justify-content: center; gap: 10px; font-style: normal; font-size: 14px; font-weight: 600; text-transform: uppercase; color: #fff; background: #ea5901; }
+.sv-dir__more { display: flex; align-items: center; justify-content: center; gap: 10px; font-style: normal; font-size: 14px; font-weight: 500; text-transform: uppercase; color: #fff; background: #ea5901; }
 @media (max-width: 1100px) { .sv-dirs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; } }
 @media (max-width: 640px) { .sv-dirs { grid-template-columns: minmax(0, 1fr); gap: 16px; margin-top: 24px; } }
 

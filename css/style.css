@@ -11,13 +11,13 @@
   --c-border: #585858;
   --c-border-soft: #303030;
   --c-text: #ffffff;
-  --c-text-2: #f0f0f0;
+  --c-text-2: #ffffff;
   --c-muted: #585858;
   --c-error: #ff5a4f;
 
   --font: 'Golos Text', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
-  --fs-h1: clamp(32px, 3.75vw, 54px);    /* 54px на 1440 */
-  --fs-h2: clamp(28px, 3.33vw, 48px);    /* 48px на 1440 */
+  --fs-h1: clamp(36px, 5vw, 72px);       /* 72px на 1440 по UI kit; 36px на мобильной */
+  --fs-h2: clamp(28px, 3.34vw, 48px);    /* 48px на 1440 */
 
   --container: 1376px;
   --gutter: 32px;
@@ -113,7 +113,7 @@ button { cursor: pointer; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 16px;
   min-height: 48px; padding: 0 32px; border: 1px solid transparent; border-radius: 3px;
-  font-size: 14px; font-weight: 500; line-height: 1; text-transform: uppercase; white-space: nowrap;
+  font-size: 14px; font-weight: 500; line-height: 1.6; text-transform: uppercase; white-space: nowrap;
   transition: background-color .2s, border-color .2s, color .2s;
 }
 /* стрелка из макета: 19.5×13.7 в обычных кнопках, 13.5×9.7 в малых */
@@ -130,9 +130,9 @@ button { cursor: pointer; }
 .btn--lg { min-height: 56px; min-width: 283px; padding: 0 21px 0 23px; }
 .btn--outline.btn--lg { min-width: 0; gap: 18px; padding: 0 25px 0 41px; }
 .btn--outline.btn--lg .btn__icon { width: 16px; height: 16px; }
-.btn--sm { min-height: 34px; padding: 0 15.25px 0 11px; gap: 7.25px; font-size: 12px; }
+.btn--sm { min-height: 34px; padding: 0 15.25px 0 11px; gap: 7.25px; font-size: 14px; }
 .btn--sm .btn__icon { width: 13.5px; height: 9.7px; }
-.btn--xs { min-height: 34px; padding: 0 14.25px 0 15px; gap: 10px; font-size: 12px; text-transform: none; }
+.btn--xs { min-height: 34px; padding: 0 14.25px 0 15px; gap: 10px; font-size: 12px; font-weight: 400; line-height: 1.4; color: #f0f0f0; text-transform: none; }
 .btn--xs .btn__icon { width: 13.7px; height: 9.8px; }
 .btn--block { width: 100%; }
 
@@ -355,7 +355,7 @@ button { cursor: pointer; }
 }
 .step__icon { width: 32px; height: 32px; object-fit: contain; object-position: left center; }
 .step__num { justify-self: end; align-self: center; font-size: 24px; font-weight: 600; line-height: 1; color: var(--c-accent); }
-.step__title { grid-column: 1 / -1; font-size: 18px; font-weight: 600; line-height: 1.25; }
+.step__title { grid-column: 1 / -1; font-size: 20px; font-weight: 600; line-height: 1.3; }
 /* Стрелка → между карточками в ряду */
 .step::after {
   content: ''; display: none; position: absolute; top: 50%; right: -36px; width: 24px; height: 24px; transform: translateY(-50%);
