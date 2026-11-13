@@ -13,6 +13,7 @@
   content: ''; position: absolute; z-index: -1; top: 0; left: 50%; width: 1440px; height: 700px; transform: translateX(-50%);
   background: var(--hero, none) 0 var(--header-h) / 1440px auto no-repeat;
 }
+.sv-hero + .section { position: relative; z-index: 1; }
 .sv-hero__inner { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 32px; }
 .sv-hero__main .crumbs { margin: 42px 0 0 8px; }
 .sv-hero__title {
