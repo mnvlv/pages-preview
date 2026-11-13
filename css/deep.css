@@ -4,6 +4,7 @@
    ========================================================== */
 
 /* ---------- Hero ---------- */
+.dp-hero::before { background-size: cover; background-position: center; }
 .dp-hero .m-hero__inner { grid-template-columns: minmax(0, 1fr) 320px; }
 .dp-params {
   align-self: start; margin-top: 42px; padding: 26px 26px 14px; background: rgba(26, 26, 26, .72);
