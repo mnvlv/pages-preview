@@ -433,8 +433,8 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 /* ---------- Знак-«кубик» с мягким свечением в hero (Наши партнёры) ---------- */
 .sv-hero--mark::after {
   content: ''; position: absolute; z-index: -1; top: 90px; left: 50%; width: 320px; height: 320px; margin-left: 133px; pointer-events: none;
-  background: url("../img/svc/mark.svg") center / 40% auto no-repeat, radial-gradient(circle, rgba(234, 89, 1, .16) 0, rgba(234, 89, 1, .06) 38%, transparent 68%);
-  filter: drop-shadow(0 0 12px rgba(234, 89, 1, .28));
+  background: url("../img/svc/mark.svg") center / 40% auto no-repeat, radial-gradient(circle, rgba(234, 89, 1, .06) 0, rgba(234, 89, 1, .02) 38%, transparent 68%);
+  filter: drop-shadow(0 0 5px rgba(234, 89, 1, .10));
 }
 @media (max-width: 1100px) { .sv-hero--mark::after { display: none; } }
 
