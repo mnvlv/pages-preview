@@ -38,7 +38,7 @@
 .sv-hero + .section { padding-top: calc(var(--section-y) + 20px); }
 
 /* ---------- Вводный блок: заголовок + линия + текст в две колонки ---------- */
-.sv-intro__title { font-size: clamp(22px, 2.5vw, 36px); font-weight: 600; line-height: 1.2; text-transform: uppercase; }
+.sv-intro__title { font-size: var(--fs-h2); font-weight: 600; line-height: 1.2; text-transform: uppercase; }
 .sv-intro .line { margin-top: 18px; width: 60px; }
 .sv-intro__text { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 60px; margin-top: 34px; line-height: 1.5; }
 .sv-intro__text p { color: var(--c-text-2); }

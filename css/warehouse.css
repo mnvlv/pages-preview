@@ -34,7 +34,7 @@
   margin-top: 62px; padding: 22px 24px 23px 20px; border-radius: 8px; box-shadow: 0 0 0 1px #585858;
 }
 .w-pick__intro { align-self: start; }
-.w-pick__title { font-size: clamp(26px, 2.78vw, 40px); font-weight: 600; line-height: 1.15; text-transform: uppercase; }
+.w-pick__title { font-size: var(--fs-h2); font-weight: 600; line-height: 1.15; text-transform: uppercase; }
 .w-pick__title .accent { display: block; }
 .w-pick__intro p { margin-top: 18px; line-height: 19px; }
 .w-pick__items { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-self: start; padding-top: 6px; text-align: center; }
