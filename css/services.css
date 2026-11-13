@@ -451,3 +451,6 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 .sv-steps--3 .sv-step__title { font-size: 20px; line-height: 1.2; }
 .sv-steps--3 .sv-step__text { max-width: 368px; font-size: 16px; line-height: 1.35; }
 @media (max-width: 560px) { .sv-steps--3 .sv-step__title { font-size: 18px; } .sv-steps--3 .sv-step__text { font-size: 15px; } }
+
+/* Текст в списках панелей — #F0F0F0 по макету */
+.sv-checks li, .sv-ticks li, .sv-rows li { color: #f0f0f0; }
