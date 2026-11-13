@@ -338,6 +338,7 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 .sv-tab__arrow { margin-left: auto; width: 14px; height: 14px; opacity: 0; transition: opacity .2s; }
 .sv-tab[aria-pressed="true"] .sv-tab__arrow { opacity: 1; }
 .sv-tabs--4 .sv-tab { justify-content: center; min-height: 64px; font-size: 18px; border-radius: 8px; }
+.sv-tabs--4 .sv-tab img { width: 32px; height: 32px; }
 .sv-tabs--4 .sv-tab small { font-size: inherit; font-weight: 400; color: var(--c-text-2); }
 .sv-tabs--4 .sv-tab[aria-pressed="true"] { background: var(--c-accent); border-color: var(--c-accent); }
 .sv-tabs--4 .sv-tab[aria-pressed="true"] small { color: rgba(255, 255, 255, .75); }
@@ -379,7 +380,7 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 /* ---------- Документация ---------- */
 .dc-feats { display: flex; flex-wrap: wrap; gap: 20px 48px; margin-top: 34px; }
 .dc-feats li { display: flex; align-items: center; gap: 14px; font-size: 14px; line-height: 1.25; }
-.dc-feats img { width: 36px; height: 36px; }
+.dc-feats img { width: 48px; height: 48px; }
 .dc-tools { display: grid; grid-template-columns: minmax(0, 1fr) 304px; gap: 16px; margin-top: 24px; }
 .dc-search, .dc-select { height: 54px; font: inherit; font-size: 16px; color: var(--c-text); background-color: rgba(35, 35, 35, .94); border: 1px solid var(--c-border); border-radius: 8px; }
 .dc-search { width: 100%; padding: 0 20px 0 52px; background-image: url("../img/svc/i-search.svg"); background-repeat: no-repeat; background-position: 18px center; background-size: 22px; }
