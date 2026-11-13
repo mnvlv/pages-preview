@@ -445,3 +445,9 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 .sv-pc--btn .sv-pc__text small { max-width: 76%; font-size: 16px; line-height: 1.3; }
 @media (max-width: 1100px) { .sv-pc--btn .sv-pc__text b { font-size: 28px; } .sv-pc--btn .sv-pc__text small { max-width: 90%; } }
 @media (max-width: 560px) { .sv-pc--btn .sv-pc__text b { font-size: 24px; } .sv-pc--btn .sv-pc__num { font-size: 28px; } }
+
+/* «Как мы работаем» на странице «Услуги»: кегли по макету (заголовок 20px, описание 16px) */
+.sv-steps--3 .sv-step { gap: 10px; padding: 24px; }
+.sv-steps--3 .sv-step__title { font-size: 20px; line-height: 1.2; }
+.sv-steps--3 .sv-step__text { max-width: 368px; font-size: 16px; line-height: 1.35; }
+@media (max-width: 560px) { .sv-steps--3 .sv-step__title { font-size: 18px; } .sv-steps--3 .sv-step__text { font-size: 15px; } }
