@@ -319,3 +319,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+/* Плавная прокрутка колесом мыши. Якорные ссылки плавно ведёт CSS (scroll-behavior), здесь — инерция при вращении колеса.
+   Отключается при prefers-reduced-motion, на сенсорных экранах, внутри прокручиваемых блоков, iframe, 3D и карт. */
+(function () {
+  'use strict';
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+  var root = document.documentElement;
+  var target = window.scrollY, current = target, raf = 0;
+  var EASE = 0.12;
+  var max = function () { return Math.max(0, root.scrollHeight - window.innerHeight); };
+
+  function inner(el) {
+    for (var n = el; n && n !== document.body && n !== root; n = n.parentElement) {
+      if (n.matches && n.matches('iframe, model-viewer, canvas, textarea, select, [data-no-smooth]')) return true;
+      var cs = getComputedStyle(n);
+      if (/(auto|scroll)/.test(cs.overflowY) && n.scrollHeight > n.clientHeight + 1) return true;
+    }
+    return false;
+  }
+  function step() {
+    current += (target - current) * EASE;
+    if (Math.abs(target - current) < 0.4) { current = target; raf = 0; } else { raf = requestAnimationFrame(step); }
+    window.scrollTo({ top: current, behavior: 'instant' });
+  }
+  window.addEventListener('wheel', function (e) {
+    if (e.defaultPrevented || e.ctrlKey || e.shiftKey || e.deltaX && Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (document.body.classList.contains('menu-open') || document.querySelector('dialog[open], [aria-modal="true"]:not([hidden])')) return;
+    if (inner(e.target)) return;
+    e.preventDefault();
+    var unit = e.deltaMode === 1 ? 32 : e.deltaMode === 2 ? window.innerHeight : 1;
+    if (!raf) { current = window.scrollY; target = current; }
+    target = Math.min(max(), Math.max(0, target + e.deltaY * unit));
+    if (!raf) raf = requestAnimationFrame(step);
+  }, { passive: false });
+  /* прокрутка другими способами (якоря, клавиши, полоса) — синхронизируем цель */
+  window.addEventListener('scroll', function () { if (!raf) { current = target = window.scrollY; } }, { passive: true });
+})();
