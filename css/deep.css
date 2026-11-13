@@ -98,7 +98,7 @@
 .dp-when__list p { padding-left: 24px; font-size: 16px; line-height: 1.25; color: var(--c-text-2); border-left: 1px solid #585858; text-align: left !important; hyphens: manual !important; }
 
 /* ---------- Форма с фото ---------- */
-.dp-request { grid-template-columns: minmax(0, 1fr) 250px 580px; gap: 32px; overflow: hidden; }
+.dp-request { grid-template-columns: minmax(0, 1fr) 250px 580px; gap: 32px; overflow: visible; position: relative; z-index: 3; }
 .dp-request .h2 { font-size: clamp(30px, 2.8vw, 40px); }
 .dp-man { align-self: end; justify-self: center; width: 100%; height: auto; margin-bottom: -27px; pointer-events: none; }
 @media (max-width: 1280px) { .dp-man { display: none; } .dp-request { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
