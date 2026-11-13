@@ -475,3 +475,5 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 .sv-ic-grid--tz .sv-ic b { font-size: 17px; }
 .sv-ic-grid--tz .sv-ic span { font-size: 15px; line-height: 1.4; padding-left: 0; }
 @media (max-width: 1100px) { .sv-ic-grid--tz { gap: 20px 24px; } }
+
+@media (max-width: 560px) { .sv-step__title br { display: none; } }
