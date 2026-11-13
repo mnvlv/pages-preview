@@ -467,3 +467,11 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 .sv-hero--slim .sv-plaques img { width: 28px; height: 28px; }
 @media (min-width: 1025px) and (max-width: 1100px) { .sv-hero--slim .sv-hero__inner { grid-template-columns: minmax(0, 1fr) 232px; } }
 @media (max-width: 1024px) { .sv-hero--slim .sv-hero__inner { grid-template-columns: minmax(0, 1fr); } }
+
+/* «Что входит в ТЗ» — по макету: карточка ~297×147, иконка 22px, описание 15px */
+.sv-ic-grid--tz { gap: 33px 60px; }
+.sv-ic-grid--tz .sv-ic { grid-template-columns: auto 1fr; gap: 12px 10px; padding: 24px 6px 24px 24px; min-height: 147px; }
+.sv-ic-grid--tz .sv-ic img { width: 22px; height: 22px; }
+.sv-ic-grid--tz .sv-ic b { font-size: 17px; }
+.sv-ic-grid--tz .sv-ic span { font-size: 15px; line-height: 1.4; padding-left: 0; }
+@media (max-width: 1100px) { .sv-ic-grid--tz { gap: 20px 24px; } }
