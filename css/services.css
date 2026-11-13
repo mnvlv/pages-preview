@@ -379,7 +379,7 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 
 /* ---------- Документация ---------- */
 .dc-feats { display: flex; flex-wrap: wrap; gap: 20px 48px; margin-top: 34px; }
-.dc-feats li { display: flex; align-items: center; gap: 14px; font-size: 14px; line-height: 1.25; }
+.dc-feats li { display: flex; align-items: center; gap: 16px; font-size: 18px; font-weight: 500; line-height: 1.25; }
 .dc-feats img { width: 48px; height: 48px; }
 .dc-tools { display: grid; grid-template-columns: minmax(0, 1fr) 304px; gap: 16px; margin-top: 24px; }
 .dc-search, .dc-select { height: 54px; font: inherit; font-size: 16px; color: var(--c-text); background-color: rgba(35, 35, 35, .94); border: 1px solid var(--c-border); border-radius: 8px; }
