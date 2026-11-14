@@ -506,3 +506,8 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 
 /* ---------- Отзывы: фото на фоне панели ---------- */
 .sv-panel__img--bg { inset: 0; width: 100%; max-width: none; height: 100%; object-fit: cover; object-position: center; -webkit-mask-image: none; mask-image: none; }
+
+/* ---------- «Проектирование склада»: фон hero по Figma (966×649, left 274, top −3, два градиента #1A1A1A) ---------- */
+.sv-hero--fig::before { left: calc(50% - 720px + 274px); top: -3px; width: 966px; height: 649px; transform: none; background: linear-gradient(90deg, #1a1a1a 0, #1a1a1a 20%, rgba(26, 26, 26, 0) 100%), linear-gradient(180deg, #1a1a1a 0, rgba(26, 26, 26, 0) 2%, rgba(26, 26, 26, 0) 92%, #1a1a1a 100%), linear-gradient(270deg, #1a1a1a 0, rgba(26, 26, 26, 0) 8%), var(--hero) center / cover no-repeat; }
+@media (max-width: 1100px) { .sv-hero--fig::before { left: 0; top: 0; width: 100%; height: 100%; } }
+@media (max-width: 760px) { .sv-hero--fig::before { opacity: .45; background-position: 62% 30%; } }
