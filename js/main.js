@@ -357,3 +357,20 @@ document.addEventListener('DOMContentLoaded', () => {
   /* прокрутка другими способами (якоря, клавиши, полоса) — синхронизируем цель */
   window.addEventListener('scroll', function () { if (!raf) { current = target = window.scrollY; } }, { passive: true });
 })();
+
+/* Запрет масштабирования страницы пальцами (щипок, двойной тап). Исключение — страницы с метой viewport без user-scalable=no
+   (3D-модель) и конфигураторы в iframe: события внутри iframe в этот документ не попадают. */
+(function () {
+  var vp = document.querySelector('meta[name="viewport"]');
+  if (!vp || !/user-scalable\s*=\s*no/.test(vp.content)) return;
+  var stop = function (e) { e.preventDefault(); };
+  document.addEventListener('gesturestart', stop);
+  document.addEventListener('gesturechange', stop);
+  document.addEventListener('touchmove', function (e) { if (e.touches && e.touches.length > 1) e.preventDefault(); }, { passive: false });
+  var last = 0;
+  document.addEventListener('touchend', function (e) {
+    var t = Date.now();
+    if (t - last < 300 && !(e.target.closest && e.target.closest('a, button, input, select, textarea, label, summary'))) e.preventDefault();
+    last = t;
+  }, { passive: false });
+})();
