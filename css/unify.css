@@ -48,3 +48,7 @@
 /* --- хлебные крошки над плашкой «Официальный дилер» (стеллажи для склада) --- */
 .rk-hero .crumbs, .w-hero__main .crumbs { margin: 24px 0 0; }
 .rk-hero .crumbs + .pill, .w-hero__main .crumbs + .pill { margin-top: 16px; }
+
+/* --- форма: текст ошибки согласия (раньше только цвет) --- */
+.form__check.is-invalid + .form__error--agree { display: flex; }
+.nav__link.is-current, .nav__link.is-current .nav__text { color: var(--c-accent); }

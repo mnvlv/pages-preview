@@ -301,6 +301,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const field = e.target.closest('.form__field');
       if (field.classList.contains('is-invalid') && e.target.value.replace(/\D/g, '').length === 11) field.classList.remove('is-invalid');
     });
+    form.elements.agree.addEventListener('change', (e) => {
+      if (e.target.checked) { e.target.closest('.form__check').classList.remove('is-invalid'); e.target.setAttribute('aria-invalid', 'false'); }
+    });
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const phone = form.elements.phone;
@@ -309,11 +312,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
       phone.closest('.form__field').classList.toggle('is-invalid', !phoneOk);
       agree.closest('.form__check').classList.toggle('is-invalid', !agree.checked);
+      phone.setAttribute('aria-invalid', String(!phoneOk));
+      agree.setAttribute('aria-invalid', String(!agree.checked));
       if (!phoneOk) { phone.focus(); return; }
       if (!agree.checked) return;
 
       // TODO: отправка на бэкенд заказчика (fetch / обработчик CMS)
-      form.querySelector('.form__success').hidden = false;
+      const ok = form.querySelector('.form__success');
+      ok.hidden = false;
+      clearTimeout(form._okTimer);
+      form._okTimer = setTimeout(() => { ok.hidden = true; }, 8000);
       form.reset();
       selects.forEach((sel) => sel.choose(''));
     });
@@ -373,4 +381,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (t - last < 300 && !(e.target.closest && e.target.closest('a, button, input, select, textarea, label, summary'))) e.preventDefault();
     last = t;
   }, { passive: false });
+})();
+
+/* Текущий пункт меню: на боевом сайте совпадает путь страницы; map нужен только для статичной вёрстки (файлы *.html). */
+(function () {
+  var map = { 'o-kompanii.html': '/about/', 'uslugi.html': '/services/', 'dokumentatsiya.html': '/dokumentatsiya/', 'blog.html': '/blog/', 'partnery.html': '/about/' };
+  var norm = function (p) { return p.replace(/\/?$/, '/'); };
+  var cur = norm(map[location.pathname.split('/').pop()] || location.pathname);
+  document.querySelectorAll('.nav__list > .nav__item > a.nav__link').forEach(function (a) {
+    if (norm(a.getAttribute('href') || '') === cur) { a.classList.add('is-current'); a.setAttribute('aria-current', 'page'); }
+  });
 })();
