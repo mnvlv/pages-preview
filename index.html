@@ -33,17 +33,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=77">
-  <link rel="stylesheet" href="css/unify.css?v=4">
+  <link rel="stylesheet" href="css/unify.css?v=6">
 </head>
 <body>
-
-<!-- ============ ИКОНКИ ИНТЕРФЕЙСА ============ -->
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-  <symbol id="i-arrow" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M.75 6.836h18M12 .836l6.75 6-6.75 6"/></symbol>
-  <symbol id="i-arrow-left" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.75 6.836h-18M7.5 .836l-6.75 6 6.75 6"/></symbol>
-  <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></symbol>
-  <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5v7l5.5-3.5z" fill="currentColor" stroke="none"/></symbol>
-</svg>
 
 <!-- ============ HEADER ============ -->
 <header class="header">
@@ -56,7 +48,7 @@
       <ul class="nav__list">
         <li class="nav__item nav__item--drop nav__item--mega">
           <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-catalog">
-            <span class="nav__text">Каталог</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            <span class="nav__text">Каталог</span> <svg class="nav__chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg>
           </button>
           <div class="mega" id="nav-catalog">
             <ul class="mega__grid">
@@ -101,7 +93,7 @@
         </li>
         <li class="nav__item nav__item--sub">
           <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-sub-services">
-            <span class="nav__text">Услуги</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            <span class="nav__text">Услуги</span> <svg class="nav__chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg>
           </button>
           <ul class="nav__sub" id="nav-sub-services">
             <li><a href="/services/sborka-i-montazh/">Сборка и монтаж</a></li>
@@ -152,8 +144,8 @@
           <li><img src="img/hero-4.webp" width="40" height="39" alt="">Сервисное<br> сопровождение</li>
         </ul>
         <div class="hero__buttons">
-          <a href="#request" class="btn btn--primary btn--lg">Получить консультацию <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          <a href="#projects" class="btn btn--outline btn--lg">Смотреть проекты <svg class="btn__icon" aria-hidden="true"><use href="#i-play"/></svg></a>
+          <a href="#request" class="btn btn--primary btn--lg">Получить консультацию <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></a>
+          <a href="#projects" class="btn btn--outline btn--lg">Смотреть проекты <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-play"/></svg></a>
         </div>
       </div>
 
@@ -181,55 +173,55 @@
           <span class="cat__num">01</span>
           <h3 class="cat__title">Металлические<br> стеллажи</h3>
           <p class="cat__text">Полочные металлические стеллажи для офиса, архива, производства и организации хранения.</p>
-          <a href="/catalog/metallicheskie-stellazhi/" class="btn btn--primary btn--block cat__btn">Смотреть каталог <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg><span class="visually-hidden">: металлические стеллажи</span></a>
+          <a href="/catalog/metallicheskie-stellazhi/" class="btn btn--primary btn--block cat__btn">Смотреть каталог <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg><span class="visually-hidden">: металлические стеллажи</span></a>
         </li>
         <li class="cat cat--main" style="--img:url('../img/cat-2.webp')">
           <span class="cat__num">02</span>
           <h3 class="cat__title">Стеллажи<br> для склада</h3>
           <p class="cat__text">Паллетные, полочные, глубинные и мезонинные стеллажи для эффективного хранения складских грузов.</p>
-          <a href="/catalog/stellazhi-dlya-sklada/" class="btn btn--primary btn--block cat__btn">Смотреть каталог <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg><span class="visually-hidden">: стеллажи для склада</span></a>
+          <a href="/catalog/stellazhi-dlya-sklada/" class="btn btn--primary btn--block cat__btn">Смотреть каталог <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg><span class="visually-hidden">: стеллажи для склада</span></a>
         </li>
         <li class="cat cat--main" style="--img:url('../img/cat-3.webp')">
           <span class="cat__num">03</span>
           <h3 class="cat__title">Металлические<br> шкафы</h3>
           <p class="cat__text">Офисные, архивные, гардеробные шкафы, локеры и шкафы для сушки и хранения одежды.</p>
-          <a href="/catalog/metallicheskie-shkafy/" class="btn btn--primary btn--block cat__btn">Смотреть каталог <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg><span class="visually-hidden">: металлические шкафы</span></a>
+          <a href="/catalog/metallicheskie-shkafy/" class="btn btn--primary btn--block cat__btn">Смотреть каталог <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg><span class="visually-hidden">: металлические шкафы</span></a>
         </li>
         <li class="cat cat--wide" style="--img:url('../img/cat-4.webp')">
           <span class="cat__num">04</span>
           <h3 class="cat__title">Производственная<br> мебель</h3>
           <p class="cat__text">Верстаки, производственные столы, инструментальные шкафы и мебель для оснащения рабочих мест.</p>
-          <a href="/catalog/proizvodstvennaya-mebel/" class="btn btn--primary btn--sm cat__btn">Смотреть каталог <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg><span class="visually-hidden">: производственная мебель</span></a>
+          <a href="/catalog/proizvodstvennaya-mebel/" class="btn btn--primary btn--sm cat__btn">Смотреть каталог <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg><span class="visually-hidden">: производственная мебель</span></a>
         </li>
         <li class="cat cat--wide" style="--img:url('../img/cat-5.webp')">
           <span class="cat__num">05</span>
           <h3 class="cat__title">Складская<br> техника</h3>
           <p class="cat__text">Гидравлические тележки (рохли), штабелёры и оборудование для перемещения и обработки грузов.</p>
-          <a href="/catalog/tekhnika-dlya-sklada/" class="btn btn--primary btn--sm cat__btn">Смотреть каталог <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg><span class="visually-hidden">: техника для склада</span></a>
+          <a href="/catalog/tekhnika-dlya-sklada/" class="btn btn--primary btn--sm cat__btn">Смотреть каталог <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg><span class="visually-hidden">: техника для склада</span></a>
         </li>
         <li class="cat cat--small" style="--img:url('../img/cat-6.webp')">
           <span class="cat__num">06</span>
           <h3 class="cat__title">Сейфы</h3>
           <p class="cat__text">Взломостойкие, огнестойкие и мебельные сейфы для надёжного хранения документов, ценностей и имущества.</p>
-          <a href="/catalog/seyfy/" class="btn btn--primary btn--sm cat__btn">Смотреть каталог <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg><span class="visually-hidden">: сейфы</span></a>
+          <a href="/catalog/seyfy/" class="btn btn--primary btn--sm cat__btn">Смотреть каталог <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg><span class="visually-hidden">: сейфы</span></a>
         </li>
         <li class="cat cat--small" style="--img:url('../img/cat-7.webp')">
           <span class="cat__num">07</span>
           <h3 class="cat__title">Медицинская<br> мебель</h3>
           <p class="cat__text">Медицинские шкафы, столы, тумбы и мебель для оснащения клиник, больниц и медицинских учреждений.</p>
-          <a href="/catalog/metallicheskaya-meditsinskaya-mebel/" class="btn btn--primary btn--sm cat__btn">Смотреть каталог <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg><span class="visually-hidden">: медицинская мебель</span></a>
+          <a href="/catalog/metallicheskaya-meditsinskaya-mebel/" class="btn btn--primary btn--sm cat__btn">Смотреть каталог <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg><span class="visually-hidden">: медицинская мебель</span></a>
         </li>
         <li class="cat cat--small" style="--img:url('../img/cat-8.webp')">
           <span class="cat__num">08</span>
           <h3 class="cat__title">Почтовые<br> ящики</h3>
           <p class="cat__text">Почтовые ящики для многоквартирных домов, офисных зданий и частных объектов.</p>
-          <a href="/catalog/pochtovye-yashchiki/" class="btn btn--primary btn--sm cat__btn">Смотреть каталог <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg><span class="visually-hidden">: почтовые ящики</span></a>
+          <a href="/catalog/pochtovye-yashchiki/" class="btn btn--primary btn--sm cat__btn">Смотреть каталог <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg><span class="visually-hidden">: почтовые ящики</span></a>
         </li>
         <li class="cat cat--small" style="--img:url('../img/cat-9.webp')">
           <span class="cat__num">09</span>
           <h3 class="cat__title">Ключницы</h3>
           <p class="cat__text">Настенные ключницы и металлические шкафы для организованного хранения и учёта ключей.</p>
-          <a href="/catalog/metallicheskie-klyuchnitsy/" class="btn btn--primary btn--sm cat__btn">Смотреть каталог <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg><span class="visually-hidden">: ключницы</span></a>
+          <a href="/catalog/metallicheskie-klyuchnitsy/" class="btn btn--primary btn--sm cat__btn">Смотреть каталог <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg><span class="visually-hidden">: ключницы</span></a>
         </li>
       </ul>
     </div>
@@ -240,10 +232,10 @@
     <div class="container">
       <h2 class="h2">Наши преимущества</h2>
       <ul class="advantages">
-        <li class="advantage" style="--ix:2;--iw:105;--ih:108;--tx:151"><img class="advantage__icon" src="img/adv-1.webp" width="105" height="108" alt=""><p>Более 1500 товаров<br> в наличии и под заказ</p></li>
-        <li class="advantage" style="--ix:6;--iy:-3;--iw:137;--ih:93;--tx:187"><img class="advantage__icon" src="img/adv-2.webp" width="137" height="93" alt=""><p>Доставка по всей России</p></li>
-        <li class="advantage" style="--ix:13;--iw:80;--ih:107;--tx:151"><img class="advantage__icon" src="img/adv-3.webp" width="80" height="107" alt=""><p>Гарантия качества<br> и надежности</p></li>
-        <li class="advantage" style="--ix:23;--iw:102;--ih:105;--tx:187"><img class="advantage__icon" src="img/adv-4.webp" width="102" height="105" alt=""><p>Индивидуальный подбор<br> и проектирование</p></li>
+        <li class="advantage" style="--ix:2;--iw:105;--ih:108;--tx:151"><img class="advantage__icon" src="img/adv-1.webp" width="105" height="108" alt="Более 1500 товаров в наличии и под заказ"><p>Более 1500 товаров<br> в наличии и под заказ</p></li>
+        <li class="advantage" style="--ix:6;--iy:-3;--iw:137;--ih:93;--tx:187"><img class="advantage__icon" src="img/adv-2.webp" width="137" height="93" alt="Доставка по всей России"><p>Доставка по всей России</p></li>
+        <li class="advantage" style="--ix:13;--iw:80;--ih:107;--tx:151"><img class="advantage__icon" src="img/adv-3.webp" width="80" height="107" alt="Гарантия качества и надежности"><p>Гарантия качества<br> и надежности</p></li>
+        <li class="advantage" style="--ix:23;--iw:102;--ih:105;--tx:187"><img class="advantage__icon" src="img/adv-4.webp" width="102" height="105" alt="Индивидуальный подбор и проектирование"><p>Индивидуальный подбор<br> и проектирование</p></li>
       </ul>
     </div>
   </section>
@@ -255,7 +247,7 @@
         <p class="eyebrow">Подберем решение за 2 минуты</p>
         <h2 class="h2">Какое пространство<br> нужно оборудовать?</h2>
         <p class="lead">Ответьте на несколько вопросов и получите рекомендации<br> по оборудованию и расчет стоимости</p>
-        <a href="#request" class="btn btn--primary btn--lg">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="#request" class="btn btn--primary btn--lg">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></a>
       </div>
       <ul class="whs__grid">
         <li><a href="#request" class="whs__tile" data-warehouse="logistics"><img src="img/icons/wh-1.svg" width="54" height="35" alt="">Логистический<br> склад</a></li>
@@ -274,14 +266,14 @@
       <div class="section-head">
         <h2 class="h2">Реализованные проекты</h2>
         <div class="slider-nav">
-          <button class="slider-nav__btn" type="button" data-slider-prev="projectsSlider" aria-label="Предыдущие проекты"><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
-          <button class="slider-nav__btn" type="button" data-slider-next="projectsSlider" aria-label="Следующие проекты"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
-          <a href="/services/sborka-i-montazh/" class="btn btn--primary btn--xs slider-nav__all">Смотреть все <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <button class="slider-nav__btn" type="button" data-slider-prev="projectsSlider" aria-label="Предыдущие проекты"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow-left"/></svg></button>
+          <button class="slider-nav__btn" type="button" data-slider-next="projectsSlider" aria-label="Следующие проекты"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></button>
+          <a href="/services/sborka-i-montazh/" class="btn btn--primary btn--xs slider-nav__all">Смотреть все <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></a>
         </div>
       </div>
       <div class="slider-wrap">
-      <button class="slider-nav__btn slider-wrap__btn slider-wrap__btn--prev" type="button" data-slider-prev="projectsSlider" aria-label="Предыдущий проект"><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
-      <button class="slider-nav__btn slider-wrap__btn slider-wrap__btn--next" type="button" data-slider-next="projectsSlider" aria-label="Следующий проект"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      <button class="slider-nav__btn slider-wrap__btn slider-wrap__btn--prev" type="button" data-slider-prev="projectsSlider" aria-label="Предыдущий проект"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow-left"/></svg></button>
+      <button class="slider-nav__btn slider-wrap__btn slider-wrap__btn--next" type="button" data-slider-next="projectsSlider" aria-label="Следующий проект"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></button>
       <ul class="slider" id="projectsSlider">
         <li class="project"><div class="project__img" style="--img:url('../img/project-1.webp')"></div><h3 class="project__title">Холодильный склад</h3><p class="project__text">Фронтальные стеллажи для хранения пищевой продукции, г. Красноярск</p></li>
         <li class="project"><div class="project__img" style="--img:url('../img/project-2.webp')"></div><h3 class="project__title">Фармацевтический склад</h3><p class="project__text">Среднегрузовые стеллажи, г. Красноярск</p></li>
@@ -290,7 +282,7 @@
         <li class="project"><div class="project__img" style="--img:url('../img/project-5.webp')"></div><h3 class="project__title">Архивное хранение</h3><p class="project__text">Мобильные стеллажи для хранения документов, г. Красноярск</p></li>
       </ul>
       </div>
-      <a href="/services/sborka-i-montazh/" class="btn btn--primary btn--lg slider-all-mob">Смотреть все проекты <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a href="/services/sborka-i-montazh/" class="btn btn--primary btn--lg slider-all-mob">Смотреть все проекты <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></a>
     </div>
   </section>
 
@@ -310,9 +302,9 @@
         <li class="step"><img class="step__icon" src="img/icons/step-8.svg" width="23" height="29" alt=""><span class="step__num">08</span><h3 class="step__title">Гарантийное<br> обслуживание</h3></li>
       </ol>
       <div class="steps-nav">
-        <button class="slider-nav__btn" type="button" data-slider-prev="stepsSlider" aria-label="Предыдущий этап"><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
+        <button class="slider-nav__btn" type="button" data-slider-prev="stepsSlider" aria-label="Предыдущий этап"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow-left"/></svg></button>
         <span class="steps-nav__bar" aria-hidden="true"><span></span></span>
-        <button class="slider-nav__btn" type="button" data-slider-next="stepsSlider" aria-label="Следующий этап"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <button class="slider-nav__btn" type="button" data-slider-next="stepsSlider" aria-label="Следующий этап"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></button>
       </div>
     </div>
   </section>
@@ -331,7 +323,7 @@
         <h2 class="h3">Работаем по всей России</h2>
         <span class="line" aria-hidden="true"></span>
         <p class="lead">Доставляем оборудование в любые регионы.<br> Сотрудничаем с надежными транспортными компаниями</p>
-        <a href="#request" class="btn btn--primary btn--lg">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="#request" class="btn btn--primary btn--lg">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></a>
       </div>
     </div>
   </section>
@@ -399,7 +391,7 @@
             <span class="form__box" aria-hidden="true"></span>
             <span>Соглашаюсь с условиями <a href="/terms/">Политики конфиденциальности</a>.</span>
           </label>
-          <button type="submit" class="btn btn--primary btn--lg btn--block">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <button type="submit" class="btn btn--primary btn--lg btn--block">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></button>
           <p class="form__success" role="status" hidden>Заявка отправлена. Мы перезвоним вам в ближайшее время.</p>
         </form>
       </div>

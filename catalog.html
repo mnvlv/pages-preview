@@ -34,20 +34,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=77">
   <link rel="stylesheet" href="css/catalog.css?v=22">
-  <link rel="stylesheet" href="css/unify.css?v=4">
+  <link rel="stylesheet" href="css/unify.css?v=6">
 </head>
 <body class="page-catalog">
-
-<!-- ============ ИКОНКИ ИНТЕРФЕЙСА ============ -->
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-  <symbol id="i-arrow" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M.75 6.836h18M12 .836l6.75 6-6.75 6"/></symbol>
-  <symbol id="i-arrow-left" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.75 6.836h-18M7.5 .836l-6.75 6 6.75 6"/></symbol>
-  <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></symbol>
-  <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5v7l5.5-3.5z" fill="currentColor" stroke="none"/></symbol>
-  <symbol id="i-crumb" viewBox="114.45 134.45 6.10 11.10"><path fill="currentColor" d="M114.65 144.65C114.45 144.84 114.45 145.16 114.65 145.35C114.84 145.55 115.16 145.55 115.35 145.35L115.00 145.00L114.65 144.65M120.00 140.00L120.35 140.35C120.55 140.16 120.55 139.84 120.35 139.65L120.00 140.00M115.35 134.65C115.16 134.45 114.84 134.45 114.65 134.65C114.45 134.84 114.45 135.16 114.65 135.35L115.00 135.00L115.35 134.65M115.00 145.00L115.35 145.35L120.35 140.35L120.00 140.00L119.65 139.65L114.65 144.65L115.00 145.00M120.00 140.00L120.35 139.65L115.35 134.65L115.00 135.00L114.65 135.35L119.65 140.35L120.00 140.00"/></symbol>
-  <symbol id="i-cart" viewBox="0 0 29 21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1.3h3.4l2.9 12.2h15.6l3.4-8.9H5.6"/><circle cx="10" cy="18.2" r="1.8"/><circle cx="21.3" cy="18.2" r="1.8"/></symbol>
-  <symbol id="i-sort" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2.5v11M2 10.5l3 3 3-3M11 13.5v-11M8 5.5l3-3 3 3"/></symbol>
-</svg>
 
 <!-- ============ HEADER ============ -->
 <header class="header">
@@ -60,7 +49,7 @@
       <ul class="nav__list">
         <li class="nav__item nav__item--drop nav__item--mega">
           <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-catalog">
-            <span class="nav__text">Каталог</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            <span class="nav__text">Каталог</span> <svg class="nav__chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg>
           </button>
           <div class="mega" id="nav-catalog">
             <ul class="mega__grid">
@@ -105,7 +94,7 @@
         </li>
         <li class="nav__item nav__item--sub">
           <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-sub-services">
-            <span class="nav__text">Услуги</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            <span class="nav__text">Услуги</span> <svg class="nav__chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg>
           </button>
           <ul class="nav__sub" id="nav-sub-services">
             <li><a href="/services/sborka-i-montazh/">Сборка и монтаж</a></li>
@@ -134,7 +123,6 @@
         <a href="https://t.me/+79138374659" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span class="socials__icon socials__icon--telegram"></span></a>
         <a href="https://max.ru/id2464149300_bot" target="_blank" rel="noopener" aria-label="Написать в Max"><span class="socials__icon socials__icon--max"></span></a>
     </div>
-    <a href="#" class="cart" aria-label="Корзина: 99 товаров"><svg class="cart__icon" aria-hidden="true"><use href="#i-cart"/></svg><span class="cart__count">99</span></a>
     <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
       <span></span><span></span><span></span>
     </button>
@@ -164,30 +152,30 @@
       </ul>
       <div class="cats-box">
         <ul class="cats-box__list" id="catsList">
-        <li><div class="cat-card cat-card--drop" data-cat-drop><a href="/catalog/shkafy-dlya-razdevalok-lokery/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-demo-1.webp" width="26" height="59" alt=""></span><span class="cat-card__title">Для раздевалок</span><span class="cat-card__count">46 товаров</span></a>
-          <button class="cat-card__toggle" type="button" aria-expanded="false" aria-controls="catSub0" aria-label="Подкатегории: Для раздевалок"><svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+        <li><div class="cat-card cat-card--drop" data-cat-drop><a href="/catalog/shkafy-dlya-razdevalok-lokery/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-demo-1.webp" width="26" height="59" alt="Для раздевалок"></span><span class="cat-card__title">Для раздевалок</span><span class="cat-card__count">46 товаров</span></a>
+          <button class="cat-card__toggle" type="button" aria-expanded="false" aria-controls="catSub0" aria-label="Подкатегории: Для раздевалок"><svg class="c-chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg></button>
           <ul class="cat-card__sub" id="catSub0"><li><a href="/catalog/shkafy-serii-ml-usilennye/">Шкафы ML (усиленные) <span>12</span></a></li><li><a href="/catalog/shkafy-serii-ls/">Шкафы LS <span>11</span></a></li><li><a href="/catalog/shkafy-serii-shrm/">Шкафы ШРМ <span>12</span></a></li><li><a href="/catalog/shkafy-serii-shrk/">Шкафы ШРК <span>7</span></a></li><li><a href="/catalog/shkafy-serii-shrek/">Шкафы ШРЭК <span>4</span></a></li><li><a href="/catalog/shkafy-dlya-razdevalok-lokery/" class="cat-card__all">Все товары <span aria-hidden="true">→</span></a></li></ul></div></li>
-        <li><div class="cat-card cat-card--drop" data-cat-drop><a href="/catalog/shkafy-dlya-ofisa/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-demo-2.webp" width="38" height="59" alt=""></span><span class="cat-card__title">Для офиса</span><span class="cat-card__count">39 товаров</span></a>
-          <button class="cat-card__toggle" type="button" aria-expanded="false" aria-controls="catSub1" aria-label="Подкатегории: Для офиса"><svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+        <li><div class="cat-card cat-card--drop" data-cat-drop><a href="/catalog/shkafy-dlya-ofisa/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-demo-2.webp" width="38" height="59" alt="Для офиса"></span><span class="cat-card__title">Для офиса</span><span class="cat-card__count">39 товаров</span></a>
+          <button class="cat-card__toggle" type="button" aria-expanded="false" aria-controls="catSub1" aria-label="Подкатегории: Для офиса"><svg class="c-chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg></button>
           <ul class="cat-card__sub" id="catSub1"><li><a href="/catalog/shkafy-arkhivnye-praktik/">Практик</a></li><li><a href="/catalog/shkafy-arkhivnye-sham/">ШАМ</a></li><li><a href="/catalog/shkafy-arkhivnye-al/">Архивные AL</a></li><li><a href="/catalog/shkafy-dlya-ofisa/" class="cat-card__all">Все товары <span aria-hidden="true">→</span></a></li></ul></div></li>
-        <li><div class="cat-card cat-card--drop" data-cat-drop><a href="/catalog/kartotechnye-shkafy/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-demo-3.webp" width="43" height="59" alt=""></span><span class="cat-card__title">Картотечные</span><span class="cat-card__count">28 товаров</span></a>
-          <button class="cat-card__toggle" type="button" aria-expanded="false" aria-controls="catSub2" aria-label="Подкатегории: Картотечные"><svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+        <li><div class="cat-card cat-card--drop" data-cat-drop><a href="/catalog/kartotechnye-shkafy/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-demo-3.webp" width="43" height="59" alt="Картотечные"></span><span class="cat-card__title">Картотечные</span><span class="cat-card__count">28 товаров</span></a>
+          <button class="cat-card__toggle" type="button" aria-expanded="false" aria-controls="catSub2" aria-label="Подкатегории: Картотечные"><svg class="c-chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg></button>
           <ul class="cat-card__sub" id="catSub2"><li><a href="/catalog/kartoteki-serii-praktik/">Картотеки ПРАКТИК</a></li><li><a href="/catalog/kartoteki-serii-kr/">Картотеки КР</a></li><li><a href="/catalog/kartoteki-bolshikh-formatov/">Картотеки больших форматов</a></li><li><a href="/catalog/papki-podvesnye/">Папки подвесные</a></li><li><a href="/catalog/kartotechnye-shkafy/" class="cat-card__all">Все товары <span aria-hidden="true">→</span></a></li></ul></div></li>
-        <li><div class="cat-card cat-card--drop" data-cat-drop><a href="/catalog/bukhgalterskie-shkafy/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-4.webp" width="29" height="53" alt=""></span><span class="cat-card__title">Бухгалтерские</span><span class="cat-card__count">36 товаров</span></a>
-          <button class="cat-card__toggle" type="button" aria-expanded="false" aria-controls="catSub3" aria-label="Подкатегории: Бухгалтерские"><svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+        <li><div class="cat-card cat-card--drop" data-cat-drop><a href="/catalog/bukhgalterskie-shkafy/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-4.webp" width="29" height="53" alt="Бухгалтерские"></span><span class="cat-card__title">Бухгалтерские</span><span class="cat-card__count">36 товаров</span></a>
+          <button class="cat-card__toggle" type="button" aria-expanded="false" aria-controls="catSub3" aria-label="Подкатегории: Бухгалтерские"><svg class="c-chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg></button>
           <ul class="cat-card__sub" id="catSub3"><li><a href="/catalog/shkafy-serii-sl/">Шкафы SL</a></li><li><a href="/catalog/shkafy-serii-kb/">Шкафы КБ</a></li><li><a href="/catalog/bukhgalterskie-shkafy/" class="cat-card__all">Все товары <span aria-hidden="true">→</span></a></li></ul></div></li>
-        <li><div class="cat-card"><a href="/catalog/abonenskie-pochtovye-shkafy/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-5.webp" width="29" height="54" alt=""></span><span class="cat-card__title">Абонентские почтовые</span><span class="cat-card__count">2 товара</span></a></div></li>
-        <li><div class="cat-card"><a href="/catalog/zamki-skameyki-podstavki-aksessuary-i-optsii/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-6.webp" width="49" height="39" alt=""></span><span class="cat-card__title">Аксессуары и опции</span><span class="cat-card__count">20 товаров</span></a></div></li>
-        <li class="cats-box__extra"><div class="cat-card cat-card--drop" data-cat-drop><a href="/catalog/shkafy-dlya-sumok-sumochnitsy/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-7.webp" width="22" height="60" alt=""></span><span class="cat-card__title">Сумочницы для сумок</span><span class="cat-card__count">5 товаров</span></a>
-          <button class="cat-card__toggle" type="button" aria-expanded="false" aria-controls="catSub6" aria-label="Подкатегории: Сумочницы для сумок"><svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+        <li><div class="cat-card"><a href="/catalog/abonenskie-pochtovye-shkafy/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-5.webp" width="29" height="54" alt="Абонентские почтовые"></span><span class="cat-card__title">Абонентские почтовые</span><span class="cat-card__count">2 товара</span></a></div></li>
+        <li><div class="cat-card"><a href="/catalog/zamki-skameyki-podstavki-aksessuary-i-optsii/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-6.webp" width="49" height="39" alt="Аксессуары и опции"></span><span class="cat-card__title">Аксессуары и опции</span><span class="cat-card__count">20 товаров</span></a></div></li>
+        <li class="cats-box__extra"><div class="cat-card cat-card--drop" data-cat-drop><a href="/catalog/shkafy-dlya-sumok-sumochnitsy/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-7.webp" width="22" height="60" alt="Сумочницы для сумок"></span><span class="cat-card__title">Сумочницы для сумок</span><span class="cat-card__count">5 товаров</span></a>
+          <button class="cat-card__toggle" type="button" aria-expanded="false" aria-controls="catSub6" aria-label="Подкатегории: Сумочницы для сумок"><svg class="c-chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg></button>
           <ul class="cat-card__sub" id="catSub6"><li><a href="/catalog/shkafy-dlya-sumok-sumochnitsy-shkafy-serii-ls/">LS</a></li><li><a href="/catalog/shkafy-dlya-sumok-sumochnitsy-shkafy-serii-shrm/">ШРМ</a></li><li><a href="/catalog/shkafy-dlya-sumok-sumochnitsy/" class="cat-card__all">Все товары <span aria-hidden="true">→</span></a></li></ul></div></li>
-        <li class="cats-box__extra"><div class="cat-card"><a href="/catalog/ognestoykie-shkafy/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-8.webp" width="33" height="60" alt=""></span><span class="cat-card__title">Огнестойкие</span><span class="cat-card__count">4 товара</span></a></div></li>
-        <li class="cats-box__extra"><div class="cat-card cat-card--drop" data-cat-drop><a href="/catalog/shkafy-sushilnye-dlya-odezhdy/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-9.webp" width="32" height="60" alt=""></span><span class="cat-card__title">Сушильные</span><span class="cat-card__count">20 товаров</span></a>
-          <button class="cat-card__toggle" type="button" aria-expanded="false" aria-controls="catSub8" aria-label="Подкатегории: Сушильные"><svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+        <li class="cats-box__extra"><div class="cat-card"><a href="/catalog/ognestoykie-shkafy/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-8.webp" width="33" height="60" alt="Огнестойкие"></span><span class="cat-card__title">Огнестойкие</span><span class="cat-card__count">4 товара</span></a></div></li>
+        <li class="cats-box__extra"><div class="cat-card cat-card--drop" data-cat-drop><a href="/catalog/shkafy-sushilnye-dlya-odezhdy/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-9.webp" width="32" height="60" alt="Сушильные"></span><span class="cat-card__title">Сушильные</span><span class="cat-card__count">20 товаров</span></a>
+          <button class="cat-card__toggle" type="button" aria-expanded="false" aria-controls="catSub8" aria-label="Подкатегории: Сушильные"><svg class="c-chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg></button>
           <ul class="cat-card__sub" id="catSub8"><li><a href="/catalog/ranger/">Ranger</a></li><li><a href="/catalog/veterok/">ВЕТЕРОК</a></li><li><a href="/catalog/nord-stoyka-sushilnaya/">Норд (стойка сушильная)</a></li><li><a href="/catalog/sakhara/">САХАРА</a></li><li><a href="/catalog/tsiklon/">ЦИКЛОН</a></li><li><a href="/catalog/shso/">ШСО</a></li><li><a href="/catalog/shkafy-sushilnye-dlya-odezhdy/" class="cat-card__all">Все товары <span aria-hidden="true">→</span></a></li></ul></div></li>
-        <li class="cats-box__extra"><div class="cat-card"><a href="/catalog/tumby-mobilnye/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-10.webp" width="48" height="48" alt=""></span><span class="cat-card__title">Тумбы мобильные</span><span class="cat-card__count">2 товара</span></a></div></li>
+        <li class="cats-box__extra"><div class="cat-card"><a href="/catalog/tumby-mobilnye/" class="cat-card__link"><span class="cat-card__img"><img src="img/catalog/cat-10.webp" width="48" height="48" alt="Тумбы мобильные"></span><span class="cat-card__title">Тумбы мобильные</span><span class="cat-card__count">2 товара</span></a></div></li>
         </ul>
-        <button class="cats-box__more" type="button" aria-expanded="false" aria-controls="catsList"><span>Развернуть все</span> <svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+        <button class="cats-box__more" type="button" aria-expanded="false" aria-controls="catsList"><span>Развернуть все</span> <svg class="c-chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg></button>
       </div>
     </div>
   </section>
@@ -195,7 +183,7 @@
   <!-- ============ 2. ФИЛЬТР И ТОВАРЫ ============ -->
   <section class="c-catalog">
     <div class="container c-catalog__inner">
-      <button class="btn btn--primary btn--block filter-open" type="button" aria-controls="filter" aria-expanded="false">Открыть фильтры <svg class="filter-open__icon" aria-hidden="true"><use href="#i-sort"/></svg></button>
+      <button class="btn btn--primary btn--block filter-open" type="button" aria-controls="filter" aria-expanded="false">Открыть фильтры <svg class="filter-open__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-sort"/></svg></button>
       <form class="filter" id="filter" aria-label="Фильтр товаров">
         <div class="filter__head">
           <h2 class="filter__title">Фильтр</h2>
@@ -246,7 +234,7 @@
           <h2 class="products__title">Найдено 46 товаров</h2>
           <span class="products__sort-label">Сортировка:</span>
           <div class="sort" data-dropdown>
-            <button type="button" class="sort__btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="sortMain"><span class="sort__value">По умолчанию</span><svg class="c-chevron" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+            <button type="button" class="sort__btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="sortMain"><span class="sort__value">По умолчанию</span><svg class="c-chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg></button>
             <ul class="sort__list" id="sortMain" role="listbox" hidden><li role="option" aria-selected="true">По умолчанию</li><li role="option" aria-selected="false">Сначала дешевле</li><li role="option" aria-selected="false">Сначала дороже</li><li role="option" aria-selected="false">По названию</li><li role="option" aria-selected="false">Сначала со скидкой</li></ul>
           </div>
         </div>
@@ -259,7 +247,7 @@
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
               <p class="product__price"><s class="product__old">11 430 ₽</s><span class="product__current">9 087 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
@@ -270,7 +258,7 @@
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
               <p class="product__price"><s class="product__old">15 111 ₽</s><span class="product__current">12 013 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
@@ -281,7 +269,7 @@
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
               <p class="product__price"><s class="product__old">7 744 ₽</s><span class="product__current">6 660 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
@@ -292,7 +280,7 @@
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
               <p class="product__price"><s class="product__old">9 044 ₽</s><span class="product__current">7 778 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
@@ -303,7 +291,7 @@
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
               <p class="product__price"><s class="product__old">9 365 ₽</s><span class="product__current">8 054 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
@@ -314,7 +302,7 @@
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
               <p class="product__price"><s class="product__old">10 256 ₽</s><span class="product__current">8 820 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
@@ -325,7 +313,7 @@
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
               <p class="product__price"><span class="product__current">9 900 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
@@ -336,7 +324,7 @@
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
               <p class="product__price"><span class="product__current">10 000 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
@@ -347,7 +335,7 @@
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
               <p class="product__price"><s class="product__old">7 966 ₽</s><span class="product__current">6 333 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
@@ -358,7 +346,7 @@
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
               <p class="product__price"><s class="product__old">12 199 ₽</s><span class="product__current">9 698 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
@@ -369,7 +357,7 @@
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
               <p class="product__price"><s class="product__old">16 765 ₽</s><span class="product__current">14 418 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
@@ -380,7 +368,7 @@
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
               <p class="product__price"><span class="product__current">10 800 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
@@ -391,7 +379,7 @@
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
               <p class="product__price"><span class="product__current">11 750 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
@@ -402,7 +390,7 @@
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
               <p class="product__price"><s class="product__old">6 302 ₽</s><span class="product__current">5 010 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
@@ -413,7 +401,7 @@
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
               <p class="product__price"><s class="product__old">13 042 ₽</s><span class="product__current">10 368 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg></button>
             </div>
           </li>
           <li class="product">
@@ -424,16 +412,16 @@
             <p class="product__status product__status--stock">В наличии</p>
             <div class="product__buy">
               <p class="product__price"><s class="product__old">11 500 ₽</s><span class="product__current">9 890 ₽</span></p>
-              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+              <button class="product__cart" type="button" aria-label="В корзину"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg></button>
             </div>
           </li>
         </ul>
         <nav class="pager" aria-label="Страницы каталога">
-          <a href="#" class="pager__item pager__item--arrow" aria-label="Предыдущая страница"><svg aria-hidden="true"><use href="#i-crumb"/></svg></a>
+          <a href="#" class="pager__item pager__item--arrow" aria-label="Предыдущая страница"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-crumb"/></svg></a>
           <a href="#" class="pager__item is-active" aria-current="page">1</a>
           <a href="#" class="pager__item">2</a>
           <a href="#" class="pager__item">3</a>
-          <a href="#" class="pager__item pager__item--arrow pager__item--next" aria-label="Следующая страница"><svg aria-hidden="true"><use href="#i-crumb"/></svg></a>
+          <a href="#" class="pager__item pager__item--arrow pager__item--next" aria-label="Следующая страница"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-crumb"/></svg></a>
         </nav>
       </div>
     </div>
@@ -450,10 +438,10 @@
           <p>При комплектации учитываем количество пользователей, доступную площадь и условия эксплуатации. «Диаском» помогает подобрать подходящие модели и организовать поставку оборудования.</p>
         </div>
         <ul class="c-seo__cards">
-          <li><img src="img/catalog/seo-1.webp" width="62" height="62" alt="">Более 1500 товаров<br> в наличии и под заказ</li>
-          <li><img src="img/catalog/seo-2.webp" width="77" height="54" alt="">Доставка по всей России</li>
-          <li><img src="img/catalog/seo-3.webp" width="46" height="62" alt="">Гарантия качества<br> и надежности</li>
-          <li><img src="img/catalog/seo-4.webp" width="60" height="60" alt="">Индивидуальный подбор<br> и проектирование</li>
+          <li><img src="img/catalog/seo-1.webp" width="62" height="62" alt="Более 1500 товаров в наличии и под заказ">Более 1500 товаров<br> в наличии и под заказ</li>
+          <li><img src="img/catalog/seo-2.webp" width="77" height="54" alt="Доставка по всей России">Доставка по всей России</li>
+          <li><img src="img/catalog/seo-3.webp" width="46" height="62" alt="Гарантия качества и надежности">Гарантия качества<br> и надежности</li>
+          <li><img src="img/catalog/seo-4.webp" width="60" height="60" alt="Индивидуальный подбор и проектирование">Индивидуальный подбор<br> и проектирование</li>
         </ul>
       </div>
     </div>
@@ -495,14 +483,14 @@
         <h2 class="h2">Где используют<br> <span class="accent">локеры</span></h2>
         <p>Локеры используются повсеместно на<br> предприятиях, в спортзалах, учебных заведениях и<br> офисах для хранения одежды и личных вещей</p>
         <div class="c-use__nav">
-          <button class="slider-nav__btn" type="button" data-slider-prev="useSlider" aria-label="Предыдущий слайд"><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
-          <button class="slider-nav__btn" type="button" data-slider-next="useSlider" aria-label="Следующий слайд"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <button class="slider-nav__btn" type="button" data-slider-prev="useSlider" aria-label="Предыдущий слайд"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow-left"/></svg></button>
+          <button class="slider-nav__btn" type="button" data-slider-next="useSlider" aria-label="Следующий слайд"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></button>
         </div>
       </div>
       <ul class="c-use__slider" id="useSlider">
-        <li><img src="img/catalog/use-1.webp" width="289" height="330" alt="" loading="lazy"><span>Промышленные<br> предприятия</span></li>
-        <li><img src="img/catalog/use-2.webp" width="289" height="330" alt="" loading="lazy"><span>Медицинские<br> организации</span></li>
-        <li><img src="img/catalog/use-3.webp" width="289" height="330" alt="" loading="lazy"><span>Образовательные<br> учреждения</span></li>
+        <li><img src="img/catalog/use-1.webp" width="289" height="330" alt="Промышленные предприятия" loading="lazy"><span>Промышленные<br> предприятия</span></li>
+        <li><img src="img/catalog/use-2.webp" width="289" height="330" alt="Медицинские организации" loading="lazy"><span>Медицинские<br> организации</span></li>
+        <li><img src="img/catalog/use-3.webp" width="289" height="330" alt="Образовательные учреждения" loading="lazy"><span>Образовательные<br> учреждения</span></li>
       </ul>
     </div>
   </section>
@@ -552,7 +540,7 @@
             <span class="form__box" aria-hidden="true"></span>
             <span>Соглашаюсь с условиями <a href="/terms/">Политики конфиденциальности</a>.</span>
           </label>
-          <button type="submit" class="btn btn--primary btn--lg btn--block">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <button type="submit" class="btn btn--primary btn--lg btn--block">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></button>
           <p class="form__success" role="status" hidden>Заявка отправлена. Мы перезвоним вам в ближайшее время.</p>
         </form>
       </div>

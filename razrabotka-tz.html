@@ -36,18 +36,9 @@
   <link rel="stylesheet" href="css/mining.css?v=7">
   <link rel="stylesheet" href="css/catalog.css?v=22">
   <link rel="stylesheet" href="css/services.css?v=65">
-  <link rel="stylesheet" href="css/unify.css?v=4">
+  <link rel="stylesheet" href="css/unify.css?v=6">
 </head>
 <body class="page-svc">
-
-<!-- ============ ИКОНКИ ИНТЕРФЕЙСА ============ -->
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-  <symbol id="i-arrow" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M.75 6.836h18M12 .836l6.75 6-6.75 6"/></symbol>
-  <symbol id="i-arrow-left" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.75 6.836h-18M7.5 .836l-6.75 6 6.75 6"/></symbol>
-  <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></symbol>
-  <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5v7l5.5-3.5z" fill="currentColor" stroke="none"/></symbol>
-  <symbol id="i-download" viewBox="489.50 518.50 15.00 15.00"><path fill="currentColor" d="M491.00 528.25C491.00 527.84 490.66 527.50 490.25 527.50C489.84 527.50 489.50 527.84 489.50 528.25L490.25 528.25L491.00 528.25M504.50 528.25C504.50 527.84 504.16 527.50 503.75 527.50C503.34 527.50 503.00 527.84 503.00 528.25L503.75 528.25L504.50 528.25M490.25 528.25L489.50 528.25C489.50 529.29 489.50 530.14 489.59 530.82C489.68 531.51 489.89 532.13 490.38 532.62L490.91 532.09L491.44 531.56C491.27 531.39 491.15 531.15 491.08 530.62C491.00 530.07 491.00 529.33 491.00 528.25L490.25 528.25M490.91 532.09L490.38 532.62C490.87 533.11 491.49 533.32 492.18 533.41C492.86 533.50 493.71 533.50 494.75 533.50L494.75 532.75L494.75 532.00C493.67 532.00 492.93 532.00 492.38 531.92C491.85 531.85 491.61 531.73 491.44 531.56L490.91 532.09M494.75 532.75L494.75 533.50L499.25 533.50L499.25 532.75L499.25 532.00L494.75 532.00L494.75 532.75M499.25 532.75L499.25 533.50C500.29 533.50 501.14 533.50 501.82 533.41C502.51 533.32 503.13 533.11 503.62 532.62L503.09 532.09L502.56 531.56C502.39 531.73 502.15 531.85 501.62 531.92C501.07 532.00 500.33 532.00 499.25 532.00L499.25 532.75M503.09 532.09L503.62 532.62C504.11 532.13 504.32 531.51 504.41 530.82C504.50 530.14 504.50 529.29 504.50 528.25L503.75 528.25L503.00 528.25C503.00 529.33 503.00 530.07 502.92 530.62C502.85 531.15 502.73 531.39 502.56 531.56L503.09 532.09"/><path fill="currentColor" d="M497.75 519.25C497.75 518.84 497.41 518.50 497.00 518.50C496.59 518.50 496.25 518.84 496.25 519.25L497.00 519.25L497.75 519.25M497.00 529.00L496.45 529.51C496.59 529.66 496.79 529.75 497.00 529.75C497.21 529.75 497.41 529.66 497.55 529.51L497.00 529.00M500.55 526.22C500.83 525.92 500.81 525.44 500.51 525.17C500.20 524.89 499.73 524.91 499.45 525.21L500.00 525.72L500.55 526.22M494.55 525.21C494.27 524.91 493.80 524.89 493.49 525.17C493.19 525.44 493.17 525.92 493.45 526.22L494.00 525.72L494.55 525.21M497.00 519.25L496.25 519.25L496.25 529.00L497.00 529.00L497.75 529.00L497.75 519.25L497.00 519.25M497.00 529.00L497.55 529.51L500.55 526.22L500.00 525.72L499.45 525.21L496.45 528.49L497.00 529.00L497.55 528.49L494.55 525.21L494.00 525.72L493.45 526.22L496.45 529.51L497.00 529.00"/></symbol>
-</svg></svg>
 
 <!-- ============ HEADER ============ -->
 <header class="header">
@@ -60,7 +51,7 @@
       <ul class="nav__list">
         <li class="nav__item nav__item--drop nav__item--mega">
           <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-catalog">
-            <span class="nav__text">Каталог</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            <span class="nav__text">Каталог</span> <svg class="nav__chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg>
           </button>
           <div class="mega" id="nav-catalog">
             <ul class="mega__grid">
@@ -105,20 +96,18 @@
         </li>
         <li class="nav__item nav__item--sub">
           <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-sub-services">
-            <span class="nav__text">Услуги</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            <span class="nav__text">Услуги</span> <svg class="nav__chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg>
           </button>
           <ul class="nav__sub" id="nav-sub-services">
-            <li><a href="sborka-i-montazh.html">Сборка и монтаж</a></li>
-            <li><a href="razrabotka-tz.html" aria-current="page">Разработка ТЗ</a></li>
-            <li><a href="proektirovanie-sklada.html">Проектирование склада</a></li>
-            <li><a href="dostavka.html">Доставка</a></li>
-            <li><a href="uslugi.html">Все услуги</a></li>
+            <li><a href="/services/sborka-i-montazh/">Сборка и монтаж</a></li>
+            <li><a href="/services/razrabotka-tz-dlya-auktsionov/">Подготовка тех. задания</a></li>
+            <li><a href="/services/proektirovanie-sklada/">Проектирование склада</a></li>
           </ul>
         </li>
-        <li class="nav__item"><a href="o-kompanii.html" class="nav__link"><span class="nav__text">О компании</span></a></li>
+        <li class="nav__item"><a href="/about/" class="nav__link"><span class="nav__text">О компании</span></a></li>
         <li class="nav__item"><a href="/services/" class="nav__link"><span class="nav__text">Комплексные решения</span></a></li>
-        <li class="nav__item"><a href="dokumentatsiya.html" class="nav__link"><span class="nav__text">Банк знаний</span></a></li>
-        <li class="nav__item"><a href="blog.html" class="nav__link"><span class="nav__text">Блог</span></a></li>
+        <li class="nav__item"><a href="#" class="nav__link"><span class="nav__text">Банк знаний</span></a></li>
+        <li class="nav__item"><a href="#" class="nav__link"><span class="nav__text">Блог</span></a></li>
       </ul>
       <div class="nav__mobile">
         <div class="icon-links">
@@ -150,8 +139,8 @@
         <h1 class="sv-hero__title">Техническое задание <span class="accent">для закупок</span></h1>
         <p class="sv-hero__lead">Готовим ТЗ по 44-ФЗ и 223-ФЗ на складское оборудование и металлическую мебель — с учётом требований закона и особенностей объекта.</p>
         <div class="sv-hero__buttons">
-          <a href="#request" class="btn btn--primary btn--md">Получить консультацию <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          <a href="#request" class="btn btn--outline btn--md">Рассчитать срок и цену <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a href="#request" class="btn btn--primary btn--md">Получить консультацию <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></a>
+          <a href="#request" class="btn btn--outline btn--md">Рассчитать срок и цену <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></a>
         </div>
       </div>
       <ul class="sv-plaques">
@@ -232,14 +221,14 @@
       <h2 class="h2">Для каких <span class="accent">организаций</span> разрабатываем <span class="accent">ТЗ</span></h2>
       <p class="lead lead--lg">Готовим техническую документацию для государственных, муниципальных и коммерческих заказчиков с учетом специфики их деятельности.</p>
       <ul class="sv-org">
-        <li class="sv-org__card"><img class="sv-org__photo" src="img/svc/t-org-logist.webp?v=2" alt="" loading="lazy"><img class="sv-org__ico" src="img/svc/i-garage.svg" width="34" height="34" alt=""><b>Логистические компании</b><span>Требования к стеллажным системам, складской технике и оборудованию для хранения грузов.</span></li>
-        <li class="sv-org__card"><img class="sv-org__photo" src="img/svc/t-org-prod.webp?v=2" alt="" loading="lazy"><img class="sv-org__ico" src="img/svc/i-factory.svg" width="34" height="34" alt=""><b>Производственные предприятия</b><span>Технические задания на верстаки, металлическую мебель, шкафы и производственное оснащение.</span></li>
-        <li class="sv-org__card"><img class="sv-org__photo" src="img/svc/t-org-arch.webp?v=2" alt="" loading="lazy"><img class="sv-org__ico" src="img/svc/i-archive.svg" width="34" height="34" alt=""><b>Архивные учреждения</b><span>Документация для закупки архивных стеллажей, картотек и систем хранения документов.</span></li>
-        <li class="sv-org__card"><img class="sv-org__photo" src="img/svc/t-org-trade.webp?v=2" alt="" loading="lazy"><img class="sv-org__ico" src="img/svc/i-cart.svg" width="34" height="34" alt=""><b>Торговые организации</b><span>Требования к торговым стеллажам, складскому оснащению и металлической мебели.</span></li>
-        <li class="sv-org__card"><img class="sv-org__photo" src="img/svc/t-org-social.webp?v=2" alt="" loading="lazy"><img class="sv-org__ico" src="img/svc/i-users.svg" width="34" height="34" alt=""><b>Учреждения социальной сферы</b><span>Технические требования к гардеробным шкафам, мебели и оборудованию бытовых помещений.</span></li>
-        <li class="sv-org__card"><img class="sv-org__photo" src="img/svc/t-org-admin.webp?v=2" alt="" loading="lazy"><img class="sv-org__ico" src="img/svc/i-chair.svg" width="34" height="34" alt=""><b>Административные организации</b><span>Технические задания на офисную мебель, шкафы для документов и архивное оборудование.</span></li>
-        <li class="sv-org__card"><img class="sv-org__photo" src="img/svc/t-org-gov.webp?v=2" alt="" loading="lazy"><img class="sv-org__ico" src="img/svc/i-building.svg" width="34" height="34" alt=""><b>Государственные и муниципальные заказчики</b><span>Документация для закупок по 44-ФЗ и 223-ФЗ с учетом требований законодательства.</span></li>
-        <li class="sv-org__card sv-org__cta"><img src="img/svc/i-doc-pen.svg" width="48" height="48" alt=""><span class="sv-org__body"><b>Не нашли свою сферу?</b><span>Подготовим техническое задание с учетом специфики вашей организации и задач закупки.</span></span><a href="#request" class="btn btn--primary btn--md">Обсудить задачу <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        <li class="sv-org__card"><img class="sv-org__photo" src="img/svc/t-org-logist.webp?v=2" alt="Логистические компании" loading="lazy"><img class="sv-org__ico" src="img/svc/i-garage.svg" width="34" height="34" alt=""><b>Логистические компании</b><span>Требования к стеллажным системам, складской технике и оборудованию для хранения грузов.</span></li>
+        <li class="sv-org__card"><img class="sv-org__photo" src="img/svc/t-org-prod.webp?v=2" alt="Производственные предприятия" loading="lazy"><img class="sv-org__ico" src="img/svc/i-factory.svg" width="34" height="34" alt=""><b>Производственные предприятия</b><span>Технические задания на верстаки, металлическую мебель, шкафы и производственное оснащение.</span></li>
+        <li class="sv-org__card"><img class="sv-org__photo" src="img/svc/t-org-arch.webp?v=2" alt="Архивные учреждения" loading="lazy"><img class="sv-org__ico" src="img/svc/i-archive.svg" width="34" height="34" alt=""><b>Архивные учреждения</b><span>Документация для закупки архивных стеллажей, картотек и систем хранения документов.</span></li>
+        <li class="sv-org__card"><img class="sv-org__photo" src="img/svc/t-org-trade.webp?v=2" alt="Торговые организации" loading="lazy"><img class="sv-org__ico" src="img/svc/i-cart.svg" width="34" height="34" alt=""><b>Торговые организации</b><span>Требования к торговым стеллажам, складскому оснащению и металлической мебели.</span></li>
+        <li class="sv-org__card"><img class="sv-org__photo" src="img/svc/t-org-social.webp?v=2" alt="Учреждения социальной сферы" loading="lazy"><img class="sv-org__ico" src="img/svc/i-users.svg" width="34" height="34" alt=""><b>Учреждения социальной сферы</b><span>Технические требования к гардеробным шкафам, мебели и оборудованию бытовых помещений.</span></li>
+        <li class="sv-org__card"><img class="sv-org__photo" src="img/svc/t-org-admin.webp?v=2" alt="Административные организации" loading="lazy"><img class="sv-org__ico" src="img/svc/i-chair.svg" width="34" height="34" alt=""><b>Административные организации</b><span>Технические задания на офисную мебель, шкафы для документов и архивное оборудование.</span></li>
+        <li class="sv-org__card"><img class="sv-org__photo" src="img/svc/t-org-gov.webp?v=2" alt="Государственные и муниципальные заказчики" loading="lazy"><img class="sv-org__ico" src="img/svc/i-building.svg" width="34" height="34" alt=""><b>Государственные и муниципальные заказчики</b><span>Документация для закупок по 44-ФЗ и 223-ФЗ с учетом требований законодательства.</span></li>
+        <li class="sv-org__card sv-org__cta"><img src="img/svc/i-doc-pen.svg" width="48" height="48" alt=""><span class="sv-org__body"><b>Не нашли свою сферу?</b><span>Подготовим техническое задание с учетом специфики вашей организации и задач закупки.</span></span><a href="#request" class="btn btn--primary btn--md">Обсудить задачу <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></a></li>
       </ul>
     </div>
   </section>
@@ -317,7 +306,7 @@
             <span class="form__box" aria-hidden="true"></span>
             <span>Соглашаюсь с условиями <a href="/terms/">Политики конфиденциальности</a>.</span>
           </label>
-          <button type="submit" class="btn btn--primary btn--lg btn--block">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <button type="submit" class="btn btn--primary btn--lg btn--block">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></button>
           <p class="form__success" role="status" hidden>Заявка отправлена. Мы перезвоним вам в ближайшее время.</p>
         </form>
       </div>
@@ -370,9 +359,8 @@
       <nav class="footer__col" aria-label="Компания">
         <h3 class="footer__title">Компания</h3>
         <ul>
-          <li><a href="o-kompanii.html">О компании</a></li>
-          <li><a href="partnery.html">Наши партнёры</a></li>
-          <li><a href="dokumentatsiya.html">Документы и сертификаты</a></li>
+          <li><a href="/about/">О компании</a></li>
+          <li><a href="/rekvizity/">Документы и сертификаты</a></li>
           <li><a href="https://yandex.ru/maps/org/diaskom/194174337631/reviews/" target="_blank" rel="noopener">Отзывы</a></li>
           <li><a href="/contact/">Контакты</a></li>
         </ul>
@@ -380,11 +368,9 @@
       <nav class="footer__col" aria-label="Услуги">
         <h3 class="footer__title">Услуги</h3>
         <ul>
-          <li><a href="sborka-i-montazh.html">Сборка и монтаж</a></li>
-          <li><a href="razrabotka-tz.html">Подготовка тех. задания</a></li>
-          <li><a href="proektirovanie-sklada.html">Проектирование склада</a></li>
-          <li><a href="dostavka.html">Доставка</a></li>
-          <li><a href="uslugi.html" class="footer__all">Все услуги</a></li>
+          <li><a href="/services/sborka-i-montazh/">Сборка и монтаж</a></li>
+          <li><a href="/services/razrabotka-tz-dlya-auktsionov/">Подготовка тех. задания</a></li>
+          <li><a href="/services/proektirovanie-sklada/">Проектирование склада</a></li>
         </ul>
       </nav>
       <div class="footer__bottom">

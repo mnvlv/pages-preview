@@ -14,17 +14,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=77">
   <link rel="stylesheet" href="css/rack3d.css?v=3">
-  <link rel="stylesheet" href="css/unify.css?v=4">
+  <link rel="stylesheet" href="css/unify.css?v=6">
 </head>
 <body>
-
-<!-- ============ ИКОНКИ ИНТЕРФЕЙСА ============ -->
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-  <symbol id="i-arrow" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M.75 6.836h18M12 .836l6.75 6-6.75 6"/></symbol>
-  <symbol id="i-arrow-left" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.75 6.836h-18M7.5 .836l-6.75 6 6.75 6"/></symbol>
-  <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></symbol>
-  <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5v7l5.5-3.5z" fill="currentColor" stroke="none"/></symbol>
-</svg>
 
 <!-- ============ HEADER ============ -->
 <header class="header">
@@ -37,7 +29,7 @@
       <ul class="nav__list">
         <li class="nav__item nav__item--drop nav__item--mega">
           <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-catalog">
-            <span class="nav__text">Каталог</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            <span class="nav__text">Каталог</span> <svg class="nav__chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg>
           </button>
           <div class="mega" id="nav-catalog">
             <ul class="mega__grid">
@@ -82,7 +74,7 @@
         </li>
         <li class="nav__item nav__item--sub">
           <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-sub-services">
-            <span class="nav__text">Услуги</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            <span class="nav__text">Услуги</span> <svg class="nav__chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg>
           </button>
           <ul class="nav__sub" id="nav-sub-services">
             <li><a href="/services/sborka-i-montazh/">Сборка и монтаж</a></li>
@@ -132,7 +124,7 @@
           <li>Раскосы и опорные пластины для устойчивости</li>
           <li>Порошковая окраска в фирменные цвета</li>
         </ul>
-        <a href="#request" class="btn btn--primary btn--lg">Рассчитать стеллаж <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="#request" class="btn btn--primary btn--lg">Рассчитать стеллаж <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></a>
       </div>
       <div class="rack3d__stage">
         <model-viewer data-src="models/pallet-rack.glb" alt="3D-модель секции паллетного стеллажа"
@@ -199,7 +191,7 @@
             <span class="form__box" aria-hidden="true"></span>
             <span>Соглашаюсь с условиями <a href="/terms/">Политики конфиденциальности</a>.</span>
           </label>
-          <button type="submit" class="btn btn--primary btn--lg btn--block">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <button type="submit" class="btn btn--primary btn--lg btn--block">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></button>
           <p class="form__success" role="status" hidden>Заявка отправлена. Мы перезвоним вам в ближайшее время.</p>
         </form>
       </div>

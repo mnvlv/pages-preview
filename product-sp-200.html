@@ -30,20 +30,9 @@
   <link rel="stylesheet" href="css/catalog.css?v=22">
   <link rel="stylesheet" href="css/racks.css?v=49">
   <link rel="stylesheet" href="css/product.css?v=5">
-  <link rel="stylesheet" href="css/unify.css?v=4">
+  <link rel="stylesheet" href="css/unify.css?v=6">
 </head>
 <body class="page-catalog page-product">
-
-<!-- ============ ИКОНКИ ИНТЕРФЕЙСА ============ -->
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-  <symbol id="i-arrow" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M.75 6.836h18M12 .836l6.75 6-6.75 6"/></symbol>
-  <symbol id="i-arrow-left" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.75 6.836h-18M7.5 .836l-6.75 6 6.75 6"/></symbol>
-  <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></symbol>
-  <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5v7l5.5-3.5z" fill="currentColor" stroke="none"/></symbol>
-  <symbol id="i-crumb" viewBox="114.45 134.45 6.10 11.10"><path fill="currentColor" d="M114.65 144.65C114.45 144.84 114.45 145.16 114.65 145.35C114.84 145.55 115.16 145.55 115.35 145.35L115.00 145.00L114.65 144.65M120.00 140.00L120.35 140.35C120.55 140.16 120.55 139.84 120.35 139.65L120.00 140.00M115.35 134.65C115.16 134.45 114.84 134.45 114.65 134.65C114.45 134.84 114.45 135.16 114.65 135.35L115.00 135.00L115.35 134.65M115.00 145.00L115.35 145.35L120.35 140.35L120.00 140.00L119.65 139.65L114.65 144.65L115.00 145.00M120.00 140.00L120.35 139.65L115.35 134.65L115.00 135.00L114.65 135.35L119.65 140.35L120.00 140.00"/></symbol>
-  <symbol id="i-cart" viewBox="0 0 29 21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1.3h3.4l2.9 12.2h15.6l3.4-8.9H5.6"/><circle cx="10" cy="18.2" r="1.8"/><circle cx="21.3" cy="18.2" r="1.8"/></symbol>
-  <symbol id="i-sort" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2.5v11M2 10.5l3 3 3-3M11 13.5v-11M8 5.5l3-3 3 3"/></symbol>
-</svg>
 
 <!-- ============ HEADER ============ -->
 <header class="header">
@@ -56,7 +45,7 @@
       <ul class="nav__list">
         <li class="nav__item nav__item--drop nav__item--mega">
           <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-catalog">
-            <span class="nav__text">Каталог</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            <span class="nav__text">Каталог</span> <svg class="nav__chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg>
           </button>
           <div class="mega" id="nav-catalog">
             <ul class="mega__grid">
@@ -101,7 +90,7 @@
         </li>
         <li class="nav__item nav__item--sub">
           <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-sub-services">
-            <span class="nav__text">Услуги</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            <span class="nav__text">Услуги</span> <svg class="nav__chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg>
           </button>
           <ul class="nav__sub" id="nav-sub-services">
             <li><a href="/services/sborka-i-montazh/">Сборка и монтаж</a></li>
@@ -130,7 +119,6 @@
         <a href="https://t.me/+79138374659" target="_blank" rel="noopener" aria-label="Написать в Telegram"><span class="socials__icon socials__icon--telegram"></span></a>
         <a href="https://max.ru/id2464149300_bot" target="_blank" rel="noopener" aria-label="Написать в Max"><span class="socials__icon socials__icon--max"></span></a>
     </div>
-    <a href="#" class="cart" aria-label="Корзина: 99 товаров"><svg class="cart__icon" aria-hidden="true"><use href="#i-cart"/></svg><span class="cart__count">99</span></a>
     <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
       <span></span><span></span><span></span>
     </button>
@@ -138,13 +126,6 @@
 </header>
 
 <main>
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-  <symbol id="p-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.3s-7.7-4.7-7.7-10.4A4.4 4.4 0 0 1 12 7.3a4.4 4.4 0 0 1 7.7 2.6c0 5.7-7.7 10.4-7.7 10.4z"/></symbol>
-  <symbol id="p-cube" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7zM3.5 7 12 12l8.5-5M12 12v9.5"/></symbol>
-  <symbol id="p-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.8h8.2L19 7.6V21H6zM14 2.8v5h5M9 11.5h7M9 14.5h7M9 17.5h5"/></symbol>
-  <symbol id="p-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v11M7.5 10.5 12 15l4.5-4.5M4 17v3h16v-3"/></symbol>
-</svg>
-
   <section class="pd-top">
     <div class="container">
       <nav class="crumbs" aria-label="Навигационная цепочка">
@@ -172,12 +153,12 @@
         <div class="pd-buy">
           <div class="pd-buy__top">
             <p class="pd-sku">Артикул: <strong>СП-200-45</strong></p>
-            <a href="#pd-config" class="pd-3d" data-pd-cfg-open aria-haspopup="dialog"><svg aria-hidden="true"><use href="#p-cube"/></svg>3D - визуализация</a>
-            <button class="pd-fav" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="#p-heart"/></svg></button>
+            <a href="#pd-config" class="pd-3d" data-pd-cfg-open aria-haspopup="dialog"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-cube"/></svg>3D - визуализация</a>
+            <button class="pd-fav" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-heart"/></svg></button>
           </div>
           <p class="pd-price"><strong>12 490 ₽</strong><s>15 600 ₽</s><span class="pd-price__badge">−20%</span></p>
           <p class="pd-price__note">Цена за 1 шт., включая НДС</p>
-          <button class="btn btn--primary btn--block pd-btn" type="button" data-pd-cart>Добавить в корзину <svg class="pd-ico" aria-hidden="true"><use href="#i-cart"/></svg></button>
+          <button class="btn btn--primary btn--block pd-btn" type="button" data-pd-cart>Добавить в корзину <svg class="pd-ico" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg></button>
           <button class="btn btn--outline btn--block pd-btn" type="button">Купить в один клик</button>
           <table class="pd-table pd-table--mini">
             <tbody>
@@ -233,24 +214,24 @@
         <h3 class="pd-label">Документы</h3>
         <ul class="pd-docs">
         <li class="pd-doc">
-          <span class="pd-doc__icon"><svg aria-hidden="true"><use href="#p-doc"/></svg></span>
+          <span class="pd-doc__icon"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-doc"/></svg></span>
           <div class="pd-doc__text"><strong>Паспорт изделия</strong><span>PDF • 2.4 МБ</span></div>
-          <a href="#" class="pd-doc__btn" download aria-label="Скачать: Паспорт изделия"><svg aria-hidden="true"><use href="#p-download"/></svg></a>
+          <a href="#" class="pd-doc__btn" download aria-label="Скачать: Паспорт изделия"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-download"/></svg></a>
         </li>
         <li class="pd-doc">
-          <span class="pd-doc__icon"><svg aria-hidden="true"><use href="#p-doc"/></svg></span>
+          <span class="pd-doc__icon"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-doc"/></svg></span>
           <div class="pd-doc__text"><strong>Сертификат соответствия</strong><span>PDF • 1.8 МБ</span></div>
-          <a href="#" class="pd-doc__btn" download aria-label="Скачать: Сертификат соответствия"><svg aria-hidden="true"><use href="#p-download"/></svg></a>
+          <a href="#" class="pd-doc__btn" download aria-label="Скачать: Сертификат соответствия"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-download"/></svg></a>
         </li>
         <li class="pd-doc">
-          <span class="pd-doc__icon"><svg aria-hidden="true"><use href="#p-doc"/></svg></span>
+          <span class="pd-doc__icon"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-doc"/></svg></span>
           <div class="pd-doc__text"><strong>Инструкция по сборке</strong><span>PDF • 3.1 МБ</span></div>
-          <a href="#" class="pd-doc__btn" download aria-label="Скачать: Инструкция по сборке"><svg aria-hidden="true"><use href="#p-download"/></svg></a>
+          <a href="#" class="pd-doc__btn" download aria-label="Скачать: Инструкция по сборке"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-download"/></svg></a>
         </li>
         <li class="pd-doc">
-          <span class="pd-doc__icon"><svg aria-hidden="true"><use href="#p-doc"/></svg></span>
+          <span class="pd-doc__icon"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-doc"/></svg></span>
           <div class="pd-doc__text"><strong>Технический каталог</strong><span>PDF • 12.6 МБ</span></div>
-          <a href="#" class="pd-doc__btn" download aria-label="Скачать: Технический каталог"><svg aria-hidden="true"><use href="#p-download"/></svg></a>
+          <a href="#" class="pd-doc__btn" download aria-label="Скачать: Технический каталог"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-download"/></svg></a>
         </li>
         </ul>
       </div>
@@ -289,141 +270,141 @@
       <div class="pd-similar__head">
         <h2 class="h2">Похожие товары</h2>
         <div class="slider-nav">
-          <button class="slider-nav__btn" type="button" data-pd-slide="1" aria-label="Следующие товары"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
-          <button class="slider-nav__btn" type="button" data-pd-slide="-1" aria-label="Предыдущие товары"><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
+          <button class="slider-nav__btn" type="button" data-pd-slide="1" aria-label="Следующие товары"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></button>
+          <button class="slider-nav__btn" type="button" data-pd-slide="-1" aria-label="Предыдущие товары"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow-left"/></svg></button>
         </div>
       </div>
       <ul class="pd-cards" id="pdCards">
         <li class="pd-card">
           <a href="#" class="pd-card__img"><img src="img/product/sim-1.webp" width="376" height="282" alt="Стеллаж полочный металлический СП-150" loading="lazy"><span class="pd-badge">−20%</span></a>
-          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="#p-heart"/></svg></button>
+          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-heart"/></svg></button>
           <div class="pd-card__body">
             <p class="pd-card__sku">Артикул: СП-150-40</p>
             <h3 class="pd-card__title"><a href="#">Стеллаж полочный<br> металлический СП-150</a></h3>
             <p class="pd-card__spec">до 150 кг на полку • 1800×900×400 мм</p>
             <p class="pd-card__price"><strong>9 990 ₽</strong><s>12 490 ₽</s></p>
-            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="#i-cart"/></svg><span>В корзину</span></button>
+            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg><span>В корзину</span></button>
           </div>
         </li>
         <li class="pd-card">
           <a href="#" class="pd-card__img"><img src="img/product/sim-2.webp" width="376" height="282" alt="Стеллаж грузовой СГ-300" loading="lazy"></a>
-          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="#p-heart"/></svg></button>
+          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-heart"/></svg></button>
           <div class="pd-card__body">
             <p class="pd-card__sku">Артикул: СГ-300-50</p>
             <h3 class="pd-card__title"><a href="#">Стеллаж грузовой СГ-300</a></h3>
             <p class="pd-card__spec">до 300 кг на полку • 2000×1200×600 мм</p>
             <p class="pd-card__price"><strong>18 900 ₽</strong></p>
-            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="#i-cart"/></svg><span>В корзину</span></button>
+            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg><span>В корзину</span></button>
           </div>
         </li>
         <li class="pd-card">
           <a href="#" class="pd-card__img"><img src="img/product/sim-3.webp" width="376" height="282" alt="Стеллаж паллетный СП-500" loading="lazy"><span class="pd-badge">−15%</span></a>
-          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="#p-heart"/></svg></button>
+          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-heart"/></svg></button>
           <div class="pd-card__body">
             <p class="pd-card__sku">Артикул: СП-500-30</p>
             <h3 class="pd-card__title"><a href="#">Стеллаж паллетный СП-500</a></h3>
             <p class="pd-card__spec">до 500 кг на уровень • 3000×2700×1100 мм</p>
             <p class="pd-card__price"><strong>24 500 ₽</strong><s>28 800 ₽</s></p>
-            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="#i-cart"/></svg><span>В корзину</span></button>
+            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg><span>В корзину</span></button>
           </div>
         </li>
         <li class="pd-card">
           <a href="#" class="pd-card__img"><img src="img/product/sim-4.webp" width="376" height="282" alt="Стеллаж архивный СА-120" loading="lazy"></a>
-          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="#p-heart"/></svg></button>
+          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-heart"/></svg></button>
           <div class="pd-card__body">
             <p class="pd-card__sku">Артикул: СА-120-60</p>
             <h3 class="pd-card__title"><a href="#">Стеллаж архивный СА-120</a></h3>
             <p class="pd-card__spec">до 120 кг на полку • 2000×1000×300 мм</p>
             <p class="pd-card__price"><strong>7 490 ₽</strong></p>
-            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="#i-cart"/></svg><span>В корзину</span></button>
+            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg><span>В корзину</span></button>
           </div>
         </li>
         <li class="pd-card">
           <a href="#" class="pd-card__img"><img src="img/product/sim-1.webp" width="376" height="282" alt="Стеллаж полочный металлический СП-150" loading="lazy"><span class="pd-badge">−20%</span></a>
-          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="#p-heart"/></svg></button>
+          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-heart"/></svg></button>
           <div class="pd-card__body">
             <p class="pd-card__sku">Артикул: СП-150-40</p>
             <h3 class="pd-card__title"><a href="#">Стеллаж полочный<br> металлический СП-150</a></h3>
             <p class="pd-card__spec">до 150 кг на полку • 1800×900×400 мм</p>
             <p class="pd-card__price"><strong>9 990 ₽</strong><s>12 490 ₽</s></p>
-            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="#i-cart"/></svg><span>В корзину</span></button>
+            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg><span>В корзину</span></button>
           </div>
         </li>
         <li class="pd-card">
           <a href="#" class="pd-card__img"><img src="img/product/sim-2.webp" width="376" height="282" alt="Стеллаж грузовой СГ-300" loading="lazy"></a>
-          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="#p-heart"/></svg></button>
+          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-heart"/></svg></button>
           <div class="pd-card__body">
             <p class="pd-card__sku">Артикул: СГ-300-50</p>
             <h3 class="pd-card__title"><a href="#">Стеллаж грузовой СГ-300</a></h3>
             <p class="pd-card__spec">до 300 кг на полку • 2000×1200×600 мм</p>
             <p class="pd-card__price"><strong>18 900 ₽</strong></p>
-            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="#i-cart"/></svg><span>В корзину</span></button>
+            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg><span>В корзину</span></button>
           </div>
         </li>
         <li class="pd-card">
           <a href="#" class="pd-card__img"><img src="img/product/sim-3.webp" width="376" height="282" alt="Стеллаж паллетный СП-500" loading="lazy"><span class="pd-badge">−15%</span></a>
-          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="#p-heart"/></svg></button>
+          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-heart"/></svg></button>
           <div class="pd-card__body">
             <p class="pd-card__sku">Артикул: СП-500-30</p>
             <h3 class="pd-card__title"><a href="#">Стеллаж паллетный СП-500</a></h3>
             <p class="pd-card__spec">до 500 кг на уровень • 3000×2700×1100 мм</p>
             <p class="pd-card__price"><strong>24 500 ₽</strong><s>28 800 ₽</s></p>
-            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="#i-cart"/></svg><span>В корзину</span></button>
+            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg><span>В корзину</span></button>
           </div>
         </li>
         <li class="pd-card">
           <a href="#" class="pd-card__img"><img src="img/product/sim-4.webp" width="376" height="282" alt="Стеллаж архивный СА-120" loading="lazy"></a>
-          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="#p-heart"/></svg></button>
+          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-heart"/></svg></button>
           <div class="pd-card__body">
             <p class="pd-card__sku">Артикул: СА-120-60</p>
             <h3 class="pd-card__title"><a href="#">Стеллаж архивный СА-120</a></h3>
             <p class="pd-card__spec">до 120 кг на полку • 2000×1000×300 мм</p>
             <p class="pd-card__price"><strong>7 490 ₽</strong></p>
-            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="#i-cart"/></svg><span>В корзину</span></button>
+            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg><span>В корзину</span></button>
           </div>
         </li>
         <li class="pd-card">
           <a href="#" class="pd-card__img"><img src="img/product/sim-1.webp" width="376" height="282" alt="Стеллаж полочный металлический СП-150" loading="lazy"><span class="pd-badge">−20%</span></a>
-          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="#p-heart"/></svg></button>
+          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-heart"/></svg></button>
           <div class="pd-card__body">
             <p class="pd-card__sku">Артикул: СП-150-40</p>
             <h3 class="pd-card__title"><a href="#">Стеллаж полочный<br> металлический СП-150</a></h3>
             <p class="pd-card__spec">до 150 кг на полку • 1800×900×400 мм</p>
             <p class="pd-card__price"><strong>9 990 ₽</strong><s>12 490 ₽</s></p>
-            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="#i-cart"/></svg><span>В корзину</span></button>
+            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg><span>В корзину</span></button>
           </div>
         </li>
         <li class="pd-card">
           <a href="#" class="pd-card__img"><img src="img/product/sim-2.webp" width="376" height="282" alt="Стеллаж грузовой СГ-300" loading="lazy"></a>
-          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="#p-heart"/></svg></button>
+          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-heart"/></svg></button>
           <div class="pd-card__body">
             <p class="pd-card__sku">Артикул: СГ-300-50</p>
             <h3 class="pd-card__title"><a href="#">Стеллаж грузовой СГ-300</a></h3>
             <p class="pd-card__spec">до 300 кг на полку • 2000×1200×600 мм</p>
             <p class="pd-card__price"><strong>18 900 ₽</strong></p>
-            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="#i-cart"/></svg><span>В корзину</span></button>
+            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg><span>В корзину</span></button>
           </div>
         </li>
         <li class="pd-card">
           <a href="#" class="pd-card__img"><img src="img/product/sim-3.webp" width="376" height="282" alt="Стеллаж паллетный СП-500" loading="lazy"><span class="pd-badge">−15%</span></a>
-          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="#p-heart"/></svg></button>
+          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-heart"/></svg></button>
           <div class="pd-card__body">
             <p class="pd-card__sku">Артикул: СП-500-30</p>
             <h3 class="pd-card__title"><a href="#">Стеллаж паллетный СП-500</a></h3>
             <p class="pd-card__spec">до 500 кг на уровень • 3000×2700×1100 мм</p>
             <p class="pd-card__price"><strong>24 500 ₽</strong><s>28 800 ₽</s></p>
-            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="#i-cart"/></svg><span>В корзину</span></button>
+            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg><span>В корзину</span></button>
           </div>
         </li>
         <li class="pd-card">
           <a href="#" class="pd-card__img"><img src="img/product/sim-4.webp" width="376" height="282" alt="Стеллаж архивный СА-120" loading="lazy"></a>
-          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="#p-heart"/></svg></button>
+          <button class="pd-fav pd-fav--sm" type="button" aria-pressed="false" aria-label="В избранное"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#p-heart"/></svg></button>
           <div class="pd-card__body">
             <p class="pd-card__sku">Артикул: СА-120-60</p>
             <h3 class="pd-card__title"><a href="#">Стеллаж архивный СА-120</a></h3>
             <p class="pd-card__spec">до 120 кг на полку • 2000×1000×300 мм</p>
             <p class="pd-card__price"><strong>7 490 ₽</strong></p>
-            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="#i-cart"/></svg><span>В корзину</span></button>
+            <button class="btn btn--primary btn--block pd-card__buy" type="button" data-pd-cart><svg class="pd-ico" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-cart"/></svg><span>В корзину</span></button>
           </div>
         </li>
       </ul>

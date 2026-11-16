@@ -15,7 +15,7 @@
   var type = 'all';
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   var norm = function (s) { return String(s).toLowerCase().replace(/ё/g, 'е'); };
-  var download = '<svg width="18" height="18" aria-hidden="true"><use href="#i-download"/></svg>';
+  var download = '<svg width="18" height="18" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-download"/></svg>';
 
   tabs.forEach(function (t) {
     var ty = t.getAttribute('data-type');

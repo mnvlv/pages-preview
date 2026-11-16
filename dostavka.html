@@ -36,18 +36,9 @@
   <link rel="stylesheet" href="css/mining.css?v=7">
   <link rel="stylesheet" href="css/catalog.css?v=22">
   <link rel="stylesheet" href="css/services.css?v=65">
-  <link rel="stylesheet" href="css/unify.css?v=4">
+  <link rel="stylesheet" href="css/unify.css?v=6">
 </head>
 <body class="page-svc">
-
-<!-- ============ ИКОНКИ ИНТЕРФЕЙСА ============ -->
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-  <symbol id="i-arrow" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M.75 6.836h18M12 .836l6.75 6-6.75 6"/></symbol>
-  <symbol id="i-arrow-left" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.75 6.836h-18M7.5 .836l-6.75 6 6.75 6"/></symbol>
-  <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></symbol>
-  <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5v7l5.5-3.5z" fill="currentColor" stroke="none"/></symbol>
-  <symbol id="i-download" viewBox="489.50 518.50 15.00 15.00"><path fill="currentColor" d="M491.00 528.25C491.00 527.84 490.66 527.50 490.25 527.50C489.84 527.50 489.50 527.84 489.50 528.25L490.25 528.25L491.00 528.25M504.50 528.25C504.50 527.84 504.16 527.50 503.75 527.50C503.34 527.50 503.00 527.84 503.00 528.25L503.75 528.25L504.50 528.25M490.25 528.25L489.50 528.25C489.50 529.29 489.50 530.14 489.59 530.82C489.68 531.51 489.89 532.13 490.38 532.62L490.91 532.09L491.44 531.56C491.27 531.39 491.15 531.15 491.08 530.62C491.00 530.07 491.00 529.33 491.00 528.25L490.25 528.25M490.91 532.09L490.38 532.62C490.87 533.11 491.49 533.32 492.18 533.41C492.86 533.50 493.71 533.50 494.75 533.50L494.75 532.75L494.75 532.00C493.67 532.00 492.93 532.00 492.38 531.92C491.85 531.85 491.61 531.73 491.44 531.56L490.91 532.09M494.75 532.75L494.75 533.50L499.25 533.50L499.25 532.75L499.25 532.00L494.75 532.00L494.75 532.75M499.25 532.75L499.25 533.50C500.29 533.50 501.14 533.50 501.82 533.41C502.51 533.32 503.13 533.11 503.62 532.62L503.09 532.09L502.56 531.56C502.39 531.73 502.15 531.85 501.62 531.92C501.07 532.00 500.33 532.00 499.25 532.00L499.25 532.75M503.09 532.09L503.62 532.62C504.11 532.13 504.32 531.51 504.41 530.82C504.50 530.14 504.50 529.29 504.50 528.25L503.75 528.25L503.00 528.25C503.00 529.33 503.00 530.07 502.92 530.62C502.85 531.15 502.73 531.39 502.56 531.56L503.09 532.09"/><path fill="currentColor" d="M497.75 519.25C497.75 518.84 497.41 518.50 497.00 518.50C496.59 518.50 496.25 518.84 496.25 519.25L497.00 519.25L497.75 519.25M497.00 529.00L496.45 529.51C496.59 529.66 496.79 529.75 497.00 529.75C497.21 529.75 497.41 529.66 497.55 529.51L497.00 529.00M500.55 526.22C500.83 525.92 500.81 525.44 500.51 525.17C500.20 524.89 499.73 524.91 499.45 525.21L500.00 525.72L500.55 526.22M494.55 525.21C494.27 524.91 493.80 524.89 493.49 525.17C493.19 525.44 493.17 525.92 493.45 526.22L494.00 525.72L494.55 525.21M497.00 519.25L496.25 519.25L496.25 529.00L497.00 529.00L497.75 529.00L497.75 519.25L497.00 519.25M497.00 529.00L497.55 529.51L500.55 526.22L500.00 525.72L499.45 525.21L496.45 528.49L497.00 529.00L497.55 528.49L494.55 525.21L494.00 525.72L493.45 526.22L496.45 529.51L497.00 529.00"/></symbol>
-</svg></svg>
 
 <!-- ============ HEADER ============ -->
 <header class="header">
@@ -60,7 +51,7 @@
       <ul class="nav__list">
         <li class="nav__item nav__item--drop nav__item--mega">
           <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-catalog">
-            <span class="nav__text">Каталог</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            <span class="nav__text">Каталог</span> <svg class="nav__chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg>
           </button>
           <div class="mega" id="nav-catalog">
             <ul class="mega__grid">
@@ -105,20 +96,18 @@
         </li>
         <li class="nav__item nav__item--sub">
           <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-sub-services">
-            <span class="nav__text">Услуги</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+            <span class="nav__text">Услуги</span> <svg class="nav__chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg>
           </button>
           <ul class="nav__sub" id="nav-sub-services">
-            <li><a href="sborka-i-montazh.html">Сборка и монтаж</a></li>
-            <li><a href="razrabotka-tz.html">Разработка ТЗ</a></li>
-            <li><a href="proektirovanie-sklada.html">Проектирование склада</a></li>
-            <li><a href="dostavka.html" aria-current="page">Доставка</a></li>
-            <li><a href="uslugi.html">Все услуги</a></li>
+            <li><a href="/services/sborka-i-montazh/">Сборка и монтаж</a></li>
+            <li><a href="/services/razrabotka-tz-dlya-auktsionov/">Подготовка тех. задания</a></li>
+            <li><a href="/services/proektirovanie-sklada/">Проектирование склада</a></li>
           </ul>
         </li>
-        <li class="nav__item"><a href="o-kompanii.html" class="nav__link"><span class="nav__text">О компании</span></a></li>
+        <li class="nav__item"><a href="/about/" class="nav__link"><span class="nav__text">О компании</span></a></li>
         <li class="nav__item"><a href="/services/" class="nav__link"><span class="nav__text">Комплексные решения</span></a></li>
-        <li class="nav__item"><a href="dokumentatsiya.html" class="nav__link"><span class="nav__text">Банк знаний</span></a></li>
-        <li class="nav__item"><a href="blog.html" class="nav__link"><span class="nav__text">Блог</span></a></li>
+        <li class="nav__item"><a href="#" class="nav__link"><span class="nav__text">Банк знаний</span></a></li>
+        <li class="nav__item"><a href="#" class="nav__link"><span class="nav__text">Блог</span></a></li>
       </ul>
       <div class="nav__mobile">
         <div class="icon-links">
@@ -150,8 +139,8 @@
         <h1 class="sv-hero__title">Доставка <span class="accent">по всей России</span></h1>
         <p class="sv-hero__lead">Оперативно и бережно доставляем стеллажи, металлическую мебель и оборудование в любую точку России.</p>
         <div class="sv-hero__buttons">
-          <a href="#request" class="btn btn--primary btn--md">Рассчитать доставку <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          <a href="#request" class="btn btn--outline btn--md">Получить консультацию <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a href="#request" class="btn btn--primary btn--md">Рассчитать доставку <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></a>
+          <a href="#request" class="btn btn--outline btn--md">Получить консультацию <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></a>
         </div>
       </div>
       <ul class="sv-plaques">
@@ -183,10 +172,10 @@
 <h2 class="h2">Как мы доставляем</h2>
       <p class="lead lead--lg">Подбираем оптимальный способ доставки с учётом объёма, сроков и особенностей проекта.</p>
       <ul class="sv-grid sv-grid--4">
-        <li><div class="sv-pc sv-pc--plain sv-pc--wide"><img src="img/svc/v-auto.webp?v=3" alt="" loading="lazy"><span class="sv-pc__text"><b>Автотранспорт</b><small>Оптимально по срокам и стоимости</small></span></div></li>
-        <li><div class="sv-pc sv-pc--plain sv-pc--wide"><img src="img/svc/v-rail.webp?v=3" alt="" loading="lazy"><span class="sv-pc__text"><b>Ж/д перевозки</b><small>Выгодное решение для крупных партий</small></span></div></li>
-        <li><div class="sv-pc sv-pc--plain sv-pc--wide"><img src="img/svc/v-lcl.webp?v=3" alt="" loading="lazy"><span class="sv-pc__text"><b>Сборные грузы</b><small>Экономия на доставке небольших объёмов</small></span></div></li>
-        <li><div class="sv-pc sv-pc--plain sv-pc--wide"><img src="img/svc/v-door.webp?v=3" alt="" loading="lazy"><span class="sv-pc__text"><b>До адреса</b><small>Доставка на склад, объект или в региональный филиал</small></span></div></li>
+        <li><div class="sv-pc sv-pc--plain sv-pc--wide"><img src="img/svc/v-auto.webp?v=3" alt="Автотранспорт" loading="lazy"><span class="sv-pc__text"><b>Автотранспорт</b><small>Оптимально по срокам и стоимости</small></span></div></li>
+        <li><div class="sv-pc sv-pc--plain sv-pc--wide"><img src="img/svc/v-rail.webp?v=3" alt="Ж/д перевозки" loading="lazy"><span class="sv-pc__text"><b>Ж/д перевозки</b><small>Выгодное решение для крупных партий</small></span></div></li>
+        <li><div class="sv-pc sv-pc--plain sv-pc--wide"><img src="img/svc/v-lcl.webp?v=3" alt="Сборные грузы" loading="lazy"><span class="sv-pc__text"><b>Сборные грузы</b><small>Экономия на доставке небольших объёмов</small></span></div></li>
+        <li><div class="sv-pc sv-pc--plain sv-pc--wide"><img src="img/svc/v-door.webp?v=3" alt="До адреса" loading="lazy"><span class="sv-pc__text"><b>До адреса</b><small>Доставка на склад, объект или в региональный филиал</small></span></div></li>
       </ul>
     </div>
   </section>
@@ -213,12 +202,12 @@
 <h2 class="h2">Как мы упаковываем груз</h2>
       <p class="lead lead--lg">Обеспечиваем сохранность оборудования при транспортировке.</p>
       <ul class="sv-grid sv-grid--3">
-        <li><div class="sv-pc sv-pc--top"><img src="img/svc/v-pk1.webp?v=2" alt="" loading="lazy"><span class="sv-pc__text"><b>Защитная упаковка</b><small>Плёнка, стрейч, защитные уголки</small></span></div></li>
-        <li><div class="sv-pc sv-pc--top"><img src="img/svc/v-pk2.webp?v=2" alt="" loading="lazy"><span class="sv-pc__text"><b>Надёжная фиксация</b><small>Обрешётка и паллеты для крупногабаритных грузов</small></span></div></li>
-        <li><div class="sv-pc sv-pc--top"><img src="img/svc/v-pk3.webp?v=2" alt="" loading="lazy"><span class="sv-pc__text"><b>Защита от повреждений</b><small>Прокладки, стяжки и маркировка</small></span></div></li>
-        <li><div class="sv-pc sv-pc--top"><img src="img/svc/v-pk4.webp?v=2" alt="" loading="lazy"><span class="sv-pc__text"><b>Комплектация по местам</b><small>Упорядоченная отгрузка по проекту</small></span></div></li>
-        <li><div class="sv-pc sv-pc--top"><img src="img/svc/v-pk5.webp?v=2" alt="" loading="lazy"><span class="sv-pc__text"><b>Сопроводительные документы</b><small>УПД, спецификации, сертификаты</small></span></div></li>
-        <li><div class="sv-pc sv-pc--top"><img src="img/svc/v-pk6.webp?v=2" alt="" loading="lazy"><span class="sv-pc__text"><b>Готовность к монтажу</b><small>Удобная и быстрая разгрузка на объекте</small></span></div></li>
+        <li><div class="sv-pc sv-pc--top"><img src="img/svc/v-pk1.webp?v=2" alt="Защитная упаковка" loading="lazy"><span class="sv-pc__text"><b>Защитная упаковка</b><small>Плёнка, стрейч, защитные уголки</small></span></div></li>
+        <li><div class="sv-pc sv-pc--top"><img src="img/svc/v-pk2.webp?v=2" alt="Надёжная фиксация" loading="lazy"><span class="sv-pc__text"><b>Надёжная фиксация</b><small>Обрешётка и паллеты для крупногабаритных грузов</small></span></div></li>
+        <li><div class="sv-pc sv-pc--top"><img src="img/svc/v-pk3.webp?v=2" alt="Защита от повреждений" loading="lazy"><span class="sv-pc__text"><b>Защита от повреждений</b><small>Прокладки, стяжки и маркировка</small></span></div></li>
+        <li><div class="sv-pc sv-pc--top"><img src="img/svc/v-pk4.webp?v=2" alt="Комплектация по местам" loading="lazy"><span class="sv-pc__text"><b>Комплектация по местам</b><small>Упорядоченная отгрузка по проекту</small></span></div></li>
+        <li><div class="sv-pc sv-pc--top"><img src="img/svc/v-pk5.webp?v=2" alt="Сопроводительные документы" loading="lazy"><span class="sv-pc__text"><b>Сопроводительные документы</b><small>УПД, спецификации, сертификаты</small></span></div></li>
+        <li><div class="sv-pc sv-pc--top"><img src="img/svc/v-pk6.webp?v=2" alt="Готовность к монтажу" loading="lazy"><span class="sv-pc__text"><b>Готовность к монтажу</b><small>Удобная и быстрая разгрузка на объекте</small></span></div></li>
       </ul>
     </div>
   </section>
@@ -226,7 +215,7 @@
   <section class="section">
     <div class="container">
       <div class="sv-two">
-        <div class="sv-panel sv-panel--photo"><img class="sv-panel__img" src="img/svc/v-cond.webp?v=2" alt="" loading="lazy">
+        <div class="sv-panel sv-panel--photo"><img class="sv-panel__img" src="img/svc/v-cond.webp?v=2" alt="Условия и сроки доставки" loading="lazy">
           <h3 class="sv-panel__title">Условия и сроки</h3><span class="line" aria-hidden="true"></span>
           <ul class="sv-checks">
             <li>Доставка по всей территории России</li>
@@ -322,7 +311,7 @@
             <span class="form__box" aria-hidden="true"></span>
             <span>Соглашаюсь с условиями <a href="/terms/">Политики конфиденциальности</a>.</span>
           </label>
-          <button type="submit" class="btn btn--primary btn--lg btn--block">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <button type="submit" class="btn btn--primary btn--lg btn--block">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></button>
           <p class="form__success" role="status" hidden>Заявка отправлена. Мы перезвоним вам в ближайшее время.</p>
         </form>
       </div>
@@ -375,9 +364,8 @@
       <nav class="footer__col" aria-label="Компания">
         <h3 class="footer__title">Компания</h3>
         <ul>
-          <li><a href="o-kompanii.html">О компании</a></li>
-          <li><a href="partnery.html">Наши партнёры</a></li>
-          <li><a href="dokumentatsiya.html">Документы и сертификаты</a></li>
+          <li><a href="/about/">О компании</a></li>
+          <li><a href="/rekvizity/">Документы и сертификаты</a></li>
           <li><a href="https://yandex.ru/maps/org/diaskom/194174337631/reviews/" target="_blank" rel="noopener">Отзывы</a></li>
           <li><a href="/contact/">Контакты</a></li>
         </ul>
@@ -385,11 +373,9 @@
       <nav class="footer__col" aria-label="Услуги">
         <h3 class="footer__title">Услуги</h3>
         <ul>
-          <li><a href="sborka-i-montazh.html">Сборка и монтаж</a></li>
-          <li><a href="razrabotka-tz.html">Подготовка тех. задания</a></li>
-          <li><a href="proektirovanie-sklada.html">Проектирование склада</a></li>
-          <li><a href="dostavka.html">Доставка</a></li>
-          <li><a href="uslugi.html" class="footer__all">Все услуги</a></li>
+          <li><a href="/services/sborka-i-montazh/">Сборка и монтаж</a></li>
+          <li><a href="/services/razrabotka-tz-dlya-auktsionov/">Подготовка тех. задания</a></li>
+          <li><a href="/services/proektirovanie-sklada/">Проектирование склада</a></li>
         </ul>
       </nav>
       <div class="footer__bottom">

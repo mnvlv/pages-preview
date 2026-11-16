@@ -44,3 +44,7 @@
 /* --- отступы: карточка 24px, крупная панель 28px --- */
 .rk-side, .pd-buy, .c-seo__cards li { padding: 24px; }
 .sv-panel { padding: 28px; }
+
+/* --- хлебные крошки над плашкой «Официальный дилер» (стеллажи для склада) --- */
+.rk-hero .crumbs, .w-hero__main .crumbs { margin: 24px 0 0; }
+.rk-hero .crumbs + .pill, .w-hero__main .crumbs + .pill { margin-top: 16px; }

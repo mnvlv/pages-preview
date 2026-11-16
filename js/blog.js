@@ -34,12 +34,12 @@
   var tabs = [].slice.call(document.querySelectorAll('[data-cat]'));
   var active = '';
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
-  var arrow = '<svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg>';
+  var arrow = '<svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg>';
 
   function render() {
     var list = data.articles.filter(function (a) { return active ? a.cat === active : !a.featured; });
     grid.innerHTML = list.map(function (a) {
-      return '<li><a class="bl-card" href="' + esc(a.href) + '"><img src="' + esc(a.img) + '" alt="" loading="lazy">' +
+      return '<li><a class="bl-card" href="' + esc(a.href) + '"><img src="' + esc(a.img) + '" alt="' + esc(a.title) + '" loading="lazy">' +
         '<span class="bl-card__body"><span class="bl-meta">' + esc(a.label) + ' · ' + esc(a.min) + ' мин</span>' +
         '<h3>' + esc(a.title) + '</h3><p>' + esc(a.text) + '</p>' +
         '<span class="bl-card__more">Читать статью ' + arrow + '</span></span></a></li>';
