@@ -15,7 +15,7 @@
   var type = 'all';
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   var norm = function (s) { return String(s).toLowerCase().replace(/ё/g, 'е'); };
-  var download = '<svg width="18" height="18" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-download"/></svg>';
+  var download = '<svg width="18" height="18" aria-hidden="true"><use href="#i-download"/></svg>';
 
   tabs.forEach(function (t) {
     var ty = t.getAttribute('data-type');
@@ -32,7 +32,7 @@
       return !q || norm(d.title + ' ' + d.series + ' ' + d.typeLabel).indexOf(q) !== -1;
     });
     body.innerHTML = list.map(function (d) {
-      return '<li class="dc-row"><span class="dc-name"><img src="img/svc/i-doc.svg" alt="">' + esc(d.title) + '</span>' +
+      return '<li class="dc-row"><span class="dc-name"><img src="img/icons/p-doc.svg" alt="">' + esc(d.title) + '</span>' +
         '<span class="dc-badge">' + esc(d.typeLabel) + '</span><span>' + esc(d.series) + '</span><span>' + esc(d.format) + '</span><span>' + esc(d.size) + '</span>' +
         '<a class="btn btn--outline btn--md" href="' + esc(d.href) + '" download>' + download + ' Скачать</a></li>';
     }).join('');

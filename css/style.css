@@ -500,8 +500,8 @@ button { cursor: pointer; }
 /* иконка — маска, чтобы при наведении перекрашивалась в оранжевый */
 .socials__icon { width: 20px; height: 18px; background: currentColor; -webkit-mask: var(--icon) center / contain no-repeat; mask: var(--icon) center / contain no-repeat; }
 /* пути к иконкам задаются здесь, чтобы url() считался от файла стилей */
-.socials__icon--mail { --icon: url(../img/icons/mail.svg); }
-.socials__icon--phone { --icon: url(../img/icons/phone.svg); }
+.socials__icon--mail { --icon: url(../img/svc/i-mail.svg); }
+.socials__icon--phone { --icon: url(../img/icons/i-phone.svg); }
 .socials__icon--telegram { --icon: url(../img/icons/telegram.svg); }
 .socials__icon--max { --icon: url(../img/icons/max.webp); }
 .footer__col { padding-top: 33px; }

@@ -42,6 +42,25 @@
 </head>
 <body class="page-racks page-racks--fold page-deep page-mobile">
 
+<!-- ============ СПРАЙТ ИКОНОК (единый, подключается include-ом) ============ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M.75 6.836h18M12 .836l6.75 6-6.75 6"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 19.5 13.672" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.75 6.836h-18M7.5 .836l-6.75 6 6.75 6"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5v7l5.5-3.5z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v12M7 11l5 4.5 5-4.5M4 20.5h16"/></symbol>
+  <symbol id="i-phone" viewBox="267.00 3669.50 17.00 17.00"><path fill="currentColor" d="M276.87 3681.43L276.43 3682.32C276.44 3682.33 276.45 3682.33 276.46 3682.33L276.87 3681.43M277.78 3681.20L276.99 3680.59L276.99 3680.59L277.78 3681.20M278.05 3680.85L278.84 3681.46L278.85 3681.45L278.05 3680.85M281.50 3685.50L281.50 3686.50L281.50 3685.50M268.00 3672.00L269.00 3672.00L268.00 3672.00M269.50 3670.50L269.50 3669.50L269.50 3670.50M271.75 3670.50L271.75 3669.50L271.75 3670.50M272.65 3675.45L273.25 3676.25L272.65 3675.45M272.30 3675.71L271.70 3674.91L271.69 3674.92L272.30 3675.71M272.08 3676.64L271.18 3677.08L271.18 3677.08L272.08 3676.64M276.87 3681.43L276.46 3682.33C276.82 3682.50 277.23 3682.54 277.61 3682.44L277.37 3681.47L277.13 3680.50C277.18 3680.49 277.24 3680.49 277.29 3680.52L276.87 3681.43M277.37 3681.47L277.61 3682.44C278.00 3682.35 278.34 3682.12 278.58 3681.80L277.78 3681.20L276.99 3680.59C277.02 3680.55 277.07 3680.52 277.13 3680.50L277.37 3681.47M277.78 3681.20L278.58 3681.81L278.84 3681.46L278.05 3680.85L277.26 3680.24L276.99 3680.59L277.78 3681.20M278.05 3680.85L278.85 3681.45C278.90 3681.39 278.96 3681.34 279.03 3681.30L278.58 3680.41L278.13 3679.51C277.78 3679.69 277.48 3679.94 277.25 3680.25L278.05 3680.85M278.58 3680.41L279.03 3681.30C279.10 3681.27 279.17 3681.25 279.25 3681.25L279.25 3680.25L279.25 3679.25C278.86 3679.25 278.48 3679.34 278.13 3679.51L278.58 3680.41M279.25 3680.25L279.25 3681.25L281.50 3681.25L281.50 3680.25L281.50 3679.25L279.25 3679.25L279.25 3680.25M281.50 3680.25L281.50 3681.25C281.63 3681.25 281.76 3681.30 281.85 3681.40L282.56 3680.69L283.27 3679.98C282.80 3679.51 282.16 3679.25 281.50 3679.25L281.50 3680.25M282.56 3680.69L281.85 3681.40C281.95 3681.49 282.00 3681.62 282.00 3681.75L283.00 3681.75L284.00 3681.75C284.00 3681.09 283.74 3680.45 283.27 3679.98L282.56 3680.69M283.00 3681.75L282.00 3681.75L282.00 3684.00L283.00 3684.00L284.00 3684.00L284.00 3681.75L283.00 3681.75M283.00 3684.00L282.00 3684.00C282.00 3684.13 281.95 3684.26 281.85 3684.35L282.56 3685.06L283.27 3685.77C283.74 3685.30 284.00 3684.66 284.00 3684.00L283.00 3684.00M282.56 3685.06L281.85 3684.35C281.76 3684.45 281.63 3684.50 281.50 3684.50L281.50 3685.50L281.50 3686.50C282.16 3686.50 282.80 3686.24 283.27 3685.77L282.56 3685.06M281.50 3685.50L281.50 3684.50C278.18 3684.50 275.01 3683.18 272.66 3680.84L271.95 3681.55L271.25 3682.25C273.97 3684.97 277.65 3686.50 281.50 3686.50L281.50 3685.50M271.95 3681.55L272.66 3680.84C270.32 3678.49 269.00 3675.32 269.00 3672.00L268.00 3672.00L267.00 3672.00C267.00 3675.85 268.53 3679.53 271.25 3682.25L271.95 3681.55M268.00 3672.00L269.00 3672.00C269.00 3671.87 269.05 3671.74 269.15 3671.65L268.44 3670.94L267.73 3670.23C267.26 3670.70 267.00 3671.34 267.00 3672.00L268.00 3672.00M268.44 3670.94L269.15 3671.65C269.24 3671.55 269.37 3671.50 269.50 3671.50L269.50 3670.50L269.50 3669.50C268.84 3669.50 268.20 3669.76 267.73 3670.23L268.44 3670.94M269.50 3670.50L269.50 3671.50L271.75 3671.50L271.75 3670.50L271.75 3669.50L269.50 3669.50L269.50 3670.50M271.75 3670.50L271.75 3671.50C271.88 3671.50 272.01 3671.55 272.10 3671.65L272.81 3670.94L273.52 3670.23C273.05 3669.76 272.41 3669.50 271.75 3669.50L271.75 3670.50M272.81 3670.94L272.10 3671.65C272.20 3671.74 272.25 3671.87 272.25 3672.00L273.25 3672.00L274.25 3672.00C274.25 3671.34 273.99 3670.70 273.52 3670.23L272.81 3670.94M273.25 3672.00L272.25 3672.00L272.25 3674.25L273.25 3674.25L274.25 3674.25L274.25 3672.00L273.25 3672.00M273.25 3674.25L272.25 3674.25C272.25 3674.33 272.23 3674.40 272.20 3674.47L273.09 3674.92L273.99 3675.37C274.16 3675.02 274.25 3674.64 274.25 3674.25L273.25 3674.25M273.09 3674.92L272.20 3674.47C272.16 3674.54 272.11 3674.60 272.05 3674.65L272.65 3675.45L273.25 3676.25C273.56 3676.02 273.81 3675.72 273.99 3675.37L273.09 3674.92M272.65 3675.45L272.05 3674.65L271.70 3674.91L272.30 3675.71L272.90 3676.51L273.25 3676.25L272.65 3675.45M272.30 3675.71L271.69 3674.92C271.37 3675.16 271.14 3675.51 271.05 3675.91L272.02 3676.14L273.00 3676.37C272.98 3676.42 272.95 3676.47 272.91 3676.51L272.30 3675.71M272.02 3676.14L271.05 3675.91C270.96 3676.30 271.00 3676.71 271.18 3677.08L272.08 3676.64L272.98 3676.20C273.00 3676.25 273.01 3676.31 273.00 3676.37L272.02 3676.14M272.08 3676.64L271.18 3677.08C272.31 3679.36 274.15 3681.20 276.43 3682.32L276.87 3681.43L277.31 3680.53C275.43 3679.60 273.90 3678.08 272.98 3676.20L272.08 3676.64"/></symbol>
+  <symbol id="i-check" viewBox="1133.89 793.89 15.23 12.11"><path fill="currentColor" d="M1148.75 795.67C1149.11 795.25 1149.08 794.62 1148.67 794.25C1148.25 793.89 1147.62 793.92 1147.25 794.33L1148.00 795.00L1148.75 795.67M1139.06 805.00L1138.32 805.67C1138.51 805.88 1138.78 806.00 1139.06 806.00C1139.35 806.00 1139.62 805.88 1139.81 805.67L1139.06 805.00M1135.75 799.79C1135.38 799.38 1134.75 799.34 1134.33 799.71C1133.92 800.08 1133.89 800.71 1134.25 801.12L1135.00 800.45L1135.75 799.79M1148.00 795.00L1147.25 794.33L1138.32 804.33L1139.06 805.00L1139.81 805.67L1148.75 795.67L1148.00 795.00M1139.06 805.00L1139.81 804.33L1135.75 799.79L1135.00 800.45L1134.25 801.12L1138.32 805.67L1139.06 805.00"/></symbol>
+  <symbol id="i-crumb" viewBox="114.45 134.45 6.10 11.10"><path fill="currentColor" d="M114.65 144.65C114.45 144.84 114.45 145.16 114.65 145.35C114.84 145.55 115.16 145.55 115.35 145.35L115.00 145.00L114.65 144.65M120.00 140.00L120.35 140.35C120.55 140.16 120.55 139.84 120.35 139.65L120.00 140.00M115.35 134.65C115.16 134.45 114.84 134.45 114.65 134.65C114.45 134.84 114.45 135.16 114.65 135.35L115.00 135.00L115.35 134.65M115.00 145.00L115.35 145.35L120.35 140.35L120.00 140.00L119.65 139.65L114.65 144.65L115.00 145.00M120.00 140.00L120.35 139.65L115.35 134.65L115.00 135.00L114.65 135.35L119.65 140.35L120.00 140.00"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></symbol>
+  <symbol id="i-sort" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2.5v11M2 10.5l3 3 3-3M11 13.5v-11M8 5.5l3-3 3 3"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6.5L20.5 7"/></symbol>
+  <symbol id="p-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.3s-7.7-4.7-7.7-10.4A4.4 4.4 0 0 1 12 7.3a4.4 4.4 0 0 1 7.7 2.6c0 5.7-7.7 10.4-7.7 10.4z"/></symbol>
+  <symbol id="p-cube" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7zM3.5 7 12 12l8.5-5M12 12v9.5"/></symbol>
+  <symbol id="p-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.8h8.2L19 7.6V21H6zM14 2.8v5h5M9 11.5h7M9 14.5h7M9 17.5h5"/></symbol>
+  <symbol id="p-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v12M7 11l5 4.5 5-4.5M4 20.5h16"/></symbol>
+</svg>
+
 <!-- ============ HEADER ============ -->
 <header class="header">
   <div class="container header__inner">
@@ -53,7 +72,7 @@
       <ul class="nav__list">
         <li class="nav__item nav__item--drop nav__item--mega">
           <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-catalog">
-            <span class="nav__text">Каталог</span> <svg class="nav__chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg>
+            <span class="nav__text">Каталог</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
           </button>
           <div class="mega" id="nav-catalog">
             <ul class="mega__grid">
@@ -98,7 +117,7 @@
         </li>
         <li class="nav__item nav__item--sub">
           <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-sub-services">
-            <span class="nav__text">Услуги</span> <svg class="nav__chevron" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-chevron"/></svg>
+            <span class="nav__text">Услуги</span> <svg class="nav__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
           </button>
           <ul class="nav__sub" id="nav-sub-services">
             <li><a href="/services/sborka-i-montazh/">Сборка и монтаж</a></li>
@@ -147,13 +166,13 @@
         <h1 class="m-hero__title rk-hero__title">Мобильные<br> <span class="accent rk-hero__line">стеллажи</span></h1>
         <p class="m-hero__lead">Компактная система хранения, которая увеличивает вместимость архива до 70% без расширения площади. Механический и электромеханический привод.</p>
         <div class="m-hero__buttons">
-          <a href="#request" class="btn btn--primary btn--md">Рассчитать проект <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></a>
-          <a href="#" class="btn btn--outline btn--md">Скачать каталог <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></a>
+          <a href="#request" class="btn btn--primary btn--md">Рассчитать проект <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a href="#" class="btn btn--outline btn--md">Скачать каталог <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </div>
         <ul class="mb-hs">
           <li><svg class="mb-hs__i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"/><rect x="8.5" y="8.5" width="7" height="7" rx="1.2"/></svg><b>до 70%</b><small>экономии площади</small></li>
-          <li><svg class="mb-hs__i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.8 9h10.4l2 11H4.8z"/><path d="M9.5 9a2.5 2.5 0 1 1 5 0"/></svg><b>1200</b><small>кг/м² нагрузка на пол</small></li>
-          <li><svg class="mb-hs__i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.8 9h10.4l2 11H4.8z"/><path d="M9.5 9a2.5 2.5 0 1 1 5 0"/></svg><b>900 кг</b><small>нагрузка на секцию</small></li>
+          <li><img class="mb-hs__i" src="img/mining/m-weight.svg" width="32" height="32" alt=""><b>1200</b><small>кг/м² нагрузка на пол</small></li>
+          <li><img class="mb-hs__i" src="img/mining/m-weight.svg" width="32" height="32" alt=""><b>900 кг</b><small>нагрузка на секцию</small></li>
           <li><svg class="mb-hs__i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 16.5 16.5 3.5l4 4-13 13z"/><path d="M8 12l2 2M11 9l1.5 1.5M14 6l2 2"/></svg><b>3 м</b><small>максимальная высота</small></li>
           <li><svg class="mb-hs__i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1"/></svg><b>2</b><small>типа привода</small></li>
         </ul>
@@ -205,7 +224,7 @@
             <li><img class="mb-row__i" src="img/deep/i-arrows-h.svg" width="24" height="24" alt=""><span>Один рабочий проход для доступа к нужному ряду</span></li>
             <li><img class="mb-row__i" src="img/svc/i-layers.svg" width="24" height="24" alt=""><span>Использование площади — до <b>70%</b></span></li>
             <li><img class="mb-row__i" src="img/svc/i-b-boxes.svg" width="24" height="24" alt=""><span>Компактное размещение большего объёма документов</span></li>
-            <li><img class="mb-row__i" src="img/svc/i-shield-check.svg" width="24" height="24" alt=""><span>Сохранность фонда и контроль доступа</span></li>
+            <li><img class="mb-row__i" src="img/svc/i-d-shield-check.svg" width="24" height="24" alt=""><span>Сохранность фонда и контроль доступа</span></li>
             </ul>
           </div>
           <img class="mb-opt__img" src="img/mobile/hero.webp" width="686" height="612" alt="Мобильные стеллажи в архиве" loading="lazy">
@@ -226,10 +245,10 @@
           <div class="mb-drive__body">
             <div class="mb-drive__head"><h3><span class="accent">МА</span> — механический привод</h3><span class="mb-drive__tag">Ручное управление</span></div>
             <ul class="mb-rows">
-            <li><img class="mb-row__i" src="img/svc/i-gear.svg" width="24" height="24" alt=""><span>Перемещение секций вращением штурвала</span></li>
-            <li><img class="mb-row__i" src="img/svc/i-wrench.svg?v=2" width="24" height="24" alt=""><span>Механическая передача движения на мобильное основание</span></li>
+            <li><img class="mb-row__i" src="img/icons/step-6.svg" width="24" height="24" alt=""><span>Перемещение секций вращением штурвала</span></li>
+            <li><img class="mb-row__i" src="img/racks/icons/s-f-wrench.svg?v=2" width="24" height="24" alt=""><span>Механическая передача движения на мобильное основание</span></li>
             <li><img class="mb-row__i" src="img/svc/i-infinity.svg" width="24" height="24" alt=""><span>Работа без подключения к электросети</span></li>
-            <li><img class="mb-row__i" src="img/svc/i-shield-check.svg" width="24" height="24" alt=""><span>Стопор и защита от опрокидывания секций</span></li>
+            <li><img class="mb-row__i" src="img/svc/i-d-shield-check.svg" width="24" height="24" alt=""><span>Стопор и защита от опрокидывания секций</span></li>
             <li><img class="mb-row__i" src="img/svc/i-shelf.svg" width="24" height="24" alt=""><span>Одностороннее или двустороннее исполнение</span></li>
             </ul>
           </div>
@@ -259,9 +278,9 @@
         <ul>
           <li><img class="mb-adv__i" src="img/svc/i-layers.svg" width="24" height="24" alt=""><div><h3>Больше ёмкости на той же площади</h3><p>Рациональное использование пространства</p></div></li>
           <li><img class="mb-adv__i" src="img/svc/i-timer.svg" width="24" height="24" alt=""><div><h3>Быстрый доступ к материалам</h3><p>Нужный ряд открывается за несколько секунд</p></div></li>
-          <li><img class="mb-adv__i" src="img/svc/i-shield-check.svg" width="24" height="24" alt=""><div><h3>Безопасная эксплуатация</h3><p>Стопоры и защита от опрокидывания</p></div></li>
+          <li><img class="mb-adv__i" src="img/svc/i-d-shield-check.svg" width="24" height="24" alt=""><div><h3>Безопасная эксплуатация</h3><p>Стопоры и защита от опрокидывания</p></div></li>
           <li><img class="mb-adv__i" src="img/svc/i-sliders.svg" width="24" height="24" alt=""><div><h3>Гибкая конфигурация</h3><p>Подбор размеров, нагрузки и комплектации</p></div></li>
-          <li><img class="mb-adv__i" src="img/svc/i-gear.svg" width="24" height="24" alt=""><div><h3>Надёжная и долговечная конструкция</h3><p>Для интенсивного использования</p></div></li>
+          <li><img class="mb-adv__i" src="img/icons/step-6.svg" width="24" height="24" alt=""><div><h3>Надёжная и долговечная конструкция</h3><p>Для интенсивного использования</p></div></li>
         </ul>
       </div>
       <div class="m-card mb-uses">
@@ -271,7 +290,7 @@
         <ul class="mb-uses__list">
           <li class="mb-use"><img src="img/mobile/use1.webp" width="316" height="312" alt="Архивные мобильные стеллажи с папками и коробами" loading="lazy"><div><h3><img class="mb-use__i" src="img/svc/i-archive.svg" width="24" height="24" alt="">Архивы и документооборот</h3><p>Компактное хранение документов, архивных коробов и фондов.</p></div></li>
           <li class="mb-use"><img src="img/mobile/use2.webp" width="316" height="312" alt="Мобильные стеллажи с коробами на складе" loading="lazy"><div><h3><img class="mb-use__i" src="img/svc/i-box.svg" width="24" height="24" alt="">Склады и логистика</h3><p>Хранение товарных запасов, комплектующих и расходных материалов с высокой плотностью.</p></div></li>
-          <li class="mb-use"><img src="img/mobile/use3.webp" width="316" height="312" alt="Мобильные стеллажи с оснасткой и деталями" loading="lazy"><div><h3><img class="mb-use__i" src="img/svc/i-wrench.svg" width="24" height="24" alt="">Производство и хранение ТМЦ</h3><p>Размещение инструмента, оснастки, деталей и материалов производства.</p></div></li>
+          <li class="mb-use"><img src="img/mobile/use3.webp" width="316" height="312" alt="Мобильные стеллажи с оснасткой и деталями" loading="lazy"><div><h3><img class="mb-use__i" src="img/racks/icons/s-f-wrench.svg" width="24" height="24" alt="">Производство и хранение ТМЦ</h3><p>Размещение инструмента, оснастки, деталей и материалов производства.</p></div></li>
           <li class="mb-use"><img src="img/mobile/use4.webp" width="316" height="312" alt="Мобильные стеллажи с медицинскими изделиями" loading="lazy"><div><h3><img class="mb-use__i" src="img/svc/i-clipboard-check.svg" width="24" height="24" alt="">Медицина и фармацевтика</h3><p>Хранение лекарственных средств, медицинских изделий, расходных материалов и документации.</p></div></li>
         </ul>
       </div>
@@ -283,19 +302,19 @@
       <h2 class="h2">Как мы работаем</h2>
       <p class="lead lead--lg">От замера до сервиса — один подрядчик отвечает за весь проект.</p>
       <ol class="steps" id="stepsSlider">
-        <li class="step"><img class="step__icon" src="img/mobile/st-chat.svg?v=1" width="32" height="32" alt=""><span class="step__num">01</span><h3 class="step__title">Заявка</h3><p class="step__text">Оставляете заявку или звоните</p></li>
-        <li class="step"><img class="step__icon" src="img/mobile/st-ruler.svg?v=1" width="32" height="32" alt=""><span class="step__num">02</span><h3 class="step__title">Замер и аудит</h3><p class="step__text">Выезжаем на объект, изучаем задачи</p></li>
-        <li class="step"><img class="step__icon" src="img/mobile/st-doc.svg?v=1" width="32" height="32" alt=""><span class="step__num">03</span><h3 class="step__title">Проектирование</h3><p class="step__text">Разрабатываем план и конфигурацию</p></li>
-        <li class="step"><img class="step__icon" src="img/mobile/st-calc.svg?v=1" width="32" height="32" alt=""><span class="step__num">04</span><h3 class="step__title">Расчёт и смета</h3><p class="step__text">Готовим КП с расчётом нагрузок</p></li>
-        <li class="step"><img class="step__icon" src="img/mobile/st-factory.svg?v=2" width="32" height="32" alt=""><span class="step__num">05</span><h3 class="step__title">Производство</h3><p class="step__text">Изготавливаем систему под проект</p></li>
-        <li class="step"><img class="step__icon" src="img/mobile/st-truck.svg?v=1" width="32" height="32" alt=""><span class="step__num">06</span><h3 class="step__title">Доставка и монтаж</h3><p class="step__text">Доставляем и монтируем «под ключ»</p></li>
-        <li class="step"><img class="step__icon" src="img/mobile/st-key.svg?v=2" width="32" height="32" alt=""><span class="step__num">07</span><h3 class="step__title">Обучение и сдача</h3><p class="step__text">Обучаем персонал и сдаём объект</p></li>
-        <li class="step"><img class="step__icon" src="img/mobile/st-shield.svg?v=1" width="32" height="32" alt=""><span class="step__num">08</span><h3 class="step__title">Сервис</h3><p class="step__text">Гарантия и обслуживание</p></li>
+        <li class="step"><img class="step__icon" src="img/svc/i-chat.svg?v=1" width="32" height="32" alt=""><span class="step__num">01</span><h3 class="step__title">Заявка</h3><p class="step__text">Оставляете заявку или звоните</p></li>
+        <li class="step"><img class="step__icon" src="img/svc/i-b-ruler.svg?v=1" width="32" height="32" alt=""><span class="step__num">02</span><h3 class="step__title">Замер и аудит</h3><p class="step__text">Выезжаем на объект, изучаем задачи</p></li>
+        <li class="step"><img class="step__icon" src="img/icons/p-doc.svg?v=1" width="32" height="32" alt=""><span class="step__num">03</span><h3 class="step__title">Проектирование</h3><p class="step__text">Разрабатываем план и конфигурацию</p></li>
+        <li class="step"><img class="step__icon" src="img/svc/i-b-calc.svg?v=1" width="32" height="32" alt=""><span class="step__num">04</span><h3 class="step__title">Расчёт и смета</h3><p class="step__text">Готовим КП с расчётом нагрузок</p></li>
+        <li class="step"><img class="step__icon" src="img/svc/i-b-factory.svg?v=2" width="32" height="32" alt=""><span class="step__num">05</span><h3 class="step__title">Производство</h3><p class="step__text">Изготавливаем систему под проект</p></li>
+        <li class="step"><img class="step__icon" src="img/svc/i-s-truck.svg?v=1" width="32" height="32" alt=""><span class="step__num">06</span><h3 class="step__title">Доставка и монтаж</h3><p class="step__text">Доставляем и монтируем «под ключ»</p></li>
+        <li class="step"><img class="step__icon" src="img/svc/i-b-key.svg?v=2" width="32" height="32" alt=""><span class="step__num">07</span><h3 class="step__title">Обучение и сдача</h3><p class="step__text">Обучаем персонал и сдаём объект</p></li>
+        <li class="step"><img class="step__icon" src="img/svc/i-s-shield.svg?v=1" width="32" height="32" alt=""><span class="step__num">08</span><h3 class="step__title">Сервис</h3><p class="step__text">Гарантия и обслуживание</p></li>
       </ol>
       <div class="steps-nav">
-        <button class="slider-nav__btn" type="button" data-slider-prev="stepsSlider" aria-label="Предыдущий этап"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow-left"/></svg></button>
+        <button class="slider-nav__btn" type="button" data-slider-prev="stepsSlider" aria-label="Предыдущий этап"><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
         <span class="steps-nav__bar" aria-hidden="true"><span></span></span>
-        <button class="slider-nav__btn" type="button" data-slider-next="stepsSlider" aria-label="Следующий этап"><svg aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></button>
+        <button class="slider-nav__btn" type="button" data-slider-next="stepsSlider" aria-label="Следующий этап"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
       </div>
     </div>
   </section>
@@ -374,7 +393,7 @@
             <span>Соглашаюсь с условиями <a href="/terms/">Политики конфиденциальности</a>.</span>
           </label>
           <p class="form__error form__error--agree" role="alert">Подтвердите согласие на обработку данных</p>
-          <button type="submit" class="btn btn--primary btn--lg btn--block">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg></button>
+          <button type="submit" class="btn btn--primary btn--lg btn--block">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
           <p class="form__success" role="status" hidden>Заявка отправлена. Мы перезвоним вам в ближайшее время.</p>
         </form>
       </div>
@@ -393,14 +412,14 @@
         </a>
         <p class="footer__slogan">Металлическая мебель и складское оборудование<br> для вашего бизнеса</p>
         <div class="footer__contact">
-          <img src="img/icons/phone.svg" width="26" height="26" alt="">
+          <img src="img/icons/i-phone.svg" width="26" height="26" alt="">
           <div>
             <a href="tel:+73912592659" class="footer__phone">+7 (391) 259-26-59</a>
             <span class="footer__hours">Ежедневно с 9:00 до 18:00</span>
           </div>
         </div>
         <div class="footer__contact footer__contact--address">
-          <img src="img/icons/pin.svg" width="26" height="32" alt="">
+          <img src="img/svc/i-b-pin.svg" width="26" height="32" alt="">
           <address class="footer__address">проспект имени газеты Красноярский рабочий, 170а, офис 3-27</address>
         </div>
         <ul class="socials">

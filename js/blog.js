@@ -34,7 +34,7 @@
   var tabs = [].slice.call(document.querySelectorAll('[data-cat]'));
   var active = '';
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
-  var arrow = '<svg class="btn__icon" aria-hidden="true"><use href="img/icons/sprite.svg?v=1#i-arrow"/></svg>';
+  var arrow = '<svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg>';
 
   function render() {
     var list = data.articles.filter(function (a) { return active ? a.cat === active : !a.featured; });
