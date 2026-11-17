@@ -560,3 +560,19 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
     var(--hero, none) right var(--header-h) / 1180px auto no-repeat;
   background-color: #1a1a1a;
 }
+
+/* ---------- Hero с боковой панелью (blog, dokumentatsiya): картинка по высоте блока ---------- */
+.sv-hero--side::before { top: 0; height: 100%; background: linear-gradient(0deg, #1a1a1a 0, rgba(26, 26, 26, 0) 14%), var(--hero, none) center / cover no-repeat; }
+.sv-hero--side .sv-hero__main { padding-bottom: 40px; }
+.sv-plaques--tabs li { padding: 0; }
+.sv-plaques--tabs .sv-tab { min-height: 66px; padding: 12px 18px; gap: 16px; border: 0; border-radius: 8px; background: transparent; font-size: 14px; font-weight: 600; line-height: 1.25; color: var(--c-text-2); }
+.sv-plaques--tabs .sv-tab img { width: 30px; height: 30px; }
+.sv-plaques--tabs .sv-tab small { font-size: inherit; font-weight: 400; color: #8a8a8a; }
+.sv-plaques--tabs li { transition: border-color .25s, background .25s; }
+.sv-plaques--tabs li:hover, .sv-plaques--tabs li:has(.sv-tab[aria-pressed="true"]) { border-color: var(--c-accent); }
+.sv-plaques--tabs li:has(.sv-tab[aria-pressed="true"]) { background: #2b1d14; }
+.sv-hero--side .dc-feats { display: grid; gap: 24px; margin-top: 44px; grid-template-columns: repeat(3, minmax(0, 260px)); }
+.sv-hero--side .dc-feats img { width: 32px; height: 32px; }
+.sv-hero--side .dc-feats li { align-items: center; font-size: 16px; color: var(--c-text-2); }
+@media (max-width: 1200px) { .sv-hero--side .dc-feats { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .sv-hero--side .dc-feats { grid-template-columns: minmax(0, 1fr); } }
