@@ -397,7 +397,6 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 .dc-row .btn { justify-self: end; width: 140px; min-width: 0; min-height: 40px; padding: 0 20px; font-size: 14px; }
 .dc-empty { padding: 36px 0 28px; text-align: center; color: var(--c-text-2); }
 .dc-count { margin-top: 14px; font-size: 14px; color: var(--c-text-2); }
-.sv-cta--doc h2::before { content: '/'; margin-right: 14px; color: var(--c-accent); }
 
 @media (max-width: 1200px) {
   .sv-tabs--6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
