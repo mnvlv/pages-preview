@@ -52,3 +52,36 @@
 /* --- форма: текст ошибки согласия (раньше только цвет) --- */
 .form__check.is-invalid + .form__error--agree { display: flex; }
 .nav__link.is-current, .nav__link.is-current .nav__text { color: var(--c-accent); }
+
+/* --- типографика заголовков: единая шкала по UI kit (Figma) ---
+   Десктоп: H1 72/100%, H2 48/115%, H3 20/130%, H4 16/100%, всё Golos Text 600.
+   Мобильная (≤768px): H1 36/100%, H2 28/115%, H3 16/130%, H4 16/100%.
+   H1 и H2 — заглавными, H3 и H4 — как в тексте. Слой подключён последним, поэтому !important
+   гасит разнобой локальных размеров (32/28/24/36/40 и т.п.) на отдельных страницах. */
+:root { --t-h1: 72px; --t-h2: 48px; --t-h3: 20px; --t-h4: 16px; }
+@media (max-width: 768px) { :root { --t-h1: 36px; --t-h2: 28px; --t-h3: 16px; --t-h4: 16px; } }
+
+body h1, body .h1, body .hero .h1 {
+  font-size: var(--t-h1) !important; line-height: 1 !important; font-weight: 600 !important;
+  letter-spacing: 0 !important; text-transform: uppercase !important;
+}
+body h2, body .h2,
+body .m-card__title, body .rk-uni__title, body .w-trust__title, body .rk-why__title, body .mb-h3,
+body .pd-h2, body .bl-feat__title, body .sv-intro__title {
+  font-size: var(--t-h2) !important; line-height: 1.15 !important; font-weight: 600 !important;
+  letter-spacing: 0 !important; text-transform: uppercase !important;
+}
+body h3:not(.cat__title):not(.project__title):not(.product__title):not(.pd-card__title):not(.pd-label),
+body h2.h3, body .faq__q, body .m-adv__title, body .rk-side__title,
+body .filter__title, body .products__title, body .pd-modal__title, body .dp-params__title {
+  font-size: var(--t-h3) !important; line-height: 1.3 !important; font-weight: 600 !important;
+  letter-spacing: 0 !important; text-transform: none !important;
+}
+body h4, body .project__title, body .product__title, body .pd-card__title {
+  font-size: var(--t-h4) !important; line-height: 1 !important; font-weight: 600 !important;
+  letter-spacing: 0 !important;
+}
+
+/* Исключение: H1 в hero Главной остаётся 54px (утверждённый макет) — при 72px он заезжает под видеобаннер */
+body .hero .hero__content .h1 { font-size: clamp(36px, 3.75vw, 54px) !important; }
+@media (max-width: 768px) { body .hero .hero__content .h1 { font-size: var(--t-h1) !important; } }
