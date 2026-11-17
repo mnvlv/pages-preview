@@ -886,7 +886,7 @@ function syncUI() {
   });
   renderCard();
 }
-function setHover(k) { if (k === hoverKey) return; hoverKey = k; syncUI(); }
+function setHover(k) { if (k === hoverKey) return; hoverKey = k; if (!LITE) syncUI(); }
 function select(k, flyTo = true) {
   if (k && !partVisible(k)) return;
   selKey = k;
@@ -1138,7 +1138,7 @@ Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 2500))]).catc
   $('#loading').classList.add('done');
   setTimeout(() => $('#loading').remove(), 500);
   setTimeout(makeThumbs, 120);
-  if (!LITE) setTimeout(playAssembly, 400);   // first visit: show the assembly once
+  /* автозапуск эффекта сборки убран по замечанию заказчика; запуск только кнопкой */
 });
 })();
 </script>
