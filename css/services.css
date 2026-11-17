@@ -624,3 +624,9 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 .sv-panel--adv .sv-checks { max-width: 62%; gap: 16px; }
 @media (min-width: 1101px) { .bl-feat__img { min-height: 568px; } }
 @media (max-width: 760px) { .sv-panel--adv .sv-panel__img { max-width: 100%; opacity: .25; } .sv-panel--adv .sv-checks { max-width: none; } }
+/* Состав ТЗ: фото со стола слева, список на тёмном фоне справа */
+.tz-comp__box::before { right: auto; width: 62%; background: url('../img/svc/t-tz-bg2.webp?v=1') left center / auto 100% no-repeat; -webkit-mask-image: linear-gradient(90deg, #000 58%, transparent 100%); mask-image: linear-gradient(90deg, #000 58%, transparent 100%); }
+.tz-comp__box::after { background: linear-gradient(90deg, rgba(22,22,22,.10) 0%, rgba(22,22,22,.18) 35%, rgba(22,22,22,.0) 100%); }
+@media (max-width: 1100px) { .tz-comp__box::before { width: 100%; opacity: .35; -webkit-mask-image: none; mask-image: none; background-position: left top; } .tz-comp__box::after { background: rgba(22,22,22,.55); } }
+.tz-comp__box::before { width: 54%; background-size: cover; background-position: left bottom; -webkit-mask-image: linear-gradient(90deg, #000 55%, transparent 100%); mask-image: linear-gradient(90deg, #000 55%, transparent 100%); }
+@media (min-width: 1101px) { .tz-comp__head { align-self: start; } }
