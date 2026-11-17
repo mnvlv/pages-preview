@@ -358,13 +358,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (inner(e.target)) return;
     e.preventDefault();
     var unit = e.deltaMode === 1 ? 32 : e.deltaMode === 2 ? window.innerHeight : 1;
-    if (!raf) { current = window.scrollY; target = current; }
-    target = Math.min(max(), Math.max(0, target + e.deltaY * unit));
-    if (!raf) raf = requestAnimationFrame(step);
+    push(e.deltaY * unit);
   }, { passive: false });
+  function push(dy) {
+    if (!raf) { current = window.scrollY; target = current; }
+    target = Math.min(max(), Math.max(0, target + dy));
+    if (!raf) raf = requestAnimationFrame(step);
+  }
+  window.__smoothPush = push;
   /* прокрутка другими способами (якоря, клавиши, полоса) — синхронизируем цель */
   window.addEventListener('scroll', function () { if (!raf) { current = target = window.scrollY; } }, { passive: true });
 })();
+
+/* Колесо мыши над 3D-конфигуратором (iframe) пересылается сюда, чтобы страница листалась так же плавно, как вне него */
+window.addEventListener('message', function (e) {
+  var d = e.data;
+  if (!d || typeof d.rkWheel !== 'number') return;
+  if (window.__smoothPush) window.__smoothPush(d.rkWheel); else window.scrollBy({ top: d.rkWheel, behavior: 'instant' });
+});
 
 /* Запрет масштабирования страницы пальцами (щипок, двойной тап). Исключение — страницы с метой viewport без user-scalable=no
    (3D-модель) и конфигураторы в iframe: события внутри iframe в этот документ не попадают. */

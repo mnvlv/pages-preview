@@ -328,8 +328,8 @@ main .rk-uni__text p { hyphens: manual !important; -webkit-hyphens: manual !impo
 
 /* плитки справа: верх и низ ровно по блоку текста */
 @media (min-width: 1181px) {
-  .rk-uni .rk-tiles { align-self: stretch; align-content: stretch; grid-auto-rows: 1fr; gap: 20px; }
-  .rk-uni .rk-tile { min-height: 0; }
+  .rk-uni .rk-tiles { align-self: center; align-content: center; grid-auto-rows: auto; gap: 20px; }
+  .rk-uni .rk-tile { min-height: 0; gap: 20px; padding: 18px 22px 18px; }
 }
 
 /* «Особенности»: текст не вылезает из карточки, ровная сетка */

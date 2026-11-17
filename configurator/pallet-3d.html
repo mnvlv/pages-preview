@@ -361,6 +361,20 @@ scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), .04).texture;
 
 const camera = new THREE.PerspectiveCamera(36, 1, .03, 200);
 const controls = new OrbitControls(camera, renderer.domElement);
+/* Диаском: страница не должна «залипать» на конфигураторе — колесо мыши масштабирует сцену только с Ctrl (или щипком на тачпаде), иначе прокручивается страница; на сенсорных экранах один палец листает страницу, два — вращают/масштабируют */
+controls.enableZoom = false;
+renderer.domElement.addEventListener('wheel', e => { if (e.ctrlKey || e.metaKey) { controls.enableZoom = true; } else { controls.enableZoom = false; e.stopImmediatePropagation(); } }, { capture: true, passive: true });
+/* Диаском: прокрутка колесом над сценой листает страницу (пересылаем её родителю), а не залипает на конфигураторе */
+addEventListener('wheel', e => {
+  if (e.ctrlKey || e.metaKey || window.parent === window) return;
+  for (let n = e.target; n && n !== document.documentElement; n = n.parentElement) {
+    const o = getComputedStyle(n).overflowY;
+    if ((o === 'auto' || o === 'scroll') && n.scrollHeight > n.clientHeight + 1) return;
+  }
+  e.preventDefault();
+  window.parent.postMessage({ rkWheel: e.deltaY * (e.deltaMode === 1 ? 32 : e.deltaMode === 2 ? innerHeight : 1) }, '*');
+}, { capture: true, passive: false });
+if (matchMedia('(pointer: coarse)').matches) { renderer.domElement.style.touchAction = 'pan-y'; controls.touches.ONE = null; }
 controls.enableDamping = true;
 controls.dampingFactor = .08;
 controls.screenSpacePanning = true;
