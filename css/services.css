@@ -578,7 +578,7 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 .sv-hero--pt::before { top: var(--header-h); height: calc(100% - var(--header-h)); background: linear-gradient(0deg, #1a1a1a 0, rgba(26, 26, 26, 0) 22%), var(--hero, none) center top / 1440px auto no-repeat; }
 
 /* Блог: широкое фото целиком, без обрезки */
-.sv-hero--bl::before { background: linear-gradient(0deg, #1a1a1a 0, rgba(26, 26, 26, 0) 14%), linear-gradient(90deg, rgba(26, 26, 26, .75) 0, rgba(26, 26, 26, .35) 38%, rgba(26, 26, 26, 0) 62%), var(--hero, none) right center / cover no-repeat; }
+.sv-hero--bl::before { background: linear-gradient(90deg, #1a1a1a 0, #1a1a1a 20%, rgba(26, 26, 26, 0) 100%), linear-gradient(180deg, #1a1a1a 0, rgba(26, 26, 26, 0) 2%, rgba(26, 26, 26, 0) 92%, #1a1a1a 100%), linear-gradient(270deg, #1a1a1a 0, rgba(26, 26, 26, 0) 8%), var(--hero, none) right center / cover no-repeat; }
 @media (max-width: 760px) {
   .sv-hero--bl::before { left: 0; width: 100%; transform: none; background: linear-gradient(180deg, #1a1a1a 0, rgba(26, 26, 26, 0) 22%, rgba(26, 26, 26, 0) 70%, #1a1a1a 100%) 0 400px / 100% 330px no-repeat, var(--hero, none) -488px 400px / auto 330px no-repeat; opacity: 1; }
   .sv-hero--bl .sv-plaques { margin-top: 350px; }
