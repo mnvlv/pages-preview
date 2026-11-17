@@ -579,5 +579,8 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 
 /* Блог: широкое фото целиком, без обрезки */
 .sv-hero--bl::before { background: linear-gradient(0deg, #1a1a1a 0, rgba(26, 26, 26, 0) 14%), linear-gradient(90deg, rgba(26, 26, 26, .75) 0, rgba(26, 26, 26, .35) 38%, rgba(26, 26, 26, 0) 62%), var(--hero, none) right center / cover no-repeat; }
-@media (max-width: 760px) { .sv-hero--bl::before { background: linear-gradient(0deg, #1a1a1a 0, rgba(26, 26, 26, 0) 22%), var(--hero, none) 70% top / auto 100% no-repeat; opacity: .55; } }
+@media (max-width: 760px) {
+  .sv-hero--bl::before { left: 0; width: 100%; transform: none; background: linear-gradient(180deg, #1a1a1a 0, rgba(26, 26, 26, 0) 22%, rgba(26, 26, 26, 0) 70%, #1a1a1a 100%) 0 400px / 100% 330px no-repeat, var(--hero, none) -488px 400px / auto 330px no-repeat; opacity: 1; }
+  .sv-hero--bl .sv-plaques { margin-top: 350px; }
+}
 @media (min-width: 1500px) { .sv-hero--bl::before { -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%); } }
