@@ -132,13 +132,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ---------- Кнопка «В корзину»: счётчик в шапке ---------- */
+  /* ---------- Количество «− / +» и кнопка «В корзину»: счётчик в шапке считает штуки ---------- */
   const count = document.querySelector('.cart__count');
-  document.querySelectorAll('.product__cart').forEach((btn) => {
+  document.querySelectorAll('.product__buy').forEach((buy) => {
+    const btn = buy.querySelector('.product__cart');
+    if (!btn) return;
+    const qty = document.createElement('div');
+    qty.className = 'product__qty';
+    qty.innerHTML = '<button type="button" class="product__qty-btn" data-d="-1" aria-label="Уменьшить количество">−</button>'
+      + '<input class="product__qty-val" type="text" inputmode="numeric" value="1" aria-label="Количество">'
+      + '<button type="button" class="product__qty-btn" data-d="1" aria-label="Увеличить количество">+</button>';
+    const group = document.createElement('div');
+    group.className = 'product__act';
+    buy.insertBefore(group, btn);
+    group.append(qty, btn);
+    const input = qty.querySelector('input');
+    let inCart = 0;
+    const read = () => Math.min(99, Math.max(1, num(input.value) || 1));
+    const sync = () => {
+      const q = read();
+      input.value = q;
+      if (btn.classList.contains('is-added') && count) {
+        count.textContent = Math.max(0, num(count.textContent) + q - inCart);
+        inCart = q;
+      }
+    };
+    qty.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-d]');
+      if (!b) return;
+      input.value = read() + Number(b.dataset.d);
+      sync();
+    });
+    input.addEventListener('change', sync);
     btn.addEventListener('click', () => {
       const added = btn.classList.toggle('is-added');
       btn.setAttribute('aria-label', added ? 'Убрать из корзины' : 'В корзину');
-      if (count) count.textContent = Math.max(0, num(count.textContent) + (added ? 1 : -1));
+      const q = read();
+      if (count) count.textContent = Math.max(0, num(count.textContent) + (added ? q : -inCart));
+      inCart = added ? q : 0;
     });
   });
 

@@ -511,3 +511,52 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 .sv-hero--fig::before { left: calc(50% - 720px + 274px); top: -3px; width: 966px; height: 649px; transform: none; background: linear-gradient(90deg, #1a1a1a 0, #1a1a1a 20%, rgba(26, 26, 26, 0) 100%), linear-gradient(180deg, #1a1a1a 0, rgba(26, 26, 26, 0) 2%, rgba(26, 26, 26, 0) 92%, #1a1a1a 100%), linear-gradient(270deg, #1a1a1a 0, rgba(26, 26, 26, 0) 8%), var(--hero) center / cover no-repeat; }
 @media (max-width: 1100px) { .sv-hero--fig::before { left: 0; top: 0; width: 100%; height: 100%; } }
 @media (max-width: 760px) { .sv-hero--fig::before { opacity: .45; background-position: 62% 30%; } }
+
+/* Разработка ТЗ: «Состав ТЗ» (список справа) и «Этапы» (линия с кружками) */
+.tz-comp__box { position: relative; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: center; padding: 48px 40px; border-radius: 8px; overflow: hidden; isolation: isolate; background: #161616; }
+.tz-comp__box::before { content: ''; position: absolute; inset: 0; z-index: -2; background: url('../img/svc/t-tz-bg.webp?v=1') 70% 40% / cover no-repeat; }
+.tz-comp__box::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(22,22,22,.9) 0%, rgba(22,22,22,.78) 40%, rgba(22,22,22,.9) 100%); }
+.tz-comp__head .h2 { margin: 0; }
+.tz-comp__head .h2 .accent { display: block; }
+.tz-comp__head .line { margin: 22px 0; }
+.tz-comp__head .lead { max-width: 340px; text-align: left; hyphens: none; }
+.tz-list { list-style: none; margin: 0; padding: 0; counter-reset: none; }
+.tz-list li { display: grid; grid-template-columns: 64px 1px minmax(0, 1fr); gap: 18px; align-items: center; padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,.18); }
+.tz-list li:first-child { padding-top: 0; }
+.tz-n { font-size: 34px; line-height: 1; font-weight: 600; color: var(--accent, #ea5901); }
+.tz-sep { display: block; width: 1px; height: 36px; background: var(--accent, #ea5901); }
+.tz-list li > div > b { display: block; font-size: 18px; font-weight: 600; }
+.tz-list li > div > span { display: block; margin-top: 2px; font-size: 15px; line-height: 1.35; color: #e4e4e4; text-align: left; hyphens: none; }
+.tz-steps { position: relative; list-style: none; margin: 44px 0 0; padding: 0; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); text-align: center; }
+.tz-steps::before { content: ''; position: absolute; left: 6.25%; right: 6.25%; top: 91px; height: 2px; background: var(--accent, #ea5901); }
+.tz-st { position: relative; padding: 0 6px; }
+.tz-st__c { display: grid; place-items: center; width: 68px; height: 68px; margin: 0 auto 20px; border-radius: 50%; background: #262626; }
+.tz-st__d { display: block; position: relative; width: 12px; height: 12px; margin: 0 auto 16px; border-radius: 50%; background: var(--accent, #ea5901); }
+.tz-st > b { display: block; font-size: 24px; font-weight: 600; color: var(--accent, #ea5901); margin-bottom: 8px; }
+.tz-st__t { display: block; font-size: 15px; line-height: 1.3; }
+@media (max-width: 1100px) {
+  .tz-comp__box { grid-template-columns: minmax(0, 1fr); gap: 32px; padding: 32px 24px; }
+  .tz-steps { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 36px; }
+  .tz-steps::before { display: none; }
+  .tz-st__d { display: none; }
+}
+@media (max-width: 640px) {
+  .tz-list li { grid-template-columns: 44px 1px minmax(0, 1fr); gap: 12px; }
+  .tz-n { font-size: 26px; }
+  .tz-steps { grid-template-columns: minmax(0, 1fr); margin-left: 4px; row-gap: 0; text-align: left; }
+  .tz-steps::before { display: block; left: 33px; right: auto; top: 34px; bottom: 34px; width: 2px; height: auto; }
+  .tz-st { display: grid; grid-template-columns: 68px 40px minmax(0, 1fr); align-items: center; column-gap: 0; padding: 12px 0; }
+  .tz-st__c { margin: 0; grid-row: 1; }
+  .tz-st__d { display: none; }
+  .tz-st > b { margin: 0 0 0 16px; grid-column: 2; font-size: 20px; }
+  .tz-st__t { grid-column: 3; margin-left: 10px; }
+}
+
+/* Разработка ТЗ: hero — фото справа, слева затемнение под текст */
+.sv-hero--tz::before {
+  background:
+    linear-gradient(90deg, #1a1a1a 0, rgba(26,26,26,.93) 30%, rgba(26,26,26,.62) 58%, rgba(26,26,26,.45) 100%),
+    linear-gradient(0deg, #1a1a1a 0, rgba(26,26,26,0) 40%),
+    var(--hero, none) right var(--header-h) / 1180px auto no-repeat;
+  background-color: #1a1a1a;
+}
