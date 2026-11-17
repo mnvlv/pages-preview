@@ -160,3 +160,9 @@ body .sv-pc--plain .sv-pc__text small { max-width: 90%; }
 /* Иконки: единые правила толщины линии. Справа/в списках — 2px (ic--s), внизу/в строках преимуществ — 1,5px (ic--b).
    Толщина «запечена» в файлах img/ic/s|b при размере 26 / 32 px, поэтому размер задаётся натуральным (из файла). */
 body img.ic{width:auto!important;height:auto!important;max-width:none!important;max-height:none!important;flex:none}
+
+/* ---------- Плитки со статистикой: текст и отступы как в верхних карточках ---------- */
+body .sv-tile b, body .sv-tile small { font-size: 20px; font-weight: 600; line-height: 1.1; color: #fff; }
+body .sv-tile span { gap: 6px; }
+body .sv-ills .sv-tile, body .sv-ills li.sv-tile { padding: 24px !important; }
+@media (max-width: 560px) { body .sv-tile b, body .sv-tile small { font-size: 18px; } body .sv-ills .sv-tile, body .sv-ills li.sv-tile { padding: 16px 18px !important; } }
