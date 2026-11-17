@@ -591,3 +591,13 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
   .sv-hero--dc::before { left: 0; width: 100%; transform: none; background: linear-gradient(180deg, #1a1a1a 0, rgba(26, 26, 26, 0) 18%, rgba(26, 26, 26, 0) 80%, #1a1a1a 100%) 0 300px / 100% 270px no-repeat, var(--hero, none) center 300px / auto 270px no-repeat; background-color: transparent; }
   .sv-hero--dc .sv-plaques { margin-top: 290px; }
 }
+
+/* Показатели из нижней строки hero — плашками в правой панели */
+.sv-pl-stat span { display: grid; gap: 2px; }
+.sv-pl-stat b { font-size: 14px; font-weight: 700; line-height: 1.15; color: #fff; }
+.sv-pl-stat small { font-size: 13px; font-weight: 400; line-height: 1.25; color: var(--c-accent); }
+.sv-hero .sv-plaques { gap: 12px; align-content: start; }
+.sv-hero .sv-plaques li { min-height: 62px; padding: 8px 18px; }
+.sv-plaques .sv-pl-info { min-height: 62px; }
+.sv-hero .sv-hero__inner { padding-bottom: 40px; }
+.sv-hero .sv-plaques--tabs li { padding: 0; }
