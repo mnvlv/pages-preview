@@ -576,3 +576,4 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 .sv-hero--side .dc-feats li { align-items: center; font-size: 16px; color: var(--c-text-2); }
 @media (max-width: 1200px) { .sv-hero--side .dc-feats { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 600px) { .sv-hero--side .dc-feats { grid-template-columns: minmax(0, 1fr); } }
+.sv-hero--pt::before { top: var(--header-h); height: calc(100% - var(--header-h)); background: linear-gradient(0deg, #1a1a1a 0, rgba(26, 26, 26, 0) 22%), var(--hero, none) center top / 1440px auto no-repeat; }
