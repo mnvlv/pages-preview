@@ -128,3 +128,27 @@
 
 /* Шаги по макету: заголовок + описание */
 .page-mobile .step__text { grid-column: 1 / -1; margin-top: -8px; font-size: 16px; line-height: 1.3; color: var(--c-text-2); text-align: left !important; hyphens: manual !important; }
+
+/* Показатели: плитки рядом с вводным текстом (текст слева, плитки справа — как на стеллажных страницах) */
+.sv-uni { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 560px); column-gap: 48px; row-gap: 0; align-items: center; }
+.sv-uni > h2, .sv-uni > .line { grid-column: 1 / -1; }
+.sv-uni > .line { margin-top: 18px; }
+.sv-uni > .sv-intro__text, .sv-uni > .mb-intro__cols { grid-column: 1; grid-row: 3; }
+.sv-tiles-uni { grid-column: 2; grid-row: 3; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; grid-auto-rows: 1fr; align-content: center; margin-top: 34px; }
+.sv-tile { display: flex; flex-direction: column; justify-content: space-between; gap: 14px; min-height: 0; padding: 16px 18px; background: #1d1d1d; border-radius: 6px; box-shadow: inset 0 0 0 1px #585858; }
+.sv-tile > img, .sv-tile > svg { flex: none; width: auto; height: 40px; max-width: 48px; align-self: flex-start; object-fit: contain; object-position: left center; color: var(--c-accent); }
+.sv-tile > svg { width: 40px; }
+.sv-tile span { display: grid; gap: 4px; }
+.sv-tile b { font-size: 20px; font-weight: 600; line-height: 1.1; color: #fff; }
+.sv-tile small { font-size: 14px; line-height: 1.25; color: var(--c-accent); }
+.sv-tiles-uni .sv-tile:last-child:nth-child(odd) { grid-column: 1; }
+.sv-ills { gap: 16px; grid-auto-rows: 1fr; } .sv-ills .sv-tile { min-height: 0; padding: 16px 18px; } .sv-ills .sv-tile > img { width: auto; height: 40px; margin: 0; }
+@media (max-width: 1100px) {
+  .sv-uni { grid-template-columns: minmax(0, 1fr); }
+  .sv-uni > .sv-intro__text, .sv-uni > .mb-intro__cols, .sv-tiles-uni { grid-column: 1; grid-row: auto; }
+  .sv-tiles-uni { margin-top: 28px; }
+}
+@media (max-width: 560px) { .sv-tiles-uni { gap: 12px; } .sv-tile { min-height: 0; padding: 14px; } .sv-tile b { font-size: 18px; } }
+.sv-tile > img, .sv-tile > svg, .sv-ills .sv-tile > img { height: 32px !important; max-height: 32px !important; max-width: 40px !important; }
+.sv-tile > svg { width: 32px !important; }
+.sv-tile, .sv-ills .sv-tile, .sv-ills li.sv-tile { min-height: 124px !important; padding: 16px 18px !important; justify-content: space-between; }

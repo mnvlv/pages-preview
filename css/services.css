@@ -412,7 +412,7 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 }
 @media (max-width: 768px) {
   .sv-partners, .bl-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; margin-top: 24px; }
-  .sv-partner { min-height: 130px; }
+  .sv-partner { min-height: 0; }
   .sv-tabs--6 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 28px; }
   .sv-tab { min-height: 60px; padding: 10px 12px; gap: 10px; }
   .sv-tab__arrow { display: none; }
@@ -592,12 +592,26 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
   .sv-hero--dc .sv-plaques { margin-top: 290px; }
 }
 
-/* Показатели из нижней строки hero — плашками в правой панели */
-.sv-pl-stat span { display: grid; gap: 2px; }
-.sv-pl-stat b { font-size: 14px; font-weight: 700; line-height: 1.15; color: #fff; }
-.sv-pl-stat small { font-size: 13px; font-weight: 400; line-height: 1.25; color: var(--c-accent); }
-.sv-hero .sv-plaques { gap: 12px; align-content: start; }
-.sv-hero .sv-plaques li { min-height: 62px; padding: 8px 18px; }
-.sv-plaques .sv-pl-info { min-height: 62px; }
-.sv-hero .sv-hero__inner { padding-bottom: 40px; }
-.sv-hero .sv-plaques--tabs li { padding: 0; }
+/* Показатели: плитки рядом с вводным текстом (текст слева, плитки справа — как на стеллажных страницах) */
+.sv-uni { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 560px); column-gap: 48px; row-gap: 0; align-items: center; }
+.sv-uni > h2, .sv-uni > .line { grid-column: 1 / -1; }
+.sv-uni > .line { margin-top: 18px; }
+.sv-uni > .sv-intro__text, .sv-uni > .mb-intro__cols { grid-column: 1; grid-row: 3; }
+.sv-tiles-uni { grid-column: 2; grid-row: 3; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; grid-auto-rows: 1fr; align-content: center; margin-top: 34px; }
+.sv-tile { display: flex; flex-direction: column; justify-content: space-between; gap: 14px; min-height: 0; padding: 16px 18px; background: #1d1d1d; border-radius: 6px; box-shadow: inset 0 0 0 1px #585858; }
+.sv-tile > img, .sv-tile > svg { flex: none; width: auto; height: 40px; max-width: 48px; align-self: flex-start; object-fit: contain; object-position: left center; color: var(--c-accent); }
+.sv-tile > svg { width: 40px; }
+.sv-tile span { display: grid; gap: 4px; }
+.sv-tile b { font-size: 20px; font-weight: 600; line-height: 1.1; color: #fff; }
+.sv-tile small { font-size: 14px; line-height: 1.25; color: var(--c-accent); }
+.sv-tiles-uni .sv-tile:last-child:nth-child(odd) { grid-column: 1; }
+.sv-ills { gap: 16px; grid-auto-rows: 1fr; } .sv-ills .sv-tile { min-height: 0; padding: 16px 18px; } .sv-ills .sv-tile > img { width: auto; height: 40px; margin: 0; }
+@media (max-width: 1100px) {
+  .sv-uni { grid-template-columns: minmax(0, 1fr); }
+  .sv-uni > .sv-intro__text, .sv-uni > .mb-intro__cols, .sv-tiles-uni { grid-column: 1; grid-row: auto; }
+  .sv-tiles-uni { margin-top: 28px; }
+}
+@media (max-width: 560px) { .sv-tiles-uni { gap: 12px; } .sv-tile { min-height: 0; padding: 14px; } .sv-tile b { font-size: 18px; } }
+.sv-tile > img, .sv-tile > svg, .sv-ills .sv-tile > img { height: 32px !important; max-height: 32px !important; max-width: 40px !important; }
+.sv-tile > svg { width: 32px !important; }
+.sv-tile, .sv-ills .sv-tile, .sv-ills li.sv-tile { min-height: 124px !important; padding: 16px 18px !important; justify-content: space-between; }
