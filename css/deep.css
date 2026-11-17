@@ -78,17 +78,19 @@
 .dp-rows li > span { text-align: left !important; hyphens: manual !important; }
 .dp-row__s { flex: none; }
 .dp-row__i { flex: none; width: 32px; height: 32px; }
+.dp-rows li > .dp-row__s { width: 24px; height: 24px; }
+.dp-rows li > .dp-row__i { width: 32px !important; height: 32px !important; object-fit: contain; }
 
 /* ---------- Когда выбирать ---------- */
 .dp-when {
   position: relative; display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 40px; overflow: hidden; padding: 36px 36px 36px;
 }
-.dp-when::before { content: ''; position: absolute; left: 0; bottom: 0; width: 400px; height: 204px; background: var(--dp-when) left bottom / 100% 100% no-repeat; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 22%), linear-gradient(90deg, #000 80%, transparent); -webkit-mask-composite: source-in; mask-image: linear-gradient(180deg, transparent 0, #000 22%), linear-gradient(90deg, #000 80%, transparent); mask-composite: intersect; pointer-events: none; }
+.dp-when::before { content: ''; position: absolute; left: 36px; bottom: 36px; width: 420px; height: 200px; background: var(--dp-when) center / cover no-repeat; border-radius: 12px; box-shadow: 0 0 0 1px #585858; pointer-events: none; }
 .dp-when__side, .dp-when__list { position: relative; }
 .dp-when .h2 { line-height: 1.15; }
 .dp-when .h2::after { width: 72px; height: 3px; margin-top: 20px; }
-.dp-when__side { padding-bottom: 220px; }
-.dp-when__side p { margin-top: 20px; max-width: 340px; font-size: 16px; line-height: 1.3; color: var(--c-text-2); text-align: justify !important; hyphens: auto !important; }
+.dp-when__side { padding-bottom: 236px; }
+.dp-when__side p { margin-top: 20px; max-width: 340px; font-size: 16px; line-height: 1.3; color: var(--c-text-2); text-align: left !important; hyphens: manual !important; }
 .dp-when__list { padding-left: 40px; border-left: 1px solid #3d3d3d; }
 .dp-when__list li { display: grid; grid-template-columns: 76px minmax(0, 1fr) minmax(0, 1.1fr); align-items: center; gap: 24px; padding: 18px 0; border-top: 1px solid #3d3d3d; }
 .dp-when__list li:first-child { border-top: 0; padding-top: 0; }
@@ -110,7 +112,7 @@
   .dp-params { margin-top: 0; padding: 22px 24px 8px; }
   .dp-params dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
   .dp-params dl > div, .dp-params dl > div:first-child { padding: 14px 0 12px; border-top: 1px solid #3d3d3d; }
-  .dp-steps { display: flex; gap: 14px; margin: 28px -16px 0; padding: 0 16px 4px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .dp-steps { display: flex; gap: 14px; margin: 28px -16px 0; padding: 0 16px 4px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; scrollbar-width: none; }
   .dp-steps::-webkit-scrollbar { display: none; }
   .dp-step { flex: 0 0 31%; scroll-snap-align: start; }
   .dp-uses { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -127,7 +129,7 @@
   .dp-params dt { font-size: 30px; }
   .dp-schemes { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .dp-scheme { padding: 22px 20px; }
-  .dp-steps { display: flex; gap: 12px; margin: 24px -16px 0; padding: 0 16px 4px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .dp-steps { display: flex; gap: 12px; margin: 24px -16px 0; padding: 0 16px 4px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; scrollbar-width: none; }
   .dp-steps::-webkit-scrollbar { display: none; }
   .dp-step { flex: 0 0 58%; max-width: 240px; scroll-snap-align: start; }
   .dp-uses { gap: 10px; margin-top: 24px; }
