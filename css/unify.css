@@ -115,7 +115,7 @@ body.page-mobile .dp-head__sub { flex: none; max-width: 820px; padding-left: 0; 
 body .sv-seo { align-items: center !important; }
 
 /* ---------- Стеллажи: правые плитки по центру относительно текста ---------- */
-@media (min-width: 1181px) { body .rk-uni > :not(.rk-uni__title) { align-self: center; } }
+@media (min-width: 1181px) { body .rk-uni > .rk-uni__text { align-self: start; } body .rk-uni > .rk-tiles { align-self: stretch; } }
 
 /* ---------- Среднегрузовые: иконки «Особенности» не гигантские ---------- */
 body .rk-feats li { grid-template-columns: 44px minmax(0, 1fr); }
