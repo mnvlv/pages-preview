@@ -584,3 +584,10 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
   .sv-hero--bl .sv-plaques { margin-top: 350px; }
 }
 @media (min-width: 1500px) { .sv-hero--bl::before { -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%); } }
+
+/* Документация: фото без видимых границ, по высоте hero */
+.sv-hero--dc::before { background: var(--hero, none) right 260px bottom 0 / auto 100% no-repeat; background-color: #1a1a1a; }
+@media (max-width: 760px) {
+  .sv-hero--dc::before { left: 0; width: 100%; transform: none; background: linear-gradient(180deg, #1a1a1a 0, rgba(26, 26, 26, 0) 18%, rgba(26, 26, 26, 0) 80%, #1a1a1a 100%) 0 300px / 100% 270px no-repeat, var(--hero, none) center 300px / auto 270px no-repeat; background-color: transparent; }
+  .sv-hero--dc .sv-plaques { margin-top: 290px; }
+}

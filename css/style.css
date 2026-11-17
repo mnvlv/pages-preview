@@ -46,6 +46,9 @@ button, input, select { font: inherit; color: inherit; }
 button { cursor: pointer; }
 :focus-visible { outline: 2px solid var(--c-accent); outline-offset: 3px; }
 
+/* Содержимое экрана — 80% ширины окна (на экранах от 1280px) */
+@media (min-width: 1280px) { :root { --container: min(1376px, 80vw); } }
+.header__inner.container { max-width: calc(1376px + 2 * var(--gutter)); } /* шапка: меню не помещается в 80% */
 .container { width: 100%; max-width: calc(var(--container) + 2 * var(--gutter)); margin: 0 auto; padding: 0 var(--gutter); }
 .accent { color: var(--c-accent); }
 .visually-hidden {
