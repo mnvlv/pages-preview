@@ -197,3 +197,14 @@
 
 /* Глубинные: расстояние от заголовка до текста по макету */
 .page-deep .rk-uni { row-gap: 44px; }
+
+/* правки: «Примеры реализации» без пустоты, ровный абзац в шапке, фон шапки на мобильной */
+.page-deep .m-card:has(.examples) { display: flex; flex-direction: column; }
+.page-deep .m-card .examples { flex: 1; grid-auto-rows: 1fr; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.page-deep .m-card .examples li { min-height: 0; }
+.page-deep .m-card .examples img { height: 100%; aspect-ratio: auto; min-height: 150px; }
+.page-deep:not(.page-mobile) .dp-hero .m-hero__lead { text-align: left !important; hyphens: manual !important; -webkit-hyphens: manual !important; }
+@media (max-width: 760px) {
+  .page-deep:not(.page-mobile) .dp-hero::before { opacity: .62; }
+  .page-deep .m-card .examples img { min-height: 0; aspect-ratio: 292 / 186; height: auto; }
+}
