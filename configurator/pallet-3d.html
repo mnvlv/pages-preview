@@ -1253,8 +1253,8 @@ function frame(now) {
   showDims(state.dims && explodeK < .03);
   const pulse = .3 + .18 * Math.sin(now * .006);
   for (const [k, c] of Object.entries(CAT)) {
-    const on = k === hoverKey || k === selKey;
-    for (const m of c.mats) { if (on) m.emissive.setHex(0xff5a1f); m.emissiveIntensity = on ? (k === hoverKey ? .5 : pulse) : 0; }
+    const on = k === selKey; /* подсветка детали только при выборе, не при наведении */
+    for (const m of c.mats) { if (on) m.emissive.setHex(0xff5a1f); m.emissiveIntensity = on ? pulse : 0; }
   }
   for (const p of PARTS) {
     const mk = MARK[p.key], a = ANCH[p.key], vis = !!a && partVisible(p.key);
