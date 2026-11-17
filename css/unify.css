@@ -113,6 +113,7 @@ body.page-mobile .dp-head__sub { flex: none; max-width: 820px; padding-left: 0; 
 
 /* ---------- Услуги: блок «Комплексное оснащение» — плитки по центру текста ---------- */
 body .sv-seo { align-items: center !important; }
+@media (min-width: 1181px) { body .sv-seo { align-items: stretch !important; } body .sv-seo > .sv-ills { align-content: stretch; } }
 
 /* ---------- Стеллажи: правые плитки по центру относительно текста ---------- */
 @media (min-width: 1181px) { body .rk-uni > .rk-uni__text { align-self: start; } body .rk-uni > .rk-tiles { align-self: stretch; } }
