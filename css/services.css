@@ -576,3 +576,8 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 @media (max-width: 1200px) { .sv-hero--side .dc-feats { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 600px) { .sv-hero--side .dc-feats { grid-template-columns: minmax(0, 1fr); } }
 .sv-hero--pt::before { top: var(--header-h); height: calc(100% - var(--header-h)); background: linear-gradient(0deg, #1a1a1a 0, rgba(26, 26, 26, 0) 22%), var(--hero, none) center top / 1440px auto no-repeat; }
+
+/* Блог: широкое фото целиком, без обрезки */
+.sv-hero--bl::before { background: linear-gradient(0deg, #1a1a1a 0, rgba(26, 26, 26, 0) 14%), linear-gradient(90deg, rgba(26, 26, 26, .75) 0, rgba(26, 26, 26, .35) 38%, rgba(26, 26, 26, 0) 62%), var(--hero, none) right center / cover no-repeat; }
+@media (max-width: 760px) { .sv-hero--bl::before { background: linear-gradient(0deg, #1a1a1a 0, rgba(26, 26, 26, 0) 22%), var(--hero, none) 70% top / auto 100% no-repeat; opacity: .55; } }
+@media (min-width: 1500px) { .sv-hero--bl::before { -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%); } }
