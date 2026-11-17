@@ -618,3 +618,9 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 .sv-tile, .sv-ills .sv-tile, .sv-ills li.sv-tile { min-height: 124px !important; padding: 16px 18px !important; justify-content: space-between; }
 .sv-plaques--tabs .sv-info { padding: 12px 18px; min-height: 66px; font-size: 14px; font-weight: 600; line-height: 1.25; color: var(--c-text-2); }
 .sv-plaques--tabs .sv-info:first-of-type { margin-top: 0; }
+.sv-panel--adv { min-height: 340px; }
+.sv-panel--adv .sv-panel__img { max-width: 70%; object-position: center; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 48%); mask-image: linear-gradient(90deg, transparent 0, #000 48%); }
+.sv-panel--adv .sv-panel__title { max-width: none; font-size: 24px; }
+.sv-panel--adv .sv-checks { max-width: 62%; gap: 16px; }
+@media (min-width: 1101px) { .bl-feat__img { min-height: 568px; } }
+@media (max-width: 760px) { .sv-panel--adv .sv-panel__img { max-width: 100%; opacity: .25; } .sv-panel--adv .sv-checks { max-width: none; } }
