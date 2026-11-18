@@ -403,3 +403,29 @@ window.addEventListener('message', function (e) {
     if (norm(a.getAttribute('href') || '') === cur) { a.classList.add('is-current'); a.setAttribute('aria-current', 'page'); }
   });
 })();
+
+/* Короткие тексты (до 3 строк) не растягиваем по ширине — иначе в строках появляются огромные пробелы */
+(function () {
+  var SEL = 'main p, .faq__a p, .footer__slogan';
+  function fix() {
+    var els = document.querySelectorAll(SEL);
+    els.forEach(function (e) { e.style.removeProperty('text-align'); e.style.removeProperty('hyphens'); });
+    els.forEach(function (e) {
+      var cs = getComputedStyle(e);
+      if (cs.textAlign !== 'justify') return;
+      var lh = parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.2;
+      var h = e.getBoundingClientRect().height - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+      if (h > 0 && Math.round(h / lh) <= 3) {
+        e.style.setProperty('text-align', 'left', 'important');
+        e.style.setProperty('hyphens', 'manual', 'important');
+      }
+    });
+  }
+  var t;
+  function later() { clearTimeout(t); t = setTimeout(fix, 150); }
+  window.addEventListener('resize', later);
+  document.addEventListener('click', later);
+  window.addEventListener('load', fix);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fix);
+  fix();
+})();
