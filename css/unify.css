@@ -376,3 +376,12 @@ body .sv-hero--pt .sv-hero__inner{gap:0}
 body .sv-hero--pt .sv-hero__main{padding-bottom:0}
 body .sv-hero--pt .sv-plaques{margin-top:28px}
 }
+/* ---- Документация: инфо-плашки отдельно от списка типов ---- */
+.sv-hero--dc .sv-hero__side{display:grid;gap:14px;align-content:start;margin-top:35px}
+.sv-hero--dc .sv-hero__side>.sv-plaques{margin-top:0 !important}
+@media (max-width:1024px){.sv-hero--dc .sv-hero__side{margin-top:28px}}
+@media (max-width:768px){
+body .sv-hero--dc .sv-hero__side{gap:10px}
+body .sv-hero--dc .sv-plaques--info{order:-1}
+}
+@media (max-width:760px){body .sv-hero--dc .sv-hero__side{margin-top:290px}}
