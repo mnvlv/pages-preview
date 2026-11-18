@@ -363,3 +363,11 @@ body .tabsel-toggle[aria-expanded="true"]::after{margin-top:5px;transform:rotate
 body .is-peek{overflow:hidden;transition:max-height .3s ease}
 body .is-peek.is-collapsed{-webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 44px),transparent);mask-image:linear-gradient(180deg,#000 calc(100% - 44px),transparent)}
 }
+/* ---- Партнёры (мобильная): бегущая карусель логотипов ---- */
+.sv-partner--clone{display:none}
+@media (max-width:768px){
+body .sv-partners{display:flex !important;grid-template-columns:none !important;gap:12px !important;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+body .sv-partners::-webkit-scrollbar{display:none}
+body .sv-partners .sv-partner{flex:none;width:62%;max-width:260px;margin:0 !important}
+body .sv-partners .sv-partner--clone{display:grid}
+}

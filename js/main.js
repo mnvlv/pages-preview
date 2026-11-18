@@ -595,3 +595,39 @@ window.addEventListener('message', function (e) {
     apply();
   });
 })();
+
+/* ---------- Партнёры (мобильная): бегущая карусель с ручной прокруткой ---------- */
+(function () {
+  var box = document.querySelector('.sv-partners');
+  if (!box) return;
+  var mq = window.matchMedia('(max-width: 768px)');
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var orig = Array.prototype.slice.call(box.children);
+  orig.forEach(function (li) {
+    var c = li.cloneNode(true);
+    c.classList.add('sv-partner--clone'); c.setAttribute('aria-hidden', 'true');
+    box.appendChild(c);
+  });
+  var pos = 0, last = 0, userAt = -1e9, visible = true, down = false;
+  function loopW() { return box.children[orig.length].offsetLeft - box.children[0].offsetLeft; }
+  function touch() { userAt = performance.now(); }
+  ['pointerdown', 'touchstart', 'wheel'].forEach(function (e) { box.addEventListener(e, function () { touch(); if (e !== 'wheel') down = true; }, { passive: true }); });
+  ['pointerup', 'pointercancel', 'touchend', 'touchcancel'].forEach(function (e) { window.addEventListener(e, function () { down = false; touch(); }, { passive: true }); });
+  box.addEventListener('scroll', function () {
+    if (performance.now() - userAt < 2500) { pos = box.scrollLeft; }
+    var w = loopW();
+    if (w > 0 && box.scrollLeft >= w) { box.scrollLeft -= w; pos = box.scrollLeft; }
+  }, { passive: true });
+  if (window.IntersectionObserver) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(box);
+  function tick(t) {
+    requestAnimationFrame(tick);
+    var dt = Math.min(t - last, 250); last = t;
+    if (!mq.matches || rm.matches || !visible || down || t - userAt < 2500) { pos = box.scrollLeft; return; }
+    var w = loopW();
+    if (w <= 0) return;
+    pos += dt * 0.03;
+    if (pos >= w) pos -= w;
+    box.scrollLeft = pos;
+  }
+  requestAnimationFrame(tick);
+})();
