@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="css/mining.css?v=7">
   <link rel="stylesheet" href="css/catalog.css?v=22">
   <link rel="stylesheet" href="css/racks.css?v=53">
-  <link rel="stylesheet" href="css/unify.css?v=51">
+  <link rel="stylesheet" href="css/unify.css?v=52">
 </head>
 <body class="page-racks page-racks--fold">
 
@@ -399,17 +399,16 @@
 <!-- ============ 6. ФОРМА ============ -->
   <section class="section" id="request">
     <div class="container">
-      <div class="request m-request">
+      <div class="request" style="--img:url('../img/form-bg.webp')">
         <div class="request__info">
-          <h2 class="h2">Получите проект<br> вашего склада<br> <span class="accent">бесплатно за 24 часа</span></h2>
+          <h2 class="h2">Нужна помощь<br> в выборе решения?</h2>
           <span class="line" aria-hidden="true"></span>
-          <ul class="checks checks--lg">
-            <li>Проектирование под ваш склад</li>
-            <li>Подбор оборудования</li>
-            <li>Расчет стоимости и сроков</li>
-            <li>Коммерческое предложение</li>
+          <p class="lead">Получите бесплатную консультацию инженера и расчет<br> стоимости вашего проекта</p>
+          <ul class="request__perks">
+            <li><img class="ic ic--b" src="img/ic/b/icons-perk-1.svg" alt=""><span>Проект бесплатно<br><span class="accent">за 24 часа</span></span></li>
+            <li><img class="ic ic--b" src="img/ic/b/icons-perk-2.svg" alt=""><span>Бесплатная<br><span class="accent">консультация специалиста</span></span></li>
+            <li><img class="ic ic--b" src="img/ic/b/icons-perk-3.svg" alt=""><span>Гарантия до 7 лет<br><span class="accent">на все системы</span></span></li>
           </ul>
-          <a href="tel:+73912592659" class="btn btn--outline btn--lg m-request__call">Позвонить сейчас <svg class="btn__icon btn__icon--phone" aria-hidden="true"><use href="#i-phone"/></svg></a>
         </div>
 
         <form class="form" id="requestForm" novalidate>
@@ -421,10 +420,6 @@
             <span class="visually-hidden">Ваш телефон</span>
             <input type="tel" name="phone" placeholder="Ваш телефон" autocomplete="tel" required data-phone>
             <span class="form__error" role="alert">Введите номер полностью</span>
-          </label>
-          <label class="form__field">
-            <span class="visually-hidden">Ваша почта</span>
-            <input type="email" name="email" placeholder="Ваша почта" autocomplete="email">
           </label>
           <div class="form__field form__select" data-select>
             <span class="visually-hidden" id="whLabel">Тип склада</span>

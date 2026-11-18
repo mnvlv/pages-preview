@@ -251,3 +251,5 @@ body .dp-when__ic img{width:52px !important;height:52px !important}
 body .cat{padding-top:68px}
 body .cat--main{padding-top:72px}
 body .sv-pc--btn{padding-top:72px}
+/* Форма заявки перед подвалом — одинаковый отступ на всех страницах */
+body #request{padding-top:calc(var(--section-y) + 20px) !important}

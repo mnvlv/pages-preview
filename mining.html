@@ -28,7 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=79">
   <link rel="stylesheet" href="css/mining.css?v=7">
-  <link rel="stylesheet" href="css/unify.css?v=51">
+  <link rel="stylesheet" href="css/unify.css?v=52">
 </head>
 <body class="page-mining">
 
@@ -306,16 +306,16 @@
   <!-- ============ 6. ФОРМА ============ -->
   <section class="section" id="request">
     <div class="container">
-      <div class="request m-request">
+      <div class="request" style="--img:url('../img/form-bg.webp')">
         <div class="request__info">
-          <h2 class="h2">Получите проект<br> вашей фермы<br> <span class="accent">бесплатно за 24 часа</span></h2>
+          <h2 class="h2">Нужна помощь<br> в выборе решения?</h2>
           <span class="line" aria-hidden="true"></span>
-          <ul class="checks checks--lg">
-            <li>Проектирование под ваше помещение</li>
-            <li>Расчет стоимости и сроков</li>
-            <li>Коммерческое предложение</li>
+          <p class="lead">Получите бесплатную консультацию инженера и расчет<br> стоимости вашего проекта</p>
+          <ul class="request__perks">
+            <li><img class="ic ic--b" src="img/ic/b/icons-perk-1.svg" alt=""><span>Проект бесплатно<br><span class="accent">за 24 часа</span></span></li>
+            <li><img class="ic ic--b" src="img/ic/b/icons-perk-2.svg" alt=""><span>Бесплатная<br><span class="accent">консультация специалиста</span></span></li>
+            <li><img class="ic ic--b" src="img/ic/b/icons-perk-3.svg" alt=""><span>Гарантия до 7 лет<br><span class="accent">на все системы</span></span></li>
           </ul>
-          <a href="tel:+73912592659" class="btn btn--outline btn--lg m-request__call">Позвонить сейчас <svg class="btn__icon btn__icon--phone" aria-hidden="true"><use href="#i-phone"/></svg></a>
         </div>
 
         <form class="form" id="requestForm" novalidate>
@@ -328,10 +328,22 @@
             <input type="tel" name="phone" placeholder="Ваш телефон" autocomplete="tel" required data-phone>
             <span class="form__error" role="alert">Введите номер полностью</span>
           </label>
-          <label class="form__field">
-            <span class="visually-hidden">Ваша почта</span>
-            <input type="email" name="email" placeholder="Ваша почта" autocomplete="email">
-          </label>
+          <div class="form__field form__select" data-select>
+            <span class="visually-hidden" id="whLabel">Тип склада</span>
+            <button type="button" class="form__select-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="whList" aria-labelledby="whLabel whValue">
+              <span class="form__select-value" id="whValue">Тип склада</span>
+              <svg class="form__chevron" viewBox="0 0 25.8 13.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M.9.9l12 12 12-12"/></svg>
+            </button>
+            <ul class="form__options" id="whList" role="listbox" aria-labelledby="whLabel" tabindex="-1" hidden>
+              <li role="option" id="wh-logistics" data-value="logistics" aria-selected="false">Логистический склад</li>
+              <li role="option" id="wh-production" data-value="production" aria-selected="false">Производственный склад</li>
+              <li role="option" id="wh-trade" data-value="trade" aria-selected="false">Склад для маркетплейсов</li>
+              <li role="option" id="wh-console" data-value="console" aria-selected="false">Склад металлопроката</li>
+              <li role="option" id="wh-cold" data-value="cold" aria-selected="false">Холодильный склад</li>
+              <li role="option" id="wh-archive" data-value="archive" aria-selected="false">Архив и офис</li>
+            </ul>
+            <input type="hidden" name="warehouse" value="">
+          </div>
           <label class="form__check">
             <input type="checkbox" name="agree" required>
             <span class="form__box" aria-hidden="true"></span>
