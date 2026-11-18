@@ -371,3 +371,8 @@ body .sv-partners::-webkit-scrollbar{display:none}
 body .sv-partners .sv-partner{flex:none;width:62%;max-width:260px;margin:0 !important}
 body .sv-partners .sv-partner--clone{display:grid}
 }
+@media (max-width:768px){
+body .sv-hero--pt .sv-hero__inner{gap:0}
+body .sv-hero--pt .sv-hero__main{padding-bottom:0}
+body .sv-hero--pt .sv-plaques{margin-top:28px}
+}

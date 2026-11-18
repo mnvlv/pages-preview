@@ -544,7 +544,7 @@ window.addEventListener('message', function (e) {
 /* ---------- Мобильные длинные списки карточек: первая видна, вторая под затемнением, стрелка раскрытия ---------- */
 (function () {
   var mq = window.matchMedia('(max-width: 768px)');
-  var SEL = '[data-tabsel], .cats, .w-types__grid, .m-adv, .m-cards, .c-seo__cards, .sv-grid--4, .sv-grid--3, .sv-steps, .sv-mini, .tz-list, .tz-steps, .sv-org, .sv-cards4, .dp-when__list, .sv-stats, .geo__stats';
+  var SEL = '[data-tabsel], .cats, .w-types__grid, .m-adv, .m-cards, .c-seo__cards, .sv-grid--4, .sv-grid--3, .sv-steps, .sv-mini, .tz-list, .tz-steps, .sv-org, .sv-cards4, .dp-when__list, .sv-stats, .geo__stats, .dc-list, .sv-hero--pt .sv-plaques';
   document.querySelectorAll(SEL).forEach(function (ul, i) {
     if (ul.hasAttribute('data-rail') || ul.closest('[data-rail]')) return;
     var btn = document.createElement('button');
@@ -590,6 +590,7 @@ window.addEventListener('message', function (e) {
     });
     var t;
     window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(apply, 120); });
+    if (window.MutationObserver) new MutationObserver(function () { open = false; btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', 'Показать все'); apply(); }).observe(ul, { childList: true });
     window.addEventListener('load', apply);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(apply);
     apply();
