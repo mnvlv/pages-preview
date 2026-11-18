@@ -261,3 +261,21 @@ body #request{padding-top:calc(var(--section-y) + 20px) !important}
 
 /* Кнопка темы: не выходит за шапку на 1181–1440 */
 @media (min-width:1181px) and (max-width:1440px){.header__inner{gap:24px}.nav__list{gap:22px}.header__btn{padding:0 28px}}
+
+/* Блок «Подберем стеллаж»: иконки в плитках, как на остальных страницах */
+@media (min-width:761px){body .w-pick__items{grid-template-columns:1fr;gap:14px;text-align:left;padding-top:0}
+body .w-pick__items li{flex-direction:row;align-items:center;gap:18px}
+body .w-pick__items li>div{display:flex;flex-direction:column;align-items:flex-start;text-align:left}
+body .w-pick__items li>div strong{margin-top:0}
+body .w-pick__items li>div span{margin-top:4px}}
+body .w-pick__ic{flex:none;display:grid;place-items:center;width:64px;height:64px;border-radius:14px;background:rgba(234,89,1,.1);box-shadow:inset 0 0 0 2px var(--c-accent),0 0 16px rgba(234,89,1,.16)}
+body .w-pick__items .w-pick__ic img{width:auto;height:auto;max-width:38px;max-height:34px}
+@media (max-width:760px){body .w-pick__items li{flex-direction:row;align-items:center;gap:16px;text-align:left}body .w-pick__items li>div{display:flex;flex-direction:column;align-items:flex-start;text-align:left}body .w-pick__items li>div strong{margin-top:0}}
+
+@media (min-width:761px){body .w-pick__items{align-self:center;justify-self:center}}
+
+/* Блок «Подберем стеллаж»: иконка над текстом, по центру колонки */
+@media (min-width:761px){body .w-pick__items{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;text-align:center;align-self:center;justify-self:stretch}
+body .w-pick__items li{flex-direction:column;align-items:center;gap:14px;text-align:center}
+body .w-pick__items li>div{align-items:center;text-align:center}
+body .w-pick__items li>div span{margin-top:8px}}
