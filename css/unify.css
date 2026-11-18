@@ -228,3 +228,14 @@ body .sv-seo .sv-intro__title{font-size:clamp(28px,2.7vw,38px) !important;line-h
 .dp-lf__grid .dp-lf__p small{font-size:14px !important}
 @media (max-width:1100px){.dp-lf__grid{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:760px){.dp-lf__grid .dp-lf__row--in,.dp-lf__grid .dp-lf__row--thru{grid-template-columns:minmax(0,1fr) !important}}
+/* Этап 7: глубинные — «Как работает» карточками, «Где используются» */
+body .dp-steps{gap:34px !important;margin-top:32px}
+body .dp-step{position:relative;display:grid !important;grid-template-columns:30px minmax(0,1fr);grid-template-rows:auto auto;align-items:center;column-gap:12px;row-gap:0 !important;padding:0 14px 16px;background:#1c1c1c;border-radius:14px;box-shadow:inset 0 0 0 1px #585858}
+body .dp-step__img{grid-column:1/-1;width:auto !important;justify-self:stretch;margin:0 -14px 14px;aspect-ratio:1/1.05 !important;border-radius:14px 14px 0 0 !important;box-shadow:none !important}
+body .dp-step__n{width:30px !important;height:30px !important;border-radius:8px !important;font-size:15px !important}
+body .dp-step p{font-size:14px !important;line-height:1.25 !important;font-weight:500}
+body .dp-step:not(:last-child)::after{content:"";position:absolute;right:-24px;top:calc((100% - 70px) / 2 * .85);width:10px;height:10px;border-top:3px solid #ea5901;border-right:3px solid #ea5901;transform:rotate(45deg)}
+body .dp-note{text-align:left !important;hyphens:manual !important;gap:20px !important}
+body .dp-note img{padding-right:20px;box-sizing:content-box;border-right:1px solid #585858}
+body .dp-head__sub{text-align:left !important;hyphens:manual !important}
+@media (max-width:1100px){body .dp-step:not(:last-child)::after{display:none}}
