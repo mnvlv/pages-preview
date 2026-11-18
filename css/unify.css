@@ -247,3 +247,7 @@ body .dp-when__ic{width:84px !important;height:84px !important;border-radius:18p
 body .dp-when__ic img{width:52px !important;height:52px !important}
 @media (max-width:1100px){body .dp-when__list{padding-left:0;border-left:0}body .dp-when__list li{grid-template-columns:64px minmax(0,1fr) !important}}
 @media (max-width:760px){body .dp-when__list li{grid-template-columns:56px minmax(0,1fr) !important;padding:14px !important;gap:8px 14px !important}body .dp-when__ic{width:56px !important;height:56px !important}body .dp-when__ic img{width:36px !important;height:36px !important}}
+/* Нумерация карточек каталога не должна наезжать на содержимое при любом масштабе */
+body .cat{padding-top:68px}
+body .cat--main{padding-top:72px}
+body .sv-pc--btn{padding-top:72px}
