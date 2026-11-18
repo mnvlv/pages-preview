@@ -442,3 +442,10 @@ body .rk-where__list>li:last-child:nth-child(odd){grid-column:1/-1}
 body .rk-where__list>li:last-child:nth-child(odd) img{aspect-ratio:16/9}
 }
 body .btn .btn__icon--dl{width:22px;height:22px}
+@media (max-width:560px){
+body .sv-cards4{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:10px !important}
+body .sv-card4{padding:14px 12px !important;gap:8px}
+body .sv-card4 img{width:40px !important;height:40px !important;max-width:40px !important;margin-bottom:2px}
+body .sv-card4 b{font-size:14px !important;line-height:1.2;overflow-wrap:anywhere;hyphens:auto}
+body .sv-card4 span{font-size:12px !important;line-height:1.3}
+}
