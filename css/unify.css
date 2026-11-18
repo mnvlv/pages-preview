@@ -409,3 +409,4 @@ html[data-theme="light"] body .revs-dots button:not(.is-active){background:#7a7a
 @media (max-width:768px){
 body .m-adv__img{display:block;margin-left:auto !important;margin-right:auto !important}
 }
+body .m-adv__img{display:block;margin-left:auto !important;margin-right:auto !important}
