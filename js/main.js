@@ -632,3 +632,62 @@ window.addEventListener('message', function (e) {
   }
   requestAnimationFrame(tick);
 })();
+
+/* ---------- Отзывы клиентов: карусель (автопрокрутка + свайп). Отзывы с 2ГИС / Яндекса добавлять в .sv-revs как <div class="sv-rev">…</div> — карусель подхватит их сама ---------- */
+(function () {
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var DELAY = 6500, IDLE = 9000;
+  document.querySelectorAll('.sv-revs').forEach(function (box) {
+    var dots = document.createElement('div');
+    dots.className = 'revs-dots'; dots.hidden = true;
+    dots.setAttribute('role', 'tablist'); dots.setAttribute('aria-label', 'Отзывы');
+    box.after(dots);
+    var idx = 0, userAt = -1e9, hover = false, visible = true, timer;
+    function slides() { return Array.prototype.slice.call(box.children); }
+    function current() { var w = box.clientWidth; return w ? Math.round(box.scrollLeft / w) : 0; }
+    function mark() {
+      idx = current();
+      Array.prototype.forEach.call(dots.children, function (d, i) {
+        d.classList.toggle('is-active', i === idx);
+        d.setAttribute('aria-selected', String(i === idx));
+      });
+    }
+    function go(i, smooth) {
+      var n = slides().length;
+      if (!n) return;
+      i = (i + n) % n;
+      box.scrollTo({ left: i * box.clientWidth, behavior: smooth === false || rm.matches ? 'auto' : 'smooth' });
+      idx = i; Array.prototype.forEach.call(dots.children, function (d, k) { d.classList.toggle('is-active', k === i); d.setAttribute('aria-selected', String(k === i)); });
+    }
+    function build() {
+      var n = slides().length;
+      dots.innerHTML = '';
+      dots.hidden = n < 2;
+      for (var i = 0; i < n; i++) {
+        (function (k) {
+          var b = document.createElement('button');
+          b.type = 'button'; b.setAttribute('role', 'tab');
+          b.setAttribute('aria-label', 'Отзыв ' + (k + 1) + ' из ' + n);
+          b.addEventListener('click', function () { userAt = performance.now(); go(k); });
+          dots.appendChild(b);
+        })(i);
+      }
+      mark();
+    }
+    function touch() { userAt = performance.now(); }
+    ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(function (e) { box.addEventListener(e, touch, { passive: true }); });
+    box.addEventListener('mouseenter', function () { hover = true; });
+    box.addEventListener('mouseleave', function () { hover = false; });
+    box.addEventListener('focusin', touch);
+    box.addEventListener('scroll', function () { clearTimeout(box._t); box._t = setTimeout(mark, 60); }, { passive: true });
+    window.addEventListener('resize', function () { go(idx, false); });
+    if (window.IntersectionObserver) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(box);
+    if (window.MutationObserver) new MutationObserver(build).observe(box, { childList: true });
+    timer = setInterval(function () {
+      if (rm.matches || !visible || hover || document.hidden || slides().length < 2) return;
+      if (performance.now() - userAt < IDLE) return;
+      go(idx + 1);
+    }, DELAY);
+    build();
+  });
+})();

@@ -397,3 +397,12 @@ body .sv-hero + .section,body .section.sv-intro,body .c-catalog + .section{paddi
 body .m-hero + .section,body .w-types{padding-top:var(--section-y)}
 }
 @media (max-width:760px){body .sv-hero__inner>.sv-plaques:not([data-tabsel]){margin-top:12px}}
+/* ---- Отзывы клиентов: карусель ---- */
+.sv-revs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.sv-revs::-webkit-scrollbar{display:none}
+.sv-revs>.sv-rev{flex:0 0 100%;min-width:0;scroll-snap-align:start}
+.revs-dots{display:flex;gap:8px;margin-top:22px}
+.revs-dots[hidden]{display:none}
+.revs-dots button{width:8px;height:8px;padding:0;background:#585858;border:0;border-radius:2px;cursor:pointer;transition:background-color .25s,width .25s}
+.revs-dots button.is-active{width:24px;background:var(--c-accent)}
+html[data-theme="light"] body .revs-dots button:not(.is-active){background:#7a7a7a}
