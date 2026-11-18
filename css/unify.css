@@ -385,3 +385,7 @@ body .sv-hero--dc .sv-hero__side{gap:10px}
 body .sv-hero--dc .sv-plaques--info{order:-1}
 }
 @media (max-width:760px){body .sv-hero--dc .sv-hero__side{margin-top:290px}}
+/* ---- выравнивание инфо-плашек с типами документов ---- */
+body .sv-plaques--info li.sv-info{padding:8px 16px !important;min-height:58px !important;height:58px;gap:16px;align-items:center}
+body .sv-plaques--info li.sv-info img{width:26px !important;height:26px !important}
+@media (min-width:1025px){body .sv-plaques--info li.sv-info{padding:12px 18px !important;min-height:68px !important;height:68px}}
