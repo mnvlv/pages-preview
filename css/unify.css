@@ -441,3 +441,4 @@ body .rk-where__list>li span{font-size:15px;padding:12px 14px 14px}
 body .rk-where__list>li:last-child:nth-child(odd){grid-column:1/-1}
 body .rk-where__list>li:last-child:nth-child(odd) img{aspect-ratio:16/9}
 }
+body .btn .btn__icon--dl{width:22px;height:22px}
