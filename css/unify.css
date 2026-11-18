@@ -211,3 +211,20 @@ body .sv-seo{grid-template-columns:minmax(0,1fr) 520px !important;gap:40px 48px 
 body .sv-seo .sv-intro__title{max-width:none}
 @media (max-width:1180px){body .sv-seo{grid-template-columns:minmax(0,1fr) !important}}
 body .sv-seo .sv-intro__title{font-size:clamp(28px,2.7vw,38px) !important;line-height:1.15 !important}
+/* Этап 6: глубинные — LIFO/FIFO двумя блоками рядом */
+.dp-lf__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:24px}
+.dp-lf__grid .dp-lf__card{margin-top:0 !important;padding:22px 20px 20px !important}
+.dp-lf__grid .dp-lf__card header{flex-direction:column !important;gap:4px !important;align-items:flex-start !important}
+.dp-lf__grid .dp-lf__card h3{font-size:22px !important}
+.dp-lf__grid .dp-lf__card header p{font-size:14px !important}
+.dp-lf__grid .dp-lf__row{gap:12px !important;margin-top:18px !important}
+.dp-lf__grid .dp-lf__row--in{grid-template-columns:104px minmax(0,1fr) !important}
+.dp-lf__grid .dp-lf__row--thru{grid-template-columns:104px minmax(0,1fr) 84px !important}
+.dp-lf__grid .dp-lf__side b,.dp-lf__grid .dp-lf__out b{font-size:14px !important;max-width:none !important}
+.dp-lf__grid .dp-lf__side span,.dp-lf__grid .dp-lf__out span{font-size:13px !important}
+.dp-lf__grid .dp-lf__p{margin-top:16px !important;gap:12px !important}
+.dp-lf__grid .dp-lf__pi{width:32px !important;height:32px !important}
+.dp-lf__grid .dp-lf__p span{font-size:16px !important}
+.dp-lf__grid .dp-lf__p small{font-size:14px !important}
+@media (max-width:1100px){.dp-lf__grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:760px){.dp-lf__grid .dp-lf__row--in,.dp-lf__grid .dp-lf__row--thru{grid-template-columns:minmax(0,1fr) !important}}
