@@ -253,3 +253,11 @@ body .cat--main{padding-top:72px}
 body .sv-pc--btn{padding-top:72px}
 /* Форма заявки перед подвалом — одинаковый отступ на всех страницах */
 body #request{padding-top:calc(var(--section-y) + 20px) !important}
+
+/* Правки 18.11 (сверка): мобильные стеллажи, доставка */
+@media (min-width:1101px){body.page-mobile .dp-hero::before{left:0;right:0;width:auto;background:linear-gradient(90deg,#1a1a1a 0,rgba(26,26,26,0) 32%),linear-gradient(180deg,#1a1a1a 0,rgba(26,26,26,0) 2%,rgba(26,26,26,0) 90%,#1a1a1a 100%),var(--rk-hero) 100% 62%/150% auto no-repeat}}
+@media (min-width:1181px){body .sv-uni:has(> .sv-stats) > .mb-intro__cols{align-self:start;margin-top:34px}body .sv-uni:has(> .sv-stats) > .mb-intro__cols + .sv-stats{align-self:start;margin-top:34px}}
+@media (min-width:761px){body .sv-hero--v::before{background-size:1500px auto;background-position:-60px var(--header-h);filter:brightness(1.4) saturate(1.1);-webkit-mask-image:linear-gradient(180deg,#000 72%,transparent 100%);mask-image:linear-gradient(180deg,#000 72%,transparent 100%)}}
+
+/* Кнопка темы: не выходит за шапку на 1181–1440 */
+@media (min-width:1181px) and (max-width:1440px){.header__inner{gap:24px}.nav__list{gap:22px}.header__btn{padding:0 28px}}
