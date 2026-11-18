@@ -410,3 +410,17 @@ html[data-theme="light"] body .revs-dots button:not(.is-active){background:#7a7a
 body .m-adv__img{display:block;margin-left:auto !important;margin-right:auto !important}
 }
 body .m-adv__img{display:block;margin-left:auto !important;margin-right:auto !important}
+@media (max-width:768px){
+body .c-seo__cards{grid-template-rows:none !important;grid-auto-rows:min-content !important;height:auto}
+body .c-seo__cards>*{height:auto !important;min-height:0}
+}
+@media (max-width:1024px){
+body .c-use{display:flex;flex-direction:column}
+body .c-use__text{display:contents}
+body .c-use__text .h2{order:1}
+body .c-use__text p{order:2}
+body .c-use__slider{order:3;margin-top:24px}
+body .c-use__nav{order:4;margin-top:20px;gap:8px}
+body .c-use__nav .slider-nav__btn{width:40px;height:40px}
+body .c-use__nav .slider-nav__btn svg{width:15.5px;height:11px}
+}
