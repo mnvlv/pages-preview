@@ -429,3 +429,115 @@ window.addEventListener('message', function (e) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fix);
   fix();
 })();
+/* ---------- Мобильные компоненты: лента «лево-право» и «Читать полностью» ---------- */
+(function () {
+  var mq = window.matchMedia('(max-width: 768px)');
+  var L = '<svg viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6H1M6 1L1 6l5 5"/></svg>';
+  var R = '<svg viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 6h14M10 1l5 5-5 5"/></svg>';
+
+  function initRail(el) {
+    var chips = el.getAttribute('data-rail') === 'chips';
+    var nav, prev, next, bar, count;
+    if (!chips) {
+      nav = document.createElement('div');
+      nav.className = 'rail-nav';
+      nav.innerHTML = '<button class="rail-nav__btn" type="button" aria-label="Назад">' + L + '</button>' +
+        '<div class="rail-nav__bar" aria-hidden="true"><span></span></div>' +
+        '<button class="rail-nav__btn" type="button" aria-label="Вперёд">' + R + '</button>' +
+        '<span class="rail-nav__count" aria-live="polite"></span>';
+      el.after(nav);
+      var b = nav.querySelectorAll('.rail-nav__btn');
+      prev = b[0]; next = b[1]; bar = nav.querySelector('.rail-nav__bar'); count = nav.querySelector('.rail-nav__count');
+      var step = function (dir) {
+        var c = el.firstElementChild;
+        var gap = parseFloat(getComputedStyle(el).columnGap) || 0;
+        el.scrollBy({ left: dir * (c.offsetWidth + gap), behavior: 'smooth' });
+      };
+      prev.addEventListener('click', function () { step(-1); });
+      next.addEventListener('click', function () { step(1); });
+    }
+    function update() {
+      var max = el.scrollWidth - el.clientWidth;
+      if (chips) { el.classList.toggle('is-end', max <= 1 || el.scrollLeft >= max - 1); return; }
+      var fit = max <= 1 || !mq.matches;
+      nav.classList.toggle('is-fit', fit);
+      if (fit) return;
+      prev.disabled = el.scrollLeft <= 1;
+      next.disabled = el.scrollLeft >= max - 1;
+      var rows = parseInt(el.getAttribute('data-rail-rows'), 10) || 1;
+      var kids = el.children, n = Math.ceil(kids.length / rows), idx = 0;
+      if (el.scrollLeft >= max - 1) idx = n - 1;
+      else {
+        var base = el.getBoundingClientRect().left, best = 1e9;
+        for (var i = 0; i < kids.length; i += rows) {
+          var d = Math.abs(kids[i].getBoundingClientRect().left - base);
+          if (d < best) { best = d; idx = i / rows; }
+        }
+      }
+      count.textContent = (idx + 1) + ' / ' + n;
+      var bw = bar.clientWidth, thumb = Math.max(24, bw * el.clientWidth / el.scrollWidth);
+      bar.style.setProperty('--w', thumb + 'px');
+      bar.style.setProperty('--x', (bw - thumb) * el.scrollLeft / max + 'px');
+    }
+    el.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    if (window.ResizeObserver) new ResizeObserver(update).observe(el);
+    if (chips) {
+      var act = el.querySelector('.is-active, [aria-current], [aria-selected="true"]');
+      if (act && mq.matches) el.scrollLeft = act.offsetLeft - (el.clientWidth - act.offsetWidth) / 2;
+    }
+    update();
+  }
+  document.querySelectorAll('[data-rail]').forEach(initRail);
+
+  document.querySelectorAll('[data-collapse]').forEach(function (box, i) {
+    var all = box.getAttribute('data-collapse') === 'all';
+    var lines = parseInt(box.getAttribute('data-collapse-lines'), 10) || 4;
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'collapse-btn'; btn.hidden = true;
+    btn.setAttribute('aria-expanded', 'false');
+    if (!box.id) box.id = 'collapse-' + (i + 1);
+    btn.setAttribute('aria-controls', box.id);
+    var more = box.getAttribute('data-more') || 'Читать полностью';
+    var less = box.getAttribute('data-less') || 'Свернуть';
+    btn.textContent = more;
+    box.after(btn);
+    var open = false, lim = 0;
+    function limit() {
+      var p = box.querySelector('p') || box, cs = getComputedStyle(p);
+      if (box.getAttribute('data-collapse-height')) return parseInt(box.getAttribute('data-collapse-height'), 10);
+      return Math.round((parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.3) * lines);
+    }
+    function apply() {
+      box.classList.remove('is-clamped', 'is-collapsed');
+      box.style.maxHeight = '';
+      btn.hidden = true;
+      if (!(all || mq.matches)) return;
+      lim = limit();
+      if (box.scrollHeight <= lim * 1.3) return;
+      btn.hidden = false;
+      if (!open) { box.classList.add('is-clamped', 'is-collapsed'); box.style.maxHeight = lim + 'px'; }
+    }
+    btn.addEventListener('click', function () {
+      open = !open;
+      btn.setAttribute('aria-expanded', open);
+      btn.textContent = open ? less : more;
+      box.classList.add('is-clamped');
+      if (open) {
+        box.classList.remove('is-collapsed');
+        box.style.maxHeight = box.scrollHeight + 'px';
+      } else {
+        box.style.maxHeight = box.scrollHeight + 'px';
+        void box.offsetHeight;
+        box.classList.add('is-collapsed');
+        box.style.maxHeight = lim + 'px';
+        var r = box.getBoundingClientRect();
+        if (r.top < 0) window.scrollBy({ top: r.top - 80, behavior: 'smooth' });
+      }
+    });
+    var t;
+    window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(apply, 150); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(apply);
+    apply();
+  });
+})();
