@@ -195,7 +195,7 @@ body .sv-stat--n .sv-stat__top{gap:4px}
 body .sv-stat--n b{font-size:24px}
 body .sv-stat--n small{font-size:15px;line-height:1.25;color:#fff;font-weight:600}
 body .sv-uni:has(> .sv-stats) > .sv-intro__text{align-self:center}
-body .sv-uni:has(> .sv-stats .sv-stat--n) > .sv-stats{align-self:stretch;grid-auto-rows:1fr;margin-top:0}
+body .sv-uni:has(> .sv-stats .sv-stat--n) > .sv-stats{align-self:stretch;grid-auto-rows:1fr;margin-top:34px}
 body .sv-uni:has(> .sv-stats .sv-stat--n) > .sv-intro__text{align-self:stretch;display:flex;flex-direction:column;justify-content:center}
 
 /* ---------- Услуги: 4 карточки (иконка сверху) ---------- */
@@ -255,7 +255,7 @@ body .sv-pc--btn{padding-top:72px}
 body #request{padding-top:calc(var(--section-y) + 20px) !important}
 
 /* Правки 18.11 (сверка): мобильные стеллажи, доставка */
-@media (min-width:1101px){body.page-mobile .dp-hero::before{left:0;right:0;width:auto;background:linear-gradient(90deg,#1a1a1a 0,rgba(26,26,26,0) 32%),linear-gradient(180deg,#1a1a1a 0,rgba(26,26,26,0) 2%,rgba(26,26,26,0) 90%,#1a1a1a 100%),var(--rk-hero) 100% 62%/150% auto no-repeat}}
+@media (min-width:1101px){body.page-mobile .dp-hero::before{left:0;right:0;width:auto;background:linear-gradient(90deg,#1a1a1a 0,rgba(26,26,26,0) 32%),linear-gradient(180deg,#1a1a1a 0,rgba(26,26,26,0) 2%,rgba(26,26,26,0) 90%,#1a1a1a 100%),var(--rk-hero) 70% 55%/cover no-repeat}}
 @media (min-width:1181px){body .sv-uni:has(> .sv-stats) > .mb-intro__cols{align-self:start;margin-top:34px}body .sv-uni:has(> .sv-stats) > .mb-intro__cols + .sv-stats{align-self:start;margin-top:34px}}
 @media (min-width:761px){body .sv-hero--v::before{background-size:1500px auto;background-position:-60px var(--header-h);filter:brightness(1.4) saturate(1.1);-webkit-mask-image:linear-gradient(180deg,#000 72%,transparent 100%);mask-image:linear-gradient(180deg,#000 72%,transparent 100%)}}
 
