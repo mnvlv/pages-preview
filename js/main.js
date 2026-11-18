@@ -541,3 +541,57 @@ window.addEventListener('message', function (e) {
     apply();
   });
 })();
+/* ---------- Мобильные длинные списки карточек: первая видна, вторая под затемнением, стрелка раскрытия ---------- */
+(function () {
+  var mq = window.matchMedia('(max-width: 768px)');
+  var SEL = '[data-tabsel], .cats, .w-types__grid, .m-adv, .m-cards, .c-seo__cards, .sv-grid--4, .sv-grid--3, .sv-steps, .sv-mini, .tz-list, .tz-steps, .sv-org, .sv-cards4, .dp-when__list, .sv-stats, .geo__stats';
+  document.querySelectorAll(SEL).forEach(function (ul, i) {
+    if (ul.hasAttribute('data-rail') || ul.closest('[data-rail]')) return;
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'tabsel-toggle'; btn.hidden = true;
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', 'Показать все');
+    if (!ul.id) ul.id = 'peek-' + (i + 1);
+    btn.setAttribute('aria-controls', ul.id);
+    ul.after(btn);
+    ul.classList.add('is-peek');
+    ul.querySelectorAll('[data-tabsel] br, .sv-tab br').forEach(function (b) { b.replaceWith(' '); });
+    var open = false;
+    function kids() { return Array.prototype.filter.call(ul.children, function (c) { return c.offsetHeight > 0; }); }
+    function collapsedH(k) {
+      var a = k[0].getBoundingClientRect(), b = k[1].getBoundingClientRect();
+      return Math.round(b.top - a.top + k[1].offsetHeight * 0.62);
+    }
+    function apply() {
+      ul.classList.remove('is-collapsed'); ul.style.maxHeight = '';
+      btn.hidden = true;
+      if (!mq.matches) return;
+      var k = kids();
+      if (k.length < 3) return;
+      if (Math.round(k[0].getBoundingClientRect().left) !== Math.round(k[1].getBoundingClientRect().left)) return;
+      var ch = collapsedH(k);
+      if (ul.scrollHeight < ch * 1.4) return;
+      btn.hidden = false;
+      if (open) ul.style.maxHeight = ul.scrollHeight + 'px';
+      else { ul.classList.add('is-collapsed'); ul.style.maxHeight = ch + 'px'; }
+    }
+    function set(o) {
+      open = o;
+      btn.setAttribute('aria-expanded', String(o));
+      btn.setAttribute('aria-label', o ? 'Свернуть' : 'Показать все');
+      var k = kids();
+      ul.classList.toggle('is-collapsed', !o);
+      ul.style.maxHeight = (o ? ul.scrollHeight : collapsedH(k)) + 'px';
+      if (!o) { var r = ul.getBoundingClientRect(); if (r.top < 0) window.scrollBy({ top: r.top - 90, behavior: 'smooth' }); }
+    }
+    btn.addEventListener('click', function () { set(!open); });
+    if (ul.hasAttribute('data-tabsel')) ul.addEventListener('click', function (e) {
+      if (e.target.closest('button') && mq.matches && open) setTimeout(function () { set(false); }, 0);
+    });
+    var t;
+    window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(apply, 120); });
+    window.addEventListener('load', apply);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(apply);
+    apply();
+  });
+})();

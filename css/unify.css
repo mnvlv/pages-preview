@@ -347,3 +347,19 @@ html[data-theme="light"] body .rail-nav__btn:disabled{background:#f2c9ae}
 html[data-theme="light"] body .rail-nav__bar{background:#cfcbc3}
 @media (max-width:380px){body .header__inner{gap:8px}}
 @media (max-width:350px){body .header__inner{gap:6px}body .header__icons{gap:4px}body .header__icons a{width:28px;height:28px}body .theme-toggle,body .burger{width:34px;height:34px}}
+/* ---- Мобильная: вкладки-фильтры — первая карточка, вторая под затемнением, стрелка ---- */
+.tabsel-toggle{display:none}
+@media (max-width:768px){
+body [data-tabsel]{display:grid !important;grid-template-columns:minmax(0,1fr) !important;grid-template-rows:none !important;grid-auto-rows:min-content !important;align-content:start !important;height:auto !important;gap:8px !important;overflow:hidden;transition:max-height .3s ease}
+body [data-tabsel] li{min-height:0;height:auto !important;width:auto !important;margin:0 !important}
+body [data-tabsel] .sv-tab{width:100%;min-height:56px;padding:8px 16px}
+body [data-tabsel].is-collapsed{-webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 44px),transparent);mask-image:linear-gradient(180deg,#000 calc(100% - 44px),transparent)}
+body .tabsel-toggle{display:grid;place-items:center;width:100%;height:36px;margin:4px 0 0;padding:0;color:var(--c-accent);background:none;border:0;cursor:pointer}
+body .tabsel-toggle[hidden]{display:none}
+body .tabsel-toggle::after{content:"";width:12px;height:12px;margin-top:-5px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg);transition:transform .2s}
+body .tabsel-toggle[aria-expanded="true"]::after{margin-top:5px;transform:rotate(-135deg)}
+}
+@media (max-width:768px){
+body .is-peek{overflow:hidden;transition:max-height .3s ease}
+body .is-peek.is-collapsed{-webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 44px),transparent);mask-image:linear-gradient(180deg,#000 calc(100% - 44px),transparent)}
+}
