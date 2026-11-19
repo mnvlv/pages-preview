@@ -549,3 +549,7 @@ html[data-theme="light"] body .mb-adv h2,html[data-theme="light"] body .mb-adv h
 body .rk-where__list[data-rail]>li:last-child:nth-child(odd){grid-column:auto}
 body .rk-where__list[data-rail]>li:last-child:nth-child(odd) img{aspect-ratio:4/3}
 }
+@media (min-width:769px){.w-pick__more{display:contents}}
+@media (max-width:768px){
+body .w-pick__more{display:grid;gap:20px}
+}

@@ -544,7 +544,7 @@ window.addEventListener('message', function (e) {
 /* ---------- Мобильные длинные списки карточек: первая видна, вторая под затемнением, стрелка раскрытия ---------- */
 (function () {
   var mq = window.matchMedia('(max-width: 768px)');
-  var SEL = '[data-tabsel], .cats, .w-types__grid, .m-adv, .m-cards, .sv-grid--4, .sv-grid--3, .sv-steps, .sv-mini, .tz-list, .tz-steps, .sv-org, .dp-when__list, .sv-stats:not(.sv-stats--t), .geo__stats, .dc-list, .sv-hero__inner > .sv-plaques, .mb-uses__list, .dp-uses, .rk-where__list, .rk-accs, .w-trust, .sv-panel .sv-checks, .sv-res, .mb-adv ul';
+  var SEL = '[data-tabsel], .cats, .w-types__grid, .m-adv, .m-cards, .sv-grid--4, .sv-grid--3, .sv-steps, .sv-mini, .tz-list, .tz-steps, .sv-org, .dp-when__list, .sv-stats:not(.sv-stats--t), .geo__stats, .dc-list, .sv-hero__inner > .sv-plaques, .mb-uses__list, .dp-uses, .rk-where__list, .rk-accs, .w-trust, .sv-panel .sv-checks, .sv-res, .mb-adv ul, .w-pick__more';
   document.querySelectorAll(SEL).forEach(function (ul, i) {
     if (ul.hasAttribute("data-rail") || ul.hasAttribute("data-marquee") || ul.closest("[data-rail],[data-marquee]")) return;
     var btn = document.createElement('button');
@@ -557,7 +557,7 @@ window.addEventListener('message', function (e) {
     ul.classList.add('is-peek');
     ul.querySelectorAll('[data-tabsel] br, .sv-tab br').forEach(function (b) { b.replaceWith(' '); });
     var open = false;
-    function kids() { return Array.prototype.filter.call(ul.children, function (c) { return c.offsetHeight > 0; }); }
+    function kids() { var src = ul.getAttribute('data-peek-kids'); var list = src ? ul.querySelectorAll(src) : ul.children; return Array.prototype.filter.call(list, function (c) { return c.offsetHeight > 0; }); }
     function collapsedH(k) {
       var t0 = k[0].getBoundingClientRect().top, t2 = null, h2 = 0, i;
       for (i = 0; i < k.length; i++) { var r = k[i].getBoundingClientRect(); if (r.top > t0 + 2) { t2 = r.top; break; } }
