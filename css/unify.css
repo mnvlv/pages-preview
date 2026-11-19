@@ -534,3 +534,10 @@ body .sv-stats--t>.sv-stat:last-child:nth-child(odd){grid-column:1/-1}
 body .sv-stats--t .sv-stat .sv-stat__top b{font-size:18px !important;line-height:1.15 !important}
 body .sv-stats--t .sv-stat .sv-stat__top small{font-size:12px !important;line-height:1.25 !important}
 }
+@media (max-width:768px){
+body .mb-opt{display:flex !important;flex-direction:column}
+body .mb-opt__body{display:contents !important}
+body .mb-opt__body h3{order:1;padding:20px 16px 0;margin-bottom:14px}
+body .mb-opt__img{order:2 !important;position:static !important;width:100% !important;height:180px !important;margin:0 0 6px;-webkit-mask-image:none !important;mask-image:none !important}
+body .mb-opt .mb-rows{order:3;padding:0 16px 16px}
+}
