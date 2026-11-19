@@ -527,3 +527,10 @@ body .sv-panel--photo{min-height:0 !important}
 @media (max-width:768px){
 body [data-marquee] .sv-pc--btn::before{background:linear-gradient(90deg,rgba(26,26,26,.88) 0,rgba(26,26,26,.55) 55%,rgba(26,26,26,.15) 100%),linear-gradient(0deg,rgba(26,26,26,.7) 0,rgba(26,26,26,0) 60%)}
 }
+@media (max-width:560px){
+body .sv-stats--t>.sv-stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+@media (max-width:560px){
+body .sv-stats--t .sv-stat .sv-stat__top b{font-size:18px !important;line-height:1.15 !important}
+body .sv-stats--t .sv-stat .sv-stat__top small{font-size:12px !important;line-height:1.25 !important}
+}
