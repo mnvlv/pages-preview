@@ -544,7 +544,7 @@ window.addEventListener('message', function (e) {
 /* ---------- Мобильные длинные списки карточек: первая видна, вторая под затемнением, стрелка раскрытия ---------- */
 (function () {
   var mq = window.matchMedia('(max-width: 768px)');
-  var SEL = '[data-tabsel], .cats, .w-types__grid, .m-adv, .m-cards, .sv-grid--4, .sv-grid--3, .sv-steps, .sv-mini, .tz-list, .tz-steps, .sv-org, .dp-when__list, .sv-stats:not(.sv-stats--t), .geo__stats, .dc-list, .sv-hero__inner > .sv-plaques, .mb-uses__list, .dp-uses, .rk-where__list, .rk-accs, .w-trust';
+  var SEL = '[data-tabsel], .cats, .w-types__grid, .m-adv, .m-cards, .sv-grid--4, .sv-grid--3, .sv-steps, .sv-mini, .tz-list, .tz-steps, .sv-org, .dp-when__list, .sv-stats:not(.sv-stats--t), .geo__stats, .dc-list, .sv-hero__inner > .sv-plaques, .mb-uses__list, .dp-uses, .rk-where__list, .rk-accs, .w-trust, .sv-panel .sv-checks, .sv-res';
   document.querySelectorAll(SEL).forEach(function (ul, i) {
     if (ul.hasAttribute("data-rail") || ul.hasAttribute("data-marquee") || ul.closest("[data-rail],[data-marquee]")) return;
     var btn = document.createElement('button');
@@ -763,5 +763,23 @@ window.addEventListener('message', function (e) {
         btn.setAttribute('aria-expanded', String(o));
       });
     });
+  });
+})();
+
+/* ---------- Панель-«раскрывающийся список» [data-acc-panel]: на мобильной заголовок открывает содержимое ---------- */
+(function () {
+  var mq = window.matchMedia('(max-width: 768px)');
+  document.querySelectorAll('[data-acc-panel]').forEach(function (p, i) {
+    var h = p.querySelector('.sv-panel__title');
+    if (!h) return;
+    var id = 'accp-' + i;
+    h.setAttribute('role', 'button'); h.setAttribute('tabindex', '0'); h.setAttribute('aria-expanded', 'false'); h.setAttribute('aria-controls', id);
+    var body = document.createElement('div');
+    body.className = 'accp-body'; body.id = id;
+    Array.prototype.slice.call(p.children).forEach(function (c) { if (c !== h && !c.classList.contains('sv-panel__img')) body.appendChild(c); });
+    p.appendChild(body);
+    function toggle() { if (!mq.matches) return; var o = p.classList.toggle('is-open'); h.setAttribute('aria-expanded', String(o)); }
+    h.addEventListener('click', toggle);
+    h.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
   });
 })();

@@ -504,3 +504,20 @@ body .slider-wrap__btn{display:none !important}
 @media (max-width:768px){
 body [data-shrink]>*{zoom:.8}
 }
+
+/* панель-аккордеон [data-acc-panel] */
+@media (max-width:768px){
+body [data-acc-panel] .sv-panel__title{display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;margin:0 !important}
+body [data-acc-panel] .sv-panel__title::after{content:"";flex:none;width:10px;height:10px;border-right:2px solid #ea5901;border-bottom:2px solid #ea5901;transform:rotate(45deg) translate(-2px,-2px);transition:transform .25s}
+body [data-acc-panel].is-open .sv-panel__title::after{transform:rotate(-135deg)}
+body [data-acc-panel]:not(.is-open) .accp-body{display:none}
+body [data-acc-panel]:not(.is-open) .sv-panel__img{display:none}
+body [data-acc-panel] .accp-body{margin-top:16px}
+}
+@media (max-width:768px){
+body [data-acc-panel]:not(.is-open){min-height:0 !important;height:auto !important;padding-bottom:20px !important;aspect-ratio:auto !important}
+}
+@media (max-width:768px){
+body .sv-res{grid-template-columns:minmax(0,1fr) !important;gap:14px !important;margin-top:20px !important;text-align:left !important}
+body .sv-res li{grid-template-columns:44px minmax(0,1fr);justify-items:start !important;align-items:center;align-content:center !important;gap:14px !important;text-align:left}
+}
