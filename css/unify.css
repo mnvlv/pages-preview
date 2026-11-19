@@ -565,3 +565,5 @@ body .whs__grid li:last-child .whs__tile img{margin:0 !important;height:44px}
 @media (max-width:768px){
 body .whs__grid[data-rail]{padding:4px 2px !important;margin:2px -2px !important;scroll-padding-left:2px}
 }
+.sv-partner{align-content:start !important}
+.sv-partner .sv-partner__cap{min-height:2.6em}

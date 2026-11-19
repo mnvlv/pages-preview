@@ -1,3 +1,9 @@
+/* iOS Safari шлёт resize при сворачивании адресной строки во время прокрутки: на такое (меняется только высота) не реагируем, иначе контент скачет. */
+(function () {
+  var ws = {}, st;
+  window.widthChanged = function (k) { var n = window.innerWidth; if (ws[k] === undefined) ws[k] = n; if (ws[k] === n) return false; ws[k] = n; return true; };
+  window.addEventListener('scroll', function () { window.__pageScrolling = true; clearTimeout(st); st = setTimeout(function () { window.__pageScrolling = false; }, 160); }, { passive: true });
+})();
 document.addEventListener('DOMContentLoaded', () => {
 
   // iOS Safari включает :active (подсветку при нажатии) только при наличии touch-обработчика
@@ -423,7 +429,7 @@ window.addEventListener('message', function (e) {
   }
   var t;
   function later() { clearTimeout(t); t = setTimeout(fix, 150); }
-  window.addEventListener('resize', later);
+  window.addEventListener('resize', function () { if (widthChanged('k1')) later(); });
   document.addEventListener('click', later);
   window.addEventListener('load', fix);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fix);
@@ -536,7 +542,7 @@ window.addEventListener('message', function (e) {
       }
     });
     var t;
-    window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(apply, 150); });
+    window.addEventListener('resize', function () { if (!widthChanged('k2')) return; clearTimeout(t); t = setTimeout(apply, 150); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(apply);
     apply();
   });
@@ -592,7 +598,7 @@ window.addEventListener('message', function (e) {
       if (e.target.closest('button') && mq.matches && open) setTimeout(function () { set(false); }, 0);
     });
     var t;
-    window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(apply, 120); });
+    window.addEventListener('resize', function () { if (!widthChanged('k3')) return; clearTimeout(t); t = setTimeout(apply, 120); });
     if (window.MutationObserver) new MutationObserver(function () { open = false; btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', 'Показать все'); apply(); }).observe(ul, { childList: true });
     window.addEventListener('load', apply);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(apply);
@@ -626,7 +632,7 @@ window.addEventListener('message', function (e) {
   function tick(t) {
     requestAnimationFrame(tick);
     var dt = Math.min(t - last, 250); last = t;
-    if (!mq.matches || rm.matches || !visible || down || t - userAt < 2500) { pos = box.scrollLeft; return; }
+    if (!mq.matches || rm.matches || !visible || down || window.__pageScrolling || t - userAt < 2500) { pos = box.scrollLeft; return; }
     var w = loopW();
     if (w <= 0) return;
     pos += dt * 0.03;
@@ -727,7 +733,7 @@ window.addEventListener('message', function (e) {
     requestAnimationFrame(tick);
     var dt = Math.min(t - last, 250); last = t;
     states.forEach(function (s) {
-      if (!mq.matches || rm.matches || !s.visible || s.down || t - s.userAt < 2500) { s.pos = s.box.scrollLeft; return; }
+      if (!mq.matches || rm.matches || !s.visible || s.down || window.__pageScrolling || t - s.userAt < 2500) { s.pos = s.box.scrollLeft; return; }
       var w = loopW(s);
       if (w <= 0) return;
       s.pos += dt * 0.03;
