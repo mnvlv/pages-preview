@@ -606,41 +606,63 @@ window.addEventListener('message', function (e) {
   });
 })();
 
-/* ---------- Партнёры (мобильная): бегущая карусель с ручной прокруткой ---------- */
+/* ---------- Мобильные бегущие ленты (партнёры .sv-partners и [data-marquee]): автодвижение + перетаскивание пальцем.
+   Двигаем transform (а не scrollLeft): на iOS программная прокрутка scrollLeft дёргалась и «откатывалась» назад. ---------- */
 (function () {
-  var box = document.querySelector('.sv-partners');
-  if (!box) return;
   var mq = window.matchMedia('(max-width: 768px)');
   var rm = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var orig = Array.prototype.slice.call(box.children);
-  orig.forEach(function (li) {
-    var c = li.cloneNode(true);
-    c.classList.add('sv-partner--clone'); c.setAttribute('aria-hidden', 'true');
-    box.appendChild(c);
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.sv-partners, [data-marquee]'));
+  if (!boxes.length) return;
+  var tapes = boxes.map(function (box) {
+    var partners = box.classList.contains('sv-partners');
+    var orig = Array.prototype.slice.call(box.children);
+    orig.forEach(function (li) {
+      var c = li.cloneNode(true);
+      c.classList.add(partners ? 'sv-partner--clone' : 'mq-clone'); c.setAttribute('aria-hidden', 'true');
+      c.querySelectorAll('a,button,input').forEach(function (x) { x.tabIndex = -1; });
+      box.appendChild(c);
+    });
+    var t = { box: box, n: orig.length, pos: 0, visible: true, hold: 0, drag: null, moved: false };
+    box.classList.add('is-tape');
+    if (window.IntersectionObserver) new IntersectionObserver(function (en) { t.visible = en[0].isIntersecting; }).observe(box);
+    function pt(e) { return e.touches ? e.touches[0] : e; }
+    box.addEventListener('pointerdown', function (e) {
+      if (!mq.matches || (e.pointerType === 'mouse' && e.button !== 0)) return;
+      t.drag = { x: e.clientX, y: e.clientY, pos: t.pos, on: false, id: e.pointerId };
+    });
+    box.addEventListener('pointermove', function (e) {
+      var d = t.drag; if (!d || e.pointerId !== d.id) return;
+      var dx = e.clientX - d.x, dy = e.clientY - d.y;
+      if (!d.on) { if (Math.abs(dx) < 6 || Math.abs(dx) < Math.abs(dy)) return; d.on = true; t.moved = true; try { box.setPointerCapture(e.pointerId); } catch (x) {} }
+      t.pos = d.pos - dx; t.hold = performance.now();
+    });
+    function end(e) { var d = t.drag; if (!d || e.pointerId !== d.id) return; t.drag = null; t.hold = performance.now(); setTimeout(function () { t.moved = false; }, 0); }
+    ['pointerup', 'pointercancel'].forEach(function (n) { box.addEventListener(n, end); });
+    box.addEventListener('click', function (e) { if (t.moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+    return t;
   });
-  var pos = 0, last = 0, userAt = -1e9, visible = true, down = false;
-  function loopW() { return box.children[orig.length].offsetLeft - box.children[0].offsetLeft; }
-  function touch() { userAt = performance.now(); }
-  ['pointerdown', 'touchstart', 'wheel'].forEach(function (e) { box.addEventListener(e, function () { touch(); if (e !== 'wheel') down = true; }, { passive: true }); });
-  ['pointerup', 'pointercancel', 'touchend', 'touchcancel'].forEach(function (e) { window.addEventListener(e, function () { down = false; touch(); }, { passive: true }); });
-  box.addEventListener('scroll', function () {
-    if (performance.now() - userAt < 2500) { pos = box.scrollLeft; }
-    var w = loopW();
-    if (w > 0 && box.scrollLeft >= w) { box.scrollLeft -= w; pos = box.scrollLeft; }
-  }, { passive: true });
-  if (window.IntersectionObserver) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(box);
-  function tick(t) {
+  function loopW(t) { return t.box.children[t.n].offsetLeft - t.box.children[0].offsetLeft; }
+  function paint(t, on) {
+    var x = on ? -t.pos : 0, k = t.box.children, i;
+    for (i = 0; i < k.length; i++) k[i].style.transform = on ? 'translate3d(' + x + 'px,0,0)' : '';
+  }
+  var last = 0;
+  function tick(now) {
     requestAnimationFrame(tick);
-    var dt = Math.min(t - last, 250); last = t;
-    if (!mq.matches || rm.matches || !visible || down || window.__pageScrolling || t - userAt < 2500) { pos = box.scrollLeft; return; }
-    var w = loopW();
-    if (w <= 0) return;
-    pos += dt * 0.03;
-    if (pos >= w) pos -= w;
-    box.scrollLeft = pos;
+    var dt = Math.min(now - last, 100); last = now;
+    tapes.forEach(function (t) {
+      if (!mq.matches) { if (t.on) { t.on = false; t.pos = 0; paint(t, false); } return; }
+      t.on = true;
+      var w = loopW(t); if (w <= 0) return;
+      if (t.visible && !rm.matches && !t.drag && now - t.hold > 1800) t.pos += dt * 0.03;
+      else if (!t.visible && !t.drag) return;
+      t.pos = ((t.pos % w) + w) % w;
+      paint(t, true);
+    });
   }
   requestAnimationFrame(tick);
 })();
+
 
 /* ---------- Отзывы клиентов: карусель (автопрокрутка + свайп). Отзывы с 2ГИС / Яндекса добавлять в .sv-revs как <div class="sv-rev">…</div> — карусель подхватит их сама ---------- */
 (function () {
@@ -699,49 +721,6 @@ window.addEventListener('message', function (e) {
     }, DELAY);
     build();
   });
-})();
-
-/* ---------- Мобильная «непрерывная лента»: [data-marquee] — автопрокрутка + свайп (как у партнёров) ---------- */
-(function () {
-  var mq = window.matchMedia('(max-width: 768px)');
-  var rm = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var boxes = Array.prototype.slice.call(document.querySelectorAll('[data-marquee]'));
-  if (!boxes.length) return;
-  var states = boxes.map(function (box) {
-    var orig = Array.prototype.slice.call(box.children);
-    orig.forEach(function (li) {
-      var c = li.cloneNode(true);
-      c.classList.add('mq-clone'); c.setAttribute('aria-hidden', 'true');
-      c.querySelectorAll('a,button,input').forEach(function (x) { x.tabIndex = -1; });
-      box.appendChild(c);
-    });
-    var s = { box: box, n: orig.length, pos: 0, userAt: -1e9, visible: true, down: false };
-    function touch() { s.userAt = performance.now(); }
-    ['pointerdown', 'touchstart', 'wheel'].forEach(function (e) { box.addEventListener(e, function () { touch(); if (e !== 'wheel') s.down = true; }, { passive: true }); });
-    ['pointerup', 'pointercancel', 'touchend', 'touchcancel'].forEach(function (e) { window.addEventListener(e, function () { s.down = false; touch(); }, { passive: true }); });
-    box.addEventListener('scroll', function () {
-      if (performance.now() - s.userAt < 2500) s.pos = box.scrollLeft;
-      var w = loopW(s);
-      if (w > 0 && box.scrollLeft >= w) { box.scrollLeft -= w; s.pos = box.scrollLeft; }
-    }, { passive: true });
-    if (window.IntersectionObserver) new IntersectionObserver(function (en) { s.visible = en[0].isIntersecting; }).observe(box);
-    return s;
-  });
-  function loopW(s) { return s.box.children[s.n].offsetLeft - s.box.children[0].offsetLeft; }
-  var last = 0;
-  function tick(t) {
-    requestAnimationFrame(tick);
-    var dt = Math.min(t - last, 250); last = t;
-    states.forEach(function (s) {
-      if (!mq.matches || rm.matches || !s.visible || s.down || window.__pageScrolling || t - s.userAt < 2500) { s.pos = s.box.scrollLeft; return; }
-      var w = loopW(s);
-      if (w <= 0) return;
-      s.pos += dt * 0.03;
-      if (s.pos >= w) s.pos -= w;
-      s.box.scrollLeft = s.pos;
-    });
-  }
-  requestAnimationFrame(tick);
 })();
 
 /* ---------- Мобильный «раскрывающийся список» для [data-acc] (заголовок = первый strong/b, остальное — тело) ---------- */

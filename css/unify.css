@@ -567,3 +567,8 @@ body .whs__grid[data-rail]{padding:4px 2px !important;margin:2px -2px !important
 }
 .sv-partner{align-content:start !important}
 .sv-partner .sv-partner__cap{min-height:2.6em}
+@media (max-width:768px){
+body .is-tape{overflow-x:hidden !important;touch-action:pan-y;-webkit-user-select:none;user-select:none}
+body .is-tape>*{will-change:transform;-webkit-user-drag:none}
+body .is-tape img{-webkit-user-drag:none;pointer-events:none}
+}
