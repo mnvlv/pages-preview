@@ -544,7 +544,7 @@ window.addEventListener('message', function (e) {
 /* ---------- Мобильные длинные списки карточек: первая видна, вторая под затемнением, стрелка раскрытия ---------- */
 (function () {
   var mq = window.matchMedia('(max-width: 768px)');
-  var SEL = '[data-tabsel], .cats, .w-types__grid, .m-adv, .m-cards, .sv-grid--4, .sv-grid--3, .sv-steps, .sv-mini, .tz-list, .tz-steps, .sv-org, .dp-when__list, .sv-stats:not(.sv-stats--t), .geo__stats, .dc-list, .sv-hero__inner > .sv-plaques, .mb-uses__list, .dp-uses, .rk-where__list, .rk-accs, .w-trust, .sv-panel .sv-checks, .sv-res';
+  var SEL = '[data-tabsel], .cats, .w-types__grid, .m-adv, .m-cards, .sv-grid--4, .sv-grid--3, .sv-steps, .sv-mini, .tz-list, .tz-steps, .sv-org, .dp-when__list, .sv-stats:not(.sv-stats--t), .geo__stats, .dc-list, .sv-hero__inner > .sv-plaques, .mb-uses__list, .dp-uses, .rk-where__list, .rk-accs, .w-trust, .sv-panel .sv-checks, .sv-res, .mb-adv ul';
   document.querySelectorAll(SEL).forEach(function (ul, i) {
     if (ul.hasAttribute("data-rail") || ul.hasAttribute("data-marquee") || ul.closest("[data-rail],[data-marquee]")) return;
     var btn = document.createElement('button');
