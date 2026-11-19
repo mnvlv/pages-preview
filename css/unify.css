@@ -524,3 +524,6 @@ body .sv-res li{grid-template-columns:44px minmax(0,1fr);justify-items:start !im
 @media (max-width:768px){
 body .sv-panel--photo{min-height:0 !important}
 }
+@media (max-width:768px){
+body [data-marquee] .sv-pc--btn::before{background:linear-gradient(90deg,rgba(26,26,26,.88) 0,rgba(26,26,26,.55) 55%,rgba(26,26,26,.15) 100%),linear-gradient(0deg,rgba(26,26,26,.7) 0,rgba(26,26,26,0) 60%)}
+}
