@@ -541,3 +541,6 @@ body .mb-opt__body h3{order:1;padding:20px 16px 0;margin-bottom:14px}
 body .mb-opt__img{order:2 !important;position:static !important;width:100% !important;height:180px !important;margin:0 0 6px;-webkit-mask-image:none !important;mask-image:none !important}
 body .mb-opt .mb-rows{order:3;padding:0 16px 16px}
 }
+@media (max-width:768px){
+body .h2--fit{font-size:clamp(18px,6vw,32px) !important;hyphens:manual;overflow-wrap:normal}
+}
