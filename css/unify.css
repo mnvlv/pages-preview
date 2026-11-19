@@ -562,3 +562,6 @@ body .whs__tile img{flex:none;margin:0 !important;width:56px;height:44px}
 body .whs__grid li:last-child .whs__tile{padding-top:12px !important}
 body .whs__grid li:last-child .whs__tile img{margin:0 !important;height:44px}
 }
+@media (max-width:768px){
+body .whs__grid[data-rail]{padding-block:4px !important;margin-block:2px !important}
+}
