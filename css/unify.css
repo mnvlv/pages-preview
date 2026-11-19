@@ -521,3 +521,6 @@ body [data-acc-panel]:not(.is-open){min-height:0 !important;height:auto !importa
 body .sv-res{grid-template-columns:minmax(0,1fr) !important;gap:14px !important;margin-top:20px !important;text-align:left !important}
 body .sv-res li{grid-template-columns:44px minmax(0,1fr);justify-items:start !important;align-items:center;align-content:center !important;gap:14px !important;text-align:left}
 }
+@media (max-width:768px){
+body .sv-panel--photo{min-height:0 !important}
+}
