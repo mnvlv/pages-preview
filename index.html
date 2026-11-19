@@ -33,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=80">
-  <link rel="stylesheet" href="css/unify.css?v=104">
+  <link rel="stylesheet" href="css/unify.css?v=109">
 <link rel="stylesheet" href="css/light.css?v=1"><script src="js/theme.js?v=1"></script></head>
 <body>
 
@@ -187,7 +187,7 @@
       <h2 class="h2">Подберите решения для вашего склада</h2>
       <p class="lead">Широкий ассортимент оборудования для складов, производства,<br> офиса, медицины и хранения ценностей. Подберем решение<br> под ваши задачи и бюджет</p>
 
-            <ul class="cats">
+            <ul class="cats" data-marquee style="--mq-w:70%">
         <li class="cat cat--main" style="--img:url('../img/cat-1.webp')">
           <span class="cat__num">01</span>
           <h3 class="cat__title">Металлические<br> стеллажи</h3>
@@ -268,7 +268,7 @@
         <p class="lead">Ответьте на несколько вопросов и получите рекомендации<br> по оборудованию и расчет стоимости</p>
         <a href="#request" class="btn btn--primary btn--lg">Оставить заявку <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
-      <ul class="whs__grid">
+      <ul class="whs__grid" data-rail data-rail-rows="2" style="--rail-w:46%">
         <li><a href="#request" class="whs__tile" data-warehouse="logistics"><img class="ic ic--b" src="img/ic/b/icons-wh-1.svg" alt="">Логистический<br> склад</a></li>
         <li><a href="#request" class="whs__tile" data-warehouse="production"><img class="ic ic--b" src="img/ic/b/icons-wh-2.svg" alt="">Производственный<br> склад</a></li>
         <li><a href="#request" class="whs__tile" data-warehouse="trade"><img class="ic ic--b" src="img/ic/b/icons-wh-3.svg" alt="">Склад<br> для маркетплейсов</a></li>
@@ -293,7 +293,7 @@
       <div class="slider-wrap">
       <button class="slider-nav__btn slider-wrap__btn slider-wrap__btn--prev" type="button" data-slider-prev="projectsSlider" aria-label="Предыдущий проект"><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
       <button class="slider-nav__btn slider-wrap__btn slider-wrap__btn--next" type="button" data-slider-next="projectsSlider" aria-label="Следующий проект"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
-      <ul class="slider" id="projectsSlider">
+      <ul class="slider" id="projectsSlider" data-rail style="--rail-w:100%;--rail-gap:16px">
         <li class="project"><div class="project__img" style="--img:url('../img/project-1.webp')"></div><h3 class="project__title">Холодильный склад</h3><p class="project__text">Фронтальные стеллажи для хранения пищевой продукции, г. Красноярск</p></li>
         <li class="project"><div class="project__img" style="--img:url('../img/project-2.webp')"></div><h3 class="project__title">Фармацевтический склад</h3><p class="project__text">Среднегрузовые стеллажи, г. Красноярск</p></li>
         <li class="project"><div class="project__img" style="--img:url('../img/project-3.webp')"></div><h3 class="project__title">Автосервис</h3><p class="project__text">Стеллажное хранение запчастей и комплектующих, г. Красноярск</p></li>
@@ -487,6 +487,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=82"></script>
+<script src="js/main.js?v=84"></script>
 </body>
 </html>

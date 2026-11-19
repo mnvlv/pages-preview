@@ -73,7 +73,18 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- Подкатегории в карточках категорий (как на текущем сайте): наведение на десктопе, клик по стрелке ---------- */
   const hoverable = window.matchMedia('(hover: hover) and (min-width: 1025px)');
   const drops = [...document.querySelectorAll('[data-cat-drop]')];
-  const setDrop = (card, open) => card.querySelector('.cat-card__toggle').setAttribute('aria-expanded', String(open));
+  const fitSub = (card) => {
+    const sub = card.querySelector('.cat-card__sub') || card.parentElement.querySelector('.cat-card__sub');
+    if (!sub) return;
+    sub.style.translate = '0px 0';
+    const r = sub.getBoundingClientRect(), vw = document.documentElement.clientWidth, m = 8;
+    let dx = 0;
+    if (r.right > vw - m) dx = vw - m - r.right;
+    if (r.left + dx < m) dx = m - r.left;
+    sub.style.translate = dx + 'px 0';
+  };
+  const setDrop = (card, open) => { card.querySelector('.cat-card__toggle').setAttribute('aria-expanded', String(open)); if (open) fitSub(card); };
+  window.addEventListener('resize', () => drops.forEach((c) => { if (c.querySelector('.cat-card__toggle').getAttribute('aria-expanded') === 'true') fitSub(c); }));
   drops.forEach((card) => {
     const btn = card.querySelector('.cat-card__toggle');
     btn.addEventListener('click', () => {

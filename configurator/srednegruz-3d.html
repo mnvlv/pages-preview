@@ -220,6 +220,10 @@ button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); o
   .sep { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .pin::before { animation: none; } * { transition: none !important; } }
+
+.rk-wheel-hint{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:5;padding:7px 12px;border-radius:6px;background:rgba(26,26,26,.85);border:1px solid #515151;color:#fff;font:500 12px/1.2 'Golos Text',system-ui,sans-serif;pointer-events:none;white-space:nowrap;transition:opacity .2s}
+.rk-wheel-hint.is-off{opacity:0}
+@media (pointer:coarse){.rk-wheel-hint{display:none}}
 </style>
 <meta name="robots" content="noindex">
 <style>
@@ -402,10 +406,20 @@ const camera = new THREE.PerspectiveCamera(36, 1, .03, 200);
 const controls = new OrbitControls(camera, renderer.domElement);
 /* Диаском: страница не должна «залипать» на конфигураторе — колесо мыши масштабирует сцену только с Ctrl (или щипком на тачпаде), иначе прокручивается страница; на сенсорных экранах один палец листает страницу, два — вращают/масштабируют */
 controls.enableZoom = false;
-renderer.domElement.addEventListener('wheel', e => { if (e.ctrlKey || e.metaKey) { controls.enableZoom = true; } else { controls.enableZoom = false; e.stopImmediatePropagation(); } }, { capture: true, passive: true });
+/* Диаском: «активация кликом» — пока по сцене не кликнули, колесо листает страницу; после клика колесо масштабирует сцену, уход курсора/клик вне сцены возвращает прокрутку страницы */
+let rkActive = false;
+const rkHint = document.createElement('div');
+rkHint.className = 'rk-wheel-hint'; rkHint.textContent = 'Кликните по модели, чтобы масштабировать колесом';
+document.body.appendChild(rkHint);
+const rkSet = v => { rkActive = v; rkHint.classList.toggle('is-off', v); };
+renderer.domElement.addEventListener('pointerdown', () => rkSet(true));
+renderer.domElement.addEventListener('pointerleave', () => rkSet(false));
+addEventListener('blur', () => rkSet(false));
+document.addEventListener('pointerdown', e => { if (e.target !== renderer.domElement) rkSet(false); });
+renderer.domElement.addEventListener('wheel', e => { if (rkActive || e.ctrlKey || e.metaKey) { controls.enableZoom = true; } else { controls.enableZoom = false; e.stopImmediatePropagation(); } }, { capture: true, passive: true });
 /* Диаском: прокрутка колесом над сценой листает страницу (пересылаем её родителю), а не залипает на конфигураторе */
 addEventListener('wheel', e => {
-  if (e.ctrlKey || e.metaKey || window.parent === window) return;
+  if (rkActive || e.ctrlKey || e.metaKey || window.parent === window) return;
   for (let n = e.target; n && n !== document.documentElement; n = n.parentElement) {
     const o = getComputedStyle(n).overflowY;
     if ((o === 'auto' || o === 'scroll') && n.scrollHeight > n.clientHeight + 1) return;

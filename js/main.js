@@ -546,7 +546,7 @@ window.addEventListener('message', function (e) {
   var mq = window.matchMedia('(max-width: 768px)');
   var SEL = '[data-tabsel], .cats, .w-types__grid, .m-adv, .m-cards, .sv-grid--4, .sv-grid--3, .sv-steps, .sv-mini, .tz-list, .tz-steps, .sv-org, .dp-when__list, .sv-stats:not(.sv-stats--t), .geo__stats, .dc-list, .sv-hero__inner > .sv-plaques, .mb-uses__list, .dp-uses, .rk-where__list, .rk-accs, .w-trust';
   document.querySelectorAll(SEL).forEach(function (ul, i) {
-    if (ul.hasAttribute('data-rail') || ul.closest('[data-rail]')) return;
+    if (ul.hasAttribute("data-rail") || ul.hasAttribute("data-marquee") || ul.closest("[data-rail],[data-marquee]")) return;
     var btn = document.createElement('button');
     btn.type = 'button'; btn.className = 'tabsel-toggle'; btn.hidden = true;
     btn.setAttribute('aria-expanded', 'false');
@@ -692,5 +692,76 @@ window.addEventListener('message', function (e) {
       go(idx + 1);
     }, DELAY);
     build();
+  });
+})();
+
+/* ---------- Мобильная «непрерывная лента»: [data-marquee] — автопрокрутка + свайп (как у партнёров) ---------- */
+(function () {
+  var mq = window.matchMedia('(max-width: 768px)');
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('[data-marquee]'));
+  if (!boxes.length) return;
+  var states = boxes.map(function (box) {
+    var orig = Array.prototype.slice.call(box.children);
+    orig.forEach(function (li) {
+      var c = li.cloneNode(true);
+      c.classList.add('mq-clone'); c.setAttribute('aria-hidden', 'true');
+      c.querySelectorAll('a,button,input').forEach(function (x) { x.tabIndex = -1; });
+      box.appendChild(c);
+    });
+    var s = { box: box, n: orig.length, pos: 0, userAt: -1e9, visible: true, down: false };
+    function touch() { s.userAt = performance.now(); }
+    ['pointerdown', 'touchstart', 'wheel'].forEach(function (e) { box.addEventListener(e, function () { touch(); if (e !== 'wheel') s.down = true; }, { passive: true }); });
+    ['pointerup', 'pointercancel', 'touchend', 'touchcancel'].forEach(function (e) { window.addEventListener(e, function () { s.down = false; touch(); }, { passive: true }); });
+    box.addEventListener('scroll', function () {
+      if (performance.now() - s.userAt < 2500) s.pos = box.scrollLeft;
+      var w = loopW(s);
+      if (w > 0 && box.scrollLeft >= w) { box.scrollLeft -= w; s.pos = box.scrollLeft; }
+    }, { passive: true });
+    if (window.IntersectionObserver) new IntersectionObserver(function (en) { s.visible = en[0].isIntersecting; }).observe(box);
+    return s;
+  });
+  function loopW(s) { return s.box.children[s.n].offsetLeft - s.box.children[0].offsetLeft; }
+  var last = 0;
+  function tick(t) {
+    requestAnimationFrame(tick);
+    var dt = Math.min(t - last, 250); last = t;
+    states.forEach(function (s) {
+      if (!mq.matches || rm.matches || !s.visible || s.down || t - s.userAt < 2500) { s.pos = s.box.scrollLeft; return; }
+      var w = loopW(s);
+      if (w <= 0) return;
+      s.pos += dt * 0.03;
+      if (s.pos >= w) s.pos -= w;
+      s.box.scrollLeft = s.pos;
+    });
+  }
+  requestAnimationFrame(tick);
+})();
+
+/* ---------- Мобильный «раскрывающийся список» для [data-acc] (заголовок = первый strong/b, остальное — тело) ---------- */
+(function () {
+  document.querySelectorAll('[data-acc]').forEach(function (ul, k) {
+    Array.prototype.forEach.call(ul.children, function (li, i) {
+      var head = li.querySelector('strong, b');
+      if (!head) return;
+      var body = head.parentElement === li ? null : head.parentElement;
+      var btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'acc-btn';
+      btn.setAttribute('aria-expanded', 'false');
+      var id = 'acc-' + k + '-' + i;
+      btn.setAttribute('aria-controls', id);
+      btn.innerHTML = '<span class="acc-btn__t"></span><svg viewBox="0 0 12 8" width="12" height="8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 1l5 5 5-5"/></svg>';
+      btn.querySelector('.acc-btn__t').appendChild(head.cloneNode(true));
+      var panel = body || document.createElement('div');
+      if (!body) { Array.prototype.slice.call(li.children).forEach(function (c) { if (c !== head) panel.appendChild(c); }); }
+      panel.id = id; panel.classList.add('acc-panel');
+      li.classList.add('acc-item');
+      li.insertBefore(btn, li.firstChild);
+      head.classList.add('acc-orig');
+      btn.addEventListener('click', function () {
+        var o = li.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', String(o));
+      });
+    });
   });
 })();

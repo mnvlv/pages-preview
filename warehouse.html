@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="css/mining.css?v=7">
   <link rel="stylesheet" href="css/catalog.css?v=22">
   <link rel="stylesheet" href="css/warehouse.css?v=7">
-  <link rel="stylesheet" href="css/unify.css?v=104">
+  <link rel="stylesheet" href="css/unify.css?v=109">
 <link rel="stylesheet" href="css/light.css?v=1"><script src="js/theme.js?v=1"></script></head>
 <body class="page-warehouse">
 
@@ -195,7 +195,7 @@
           <h2 class="w-pick__title">Подберем стеллаж <span class="accent">именно под ваш склад</span></h2>
           <p>Подберем оптимальное решение под ваш склад,<br> тип груза и необходимую нагрузку</p>
         </div>
-        <ul class="w-pick__items">
+        <ul class="w-pick__items" data-acc>
           <li><span class="w-pick__ic"><img src="img/warehouse/pick-1.webp" width="55" height="41" alt="Тип груза"></span><div><strong>Тип груза</strong><span>учитываем особенности<br> и габариты</span></div></li>
           <li><span class="w-pick__ic"><img src="img/warehouse/pick-2.webp" width="44" height="39" alt="Нагрузка"></span><div><strong>Нагрузка</strong><span>подберем стеллаж<br> под нужный вес</span></div></li>
           <li><span class="w-pick__ic"><img src="img/warehouse/pick-3.webp" width="47" height="38" alt="Размеры склада"></span><div><strong>Размеры склада</strong><span>эффективно используем<br> площадь и высоту</span></div></li>
@@ -215,7 +215,7 @@
   <section class="section w-types">
     <div class="container">
       <h2 class="h2">Виды стеллажей</h2>
-      <ul class="w-types__grid">
+      <ul class="w-types__grid" data-rail style="--rail-w:80%">
         <li class="w-type">
           <div class="w-type__img"><img src="img/warehouse/type-1.webp" width="436" height="190" alt="Паллетные стеллажи" loading="lazy"><span class="w-badge w-badge--hit">Хит</span></div>
           <h3 class="w-type__title">Паллетные стеллажи</h3>
@@ -315,7 +315,7 @@
       <div class="slider-wrap">
       <button class="slider-nav__btn slider-wrap__btn slider-wrap__btn--prev" type="button" data-slider-prev="projectsSlider" aria-label="Предыдущий проект"><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
       <button class="slider-nav__btn slider-wrap__btn slider-wrap__btn--next" type="button" data-slider-next="projectsSlider" aria-label="Следующий проект"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
-      <ul class="slider" id="projectsSlider">
+      <ul class="slider" id="projectsSlider" data-rail style="--rail-w:100%;--rail-gap:16px">
         <li class="project"><div class="project__img" style="--img:url('../img/project-1.webp')"></div><h3 class="project__title">Холодильный склад</h3><p class="project__text">Фронтальные стеллажи для хранения пищевой продукции, г. Красноярск</p></li>
         <li class="project"><div class="project__img" style="--img:url('../img/project-2.webp')"></div><h3 class="project__title">Фармацевтический склад</h3><p class="project__text">Среднегрузовые стеллажи, г. Красноярск</p></li>
         <li class="project"><div class="project__img" style="--img:url('../img/project-3.webp')"></div><h3 class="project__title">Автосервис</h3><p class="project__text">Стеллажное хранение запчастей и комплектующих, г. Красноярск</p></li>
@@ -509,7 +509,7 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=82"></script>
+<script src="js/main.js?v=84"></script>
 <script src="js/catalog.js?v=3"></script>
 </body>
 </html>
