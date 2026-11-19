@@ -545,3 +545,7 @@ body .mb-opt .mb-rows{order:3;padding:0 16px 16px}
 body .h2--fit{font-size:clamp(18px,6vw,32px) !important;hyphens:manual;overflow-wrap:normal}
 }
 html[data-theme="light"] body .mb-adv h2,html[data-theme="light"] body .mb-adv h3,html[data-theme="light"] body .mb-adv li,html[data-theme="light"] body .mb-adv li b,html[data-theme="light"] body .mb-adv li span{color:#fff}
+@media (max-width:768px){
+body .rk-where__list[data-rail]>li:last-child:nth-child(odd){grid-column:auto}
+body .rk-where__list[data-rail]>li:last-child:nth-child(odd) img{aspect-ratio:4/3}
+}
