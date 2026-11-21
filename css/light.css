@@ -206,17 +206,19 @@ html[data-theme="light"] .mega__head{color:var(--c-text)}
 html[data-theme="light"] .btn--primary,html[data-theme="light"] .slider-nav__btn{color:var(--c-on-accent)}
 html[data-theme="light"] .btn--primary:hover,html[data-theme="light"] .btn--primary:focus-visible{color:var(--c-text)}
 
-/* тёмные «острова» с фото: возвращаем светлый текст */
-html[data-theme="light"] :is(.sv-hero,.m-hero,.rk-hero,.dp-hero,.w-hero,.mb-hero,.cat,.sv-pc,.project__img,.sv-dir,.dp-use,.dp-badge,.c-use__slider li,.sv-panel--rev,.tz-comp__box,.rk-var li){
+/* тёмные «острова» с фото: возвращаем светлый текст (первые экраны страниц — светлые по макету, см. конец файла) */
+html[data-theme="light"] :is(.cat,.sv-pc,.project__img,.sv-dir,.dp-use,.dp-badge,.c-use__slider li,.sv-panel--rev,.tz-comp__box,.rk-var li){
   --c-text:#fff;--c-text-2:#fff;--c-bg:#1a1a1a;--c-surface:#232323;--c-border:#585858;--c-border-soft:#303030;color:#fff}
-html[data-theme="light"] :is(.sv-hero,.m-hero,.rk-hero,.dp-hero,.w-hero,.mb-hero) :is(h1,h2,h3,p,li,b,small,span,a,dt,dd):not(.accent):not([class*="btn"]){color:#fff}
-html[data-theme="light"] :is(.sv-hero,.m-hero,.rk-hero,.dp-hero,.w-hero,.mb-hero) .accent{color:var(--c-accent)}
 /* линейные белые иконки/картинки на светлом фоне */
-html[data-theme="light"] .advantage__icon,html[data-theme="light"] .advantage img{filter:invert(1) hue-rotate(180deg)}
+/* «Наши преимущества»: светлые иконки из макета (1772:556–559), а не инверсия тёмных; размеры и отступы — из макета. Картинка подменяется фоном, тег img остаётся */
+html[data-theme="light"] .advantage__icon{object-position:-9999px 0;background:center/100% 100% no-repeat}
+html[data-theme="light"] .advantage:nth-child(1){--ix:0;--iy:0;--iw:109;--ih:110}html[data-theme="light"] .advantage:nth-child(1) .advantage__icon{background-image:url(../img/adv-1-light.webp)}
+html[data-theme="light"] .advantage:nth-child(2){--ix:1;--iy:0;--iw:144;--ih:110}html[data-theme="light"] .advantage:nth-child(2) .advantage__icon{background-image:url(../img/adv-2-light.webp)}
+html[data-theme="light"] .advantage:nth-child(3){--ix:7;--iy:0;--iw:95;--ih:110}html[data-theme="light"] .advantage:nth-child(3) .advantage__icon{background-image:url(../img/adv-3-light.webp)}
+html[data-theme="light"] .advantage:nth-child(4){--ix:14;--iy:0;--iw:118;--ih:110}html[data-theme="light"] .advantage:nth-child(4) .advantage__icon{background-image:url(../img/adv-4-light.webp)}
 html[data-theme="light"] .partner__img:not(.partner__img--color){filter:invert(1) brightness(.55)}
 html[data-theme="light"] .partner:hover .partner__img:not(.partner__img--color){filter:none}
 
-html[data-theme="light"] :is(.sv-hero,.m-hero,.rk-hero,.dp-hero,.w-hero,.mb-hero){background-color:#1a1a1a;isolation:isolate}
 html[data-theme="light"] :is(.sv-dir,.dp-use,.dp-badge) :is(b,span,a,p){color:#fff}
 html[data-theme="light"] .dp-use__cap{background:#1d1d1d !important}
 html[data-theme="light"] .dp-badge{background:rgba(26,26,26,.9) !important}
@@ -224,7 +226,8 @@ html[data-theme="light"] .dp-badge{background:rgba(26,26,26,.9) !important}
 html[data-theme="light"] .request{background:rgba(255,255,255,.14)}
 html[data-theme="light"] .request::before{opacity:.05}
 /* карта поставок: светлая версия тёмной картинки */
-html[data-theme="light"] .geo__map{filter:invert(1) hue-rotate(180deg)}
+/* карта поставок (главная, «Стеллажи для склада», майнинг): светлая карта из макета (1772:639) вместо инверсии или тёмной карты */
+html[data-theme="light"] :is(.geo__map,.m-card__map){object-position:-9999px 0;background:url(../img/map-light.webp) 0 0/100% 100% no-repeat}
 
 /* ===== каталог и карточка товара по макету (фреймы 1772:1077 и 1772:1444) ===== */
 /* первый экран каталога в макете светлый: своя светлая фотография, тёмный текст */
@@ -242,7 +245,7 @@ html[data-theme="light"] .pd-sku,html[data-theme="light"] .pd-price s,html[data-
 html[data-theme="light"] .pd-table th,html[data-theme="light"] .pd-card__sku,html[data-theme="light"] .pd-card__price s{color:var(--c-muted-2)}
 /* мини-таблица в блоке покупки: строки одного цвета, разделители #585858 */
 html[data-theme="light"] .pd-table--mini tr:nth-child(n){background:var(--c-surface)}
-html[data-theme="light"] .pd-table--mini tr + tr > *{border-top:1px solid var(--c-border)}
+html[data-theme="light"] .pd-table--mini tr + tr > *{box-shadow:inset 0 1px 0 var(--c-border)}
 
 /* ===== состояния: правила выше перебивали наведение и активные пункты, возвращаем ===== */
 html[data-theme="light"] .btn--outline:is(:hover,:focus-visible),
@@ -281,3 +284,46 @@ html[data-theme="light"] .dc-select{background-image:url("data:image/svg+xml,%3C
 html[data-theme="light"] .dc-select option{background:var(--c-surface);color:var(--c-text)}
 /* «Не нашли свою сферу?»: тёмно-коричневая плашка без фото — в светлой теме светлая с оранжевым оттенком */
 html[data-theme="light"] .sv-org__cta{background:var(--c-accent-tint)}
+/* ===== светлые первые экраны по макету: «Среднегрузовые» 1808:3186, «Паллетные» 1808:3226, «Мезонинные» 1808:3263, «Стеллажи для склада» 1822:3390 ===== */
+/* фото уже растворяются в фон #fff0e6; мягкая маска по краям прячет шов (цвет растушёвки в файле чуть отличается от фона). Координаты — из фреймов 1440 px */
+html[data-theme="light"] .rk-hero::before{background-size:100% 100%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%),linear-gradient(180deg,transparent 0,#000 8%,#000 84%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%),linear-gradient(180deg,transparent 0,#000 8%,#000 84%,transparent 100%)}
+html[data-theme="light"] .rk-hero[style*="racks/s-hero"]::before{background-image:url(../img/racks/s-hero-light.webp);width:1440px;height:679px;margin-left:-720px;top:-2px}
+html[data-theme="light"] .rk-hero[style*="racks/p-hero"]::before{background-image:url(../img/racks/p-hero-light.webp);width:1446px;height:682px;margin-left:-624px;top:-3px}
+html[data-theme="light"] .rk-hero[style*="racks/m-hero"]::before{background-image:url(../img/racks/m-hero-light.webp);width:1014px;height:566px;margin-left:-521px;top:40px}
+html[data-theme="light"] .rk-hero .m-hero__features li{background:rgba(255,240,230,.6)}
+html[data-theme="light"] .w-hero::before{background:linear-gradient(rgba(255,240,230,.2),rgba(255,240,230,.2)),url(../img/warehouse/hero-light.webp) 0 0/100% 100% no-repeat;width:919px;height:513px;margin-left:-406px;top:30px}
+@media (max-width:1200px){
+  html[data-theme="light"] .rk-hero:not(.dp-hero)[style*="-hero"]::before{left:0;width:100%;margin-left:0;top:0;height:560px;opacity:.6;background-size:cover;background-position:70% top}
+}
+/* ===== светлые первые экраны 12 страниц по макету (фреймы 313274–313284): глубинные, мобильные, майнинг, услуги и их подстраницы, о компании, партнёры, блог, документация =====
+   фото из макета уже растворяются в фон; в макете картинка 1376×768 вписана (FIT) в прямоугольник 1440×682 от y=-3 → 1222×682 с отступом 109 px слева. Высота блока у нас меньше 679 — низ уходит в мягкую маску */
+html[data-theme="light"] .sv-hero[style*="u-hero"],html[data-theme="light"] .sv-hero[style*="o-hero"]{--hl:url(../img/svc/u-hero-light.webp)}
+html[data-theme="light"] .sv-hero[style*="p-hero"]{--hl:url(../img/svc/p-hero-light.webp)}
+html[data-theme="light"] .sv-hero[style*="m-hero"]{--hl:url(../img/svc/m-hero-light.webp)}
+html[data-theme="light"] .sv-hero[style*="v-hero"]{--hl:url(../img/svc/v-hero-light.webp)}
+html[data-theme="light"] .sv-hero[style*="t-hero"]{--hl:url(../img/svc/t-hero-light.webp)}
+html[data-theme="light"] .sv-hero[style*="pt-hero"]{--hl:url(../img/svc/pt-hero-light.webp)}
+html[data-theme="light"] .sv-hero[style*="bl-hero"]{--hl:url(../img/svc/bl-hero-light.webp)}
+html[data-theme="light"] .sv-hero[style*="dc-hero"]{--hl:url(../img/svc/dc-hero-light.webp)}
+html[data-theme="light"] .page-deep:not(.page-mobile) .dp-hero{--hl:url(../img/deep/hero-light.webp)}
+html[data-theme="light"] .page-mobile .dp-hero{--hl:url(../img/mobile/hero-light.webp)}
+html[data-theme="light"] .page-mining .m-hero{--hl:url(../img/mining/hero-light.webp)}
+html[data-theme="light"] body :is(.sv-hero,.dp-hero,.page-mining .m-hero){background-color:transparent}
+html[data-theme="light"]:root body :is(.sv-hero,.dp-hero.m-hero,.page-mining .m-hero)::before{left:50%;right:auto;top:-3px;width:1222px;height:calc(100% + 3px);margin-left:-611px;transform:none;opacity:1;filter:none;background:var(--hl) 0 0/1222px 682px no-repeat;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%),linear-gradient(180deg,#000 0,#000 84%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%),linear-gradient(180deg,#000 0,#000 84%,transparent 100%);-webkit-mask-composite:source-in;mask-composite:intersect}
+/* майнинг 1822:3533: фото — заливка фрейма с кадрированием (1440×804, сдвиг -158/-62), справа от x≈1282 — фон */
+html[data-theme="light"]:root body.page-mining .m-hero::before{left:50%;right:auto;top:0;width:1440px;height:100%;margin-left:-720px;transform:none;opacity:1;filter:none;background:var(--hl) -158px -62px/1440px 804px no-repeat;-webkit-mask-image:linear-gradient(90deg,#000 0,#000 86%,transparent 89%),linear-gradient(180deg,#000 0,#000 84%,transparent 100%);mask-image:linear-gradient(90deg,#000 0,#000 86%,transparent 89%),linear-gradient(180deg,#000 0,#000 84%,transparent 100%);-webkit-mask-composite:source-in;mask-composite:intersect}
+html[data-theme="light"] .page-mining .m-hero__features li{background:rgba(255,240,230,.6)}
+/* панель «Ключевые параметры» (глубинные) и плашки мобильных стеллажей — светлые полупрозрачные, как карточки на фото */
+html[data-theme="light"] .dp-params,html[data-theme="light"] .mb-hc li{background:rgba(255,240,230,.72)}
+/* плашки справа на первом экране услуг: как карточки на светлом фоне; активная вкладка блога/документации — оранжевый оттенок, а не тёмная */
+html[data-theme="light"] body .sv-hero .sv-plaques li{background:rgba(255,240,230,.6)}
+html[data-theme="light"] body .sv-hero .sv-plaques--tabs li:has(.sv-tab[aria-pressed="true"]){background:var(--c-accent-tint);border-color:var(--c-accent)}
+html[data-theme="light"] body .sv-hero .sv-plaques--tabs .sv-tab[aria-pressed="true"]{color:var(--c-text)}
+@media (max-width:1024px){
+  html[data-theme="light"]:root body :is(.sv-hero,.dp-hero.m-hero,.page-mining .m-hero)::before{left:0;width:100%;margin-left:0;top:0;height:min(100%,640px);opacity:.55;background:var(--hl) 72% top/cover no-repeat;-webkit-mask-image:linear-gradient(180deg,#000 0,#000 80%,transparent 100%);mask-image:linear-gradient(180deg,#000 0,#000 80%,transparent 100%)}
+}
+@media (max-width:760px){
+  html[data-theme="light"]:root body :is(.sv-hero,.dp-hero.m-hero,.page-mining .m-hero)::before{opacity:.4}
+  html[data-theme="light"]:root body .sv-hero.sv-hero--bl::before{height:100%;opacity:1;background:var(--hl) 78% 400px/auto 330px no-repeat;-webkit-mask-image:linear-gradient(180deg,transparent 400px,#000 430px,#000 700px,transparent 730px);mask-image:linear-gradient(180deg,transparent 400px,#000 430px,#000 700px,transparent 730px)}
+  html[data-theme="light"]:root body .sv-hero.sv-hero--dc::before{height:100%;opacity:1;background:var(--hl) 62% 300px/auto 270px no-repeat;-webkit-mask-image:linear-gradient(180deg,transparent 300px,#000 325px,#000 545px,transparent 570px);mask-image:linear-gradient(180deg,transparent 300px,#000 325px,#000 545px,transparent 570px)}
+}
