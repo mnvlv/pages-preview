@@ -1,6 +1,8 @@
 /* Документация: фильтр по типу, поиск и выбор категории. Данные — JSON в <script id="docs-data"> */
 (function () {
   'use strict';
+  // Папка с картинками рядом с папкой js/: в вёрстке это img/, в шаблоне Битрикса — /local/templates/diaskom/img/
+  var IMG = (document.currentScript && document.currentScript.src || '').replace(/js\/docs\.js[^/]*$/, '') + 'img/';
   var dataEl = document.getElementById('docs-data');
   if (!dataEl) return;
   var docs;
@@ -17,6 +19,14 @@
   var norm = function (s) { return String(s).toLowerCase().replace(/ё/g, 'е'); };
   var download = '<svg width="18" height="18" aria-hidden="true"><use href="#i-download"/></svg>';
 
+  // Категории в списке — из самих документов (их задают в админке), «Все категории» остаётся первой
+  var cats = [];
+  docs.forEach(function (d) { if (d.cat && cats.indexOf(d.cat) === -1) cats.push(d.cat); });
+  if (cats.length) {
+    [].slice.call(select.options).forEach(function (o) { if (o.value) o.remove(); });
+    cats.forEach(function (c) { var o = document.createElement('option'); o.value = c; o.textContent = c; select.appendChild(o); });
+  }
+
   tabs.forEach(function (t) {
     var ty = t.getAttribute('data-type');
     var n = ty === 'all' ? docs.length : docs.filter(function (d) { return d.type === ty; }).length;
@@ -32,7 +42,7 @@
       return !q || norm(d.title + ' ' + d.series + ' ' + d.typeLabel).indexOf(q) !== -1;
     });
     body.innerHTML = list.map(function (d) {
-      return '<li class="dc-row"><span class="dc-name"><img src="img/icons/p-doc.svg" alt="">' + esc(d.title) + '</span>' +
+      return '<li class="dc-row"><span class="dc-name"><img src="' + IMG + 'icons/p-doc.svg" alt="">' + esc(d.title) + '</span>' +
         '<span class="dc-badge">' + esc(d.typeLabel) + '</span><span>' + esc(d.series) + '</span><span>' + esc(d.format) + '</span><span>' + esc(d.size) + '</span>' +
         '<a class="btn btn--outline btn--md" href="' + esc(d.href) + '" download>' + download + ' Скачать</a></li>';
     }).join('');
