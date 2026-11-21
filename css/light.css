@@ -296,7 +296,7 @@ html[data-theme="light"] .w-hero::before{background:linear-gradient(rgba(255,240
   html[data-theme="light"] .rk-hero:not(.dp-hero)[style*="-hero"]::before{left:0;width:100%;margin-left:0;top:0;height:560px;opacity:.6;background-size:cover;background-position:70% top}
 }
 /* ===== светлые первые экраны 12 страниц по макету (фреймы 313274–313284): глубинные, мобильные, майнинг, услуги и их подстраницы, о компании, партнёры, блог, документация =====
-   фото из макета уже растворяются в фон; в макете картинка 1376×768 вписана (FIT) в прямоугольник 1440×682 от y=-3 → 1222×682 с отступом 109 px слева. Высота блока у нас меньше 679 — низ уходит в мягкую маску */
+   фото из макета уже растворяются в фон; в макете картинка 1376×768 вписана (FIT) в прямоугольник 1440×682 от y=-3 → 1222×682 с отступом 109 px слева. Первые экраны у нас ниже 679 px, поэтому фото вписано целиком по высоте блока, по центру, как в макете (там картинка вписана по центру фрейма), без обрезки */
 html[data-theme="light"] .sv-hero[style*="u-hero"],html[data-theme="light"] .sv-hero[style*="o-hero"]{--hl:url(../img/svc/u-hero-light.webp)}
 html[data-theme="light"] .sv-hero[style*="p-hero"]{--hl:url(../img/svc/p-hero-light.webp)}
 html[data-theme="light"] .sv-hero[style*="m-hero"]{--hl:url(../img/svc/m-hero-light.webp)}
@@ -309,7 +309,7 @@ html[data-theme="light"] .page-deep:not(.page-mobile) .dp-hero{--hl:url(../img/d
 html[data-theme="light"] .page-mobile .dp-hero{--hl:url(../img/mobile/hero-light.webp)}
 html[data-theme="light"] .page-mining .m-hero{--hl:url(../img/mining/hero-light.webp)}
 html[data-theme="light"] body :is(.sv-hero,.dp-hero,.page-mining .m-hero){background-color:transparent}
-html[data-theme="light"]:root body :is(.sv-hero,.dp-hero.m-hero,.page-mining .m-hero)::before{left:50%;right:auto;top:-3px;width:1222px;height:calc(100% + 3px);margin-left:-611px;transform:none;opacity:1;filter:none;background:var(--hl) 0 0/1222px 682px no-repeat;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%),linear-gradient(180deg,#000 0,#000 84%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%),linear-gradient(180deg,#000 0,#000 84%,transparent 100%);-webkit-mask-composite:source-in;mask-composite:intersect}
+html[data-theme="light"]:root body :is(.sv-hero,.dp-hero.m-hero,.page-mining .m-hero)::before{left:50%;right:auto;top:-3px;width:auto;height:min(calc(100% + 3px),682px);aspect-ratio:1376/768;margin-left:0;transform:translateX(-50%);opacity:1;filter:none;background:var(--hl) 0 0/100% 100% no-repeat;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%),linear-gradient(180deg,transparent 0,#000 3%,#000 92%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%),linear-gradient(180deg,transparent 0,#000 3%,#000 92%,transparent 100%);-webkit-mask-composite:source-in;mask-composite:intersect}
 /* майнинг 1822:3533: фото — заливка фрейма с кадрированием (1440×804, сдвиг -158/-62), справа от x≈1282 — фон */
 html[data-theme="light"]:root body.page-mining .m-hero::before{left:50%;right:auto;top:0;width:1440px;height:100%;margin-left:-720px;transform:none;opacity:1;filter:none;background:var(--hl) -158px -62px/1440px 804px no-repeat;-webkit-mask-image:linear-gradient(90deg,#000 0,#000 86%,transparent 89%),linear-gradient(180deg,#000 0,#000 84%,transparent 100%);mask-image:linear-gradient(90deg,#000 0,#000 86%,transparent 89%),linear-gradient(180deg,#000 0,#000 84%,transparent 100%);-webkit-mask-composite:source-in;mask-composite:intersect}
 html[data-theme="light"] .page-mining .m-hero__features li{background:rgba(255,240,230,.6)}
@@ -320,7 +320,7 @@ html[data-theme="light"] body .sv-hero .sv-plaques li{background:rgba(255,240,23
 html[data-theme="light"] body .sv-hero .sv-plaques--tabs li:has(.sv-tab[aria-pressed="true"]){background:var(--c-accent-tint);border-color:var(--c-accent)}
 html[data-theme="light"] body .sv-hero .sv-plaques--tabs .sv-tab[aria-pressed="true"]{color:var(--c-text)}
 @media (max-width:1024px){
-  html[data-theme="light"]:root body :is(.sv-hero,.dp-hero.m-hero,.page-mining .m-hero)::before{left:0;width:100%;margin-left:0;top:0;height:min(100%,640px);opacity:.55;background:var(--hl) 72% top/cover no-repeat;-webkit-mask-image:linear-gradient(180deg,#000 0,#000 80%,transparent 100%);mask-image:linear-gradient(180deg,#000 0,#000 80%,transparent 100%)}
+  html[data-theme="light"]:root body :is(.sv-hero,.dp-hero.m-hero,.page-mining .m-hero)::before{left:0;width:100%;margin-left:0;top:0;transform:none;aspect-ratio:auto;height:min(100%,640px);opacity:.55;background:var(--hl) 72% top/cover no-repeat;-webkit-mask-image:linear-gradient(180deg,#000 0,#000 80%,transparent 100%);mask-image:linear-gradient(180deg,#000 0,#000 80%,transparent 100%)}
 }
 @media (max-width:760px){
   html[data-theme="light"]:root body :is(.sv-hero,.dp-hero.m-hero,.page-mining .m-hero)::before{opacity:.4}
