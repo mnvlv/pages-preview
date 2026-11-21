@@ -476,6 +476,7 @@ button { cursor: pointer; }
 .form__check.is-invalid .form__box { border-color: #ad0000; }
 .form .btn { justify-self: end; width: calc(100% - 1.5px); margin-top: 5px; }
 .form__success { font-size: 16px; color: var(--c-accent); }
+.form__success--error { color: var(--c-text-2); }  /* ошибка отправки: текст от сервера */
 
 /* ---------- Подвал ---------- */
 /* по макету: блок 516px, радиус 8px, рамка #585858 снаружи; поля 32 сверху, 28 слева, 32 справа */
@@ -502,7 +503,7 @@ button { cursor: pointer; }
 .socials a:hover, .socials a:focus-visible { border-color: var(--c-accent); color: var(--c-accent); }
 /* иконка — маска, чтобы при наведении перекрашивалась в оранжевый */
 .socials__icon { width: 20px; height: 18px; background: currentColor; -webkit-mask: var(--icon) center / contain no-repeat; mask: var(--icon) center / contain no-repeat; }
-/* пути к иконкам задаются здесь, чтобы url() считался от файла стилей */
+/* пути к иконкам задаются здесь, чтобы адрес картинки считался от файла стилей */
 .socials__icon--mail { --icon: url(../img/svc/i-mail.svg); }
 .socials__icon--phone { --icon: url(../img/icons/i-phone.svg); }
 .socials__icon--telegram { --icon: url(../img/icons/telegram.svg); }

@@ -323,13 +323,24 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!phoneOk) { phone.focus(); return; }
       if (!agree.checked) return;
 
-      // TODO: отправка на бэкенд заказчика (fetch / обработчик CMS)
+      // Отправку на сервер подключает сайт: window.dskSendForm(form) → Promise<{ ok, message }>.
+      // В статичной вёрстке её нет — форма просто показывает сообщение об успехе.
       const ok = form.querySelector('.form__success');
-      ok.hidden = false;
-      clearTimeout(form._okTimer);
-      form._okTimer = setTimeout(() => { ok.hidden = true; }, 8000);
-      form.reset();
-      selects.forEach((sel) => sel.choose(''));
+      const btn = form.querySelector('[type="submit"]');
+      if (!ok.dataset.text) ok.dataset.text = ok.textContent;
+      if (btn.disabled) return;
+      btn.disabled = true;
+      const send = typeof window.dskSendForm === 'function' ? window.dskSendForm(form) : Promise.resolve({ ok: true });
+      send.then((res) => {
+        clearTimeout(form._okTimer);
+        ok.classList.toggle('form__success--error', !res.ok);
+        ok.textContent = res.message || ok.dataset.text;
+        ok.hidden = false;
+        if (!res.ok) return;
+        form._okTimer = setTimeout(() => { ok.hidden = true; }, 8000);
+        form.reset();
+        selects.forEach((sel) => sel.choose(''));
+      }).finally(() => { btn.disabled = false; });
     });
   }
 });
