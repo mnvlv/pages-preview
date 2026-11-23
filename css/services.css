@@ -579,7 +579,7 @@ a.sv-pc:hover .sv-pc__btn { background: var(--c-accent-hover); }
 @media (max-width: 760px) { .sv-hero--pt::before { left: 0; width: 100%; transform: none; background-position: right -117px top 40px; background-size: 700px auto; } }
 
 /* Блог: широкое фото целиком, без обрезки */
-.sv-hero--bl::before { background: linear-gradient(90deg, #1a1a1a 0, #1a1a1a 12%, rgba(26, 26, 26, 0) 40%), linear-gradient(180deg, #1a1a1a 0, rgba(26, 26, 26, 0) 2%, rgba(26, 26, 26, 0) 92%, #1a1a1a 100%), linear-gradient(270deg, #1a1a1a 0, rgba(26, 26, 26, 0) 8%), var(--hero, none) right center / cover no-repeat; }
+.sv-hero--bl::before { background: linear-gradient(90deg, #1a1a1a 0, #1a1a1a 12%, rgba(26, 26, 26, 0) 40%), linear-gradient(180deg, #1a1a1a 0, rgba(26, 26, 26, 0) 2%, rgba(26, 26, 26, 0) 92%, #1a1a1a 100%), linear-gradient(270deg, #1a1a1a 0, rgba(26, 26, 26, .82) 8%, rgba(26, 26, 26, .45) 20%, rgba(26, 26, 26, 0) 34%), var(--hero, none) right center / cover no-repeat; }
 @media (max-width: 760px) {
   .sv-hero--bl::before { left: 0; width: 100%; transform: none; background: linear-gradient(180deg, #1a1a1a 0, rgba(26, 26, 26, 0) 22%, rgba(26, 26, 26, 0) 70%, #1a1a1a 100%) 0 400px / 100% 330px no-repeat, var(--hero, none) -488px 400px / auto 330px no-repeat; opacity: 1; }
   .sv-hero--bl .sv-plaques { margin-top: 350px; }

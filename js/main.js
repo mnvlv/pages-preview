@@ -34,15 +34,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const drops = [];
   document.querySelectorAll('.nav__drop-btn').forEach((btn) => {
     const item = btn.closest('.nav__item');
-    let timer = 0;
+    let timer = 0, hoverAt = 0;
     const setDrop = (open) => { clearTimeout(timer); btn.setAttribute('aria-expanded', open); };
     drops.push(setDrop);
-    btn.addEventListener('click', () => setDrop(btn.getAttribute('aria-expanded') !== 'true'));
+    // На десктопе меню уже открылось по наведению: клик сразу после него не должен его закрывать
+    btn.addEventListener('click', () => setDrop(desktop.matches && Date.now() - hoverAt < 1500 ? true : btn.getAttribute('aria-expanded') !== 'true'));
     // При уходе курсора меню закрывается с задержкой: можно спокойно вести мышь к списку,
     // даже медленно или наискосок через промежуток под пунктом
     item.addEventListener('mouseenter', () => {
       if (!desktop.matches) return;
       drops.forEach((d) => { if (d !== setDrop) d(false); });
+      if (btn.getAttribute('aria-expanded') !== 'true') hoverAt = Date.now();
       setDrop(true);
     });
     item.addEventListener('mouseleave', () => {
